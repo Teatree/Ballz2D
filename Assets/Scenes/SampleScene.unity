@@ -609,7 +609,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3467d9cca0722384d9df0ce340911c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghost_go: {fileID: 1353940230588586, guid: 6c7c6351671881b459ffe4e56f085f87, type: 2}
   ballPrefab: {fileID: 114745801369772572, guid: 5e9a8d87241ee1048b005730cecbd1e6,
     type: 2}
 --- !u!212 &1936070847
@@ -717,7 +716,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -774,7 +773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca197050da730db469383cbc17a354d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghost_go: {fileID: 1353940230588586, guid: 6c7c6351671881b459ffe4e56f085f87, type: 2}
+  ghostGO: {fileID: 1353940230588586, guid: 7dcf77bdafed44b4c980eac9821b1fb1, type: 2}
 --- !u!1 &2101368264
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,28 +20,14 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(dir * Time.deltaTime * moveSpeed);
+        transform.position += dir * Time.deltaTime * moveSpeed;
+    }
 
-        Ray2D ray = new Ray2D(transform.position, dir);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, .1f);
-
-       // Debug.DrawRay(ray.origin, ray.direction, Color.red, 100);
-        if (hit.collider != null ) {
-            Debug.Log("colliding with " + hit.transform.gameObject.name);
-
-            //var refLect = Vector2.Reflect(ray.origin, hit.normal);
-            var refLect = Vector2.Reflect(transform.position, hit.normal);
-            Debug.Log(">>> hit point: " + hit.point);
-            Debug.Log(">>> position: " + transform.position);
-            Debug.Log(">>> ray origin: " + ray.origin);
-            Debug.Log(">>> reflect: " + refLect);
-
-            RaycastHit2D ricochetHit = Physics2D.Raycast(transform.position, refLect + hit.normal);
-            Debug.DrawRay(transform.position, refLect, Color.yellow, 100);
-
-            dir = refLect;
+    private void OnCollisionEnter2D(Collision2D collision) {
+        //Debug.Log("collision detected");
+        foreach(ContactPoint2D contact in collision.contacts) {
+            dir = 2 * (Vector3.Dot(dir, Vector3.Normalize(contact.normal))) * Vector3.Normalize(contact.normal) - dir;
+            dir *= -1;
         }
-
-        //rigidbody2D.velocity = rigidbody2D.velocity.normalized * moveSpeed;
     }
 }

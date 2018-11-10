@@ -68,8 +68,8 @@ public class BallLauncher : MonoBehaviour
 
     private IEnumerator LaunchBalls()
     {
-        //Vector3 direction = endDragPosition - transform.position;
-        //direction.Normalize();
+        Vector3 direction = endDragPosition - transform.position;
+        direction.Normalize();
 
         foreach (var ball in balls)
         {
