@@ -55,8 +55,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052273827840646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04608822, y: 6.686766, z: -4.6484375}
-  m_LocalScale: {x: 60, y: 60, z: 60}
+  m_LocalPosition: {x: -2.7261, y: 7.2269, z: -4.6484375}
+  m_LocalScale: {x: 45.194157, y: 45.194157, z: 61.458843}
   m_Children:
   - {fileID: 224157517216533112}
   m_Father: {fileID: 0}
@@ -127,8 +127,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.006532589, y: 0.006532589}
-  m_EdgeRadius: 0.1
+  m_Size: {x: 0.0084, y: 0.0084}
+  m_EdgeRadius: 0.03
 --- !u!114 &114504280809085978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,10 +175,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 44.75
-  m_fontSizeBase: 36
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
