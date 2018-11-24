@@ -16,14 +16,15 @@ public class BlockSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        for (int i = 0; i < 1; i++)
-        {
-            SpawnRowOfBlocks();
-        }
+        DataController.LoadLevels();
+        //for (int i = 0; i < 1; i++)
+        //{
+        //    SpawnRowOfBlocks();
+        //}
     }
 
-    public void SpawnRowOfBlocks()
-    {
+    public void SpawnRowOfBlocks() { 
+        //move blocks down one line
         foreach (var block in blocksSpawned)
         {
             if (block != null)
@@ -32,18 +33,20 @@ public class BlockSpawner : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < playWidth; i++)
-        {
-            if (UnityEngine.Random.Range(0, 100) <= 30)
-            {
-                var block = Instantiate(blockPrefab, GetPosition(i), Quaternion.identity);
-                int hits = UnityEngine.Random.Range(1, 3) + rowsSpawned;
+        //for (int i = 0; i < playWidth; i++)
+        //{
+        //    if (UnityEngine.Random.Range(0, 100) <= 30)
+        //    {
+        //        var block = Instantiate(blockPrefab, GetPosition(i), Quaternion.identity);
+        //        int hits = UnityEngine.Random.Range(1, 3) + rowsSpawned;
 
-                block.SetHits(hits);
+        //        block.SetHits(hits);
 
-                blocksSpawned.Add(block);
-            }
-        }
+        //        blocksSpawned.Add(block);
+        //    }
+        //}
+
+
 
         rowsSpawned++;
     }
