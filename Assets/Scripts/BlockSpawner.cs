@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour
@@ -17,7 +15,7 @@ public class BlockSpawner : MonoBehaviour
     {
         DataController.LoadLevels();
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 5; i++) {
             SpawnRowOfBlocks();
         }
     }
@@ -32,17 +30,17 @@ public class BlockSpawner : MonoBehaviour
                 RectTransform rt = (RectTransform)block.transform;
                 width = rt.rect.width * block.transform.localScale.y;
                 block.transform.position = new Vector3(block.transform.position.x, block.transform.position.y - width, block.transform.position.z);
-                Debug.Log(width);
             }
         }
 
+        //add new line
         List<CellData> cells = DataController.allLevels[0].rows[rowsSpawned].GetCells();
+        Debug.Log(">>> add new line " + DataController.allLevels[0].rows[rowsSpawned].GetCells()[4].type);
+        Debug.Log(">>> add new line " + DataController.allLevels[0].rows[rowsSpawned].GetCells()[4].life);
         for (int i = 0; i < playWidth; i++) {
             if (cells[i] != null && cells[i].type != "") {
                 var block = Instantiate(blockPrefab, GetPosition(i, width), Quaternion.identity);
-
                 block.SetHits(cells[i].life);
-
                 blocksSpawned.Add(block);
             }
         }

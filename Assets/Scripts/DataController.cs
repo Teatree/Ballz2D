@@ -18,7 +18,7 @@ public class DataController: MonoBehaviour {
     }
 
     public static void LoadLevels() {
-        string filePath = Path.Combine(Application.dataPath, levelsFileName);
+        string filePath = Path.Combine(Application.streamingAssetsPath, levelsFileName);
         if (File.Exists(filePath)) {
             string jsonData = File.ReadAllText(filePath);
             string separ = "Level_?";
@@ -28,14 +28,12 @@ public class DataController: MonoBehaviour {
             for (int i = 1; i < lvls.Length; i++) {
 
                 string editedLvl = "{ \"Rows" + lvls[1].Substring(1, lvls[1].Length - 7) + "}";
-                Debug.Log(">>>>  " + editedLvl);
                 RowData[] rows = JsonHelper.FromJson<RowData>(editedLvl);
                 LevelData lvlData = new LevelData();
+                System.Array.Reverse(rows);
                 lvlData.rows = rows;
                 lvlsData.Add(lvlData);
             }
-            
-            Debug.Log(">>>>  " + lvlsData.ToString());
             allLevels = lvlsData;
         } else {
             Debug.LogError("Cannot find the file " + filePath);
