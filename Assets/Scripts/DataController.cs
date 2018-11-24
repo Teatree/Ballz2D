@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 public class DataController: MonoBehaviour {
     private static string levelsFileName = "levels.json";
-    public static ArrayList allLevels = new ArrayList();
+    public static List<LevelData> allLevels = new List<LevelData>();
+   
     // Use this for initialization
     void Start() {
         LoadLevels();
@@ -22,7 +24,7 @@ public class DataController: MonoBehaviour {
             string separ = "Level_?";
             string[] lvls = System.Text.RegularExpressions.Regex.Split(jsonData, separ);
 
-            ArrayList lvlsData = new ArrayList();
+            List<LevelData> lvlsData = new List<LevelData>();
             for (int i = 1; i < lvls.Length; i++) {
 
                 string editedLvl = "{ \"Rows" + lvls[1].Substring(1, lvls[1].Length - 7) + "}";
@@ -68,25 +70,43 @@ public class RowData {
     public string col14;
     public string col15;
 
-    public ArrayList GetCells() {
-        ArrayList cells = new ArrayList();
-        cells.Add(new CellData(col1));
+    public List<CellData> GetCells() {
+        List<CellData> cells = new List<CellData>();
+        cells.Add(new CellData(col2));
+        cells.Add(new CellData(col3));
+        cells.Add(new CellData(col4));
+        cells.Add(new CellData(col5));
+        cells.Add(new CellData(col6));
+        cells.Add(new CellData(col7));
+        cells.Add(new CellData(col8));
+        cells.Add(new CellData(col9));
+        cells.Add(new CellData(col10));
+        cells.Add(new CellData(col11));
+        cells.Add(new CellData(col12));
+        cells.Add(new CellData(col13));
+        cells.Add(new CellData(col14));
+
         return cells;
     }
+}
 
-    public class CellData {
-        public string type;
-        public int life; 
+public class CellData {
+    public string type;
+    public int life;
 
-        public CellData (string stringVal) {
-            if (stringVal.Length > 2) {
-                type = stringVal.Substring(0, 2);
-                type = stringVal.Substring(2, stringVal.Length-1);
-            } else {
-                type = stringVal;
-            }
+    public CellData(string stringVal) {
+        if (stringVal.Length > 2) {
+            Debug.Log("stringVal: " + stringVal);
+            type = stringVal.Substring(0, 2);
+            life = int.Parse(stringVal.Substring(2, stringVal.Length - 2));
+            Debug.Log("life: "  + life );
+            Debug.Log("type: " + type);
+        }
+        else {
+            type = stringVal;
         }
     }
+}
 
 public static class JsonHelper {
     public static T[] FromJson<T>(string json) {
