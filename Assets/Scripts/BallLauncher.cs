@@ -18,7 +18,7 @@ public class BallLauncher : MonoBehaviour
     {
         blockSpawner = FindObjectOfType<BlockSpawner>();
         launchPreview = GetComponent<LaunchPreview>();
-        CreateBall();
+        CreateBall(13);
     }
 
     public void ReturnBall()
@@ -27,15 +27,17 @@ public class BallLauncher : MonoBehaviour
         if (ballsReady == balls.Count)
         {
             blockSpawner.SpawnRowOfBlocks();
-            CreateBall();
+            //CreateBall();
         }
     }
 
-    private void CreateBall()
+    private void CreateBall(int ballsAmount)
     {
-        var ball = Instantiate(ballPrefab);
-        balls.Add(ball);
-        ballsReady++;
+        for (int i = 0; i < ballsAmount; i++) {
+            var ball = Instantiate(ballPrefab);
+            balls.Add(ball);
+            ballsReady++;
+        }
     }
 
     private void Update()
@@ -78,7 +80,7 @@ public class BallLauncher : MonoBehaviour
             ball.SetDir(LaunchPreview.launchDirection);
             //ball.GetComponent<Rigidbody2D>().AddForce(direction);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.03f);
         }
         ballsReady = 0;
     }

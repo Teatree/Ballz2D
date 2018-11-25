@@ -16,6 +16,8 @@ public class Ball : MonoBehaviour
 
     public void SetDir(Vector3 newDir) {
         dir = newDir;
+        dir = dir.normalized;
+        Debug.Log("dir = " + dir);
     }
 
     private void Update()

@@ -31,7 +31,21 @@ public class DataController: MonoBehaviour {
                 RowData[] rows = JsonHelper.FromJson<RowData>(editedLvl);
                 LevelData lvlData = new LevelData();
                 System.Array.Reverse(rows);
-                lvlData.rows = rows;
+
+                foreach(RowData row in rows) {
+                    if (!row.IsEmpty()) {
+                        lvlData.rows.Add(row);
+                    }
+                }
+
+                foreach (RowData row in rows) {
+                    if (row.IsEmpty()) {
+                        lvlData.emptyRowsCount++;
+                    }else {
+                        break;
+                    }
+                }
+
                 lvlsData.Add(lvlData);
             }
             allLevels = lvlsData;
@@ -46,7 +60,8 @@ public class LevelData {
     //public int levelNumber;
     //public int levelStars;
     //public bool copleted; 
-    public RowData[] rows;
+    public int emptyRowsCount;
+    public List<RowData> rows = new List<RowData>();
 }
 
 [System.Serializable]
@@ -86,6 +101,22 @@ public class RowData {
 
         return cells;
     }
+
+    public bool IsEmpty() {
+        return col2 != null && (col2 == "" || col2 == "x") &&
+                col3 != null && (col3 == "" || col3 == "x") &&
+                col4 != null && (col4 == "" || col4 == "x") &&
+                col5 != null && (col5 == "" || col5 == "x") &&
+                col6 != null && (col6 == "" || col6 == "x") &&
+                col7 != null && (col7 == "" || col7 == "x") &&
+                col8 != null && (col8 == "" || col8 == "x") &&
+                col9 != null && (col9 == "" || col9 == "x") &&
+                col10 != null && (col10 == "" || col10 == "x") &&
+                col11 != null && (col11 == "" || col11 == "x") &&
+                col12 != null && (col12 == "" || col12 == "x") &&
+                col13 != null && (col13 == "" || col13 == "x") &&
+                col14 != null && (col14 == "" || col14 == "x");
+    }
 }
 
 public class CellData {
@@ -94,11 +125,8 @@ public class CellData {
 
     public CellData(string stringVal) {
         if (stringVal.Length > 2) {
-            Debug.Log("stringVal: " + stringVal);
             type = stringVal.Substring(0, 2);
             life = int.Parse(stringVal.Substring(2, stringVal.Length - 2));
-            Debug.Log("life: "  + life );
-            Debug.Log("type: " + type);
         }
         else {
             type = stringVal;

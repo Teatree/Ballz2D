@@ -15,14 +15,14 @@ public class BlockSpawner : MonoBehaviour
     {
         DataController.LoadLevels();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 18-DataController.allLevels[0].emptyRowsCount; i++) {
             SpawnRowOfBlocks();
         }
     }
 
     public void SpawnRowOfBlocks() {
         //move blocks down one line
-        float width = 0.45f;
+        float width = 0.4519416f;
         foreach (var block in blocksSpawned)
         {
             if (block != null)
@@ -35,8 +35,8 @@ public class BlockSpawner : MonoBehaviour
 
         //add new line
         List<CellData> cells = DataController.allLevels[0].rows[rowsSpawned].GetCells();
-        Debug.Log(">>> add new line " + DataController.allLevels[0].rows[rowsSpawned].GetCells()[4].type);
-        Debug.Log(">>> add new line " + DataController.allLevels[0].rows[rowsSpawned].GetCells()[4].life);
+        //Debug.Log(">>> add new line " + DataController.allLevels[0].rows[rowsSpawned].GetCells()[4].type);
+        //Debug.Log(">>> add new line " + DataController.allLevels[0].rows[rowsSpawned].GetCells()[4].life);
         for (int i = 0; i < playWidth; i++) {
             if (cells[i] != null && cells[i].type != "") {
                 var block = Instantiate(blockPrefab, GetPosition(i, width), Quaternion.identity);
