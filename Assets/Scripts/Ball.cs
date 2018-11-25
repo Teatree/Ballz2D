@@ -30,6 +30,8 @@ public class Ball : MonoBehaviour
         foreach(ContactPoint2D contact in collision.contacts) {
             dir = 2 * (Vector3.Dot(dir, Vector3.Normalize(contact.normal))) * Vector3.Normalize(contact.normal) - dir;
             dir *= -1;
+
+
         }
     }
 }

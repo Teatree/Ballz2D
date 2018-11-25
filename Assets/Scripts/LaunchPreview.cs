@@ -13,7 +13,7 @@ public class LaunchPreview : MonoBehaviour
 
     //private int _count = 2;
 
-    private void Awake()
+    private void OnEnable()
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.positionCount = 3;
@@ -23,18 +23,21 @@ public class LaunchPreview : MonoBehaviour
 
         for (int i = 0; i <= 10; ++i) {
             ghosts[i] = Instantiate(ghostGO);
+            ghosts[i].transform.parent = transform;
         }
 
         ghostsReflect = new GameObject[6];
 
         for (int i = 0; i <= 5; ++i) {
             ghostsReflect[i] = Instantiate(ghostGO);
+            ghostsReflect[i].transform.parent = transform;
         }
     }
 
     private void Update() {
         //literally just draw some objects
         if (_lineRenderer != null) {
+
             for (int i = 0; i < 10; ++i) {
                 Vector3 position = Vector3.Lerp(_lineRenderer.GetPosition(0), _lineRenderer.GetPosition(1), i * 0.1f);
                 // TODO : create object at position
@@ -47,6 +50,14 @@ public class LaunchPreview : MonoBehaviour
                 ghostsReflect[i].transform.position = position;
             }
         }
+        //else {
+        //    foreach(GameObject ghost in ghosts) {
+        //        ghost.transform.position = new Vector3(-100, -100, 0);
+        //    }
+        //    foreach (GameObject ghostRef in ghostsReflect) {
+        //        ghostRef.transform.position = new Vector3(-100, -100, 0);
+        //    }
+        //}
     }
 
     public void SetStartPoint(Vector3 worldPoint)

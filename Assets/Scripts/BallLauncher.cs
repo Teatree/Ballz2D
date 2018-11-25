@@ -9,7 +9,8 @@ public class BallLauncher : MonoBehaviour
     private BlockSpawner blockSpawner;
     private LaunchPreview launchPreview;
     private List<Ball> balls = new List<Ball>();
-    private int ballsReady;
+
+    public int BallsReady;
 
     [SerializeField]
     private Ball ballPrefab;
@@ -23,8 +24,8 @@ public class BallLauncher : MonoBehaviour
 
     public void ReturnBall()
     {
-        ballsReady++;
-        if (ballsReady == balls.Count)
+        BallsReady++;
+        if (BallsReady == balls.Count)
         {
             blockSpawner.SpawnRowOfBlocks();
             //CreateBall();
@@ -36,13 +37,13 @@ public class BallLauncher : MonoBehaviour
         for (int i = 0; i < ballsAmount; i++) {
             var ball = Instantiate(ballPrefab);
             balls.Add(ball);
-            ballsReady++;
+            BallsReady++;
         }
     }
 
     private void Update()
     {
-        if (ballsReady != balls.Count) // don't let the player launch until all balls are back.
+        if (BallsReady != balls.Count) // don't let the player launch until all balls are back.
             return;
 
         //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.back * -10;
@@ -82,7 +83,19 @@ public class BallLauncher : MonoBehaviour
 
             yield return new WaitForSeconds(0.03f);
         }
-        ballsReady = 0;
+        BallsReady = 0;
+
+        // DESTOYING THINGS
+        //foreach (Vector3 pos in GetComponent<LineRenderer>().GetPositions()) {
+
+        //}
+        GetComponent<LineRenderer>().positionCount = 0;
+        foreach (Transform ghost in transform) {
+            ghost.position = new Vector3(-100, -100, 0);
+            Debug.Log("ghost pos = " + ghost.position);
+        }
+        gameObject.SetActive(false);
+
     }
 
     private void ContinueDrag(Vector3 worldPosition)
