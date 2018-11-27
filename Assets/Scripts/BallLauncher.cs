@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class BallLauncher : MonoBehaviour
 {
-    private Vector3 startDragPosition;
+    private static float MIN_AIM_HEIGHT = 0.2f;
+
+    //private Vector3 startDragPosition
     private Vector3 endDragPosition;
     private BlockSpawner blockSpawner;
     private LaunchPreview launchPreview;
     private List<Ball> balls = new List<Ball>();
+
 
     public int BallsReady;
 
@@ -50,23 +53,30 @@ public class BallLauncher : MonoBehaviour
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         //controls 
-        if (Input.GetMouseButtonDown(0))
-        {
-            StartDrag(worldPosition);
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            ContinueDrag(worldPosition);
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            EndDrag();
+        if (ShouldAim(worldPosition)) {
+            if (Input.GetMouseButtonDown(0)) {
+                StartDrag(worldPosition);
+            }
+            else if (Input.GetMouseButton(0)) {
+                ContinueDrag(worldPosition);
+            }
+            else if (Input.GetMouseButtonUp(0)) {
+                EndDrag(worldPosition);
+            }
+        } else {
+            EndDrag(worldPosition);
         }
     }
 
-    private void EndDrag()
+    private void EndDrag(Vector3 worldPos)
     {
-        StartCoroutine(LaunchBalls());
+        if (ShouldAim(worldPos)) {
+            StartCoroutine(LaunchBalls());
+        } else  {
+            HideGhosts();
+            gameObject.SetActive(false);
+            gameObject.SetActive(true);
+        }
     }
 
     private IEnumerator LaunchBalls()
@@ -79,38 +89,37 @@ public class BallLauncher : MonoBehaviour
             ball.transform.position = transform.position;
             ball.gameObject.SetActive(true);
             ball.SetDir(LaunchPreview.launchDirection);
-            //ball.GetComponent<Rigidbody2D>().AddForce(direction);
-
             yield return new WaitForSeconds(0.03f);
         }
         BallsReady = 0;
 
-        // DESTOYING THINGS
-        //foreach (Vector3 pos in GetComponent<LineRenderer>().GetPositions()) {
+        HideGhosts();
+        gameObject.SetActive(false);
+    }
 
-        //}
+    private void HideGhosts() {
         GetComponent<LineRenderer>().positionCount = 0;
         foreach (Transform ghost in transform) {
             ghost.position = new Vector3(-100, -100, 0);
-            Debug.Log("ghost pos = " + ghost.position);
+            //Debug.Log("ghost pos = " + ghost.position)
         }
-        gameObject.SetActive(false);
-
     }
 
     private void ContinueDrag(Vector3 worldPosition)
     {
         endDragPosition = worldPosition;
-
-        //Vector3 direction = endDragPosition - startDragPosition;
-
-        //launchPreview.SetEndPoint(transform.position - direction);
-        launchPreview.SetEndPoint(endDragPosition);
+        if (ShouldAim(worldPosition)) {
+            launchPreview.SetEndPoint(endDragPosition);
+        }
     }
 
     private void StartDrag(Vector3 worldPosition)
     {
-        startDragPosition = worldPosition;
+   //     startDragPosition = worldPosition;
         launchPreview.SetStartPoint(transform.position);
+    }
+
+    private bool ShouldAim (Vector3 worldPosition) {
+        return worldPosition.y > (transform.position.y + MIN_AIM_HEIGHT);
     }
 }
