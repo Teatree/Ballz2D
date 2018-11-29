@@ -2,124 +2,122 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallLauncher : MonoBehaviour
-{
+public class BallLauncher : MonoBehaviour {
     private static float MIN_AIM_HEIGHT = 0.2f;
 
-    //private Vector3 startDragPosition
+    [SerializeField]
+    public int InitBallAmount = 13;
+
     private Vector3 endDragPosition;
     private BlockSpawner blockSpawner;
     private LaunchPreview launchPreview;
-    private List<Ball> balls = new List<Ball>();
+    public List<Ball> balls = new List<Ball>();
 
 
-    public int BallsReady;
+    public int BallsReadyToShoot;
 
     [SerializeField]
     private Ball ballPrefab;
 
-    private void Awake()
-    {
+    private void Awake() {
         blockSpawner = FindObjectOfType<BlockSpawner>();
         launchPreview = GetComponent<LaunchPreview>();
-        CreateBall(13);
+        CreateBall(InitBallAmount);
     }
 
-    public void ReturnBall()
-    {
-        BallsReady++;
-        if (BallsReady == balls.Count)
-        {
-            blockSpawner.SpawnRowOfBlocks();
-            //CreateBall();
+    private void Update() {
+        if (BallsReadyToShoot >= balls.Count) { // don't let the player launch until all balls are back.
+            //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.back * -10;
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            //controls 
+            if (ShouldAim(worldPosition)) {
+                if (Input.GetMouseButtonDown(0)) {
+
+                    SetStartDrag();
+                }
+                else if (Input.GetMouseButton(0)) {
+                    ContinueDrag(worldPosition);
+                }
+                else if (Input.GetMouseButtonUp(0)) {
+                    EndDrag(worldPosition);
+                }
+            }
+            else {
+                //Reset launcher
+                HideGhosts();
+                gameObject.SetActive(false);
+                gameObject.SetActive(true);
+                SetStartDrag();
+            }
+        }
+
+        if (Input.GetKeyDown("space")) {
+            Debug.Log(">>>> BallsReady: " + BallsReadyToShoot);
         }
     }
 
-    private void CreateBall(int ballsAmount)
-    {
+    public void ReturnBall(Ball b) {
+            BallsReadyToShoot++;
+            b.active = false;
+            if (BallsReadyToShoot == balls.Count) {
+                blockSpawner.SpawnRowOfBlocks();
+            }
+    }
+
+    private void CreateBall(int ballsAmount) {
         for (int i = 0; i < ballsAmount; i++) {
             var ball = Instantiate(ballPrefab);
+            ball.ballId = i;
             balls.Add(ball);
-            BallsReady++;
+            BallsReadyToShoot++;
         }
     }
 
-    private void Update()
-    {
-        if (BallsReady != balls.Count) // don't let the player launch until all balls are back.
-            return;
-
-        //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.back * -10;
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        //controls 
-        if (ShouldAim(worldPosition)) {
-            if (Input.GetMouseButtonDown(0)) {
-                StartDrag(worldPosition);
-            }
-            else if (Input.GetMouseButton(0)) {
-                ContinueDrag(worldPosition);
-            }
-            else if (Input.GetMouseButtonUp(0)) {
-                EndDrag(worldPosition);
-            }
-        } else {
-            EndDrag(worldPosition);
-        }
+    private void EndDrag(Vector3 worldPos) {
+        StartCoroutine(LaunchBalls());
     }
 
-    private void EndDrag(Vector3 worldPos)
-    {
-        if (ShouldAim(worldPos)) {
-            StartCoroutine(LaunchBalls());
-        } else  {
-            HideGhosts();
-            gameObject.SetActive(false);
-            gameObject.SetActive(true);
-        }
-    }
-
-    private IEnumerator LaunchBalls()
-    {
+    private IEnumerator LaunchBalls() {
         Vector3 direction = endDragPosition - transform.position;
         direction.Normalize();
 
-        foreach (var ball in balls)
-        {
+        foreach (var ball in balls) {
             ball.transform.position = transform.position;
+            ball.active = true;
             ball.gameObject.SetActive(true);
             ball.SetDir(LaunchPreview.launchDirection);
+            ball.EnableCollision();
             yield return new WaitForSeconds(0.03f);
         }
-        BallsReady = 0;
-
+      
+        BallsReadyToShoot = 0;
         HideGhosts();
         gameObject.SetActive(false);
     }
 
     private void HideGhosts() {
         GetComponent<LineRenderer>().positionCount = 0;
+        launchPreview.active = false;
         foreach (Transform ghost in transform) {
             ghost.position = new Vector3(-100, -100, 0);
             //Debug.Log("ghost pos = " + ghost.position)
         }
     }
 
-    private void ContinueDrag(Vector3 worldPosition)
-    {
+    private void ContinueDrag(Vector3 worldPosition) {
         endDragPosition = worldPosition;
         if (ShouldAim(worldPosition)) {
             launchPreview.SetEndPoint(endDragPosition);
         }
     }
 
-    private void StartDrag(Vector3 worldPosition)
-    {
-   //     startDragPosition = worldPosition;
+    private void SetStartDrag() {
         launchPreview.SetStartPoint(transform.position);
+        launchPreview.active = true;
     }
 
-    private bool ShouldAim (Vector3 worldPosition) {
+    private bool ShouldAim(Vector3 worldPosition) {
         return worldPosition.y > (transform.position.y + MIN_AIM_HEIGHT);
     }
 }

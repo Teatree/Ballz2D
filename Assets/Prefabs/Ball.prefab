@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4685627427663770}
   - component: {fileID: 212723517670425870}
-  - component: {fileID: 114745801369772572}
   - component: {fileID: 58975375745680046}
+  - component: {fileID: 114868672981750182}
   - component: {fileID: 50411074756764378}
   m_Layer: 8
   m_Name: Ball
@@ -78,7 +78,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
---- !u!114 &114745801369772572
+--- !u!114 &114868672981750182
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,7 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f78b213997ee72f4c854d12d94ed62ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 12
+  ballId: 0
+  moveSpeedNorm: 12
+  moveSpeedFast: 18
 --- !u!212 &212723517670425870
 SpriteRenderer:
   m_ObjectHideFlags: 1

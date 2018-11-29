@@ -9,15 +9,20 @@ public class BallReturn : MonoBehaviour
         ballLauncher = FindObjectOfType<BallLauncher>();
     }
 
+
+    private void Update() 
+    {
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (ballLauncher.BallsReady == 0) {
-            ballLauncher.gameObject.transform.position = new Vector2 (collision.collider.transform.position.x, 0);
+        //Ball launcher where the first ball fell
+        if (ballLauncher.BallsReadyToShoot == 0) {
+            ballLauncher.gameObject.transform.position = new Vector3 (collision.collider.transform.position.x, 0,01f);
             ballLauncher.gameObject.SetActive(true);
-            Debug.Log("this does indeed happen");
         }
-
-        ballLauncher.ReturnBall();
+        ballLauncher.ReturnBall(collision.collider.GetComponent<Ball>());
         collision.collider.gameObject.SetActive(false);
     }
+
 }

@@ -6,58 +6,52 @@ public class LaunchPreview : MonoBehaviour
     public static Vector3 launchDirection;
     public GameObject ghostGO;
 
-    private GameObject[] ghosts;
-    private GameObject[] ghostsReflect;
+    private GameObject[] ghosts = new GameObject[11];
+    private GameObject[] ghostsReflect = new GameObject[6];
     private LineRenderer _lineRenderer;
     private Vector3 _dragStartPoint;
+    public bool active = false;
 
     //private int _count = 2;
+    private void Start() {
+        ghosts = new GameObject[11];
+        for (int i = 0; i < ghosts.Length; i++) {
+            ghosts[i] = Instantiate(ghostGO);
+            ghosts[i].transform.parent = transform;
+            ghosts[i].transform.position = new Vector3(-100, -100, 0);
+        }
+
+        ghostsReflect = new GameObject[6];
+
+        for (int i = 0; i < ghostsReflect.Length; i++) {
+            ghostsReflect[i] = Instantiate(ghostGO);
+            ghostsReflect[i].transform.parent = transform;
+            ghostsReflect[i].transform.position = new Vector3(-100, -100, 0);
+        }
+    }
 
     private void OnEnable()
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.positionCount = 3;
         _lineRenderer.useWorldSpace = true;
-
-        ghosts = new GameObject[11];
-
-        for (int i = 0; i <= 10; ++i) {
-            ghosts[i] = Instantiate(ghostGO);
-            ghosts[i].transform.parent = transform;
-        }
-
-        ghostsReflect = new GameObject[6];
-
-        for (int i = 0; i <= 5; ++i) {
-            ghostsReflect[i] = Instantiate(ghostGO);
-            ghostsReflect[i].transform.parent = transform;
-        }
     }
 
     private void Update() {
         //literally just draw some objects
-        if (_lineRenderer != null) {
-
-            for (int i = 0; i < 10; ++i) {
+       if (_lineRenderer != null && active) {
+            for (int i = 0; i < ghosts.Length; i++) {
                 Vector3 position = Vector3.Lerp(_lineRenderer.GetPosition(0), _lineRenderer.GetPosition(1), i * 0.1f);
                 // TODO : create object at position
                 ghosts[i].transform.position = position;
             }
 
-            for (int i = 0; i < 5; ++i) {
+            for (int i = 0; i < ghostsReflect.Length; i++) {
                 Vector3 position = Vector3.Lerp(_lineRenderer.GetPosition(1), _lineRenderer.GetPosition(2), i * 0.1f);
                 // TODO : create object at position
                 ghostsReflect[i].transform.position = position;
             }
         }
-        //else {
-        //    foreach(GameObject ghost in ghosts) {
-        //        ghost.transform.position = new Vector3(-100, -100, 0);
-        //    }
-        //    foreach (GameObject ghostRef in ghostsReflect) {
-        //        ghostRef.transform.position = new Vector3(-100, -100, 0);
-        //    }
-        //}
     }
 
     public void SetStartPoint(Vector3 worldPoint)
