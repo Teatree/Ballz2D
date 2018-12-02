@@ -33,7 +33,6 @@ public class BallLauncher : MonoBehaviour {
             //controls 
             if (ShouldAim(worldPosition)) {
                 if (Input.GetMouseButtonDown(0)) {
-
                     SetStartDrag();
                 }
                 else if (Input.GetMouseButton(0)) {
@@ -58,16 +57,17 @@ public class BallLauncher : MonoBehaviour {
     }
 
     public void ReturnBall(Ball b) {
-            BallsReadyToShoot++;
-            b.active = false;
-            if (BallsReadyToShoot == balls.Count) {
-                blockSpawner.SpawnRowOfBlocks();
-            }
+        BallsReadyToShoot++;
+        b.active = false;
+        if (BallsReadyToShoot == balls.Count) {
+            blockSpawner.SpawnRowOfBlocks();
+        }
     }
 
     private void CreateBall(int ballsAmount) {
         for (int i = 0; i < ballsAmount; i++) {
             var ball = Instantiate(ballPrefab);
+            ball.transform.position = transform.position;
             ball.ballId = i;
             balls.Add(ball);
             BallsReadyToShoot++;
@@ -90,7 +90,7 @@ public class BallLauncher : MonoBehaviour {
             ball.EnableCollision();
             yield return new WaitForSeconds(0.03f);
         }
-      
+
         BallsReadyToShoot = 0;
         HideGhosts();
         gameObject.SetActive(false);

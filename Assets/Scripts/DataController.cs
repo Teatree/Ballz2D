@@ -1,38 +1,33 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-public class DataController: MonoBehaviour {
+public class DataController {
     private static string levelsFileName = "levels.json";
-    public static List<LevelData> allLevels = new List<LevelData>();
-   
-    // Use this for initialization
-    void Start() {
-        LoadLevels();
-    }
 
-    // Update is called once per frame
-    void Update() {
-
-    }
-
-    public static void LoadLevels() {
+    public static List<LevelData> LoadLevels() {
+        List<LevelData> lvlsData = new List<LevelData>();
         string filePath = Path.Combine(Application.streamingAssetsPath, levelsFileName);
         if (File.Exists(filePath)) {
             string jsonData = File.ReadAllText(filePath);
             string separ = "Level_?";
             string[] lvls = System.Text.RegularExpressions.Regex.Split(jsonData, separ);
 
-            List<LevelData> lvlsData = new List<LevelData>();
             for (int i = 1; i < lvls.Length; i++) {
 
-                string editedLvl = "{ \"Rows" + lvls[1].Substring(1, lvls[1].Length - 7) + "}";
+                string editedLvl = "{ \"Rows" + lvls[i].Substring(1, lvls[i].Length - 7);
+                if (editedLvl.LastIndexOf("]") == editedLvl.Length-1) {
+                    editedLvl += "}";
+                }
+                else {
+                    editedLvl += "]}";
+                }
+                Debug.Log("editedLvl " + editedLvl);
                 RowData[] rows = JsonHelper.FromJson<RowData>(editedLvl);
                 LevelData lvlData = new LevelData();
                 System.Array.Reverse(rows);
 
-                foreach(RowData row in rows) {
+                foreach (RowData row in rows) {
                     if (!row.IsEmpty()) {
                         lvlData.rows.Add(row);
                     }
@@ -41,16 +36,20 @@ public class DataController: MonoBehaviour {
                 foreach (RowData row in rows) {
                     if (row.IsEmpty()) {
                         lvlData.emptyRowsCount++;
-                    }else {
+                    }
+                    else {
                         break;
                     }
                 }
 
                 lvlsData.Add(lvlData);
             }
-            allLevels = lvlsData;
-        } else {
+            return lvlsData;
+        }
+        else 
+        {
             Debug.LogError("Cannot find the file " + filePath);
+            return lvlsData;
         }
     }
 }
