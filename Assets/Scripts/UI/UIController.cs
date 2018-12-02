@@ -11,6 +11,9 @@ public class UIController : MonoBehaviour {
 
     void Start () {
         AllLevelsData.allLevels = DataController.LoadLevels();
+        PlayerInfo pi = DataController.LoadPlayer();
+        pi.starsPerLvl[0] = 3;
+        DataController.SavePlayer(pi);
 
         for (int i = 0; i< AllLevelsData.allLevels.Count; i++) {
             var lvl = Instantiate(levelUiElementPrefab);

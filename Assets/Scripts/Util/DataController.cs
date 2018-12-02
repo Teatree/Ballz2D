@@ -4,7 +4,30 @@ using System.IO;
 
 public class DataController {
     private static string levelsFileName = "levels.json";
+    private static string playerFileName = "playerInfo.json";
 
+    //--------- Player Info ----------
+    public static PlayerInfo LoadPlayer() {
+        string filePath = Path.Combine(Application.streamingAssetsPath, playerFileName);
+        if (File.Exists(filePath)) {
+            string jsonData = File.ReadAllText(filePath);
+            PlayerInfo pi = JsonUtility.FromJson<PlayerInfo>(jsonData);
+            Debug.Log(">>> PlayerInfo > " + pi);
+            return pi;
+        }
+        else {
+            Debug.LogError("Cannot find the file " + filePath);
+            return new PlayerInfo();
+        }
+    }
+
+    public static void SavePlayer( PlayerInfo pi) {
+        string filePath = Path.Combine(Application.streamingAssetsPath, playerFileName);
+        string jsonData = JsonUtility.ToJson(pi);
+        File.WriteAllText(filePath, jsonData);
+    }
+
+    //------------Load Levels --------------------
     public static List<LevelData> LoadLevels() {
         List<LevelData> lvlsData = new List<LevelData>();
         string filePath = Path.Combine(Application.streamingAssetsPath, levelsFileName);
@@ -16,13 +39,12 @@ public class DataController {
             for (int i = 1; i < lvls.Length; i++) {
 
                 string editedLvl = "{ \"Rows" + lvls[i].Substring(1, lvls[i].Length - 7);
-                if (editedLvl.LastIndexOf("]") == editedLvl.Length-1) {
+                if (editedLvl.LastIndexOf("]") == editedLvl.Length - 1) {
                     editedLvl += "}";
                 }
                 else {
                     editedLvl += "]}";
                 }
-                Debug.Log("editedLvl " + editedLvl);
                 RowData[] rows = JsonHelper.FromJson<RowData>(editedLvl);
                 LevelData lvlData = new LevelData();
                 System.Array.Reverse(rows);
@@ -46,12 +68,17 @@ public class DataController {
             }
             return lvlsData;
         }
-        else 
-        {
+        else {
             Debug.LogError("Cannot find the file " + filePath);
             return lvlsData;
         }
     }
+
+}
+
+[System.Serializable] 
+public class PlayerInfo {
+    public List<int> starsPerLvl = new List<int>();
 }
 
 [System.Serializable]
@@ -156,4 +183,6 @@ public static class JsonHelper {
         public T[] Rows;
     }
 }
+
+
 
