@@ -50,10 +50,6 @@ public class BallLauncher : MonoBehaviour {
                 SetStartDrag();
             }
         }
-
-        if (Input.GetKeyDown("space")) {
-            Debug.Log(">>>> BallsReady: " + BallsReadyToShoot);
-        }
     }
 
     public void ReturnBall(Ball b) {
@@ -101,7 +97,6 @@ public class BallLauncher : MonoBehaviour {
         launchPreview.active = false;
         foreach (Transform ghost in transform) {
             ghost.position = new Vector3(-100, -100, 0);
-            //Debug.Log("ghost pos = " + ghost.position)
         }
     }
 

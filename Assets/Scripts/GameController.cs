@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-    public int levelScore;
+    public static int levelScoreCoefficientMin = 10;
+    public static int levelScoreCoefficientStep = 10;
+
+    public static int levelScore;
+    public static int levelScoreCoefficient = levelScoreCoefficientMin;
 
     //public int currentLevelIndex;
     public LevelData currentLevel;
@@ -14,5 +16,20 @@ public class GameController : MonoBehaviour {
     void Awake() {
         //allLevels = DataController.LoadLevels();
         currentLevel = AllLevelsData.GetCurrentLevel();
+    }
+
+    public static void IncreseScore() {       
+        levelScore += levelScoreCoefficient;
+        levelScoreCoefficient += levelScoreCoefficientStep;
+        Debug.Log(">>> " + levelScore);
+    }
+
+    public static void ResetScoreCoefficient() {
+        levelScoreCoefficient = levelScoreCoefficientMin;
+    }
+
+    public static void ResetScore() {
+        levelScoreCoefficient = levelScoreCoefficientMin;
+        levelScore = 0;
     }
 }

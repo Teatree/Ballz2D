@@ -14,6 +14,7 @@ public class BallReturn : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision) {
         //Ball launcher where the first ball fell
         if (ballLauncher.BallsReadyToShoot == 0) {
+            GameController.ResetScoreCoefficient();
             ballLauncher.gameObject.transform.position = new Vector3(collision.collider.transform.position.x, 0, 01f);
             ballLauncher.gameObject.SetActive(true);
         }

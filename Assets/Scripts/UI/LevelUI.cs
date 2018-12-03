@@ -10,7 +10,7 @@ public class LevelUI : MonoBehaviour {
 
     public Button buttonComponent;
 
-    [Header("Shit")]
+    [Header("UI")]
     public Text levelNumText;
     public Text Star1;
     public Text Star2;
@@ -42,6 +42,7 @@ public class LevelUI : MonoBehaviour {
 
     public void StartGameAtLevel() {
         AllLevelsData.CurrentLevelIndex = LevelNumber;
+        GameController.ResetScore();
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
     }
 }

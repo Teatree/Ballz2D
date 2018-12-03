@@ -40,13 +40,11 @@ public class LaunchPreview : MonoBehaviour {
         if (_lineRenderer != null && active) {
             for (int i = 0; i < ghosts.Length; i++) {
                 Vector3 position = Vector3.Lerp(_lineRenderer.GetPosition(0), _lineRenderer.GetPosition(1), i * 0.1f);
-                // TODO : create object at position
                 ghosts[i].transform.position = position;
             }
 
             for (int i = 0; i < ghostsReflect.Length; i++) {
                 Vector3 position = Vector3.Lerp(_lineRenderer.GetPosition(1), _lineRenderer.GetPosition(2), i * 0.1f);
-                // TODO : create object at position
                 ghostsReflect[i].transform.position = position;
             }
         }

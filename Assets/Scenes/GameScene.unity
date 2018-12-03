@@ -755,7 +755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed99ec4090eaeb40a6855c1f8068a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelScore: 0
   currentLevel:
     emptyRowsCount: 0
     rows: []
@@ -1009,7 +1008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3467d9cca0722384d9df0ce340911c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitBallAmount: 3
+  InitBallAmount: 13
   balls: []
   BallsReadyToShoot: 0
   ballPrefab: {fileID: 114868672981750182, guid: 5e9a8d87241ee1048b005730cecbd1e6,

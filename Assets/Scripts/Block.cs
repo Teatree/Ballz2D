@@ -2,39 +2,36 @@
 using TMPro;
 using UnityEngine;
 
-public class Block : MonoBehaviour
-{
+public class Block : MonoBehaviour {
 
     private int hitsRemaining = 5;
 
     private SpriteRenderer spriteRenderer;
     private TextMeshPro text;
 
-    private void Awake()
-    {
+    private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         text = GetComponentInChildren<TextMeshPro>();
         UpdateVisualState();
     }
 
-    private void UpdateVisualState()
-    {
+    private void UpdateVisualState() {
         text.SetText(hitsRemaining.ToString());
         spriteRenderer.color = Color.Lerp(Color.white, Color.red, hitsRemaining / 10f);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+    private void OnCollisionEnter2D(Collision2D collision) {
         hitsRemaining--;
 
-        if (hitsRemaining > 0)
+        if (hitsRemaining > 0) {
             UpdateVisualState();
-        else
+        } else {
+            GameController.IncreseScore();
             Destroy(gameObject, 0.0000001f);
+        }
     }
 
-    internal void SetHits(int hits)
-    {
+    internal void SetHits(int hits) {
         hitsRemaining = hits;
         UpdateVisualState();
     }
