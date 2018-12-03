@@ -4,10 +4,16 @@ using UnityEngine;
 
 public static class AllLevelsData {
     public static List<LevelData> allLevels = new List<LevelData>();
+    public static PlayerInfo playerInfo; 
 
-    public static int CurrentLevelIndex;
+    public static int CurrentLevelIndex = 0;
 
     public static LevelData GetCurrentLevel() {
-        return allLevels[CurrentLevelIndex];
+        if (allLevels.Count > 0) {
+            return allLevels[CurrentLevelIndex];
+        } else {
+            allLevels = DataController.LoadLevels();
+            return allLevels[CurrentLevelIndex];
+        }
     }
 }

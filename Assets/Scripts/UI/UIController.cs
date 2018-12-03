@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
 
@@ -9,20 +8,26 @@ public class UIController : MonoBehaviour {
     [SerializeField]
     private LevelUI levelUiElementPrefab;
 
-    void Start () {
-        AllLevelsData.allLevels = DataController.LoadLevels();
-        PlayerInfo pi = DataController.LoadPlayer();
-        pi.starsPerLvl[0] = 3;
-        DataController.SavePlayer(pi);
+    public SpriteState sprState = new SpriteState();
 
-        for (int i = 0; i< AllLevelsData.allLevels.Count; i++) {
+    void Start() {
+        //Load data
+        AllLevelsData.allLevels = DataController.LoadLevels();
+        AllLevelsData.playerInfo = DataController.LoadPlayer();
+
+        //Create level buttons
+        for (int i = 0; i < AllLevelsData.allLevels.Count; i++) {
             var lvl = Instantiate(levelUiElementPrefab);
             lvl.LevelNumber = i;
             lvl.transform.parent = LevelListParent.transform;
+            if (i <= AllLevelsData.playerInfo.starsPerLvl.Count) {
+                lvl.buttonComponent.interactable = true;
+                lvl.StarsNumber = (i < AllLevelsData.playerInfo.starsPerLvl.Count) ? AllLevelsData.playerInfo.starsPerLvl[i] : 0;
+            }
         }
-	}
-	
-	void Update () {
-		
-	}
+    }
+
+    void Update() {
+
+    }
 }

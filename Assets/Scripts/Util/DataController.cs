@@ -12,7 +12,7 @@ public class DataController {
         if (File.Exists(filePath)) {
             string jsonData = File.ReadAllText(filePath);
             PlayerInfo pi = JsonUtility.FromJson<PlayerInfo>(jsonData);
-            Debug.Log(">>> PlayerInfo > " + pi);
+            //Debug.Log(">>> PlayerInfo > " + pi);
             return pi;
         }
         else {
