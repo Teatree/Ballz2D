@@ -9,11 +9,13 @@ public class BlockSpawner : MonoBehaviour {
 
     [SerializeField]
     private Block blockPrefab;
+    [SerializeField]
+    private Block laserPrefab;
 
     private int playWidth = 13;
     private int rowsSpawned;
 
-    private List<Block> blocksSpawned = new List<Block>();
+    public static List<Block> blocksSpawned = new List<Block>();
 
     private void Start() { //OnLevelWasLoaded
         gc = GetComponent<GameController>();
@@ -37,8 +39,14 @@ public class BlockSpawner : MonoBehaviour {
         List<CellData> cells = gc.currentLevel.rows[rowsSpawned].GetCells();
         for (int i = 0; i < playWidth; i++) {
             if (cells[i] != null && cells[i].type != "") {
-                var block = Instantiate(blockPrefab, GetPosition(i, width), Quaternion.identity);
-                block.SetHits(cells[i].life);
+                Block block;
+                if (Block.TypeMap[cells[i].type] == Block.BlockType.LaserHorisontal) {
+                    block = Instantiate(laserPrefab, GetPosition(i, width), Quaternion.identity);
+                }
+                else {
+                    block = Instantiate(blockPrefab, GetPosition(i, width), Quaternion.identity);
+                }
+                block.Setup(cells[i].type, cells[i].life, rowsSpawned, i);
                 blocksSpawned.Add(block);
             }
         }

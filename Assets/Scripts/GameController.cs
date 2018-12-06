@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour {
     public static int levelScoreCoefficientStep = 10;
 
     public static int levelScore;
-    public static int levelScoreCoefficient = levelScoreCoefficientMin;
+    public static int levelScoreCoefficient = levelScoreCoefficientMin ;
 
     //public int currentLevelIndex;
     public LevelData currentLevel;
@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour {
     public static void IncreseScore() {       
         levelScore += levelScoreCoefficient;
         levelScoreCoefficient += levelScoreCoefficientStep;
-        Debug.Log(">>> " + levelScore);
+       // Debug.Log(">>> levelScoreCoefficient > " + levelScore + " >>> ScoreCoefficient > " + levelScoreCoefficient); 0.0167
     }
 
     public static void ResetScoreCoefficient() {

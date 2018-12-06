@@ -33,8 +33,11 @@ public class Ball : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         foreach (ContactPoint2D contact in collision.contacts) {
-            dir = 2 * (Vector3.Dot(dir, Vector3.Normalize(contact.normal))) * Vector3.Normalize(contact.normal) - dir;
-            dir *= -1;
+            if (contact.collider.gameObject.GetComponent<Block>() == null || contact.collider.gameObject.GetComponent<Block>()._type != Block.BlockType.LaserHorisontal ||
+                contact.collider.gameObject.GetComponent<Block>()._type != Block.BlockType.LaserVertical) {
+                dir = 2 * (Vector3.Dot(dir, Vector3.Normalize(contact.normal))) * Vector3.Normalize(contact.normal) - dir;
+                dir *= -1;
+            }
         }
     }
 
