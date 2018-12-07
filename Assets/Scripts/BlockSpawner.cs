@@ -25,6 +25,9 @@ public class BlockSpawner : MonoBehaviour {
     }
 
     public void SpawnRowOfBlocks() {
+
+        RemoveOneTurnBlocks();
+
         //move blocks down one line
         float width = THE_WIDTH;
         foreach (var block in blocksSpawned) {
@@ -40,7 +43,7 @@ public class BlockSpawner : MonoBehaviour {
         for (int i = 0; i < playWidth; i++) {
             if (cells[i] != null && cells[i].type != "") {
                 Block block;
-                if (Block.TypeMap[cells[i].type] == Block.BlockType.LaserHorisontal) {
+                if (BlockType.TypeMap[cells[i].type].Family == "Laser") {
                     block = Instantiate(laserPrefab, GetPosition(i, width), Quaternion.identity);
                 }
                 else {
@@ -52,6 +55,14 @@ public class BlockSpawner : MonoBehaviour {
         }
 
         rowsSpawned++;
+    }
+
+    public void RemoveOneTurnBlocks() {
+        foreach (Block b in blocksSpawned) {
+            if (b.wasHit) { 
+                b.DestroySelf();
+            }
+        }
     }
 
     private Vector3 GetPosition(int i, float width) {

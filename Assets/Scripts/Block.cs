@@ -4,41 +4,15 @@ using System.Collections.Generic;
 
 public class Block : MonoBehaviour {
 
-    private static Dictionary<string, BlockType> typesMap;
-
-    public static Dictionary<string, BlockType> TypeMap {
-        get {
-            if (typesMap == null) {
-                typesMap = new Dictionary<string, BlockType>();
-                typesMap.Add("ob", BlockType.Block);
-                typesMap.Add("NW", BlockType.TriNW);
-                typesMap.Add("NE", BlockType.TriNE);
-                typesMap.Add("SE", BlockType.TriSE);
-                typesMap.Add("SW", BlockType.TriSW);
-                typesMap.Add("BM", BlockType.Bomb);
-                typesMap.Add("BV", BlockType.BombVertical);
-                typesMap.Add("BH", BlockType.BombHorisontal);
-                typesMap.Add("BC", BlockType.BombCross);
-                typesMap.Add("LV", BlockType.LaserVertical);
-                typesMap.Add("LH", BlockType.LaserHorisontal);
-                typesMap.Add("LC", BlockType.LaserCross);
-                typesMap.Add("st", BlockType.ExtraBall);
-                typesMap.Add("★★", BlockType.ExtraBall);
-                typesMap.Add("FF", BlockType.Fountain);
-            }
-            return typesMap;
-        }
-    }
-
     public int hitsRemaining = 5;
+    public bool wasHit; //set true if should be deleted next move
+    public bool destroyed;
 
     private SpriteRenderer spriteRenderer;
     private TextMeshPro text;
 
     public BlockType _type;
     public IBehaviour _behaviour;
-
-    public bool destroyed; 
 
     public int col;
     public int row;
@@ -57,38 +31,42 @@ public class Block : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        _behaviour.Update();
-       // UpdateVisualState();
+        _behaviour.OnCollide();
+    }
+
+    void OnCollisionExit2D(Collision2D other) {
+        _behaviour.OnCollisionExit();
     }
 
     public void DestroySelf() {
-        destroyed = true;
-        Destroy(gameObject, 0.0000001f);
+        if (!destroyed) {
+            destroyed = true;
+            Destroy(gameObject, 0.0000001f);
+        }
     }
 
     internal void Setup(string blockType, int hits, int row, int col) {
         this.row = row;
+        this.col = col;
         hitsRemaining = hits;
+
+        //Set block type
         try {
-            _type = TypeMap[blockType];
+            _type = BlockType.TypeMap[blockType];
         } catch (KeyNotFoundException r) {
             Debug.Log(">> blockType not found = " + blockType);
         }
 
-        if (_type == BlockType.LaserHorisontal) {
-            _behaviour = new LaserBehaviour();
-        } else {
-            _behaviour = new BlockBehaviour();
-        }
+        //Set block behaviour
+        _behaviour = BlockType.getBehaviourByType(blockType);
+   
         _behaviour.setBlock(this);
 
         UpdateVisualState();
     }
 
-    public void HitOnce() {
-        hitsRemaining--;
+    public void Hit() {
+        _behaviour.GetOneLife();
     }
-
-    public enum BlockType {
-Block, TriNW, TriSW, TriSE, TriNE, Bomb, BombVertical, BombHorisontal, BombCross, LaserVertical, LaserHorisontal, LaserCross, ExtraBall, Fountain}
 }
+

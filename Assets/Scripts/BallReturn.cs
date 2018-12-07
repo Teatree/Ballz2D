@@ -21,5 +21,4 @@ public class BallReturn : MonoBehaviour {
         ballLauncher.ReturnBall(collision.collider.GetComponent<Ball>());
         collision.collider.gameObject.SetActive(false);
     }
-
 }
