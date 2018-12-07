@@ -17,7 +17,7 @@ public class BlockType {
     public static BlockType BombCross = new BlockType("Block");
     public static BlockType LaserVertical = new BlockType("Laser");
     public static BlockType LaserHorisontal = new BlockType("Laser");
-    public static BlockType LaserCross = new BlockType("Block");
+    public static BlockType LaserCross = new BlockType("Laser");
     public static BlockType ExtraBall = new BlockType("Block");
     public static BlockType Fountain = new BlockType("Block");
 
@@ -54,6 +54,9 @@ public class BlockType {
                 }
             case "LV": {
                     return new LaserVerticalBehaviour();
+                }
+            case "LC": {
+                    return new LaserCrossBehaviour();
                 }
             case "ob": {
                     return new BlockBehaviour();
