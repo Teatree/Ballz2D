@@ -1,11 +1,19 @@
-﻿public class BlockBehaviour : IBehaviour {
+﻿public class BombBehaviour : IBehaviour {
 
     public override void setBlock(Block b) {
         this.block = b;
     }
 
     public override void OnDestroy() {
+        PlayAni();
         GameController.IncreseScore();
+        foreach (Block b in BlockSpawner.blocksSpawned) {
+            if (!b.destroyed &&
+                    (b.row >= block.row - 1 && b.row <= block.row + 1) &&
+                    (b.col >= block.col - 1 && b.col <= block.col + 1)) {
+                b.DestroySelf();
+            }
+        }
         block.DestroySelf();
     }
 
@@ -17,7 +25,7 @@
     public override void GetOneLife() {
         block.hitsRemaining--;
         if (block.hitsRemaining > 0) {
-            
+
             block.UpdateVisualState();
         }
         else {
@@ -26,4 +34,7 @@
     }
 
     public override void OnCollisionExit() { }
+
+    public void PlayAni() {
+    }
 }

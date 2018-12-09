@@ -11,10 +11,10 @@ public class BlockType {
     public static BlockType TriSW = new BlockType("Block");
     public static BlockType TriSE = new BlockType("Block");
     public static BlockType TriNE = new BlockType("Block");
-    public static BlockType Bomb = new BlockType("Block");
-    public static BlockType BombVertical = new BlockType("Block");
-    public static BlockType BombHorisontal = new BlockType("Block");
-    public static BlockType BombCross = new BlockType("Block");
+    public static BlockType Bomb = new BlockType("Bomb");
+    public static BlockType BombVertical = new BlockType("Bomb");
+    public static BlockType BombHorisontal = new BlockType("Bomb");
+    public static BlockType BombCross = new BlockType("Bomb");
     public static BlockType LaserVertical = new BlockType("Laser");
     public static BlockType LaserHorisontal = new BlockType("Laser");
     public static BlockType LaserCross = new BlockType("Laser");
@@ -57,6 +57,18 @@ public class BlockType {
                 }
             case "LC": {
                     return new LaserCrossBehaviour();
+                }
+            case "BM": {
+                    return new BombBehaviour();
+                }
+            case "BV": {
+                    return new BombVerticalBehaviour();
+                }
+            case "BH": {
+                    return new BombHorisontalBehaviour();
+                }
+            case "BC": {
+                    return new BombCrossBehaviour();
                 }
             case "ob": {
                     return new BlockBehaviour();

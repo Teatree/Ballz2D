@@ -9,6 +9,7 @@ public class LaunchPreview : MonoBehaviour {
     private GameObject[] ghostsReflect = new GameObject[6];
     private LineRenderer _lineRenderer;
     private Vector3 _dragStartPoint;
+    private Vector3 baseOffsetDirection = Vector3.down * 0.1f;
     public bool active = false;
 
     //private int _count = 2;
@@ -75,8 +76,13 @@ public class LaunchPreview : MonoBehaviour {
         if (hit.collider != null) {
             _lineRenderer.SetPosition(1, hit.point);
 
-            var reflectDir = 2 * (Vector3.Dot(launchDirection, Vector3.Normalize(hit.normal))) * Vector3.Normalize(hit.normal) - launchDirection;
-            reflectDir *= -1;
+            Vector3 offsetDirection = Vector3.zero;
+            offsetDirection = baseOffsetDirection;
+     
+            var reflectDir = Vector3.Reflect(launchDirection, hit.normal) + offsetDirection;
+
+            //var reflectDir = 2 * (Vector3.Dot(launchDirection, Vector3.Normalize(hit.normal))) * Vector3.Normalize(hit.normal) - launchDirection;
+            //reflectDir *= -1;
 
             RaycastHit2D reflectRay = Physics2D.Raycast(hit.point * 0.999999f, reflectDir, 20);
             //Debug.Log("reflectDir " + reflectDir + " reflectRay.point " + reflectRay.point + " reflectRay colliding with: " + reflectRay.collider.name);

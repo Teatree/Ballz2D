@@ -11,6 +11,8 @@ public class BlockSpawner : MonoBehaviour {
     private Block blockPrefab;
     [SerializeField]
     private Block laserPrefab;
+    [SerializeField]
+    private Block bombPrefab;
 
     private int playWidth = 13;
     private int rowsSpawned;
@@ -45,6 +47,9 @@ public class BlockSpawner : MonoBehaviour {
                 Block block;
                 if (BlockType.TypeMap[cells[i].type].Family == "Laser") {
                     block = Instantiate(laserPrefab, GetPosition(i, width), Quaternion.identity);
+                } else
+                if (BlockType.TypeMap[cells[i].type].Family == "Bomb") {
+                    block = Instantiate(bombPrefab, GetPosition(i, width), Quaternion.identity);
                 }
                 else {
                     block = Instantiate(blockPrefab, GetPosition(i, width), Quaternion.identity);

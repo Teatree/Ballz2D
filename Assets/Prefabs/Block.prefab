@@ -113,7 +113,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.00935, y: 0.00935}
+  m_Size: {x: 0.0094, y: 0.0094}
   m_EdgeRadius: 0.015
 --- !u!114 &114504280809085978
 MonoBehaviour:
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitsRemaining: 5
-  _type: 0
+  wasHit: 0
   destroyed: 0
   col: 0
   row: 0
@@ -331,6 +331,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.7261, y: 7.2269}
+  m_AnchoredPosition: {x: 0.85959804, y: 2.87312}
   m_SizeDelta: {x: 0.01, y: 0.01}
   m_Pivot: {x: 0.5, y: 0.5}
