@@ -30,7 +30,12 @@ public class Block : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    //private void OnCollisionEnter2D(Collision2D collision) {
+    //    _behaviour.OnCollide();
+    //}
+
+
+    public void OnCollisionEnter2D() {
         _behaviour.OnCollide();
     }
 

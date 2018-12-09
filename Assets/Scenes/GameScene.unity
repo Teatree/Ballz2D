@@ -705,6 +705,8 @@ MonoBehaviour:
     type: 2}
   laserPrefab: {fileID: 114838009722516278, guid: 32758e2d31077c04b944b4552758efa2,
     type: 2}
+  bombPrefab: {fileID: 114838009722516278, guid: ffd51ba95e58dfe4dbae3f3867a6e27e,
+    type: 2}
 --- !u!4 &968802899
 Transform:
   m_ObjectHideFlags: 0
@@ -745,7 +747,7 @@ GameObject:
   - component: {fileID: 1074838489}
   m_Layer: 2
   m_Name: Ball Return
-  m_TagString: Untagged
+  m_TagString: BallReturn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -22,6 +22,7 @@ public class LaserHorisontalBehaviour : IBehaviour {
             }
         }
         block.wasHit = true;
+        OnCollisionExit();
     }
 
     public override void OnCollisionExit() {

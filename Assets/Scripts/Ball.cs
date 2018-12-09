@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour {
     private Vector3 dir;
-    public Rigidbody2D rb;
+    //public Rigidbody2D rb;
     private bool isCollidable;
 
     private float moveSpeed;
     public int ballId;
-    public bool active;
+    private BallLauncher ballLauncher;
+    public bool ignoreCollision;
 
     [SerializeField]
     public float moveSpeedNorm;
@@ -19,8 +20,10 @@ public class Ball : MonoBehaviour {
     private float timer = 0;
     private Vector3 baseOffsetDirection = Vector3.down * 0.1f;
 
+
+
     private void Start() {
-        rb = GetComponent<Rigidbody2D>();
+        ballLauncher = FindObjectOfType<BallLauncher>();
         moveSpeed = moveSpeedNorm;
     }
 
@@ -36,7 +39,7 @@ public class Ball : MonoBehaviour {
     private void FixedUpdate() {
         transform.position += dir * Time.deltaTime * moveSpeed;
 
-        if (rb.isKinematic && transform.position.y < 0.01f) { //enable collision when ball is close to the ground
+        if (ignoreCollision && transform.position.y < 0.01f) { //enable collision when ball is close to the ground
             EnableCollision();
         }
 
@@ -46,14 +49,25 @@ public class Ball : MonoBehaviour {
         if (!hit)
             return;
 
-        // Checking for what kind of collision is it??
-        if ((hit.collider.gameObject.GetComponent<Block>() == null || hit.collider.gameObject.GetComponent<Block>()._type.Family != "Laser") && hit.collider.gameObject.GetComponent<BallReturn>() == null) {
+        if ((hit.collider.gameObject.GetComponent<Block>() == null 
+            || hit.collider.gameObject.GetComponent<Block>()._type.Family != "Laser") 
+            && !"BallReturn".Equals(hit.collider.gameObject.tag)) {
             timer = 0;
         }
         else {
+
+            if ("BallReturn".Equals(hit.collider.gameObject.tag)) {
+                OnFloorCollision(hit.collider);
+            }
+            if (hit.collider.gameObject.GetComponent<Block>() != null && hit.collider.gameObject.GetComponent<Block>()._type.Family == "Laser") {
+                hit.collider.gameObject.GetComponent<Block>().OnCollisionEnter2D();
+            }
             return;
         }
-        // Add Floor
+
+        if (hit.collider.gameObject.GetComponent<Block>() != null) {
+            hit.collider.gameObject.GetComponent<Block>().OnCollisionEnter2D();
+        }
 
         Vector3 offsetDirection = Vector3.zero;
         if (timer >= timeToConsiderBeingStuck) {
@@ -62,42 +76,28 @@ public class Ball : MonoBehaviour {
         }
 
         dir = Vector3.Reflect(dir, hit.normal) + offsetDirection;
-
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision) {
-    //    if (isCollidable) {
-    //        foreach (ContactPoint2D contact in collision.contacts) {
-    //            if (contact.collider.gameObject.GetComponent<Block>() == null || contact.collider.gameObject.GetComponent<Block>()._type.Family != "Laser") {
-    //                dir = 2 * (Vector3.Dot(dir, Vector3.Normalize(contact.normal))) * Vector3.Normalize(contact.normal) - dir;
-    //                dir *= -1;
-
-    //                isCollidable = false;
-    //                StartCoroutine(Countdown(0.002f));
-    //            }
-    //        }
-    //    }
-    //}
-
-    private IEnumerator Countdown(float dur) {
-        float normalizedTime = 0;
-
-        while (normalizedTime <= 1f) {
-            normalizedTime += Time.deltaTime / dur;
-            yield return null;
+    private void OnFloorCollision(Collider2D collider) {
+        //  Ball launcher where the first ball fell
+        if (ballLauncher.BallsReadyToShoot == 0) {
+            GameController.ResetScoreCoefficient();
+            ballLauncher.gameObject.transform.position = new Vector3(transform.position.x, 0, 01f);
+            ballLauncher.gameObject.SetActive(true);
         }
-
-        Debug.Log("done with coroutine!");
-        isCollidable = true;
+        ballLauncher.ReturnBall(collider.GetComponent<Ball>());
+        // collider.gameObject.SetActive(false);
     }
 
     public void DisableCollision() {
-        rb.isKinematic = true;
+        ignoreCollision = true;
         moveSpeed = moveSpeedFast;
     }
 
     public void EnableCollision() {
-        rb.isKinematic = false;
+        ignoreCollision = false;
         moveSpeed = moveSpeedNorm;
     }
+
+
 }

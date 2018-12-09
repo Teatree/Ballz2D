@@ -54,7 +54,7 @@ public class BallLauncher : MonoBehaviour {
 
     public void ReturnBall(Ball b) {
         BallsReadyToShoot++;
-        b.active = false;
+       // b.active = false;
         if (BallsReadyToShoot == balls.Count) {
             blockSpawner.SpawnRowOfBlocks();
         }
@@ -80,7 +80,7 @@ public class BallLauncher : MonoBehaviour {
 
         foreach (var ball in balls) {
             ball.transform.position = transform.position;
-            ball.active = true;
+            //ball.active = true;
             ball.gameObject.SetActive(true);
             ball.SetDir(LaunchPreview.launchDirection);
             ball.EnableCollision();
