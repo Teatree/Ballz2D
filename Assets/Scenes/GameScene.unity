@@ -701,11 +701,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6deeb9b945e7d1a4683a314b4a443363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstaclePrefab: {fileID: 114838009722516278, guid: ffd51ba95e58dfe4dbae3f3867a6e27e,
+    type: 2}
   blockPrefab: {fileID: 114838009722516278, guid: ffd51ba95e58dfe4dbae3f3867a6e27e,
     type: 2}
-  laserPrefab: {fileID: 114838009722516278, guid: 32758e2d31077c04b944b4552758efa2,
+  triangleNWPrefab: {fileID: 114838009722516278, guid: 0d59061606300c7428abb9f7661092fa,
     type: 2}
-  bombPrefab: {fileID: 114838009722516278, guid: ffd51ba95e58dfe4dbae3f3867a6e27e,
+  triangleNEPrefab: {fileID: 114838009722516278, guid: f12054762660c2146b6ce18ddef669bf,
+    type: 2}
+  triangleSEPrefab: {fileID: 114131903841729098, guid: e98f540acb10f0245be383266cdd596f,
+    type: 2}
+  triangleSWPrefab: {fileID: 114629025373439364, guid: 36544205242d5ad4cb8e18a71225193d,
+    type: 2}
+  laserHorizontalPrefab: {fileID: 114838009722516278, guid: 32758e2d31077c04b944b4552758efa2,
+    type: 2}
+  laserVerticalPrefab: {fileID: 114838009722516278, guid: a66d8f9d7470230469b2627379f59d36,
+    type: 2}
+  laserCrossPrefab: {fileID: 114838009722516278, guid: 34285534b533b9a4ca3c61edc95e405f,
+    type: 2}
+  bombPrefab: {fileID: 114838009722516278, guid: 557219d68e242d74996ffe970be3374d,
+    type: 2}
+  bombCrossPrefab: {fileID: 114838009722516278, guid: abde8e82fe8391f4285f949a5d6377d8,
+    type: 2}
+  bombVerticalPrefab: {fileID: 114838009722516278, guid: 9abe0f72dcdf66748a5a05e1c253aec8,
+    type: 2}
+  bombHorizontalPrefab: {fileID: 114838009722516278, guid: 8138643bb2ee65a42a43f9e6f76fb00b,
+    type: 2}
+  plusBallPrefab: {fileID: 114838009722516278, guid: 71d2fde60548ada49be65e6b9aa47402,
+    type: 2}
+  fountainPrefab: {fileID: 114838009722516278, guid: 36d7eb921cee63144bc30e371ae97bbf,
     type: 2}
 --- !u!4 &968802899
 Transform:
@@ -968,7 +992,7 @@ GameObject:
   - component: {fileID: 1936070849}
   m_Layer: 2
   m_Name: Ball Launcher
-  m_TagString: Untagged
+  m_TagString: BallReturn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -984,7 +1008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3467d9cca0722384d9df0ce340911c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitBallAmount: 1
+  InitBallAmount: 2
   balls: []
   BallsReadyToShoot: 0
   ballPrefab: {fileID: 114868672981750182, guid: 5e9a8d87241ee1048b005730cecbd1e6,

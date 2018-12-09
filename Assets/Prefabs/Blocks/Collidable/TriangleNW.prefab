@@ -39,10 +39,10 @@ GameObject:
   m_Component:
   - component: {fileID: 224673570516001904}
   - component: {fileID: 212990759036189708}
-  - component: {fileID: 61177527315333796}
   - component: {fileID: 114838009722516278}
+  - component: {fileID: 60834013368063518}
   m_Layer: 0
-  m_Name: Block
+  m_Name: TriangleNW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,15 +90,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1047441085165380}
   m_Mesh: {fileID: 0}
---- !u!61 &61177527315333796
-BoxCollider2D:
+--- !u!60 &60834013368063518
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052273827840646}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 84d383a9d892f8c4ba51b006f2b95940, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -112,9 +112,13 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.0094, y: 0.0094}
-  m_EdgeRadius: 0.015
+  m_Points:
+    m_Paths:
+    - - {x: -0.005, y: 0.005}
+      - {x: -0.005, y: -0.005}
+      - {x: 0.005, y: -0.005}
+      - {x: 0.005, y: -0.00453125}
+      - {x: -0.00453125, y: 0.005}
 --- !u!114 &114504280809085978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -279,7 +283,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8ded951b707f18c4facfc401155790df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 77bcc93d1a391bc418d112c6d84b5c85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -312,7 +316,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00003, y: 0}
+  m_AnchoredPosition: {x: -0.00172, y: -0.00284}
   m_SizeDelta: {x: 6.062467, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224673570516001904
@@ -323,7 +327,7 @@ RectTransform:
   m_GameObject: {fileID: 1052273827840646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 45.194157, y: 45.194157, z: 61.458843}
+  m_LocalScale: {x: 43, y: 43, z: 61.458843}
   m_Children:
   - {fileID: 224157517216533112}
   m_Father: {fileID: 0}
@@ -331,6 +335,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.85959804, y: 2.87312}
+  m_AnchoredPosition: {x: 1.4440184, y: 6.6913004}
   m_SizeDelta: {x: 0.01, y: 0.01}
   m_Pivot: {x: 0.5, y: 0.5}

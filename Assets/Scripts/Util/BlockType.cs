@@ -39,7 +39,6 @@ public class BlockType {
                 typesMap.Add("LV", LaserVertical);
                 typesMap.Add("LH", LaserHorisontal);
                 typesMap.Add("LC", LaserCross);
-                typesMap.Add("st", ExtraBall);
                 typesMap.Add("★★", ExtraBall);
                 typesMap.Add("FF", Fountain);
             }

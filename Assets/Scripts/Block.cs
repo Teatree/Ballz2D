@@ -24,7 +24,7 @@ public class Block : MonoBehaviour {
     }
 
     public void UpdateVisualState() {
-        if (text != null) {
+        if (text != null && _type != null && _type.Family.Equals("Block")) {
             text.SetText(hitsRemaining.ToString());
             spriteRenderer.color = Color.Lerp(Color.white, Color.red, hitsRemaining / 10f);
         }

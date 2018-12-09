@@ -31,6 +31,7 @@ public class BallLauncher : MonoBehaviour {
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             //controls 
+            
             if (ShouldAim(worldPosition)) {
                 if (Input.GetMouseButtonDown(0)) {
                     SetStartDrag();
@@ -47,7 +48,7 @@ public class BallLauncher : MonoBehaviour {
                 HideGhosts();
                 gameObject.SetActive(false);
                 gameObject.SetActive(true);
-                SetStartDrag();
+                //SetStartDrag();
             }
         }
     }
@@ -63,7 +64,7 @@ public class BallLauncher : MonoBehaviour {
     private void CreateBall(int ballsAmount) {
         for (int i = 0; i < ballsAmount; i++) {
             var ball = Instantiate(ballPrefab);
-            ball.transform.position = transform.position;
+            ball.transform.position = new Vector3(transform.position.x, transform.position.y-190);
             ball.ballId = i;
             balls.Add(ball);
             BallsReadyToShoot++;
@@ -97,12 +98,20 @@ public class BallLauncher : MonoBehaviour {
         launchPreview.active = false;
         foreach (Transform ghost in transform) {
             ghost.position = new Vector3(-100, -100, 0);
+            ghost.gameObject.SetActive(false);
+        }
+    }
+
+    private void ShowGhosts() {
+        foreach (Transform ghost in transform) {
+            ghost.gameObject.SetActive(true);
         }
     }
 
     private void ContinueDrag(Vector3 worldPosition) {
         endDragPosition = worldPosition;
         if (ShouldAim(worldPosition)) {
+            //Debug.Log(" endDragPosition " + endDragPosition);
             launchPreview.SetEndPoint(endDragPosition);
         }
     }
@@ -110,6 +119,7 @@ public class BallLauncher : MonoBehaviour {
     private void SetStartDrag() {
         launchPreview.SetStartPoint(transform.position);
         launchPreview.active = true;
+        ShowGhosts();
     }
 
     private bool ShouldAim(Vector3 worldPosition) {
