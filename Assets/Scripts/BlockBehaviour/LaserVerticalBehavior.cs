@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class LaserVerticalBehaviour : IBehaviour {
 
@@ -15,13 +16,17 @@ public class LaserVerticalBehaviour : IBehaviour {
     }
 
     public override void OnCollide() {
-        foreach (Block b in BlockSpawner.blocksSpawned) {
+        if (!activated) {
+            Debug.Log("Vertical OnCollide");
             ShootLasers();
-            if (!b.destroyed && b.col == block.col) {
-                b.Hit();
+            foreach (Block b in BlockSpawner.blocksSpawned) {
+                if (!b.destroyed && b.col == block.col) {
+                    b.Hit();
+                }
             }
+            block.wasHit = true;
+            activated = true;
         }
-        block.wasHit = true;
     }
 
     public override void OnCollisionExit() {
@@ -30,9 +35,15 @@ public class LaserVerticalBehaviour : IBehaviour {
 
     // shoot them pretty lasers
     public void ShootLasers() {
+        Color c = laserLine.material.color;
+        c.a = 1f;
+        laserLine.material.color = c;
+
         laserLine.positionCount = 2;
         laserLine.SetPosition(0, new Vector2(block.transform.position.x, 0));
         laserLine.SetPosition(1, new Vector2(block.transform.position.x, 8.5f));
+
+        block.StartCoroutine(LaserFade(laserLine));
     }
 
     public override void GetOneLife() {

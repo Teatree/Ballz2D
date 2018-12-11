@@ -26,13 +26,13 @@ public class BallLauncher : MonoBehaviour {
     }
 
     private void Update() {
-        if (BallsReadyToShoot >= balls.Count) { // don't let the player launch until all balls are back.
+        if (BallsReadyToShoot >= balls.Count && !BlockSpawner.rowsAreSpawning) { // don't let the player launch until all balls are back.
             //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.back * -10;
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             //controls 
             
-            if (ShouldAim(worldPosition)) {
+            if (ShouldAim(worldPosition) && !BlockSpawner.rowsAreSpawning) {
                 if (Input.GetMouseButtonDown(0)) {
                     SetStartDrag();
                 }
@@ -55,7 +55,6 @@ public class BallLauncher : MonoBehaviour {
 
     public void ReturnBall(Ball b) {
         BallsReadyToShoot++;
-       // b.active = false;
         if (BallsReadyToShoot == balls.Count) {
             blockSpawner.SpawnRowOfBlocks();
         }

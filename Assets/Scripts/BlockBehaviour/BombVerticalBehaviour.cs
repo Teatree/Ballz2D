@@ -1,18 +1,23 @@
-﻿public class BombVerticalBehaviour : IBehaviour {
+﻿using UnityEngine;
+using System.Collections;
+
+public class BombVerticalBehaviour : IBehaviour {
+
+    private LineRenderer laserLine;
 
     public override void setBlock(Block b) {
         this.block = b;
+        laserLine = block.gameObject.GetComponent<LineRenderer>();
     }
 
     public override void OnDestroy() {
         GameController.IncreseScore();
-        PlayAni();
+        ShootLasers();
         foreach (Block b in BlockSpawner.blocksSpawned) {
-            if (!b.destroyed && b.col == block.col) {
+            if (!b.destroyed && b.col == block.col && b != this.block) {
                 b.DestroySelf();
             }
         }
-        block.DestroySelf();
     }
 
     public override void OnCollide() {
@@ -33,7 +38,17 @@
 
     public override void OnCollisionExit() { }
 
-    public void PlayAni() {
+    // shoot them pretty lasers
+    public void ShootLasers() {
+        Color c = laserLine.material.color;
+        c.a = 1f;
+        laserLine.material.color = c;
+
+        laserLine.positionCount = 2;
+        laserLine.SetPosition(0, new Vector2(block.transform.position.x, 0));
+        laserLine.SetPosition(1, new Vector2(block.transform.position.x, 8.5f));
+
+        block.StartCoroutine(BombLaserFade(laserLine));
     }
 }
 

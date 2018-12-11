@@ -39,36 +39,34 @@ public class Ball : MonoBehaviour {
     private void FixedUpdate() {
         transform.position += dir * Time.deltaTime * moveSpeed;
 
-        if (ignoreCollision && transform.position.y < 0.01f) { //enable collision when ball is close to the ground
-            EnableCollision();
-        }
-
         timer += Time.deltaTime;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, moveSpeed * Time.deltaTime * 1.2f, ~(1 << 8));
         if (!hit)
             return;
 
-        if ((hit.collider.gameObject.GetComponent<Block>() == null 
-            || hit.collider.gameObject.GetComponent<Block>()._type.Family != "Laser") 
-            && !"BallReturn".Equals(hit.collider.gameObject.tag)) {
-            timer = 0;
+
+        if (!ignoreCollision &&
+            (hit.collider.gameObject.GetComponent<Block>() == null || hit.collider.gameObject.GetComponent<Block>()._type.isCollidable)
+            && !"BallReturn".Equals(hit.collider.gameObject.tag)
+            ) {
+            timer = 0; //Do not collide
         }
         else {
-
             if ("BallReturn".Equals(hit.collider.gameObject.tag)) {
                 OnFloorCollision(hit.collider);
             }
-            if (hit.collider.gameObject.GetComponent<Block>() != null && hit.collider.gameObject.GetComponent<Block>()._type.Family == "Laser") {
-                hit.collider.gameObject.GetComponent<Block>().OnCollisionEnter2D();
+            if (hit.collider.gameObject.GetComponent<Block>() != null && !hit.collider.gameObject.GetComponent<Block>()._type.isCollidable) {
+                hit.collider.gameObject.GetComponent<Block>().interactWithBall();
             }
             return;
         }
 
-        if (hit.collider.gameObject.GetComponent<Block>() != null) {
-            hit.collider.gameObject.GetComponent<Block>().OnCollisionEnter2D();
+        if (hit.collider.gameObject.GetComponent<Block>() != null && hit.collider.gameObject.GetComponent<Block>()._type.isCollidable) {
+          hit.collider.gameObject.GetComponent<Block>().interactWithBall();
         }
 
+        //Reflect
         Vector3 offsetDirection = Vector3.zero;
         if (timer >= timeToConsiderBeingStuck) {
             timer = 0;
@@ -79,17 +77,19 @@ public class Ball : MonoBehaviour {
     }
 
     private void OnFloorCollision(Collider2D collider) {
+      //  Debug.Log("OnFloorCollision");
         //  Ball launcher where the first ball fell
         if (ballLauncher.BallsReadyToShoot == 0) {
             GameController.ResetScoreCoefficient();
             ballLauncher.gameObject.transform.position = new Vector3(transform.position.x, 0, 01f);
             ballLauncher.gameObject.SetActive(true);
         }
-        ballLauncher.ReturnBall(collider.GetComponent<Ball>());
-        // collider.gameObject.SetActive(false);
+        EnableCollision();
+        ballLauncher.ReturnBall(this);
     }
 
     public void DisableCollision() {
+        Debug.Log("Disable collision");
         ignoreCollision = true;
         moveSpeed = moveSpeedFast;
     }

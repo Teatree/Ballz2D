@@ -24,23 +24,14 @@ public class Block : MonoBehaviour {
     }
 
     public void UpdateVisualState() {
-        if (text != null && _type != null && _type.Family.Equals("Block")) {
+        if (text != null && _type != null && (_type.Family.Equals("Block") || _type.Family.Equals("Bomb"))) {
             text.SetText(hitsRemaining.ToString());
             spriteRenderer.color = Color.Lerp(Color.white, Color.red, hitsRemaining / 10f);
         }
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision) {
-    //    _behaviour.OnCollide();
-    //}
-
-
-    public void OnCollisionEnter2D() {
+    public void interactWithBall() {
         _behaviour.OnCollide();
-    }
-
-    void OnCollisionExit2D(Collision2D other) {
-        _behaviour.OnCollisionExit();
     }
 
     public void DestroySelf() {

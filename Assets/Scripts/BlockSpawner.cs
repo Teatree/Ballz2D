@@ -45,6 +45,7 @@ public class BlockSpawner : MonoBehaviour {
     private int rowsSpawned;
 
     public static List<Block> blocksSpawned = new List<Block>();
+    public static bool rowsAreSpawning;
 
     private void Start() { //OnLevelWasLoaded
         gc = GetComponent<GameController>();
@@ -54,7 +55,7 @@ public class BlockSpawner : MonoBehaviour {
     }
 
     public void SpawnRowOfBlocks() {
-
+        rowsAreSpawning = true; 
         RemoveOneTurnBlocks();
 
         //move blocks down one line
@@ -141,6 +142,7 @@ public class BlockSpawner : MonoBehaviour {
         }
 
         rowsSpawned++;
+        rowsAreSpawning = false;
     }
 
     public void RemoveOneTurnBlocks() {

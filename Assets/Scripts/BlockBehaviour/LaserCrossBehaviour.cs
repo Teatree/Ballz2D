@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class LaserCrossBehaviour : IBehaviour {
 
@@ -15,13 +16,15 @@ public class LaserCrossBehaviour : IBehaviour {
     }
 
     public override void OnCollide() {
-        foreach (Block b in BlockSpawner.blocksSpawned) {
+        if (!activated) {
             ShootLasers();
-            if (!b.destroyed && (b.row == block.row || b.col == block.col)) {
-                b.Hit();
+            foreach (Block b in BlockSpawner.blocksSpawned) {
+                if (!b.destroyed && (b.row == block.row || b.col == block.col)) {
+                    b.Hit();
+                }
             }
+            block.wasHit = true;
         }
-        block.wasHit = true;
     }
 
     public override void OnCollisionExit() {
@@ -30,6 +33,11 @@ public class LaserCrossBehaviour : IBehaviour {
 
     // shoot them pretty lasers
     public void ShootLasers() {
+        Debug.Log("shhot cros");
+        Color c = laserLine.material.color;
+        c.a = 1f;
+        laserLine.material.color = c;
+
         laserLine.positionCount = 5;
         laserLine.SetPosition(0, new Vector2(3.15f, block.transform.position.y));
         laserLine.SetPosition(1, new Vector2(-3.15f, block.transform.position.y));
@@ -37,6 +45,12 @@ public class LaserCrossBehaviour : IBehaviour {
 
         laserLine.SetPosition(3, new Vector2(block.transform.position.x, 0));
         laserLine.SetPosition(4, new Vector2(block.transform.position.x, 8.5f));
+
+        block.StartCoroutine(LaserFade(laserLine));
+    }
+
+    private IEnumerator LaserHide(LineRenderer laserLine) {
+        return LaserFade(laserLine);
     }
 
     public override void GetOneLife() {

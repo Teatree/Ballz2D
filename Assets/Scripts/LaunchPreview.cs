@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public class LaunchPreview : MonoBehaviour {
     public static Vector3 launchDirection;
