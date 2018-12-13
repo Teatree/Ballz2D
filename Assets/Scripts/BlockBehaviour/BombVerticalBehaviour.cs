@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class BombVerticalBehaviour : IBehaviour {
 
@@ -11,13 +10,16 @@ public class BombVerticalBehaviour : IBehaviour {
     }
 
     public override void OnDestroy() {
-        GameController.IncreseScore();
-        ShootLasers();
-        foreach (Block b in BlockSpawner.blocksSpawned) {
-            if (!b.destroyed && b.col == block.col && b != this.block) {
-                b.DestroySelf();
+        if (!block.destroyed) {
+            GameController.IncreseScore();
+            ShootLasers();
+            foreach (Block b in BlockSpawner.blocksSpawned) {
+                if (!b.destroyed && b.col == block.col && b != this.block) {
+                    b.DestroySelf();
+                }
             }
-        }
+            block.destroyed = true;
+        } 
     }
 
     public override void OnCollide() {

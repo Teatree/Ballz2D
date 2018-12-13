@@ -11,12 +11,15 @@ public class BombHorisontalBehaviour : IBehaviour {
     }
 
     public override void OnDestroy() {
-        GameController.IncreseScore();
-        ShootLasers();
-        foreach (Block b in BlockSpawner.blocksSpawned) {
-            if (!b.destroyed && b.row == block.row && b != this.block) {
-                b.DestroySelf();
+        if (!block.destroyed) {
+            GameController.IncreseScore();
+            ShootLasers();
+            foreach (Block b in BlockSpawner.blocksSpawned) {
+                if (!b.destroyed && b.row == block.row && b != this.block) {
+                    b.DestroySelf();
+                }
             }
+            block.destroyed = true;
         }
     }
 

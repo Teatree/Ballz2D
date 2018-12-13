@@ -6,7 +6,7 @@ public class BallLauncher : MonoBehaviour {
     private static float MIN_AIM_HEIGHT = 0.2f;
 
     [SerializeField]
-    public int InitBallAmount = 13;
+    public int InitBallAmount;
 
     private Vector3 endDragPosition;
     private BlockSpawner blockSpawner;
@@ -15,6 +15,8 @@ public class BallLauncher : MonoBehaviour {
 
 
     public int BallsReadyToShoot;
+    public int BallsShot;
+    public static bool canShoot;
 
     [SerializeField]
     private Ball ballPrefab;
@@ -26,13 +28,13 @@ public class BallLauncher : MonoBehaviour {
     }
 
     private void Update() {
-        if (BallsReadyToShoot >= balls.Count && !BlockSpawner.rowsAreSpawning) { // don't let the player launch until all balls are back.
+        if (BallsReadyToShoot == balls.Count && canShoot) { // don't let the player launch until all balls are back.
             //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.back * -10;
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             //controls 
             
-            if (ShouldAim(worldPosition) && !BlockSpawner.rowsAreSpawning) {
+            if (ShouldAim(worldPosition) && canShoot) {
                 if (Input.GetMouseButtonDown(0)) {
                     SetStartDrag();
                 }
@@ -54,10 +56,20 @@ public class BallLauncher : MonoBehaviour {
     }
 
     public void ReturnBall(Ball b) {
+
+        Debug.Log(">>>> " + BallsReadyToShoot);
+        if (BallsReadyToShoot == 0) {
+            //gameObject.SetActive(true);
+            transform.position = new Vector3(b.transform.position.x, 0, 00f);
+        }
         BallsReadyToShoot++;
         if (BallsReadyToShoot == balls.Count) {
             blockSpawner.SpawnRowOfBlocks();
+            GameController.ResetScoreCoefficient();
+            gameObject.SetActive(true);
         }
+        b.transform.position = new Vector2(-100, -100);
+        b.moveSpeed = 0;
     }
 
     private void CreateBall(int ballsAmount) {
@@ -75,21 +87,23 @@ public class BallLauncher : MonoBehaviour {
     }
 
     private IEnumerator LaunchBalls() {
-        Vector3 direction = endDragPosition - transform.position;
-        direction.Normalize();
-
-        foreach (var ball in balls) {
-            ball.transform.position = transform.position;
-            //ball.active = true;
-            ball.gameObject.SetActive(true);
-            ball.SetDir(LaunchPreview.launchDirection);
-            ball.EnableCollision();
-            yield return new WaitForSeconds(0.03f);
+        Debug.Log("LaunchBalls");
+        if (BallsReadyToShoot == balls.Count) {
+            canShoot = false;
+            Vector3 direction = endDragPosition - transform.position;
+            direction.Normalize();
+            BallsReadyToShoot = 0;
+            foreach (var ball in balls) {
+                ball.transform.position = transform.position;
+                ball.moveSpeed = ball.moveSpeedNorm;
+                ball.gameObject.SetActive(true);
+                ball.SetDir(LaunchPreview.launchDirection);
+                ball.EnableCollision();
+                yield return new WaitForSeconds(0.03f);
+            }
+            HideGhosts();
+            gameObject.SetActive(false);
         }
-
-        BallsReadyToShoot = 0;
-        HideGhosts();
-        gameObject.SetActive(false);
     }
 
     private void HideGhosts() {

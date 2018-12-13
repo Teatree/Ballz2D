@@ -17,7 +17,6 @@ public class LaserVerticalBehaviour : IBehaviour {
 
     public override void OnCollide() {
         if (!activated) {
-            Debug.Log("Vertical OnCollide");
             ShootLasers();
             foreach (Block b in BlockSpawner.blocksSpawned) {
                 if (!b.destroyed && b.col == block.col) {

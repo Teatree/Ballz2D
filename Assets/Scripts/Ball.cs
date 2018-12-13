@@ -1,12 +1,11 @@
-﻿using System.Collections;
+﻿
 using UnityEngine;
 
 public class Ball : MonoBehaviour {
     private Vector3 dir;
-    //public Rigidbody2D rb;
     private bool isCollidable;
 
-    private float moveSpeed;
+    public float moveSpeed;
     public int ballId;
     private BallLauncher ballLauncher;
     public bool ignoreCollision;
@@ -46,24 +45,39 @@ public class Ball : MonoBehaviour {
             return;
 
 
-        if (!ignoreCollision &&
-            (hit.collider.gameObject.GetComponent<Block>() == null || hit.collider.gameObject.GetComponent<Block>()._type.isCollidable)
-            && !"BallReturn".Equals(hit.collider.gameObject.tag)
-            ) {
-            timer = 0; //Do not collide
-        }
-        else {
-            if ("BallReturn".Equals(hit.collider.gameObject.tag)) {
-                OnFloorCollision(hit.collider);
-            }
-            if (hit.collider.gameObject.GetComponent<Block>() != null && !hit.collider.gameObject.GetComponent<Block>()._type.isCollidable) {
-                hit.collider.gameObject.GetComponent<Block>().interactWithBall();
-            }
+        //if (!ignoreCollision &&
+        //    (hit.collider.gameObject.GetComponent<Block>() == null || hit.collider.gameObject.GetComponent<Block>()._type.isCollidable)
+        //    && !"BallReturn".Equals(hit.collider.gameObject.tag)
+        //    ) {
+        //    timer = 0; //Do not collide
+        //}
+        //else {
+        //    if ("BallReturn".Equals(hit.collider.gameObject.tag)) {
+        //        OnFloorCollision(hit.collider);
+        //    }
+        //    if (hit.collider.gameObject.GetComponent<Block>() != null && !hit.collider.gameObject.GetComponent<Block>()._type.isCollidable) {
+        //        hit.collider.gameObject.GetComponent<Block>().interactWithBall();
+        //    }
+        //    return;
+        //}
+
+        if ("BallReturn".Equals(hit.collider.gameObject.tag)) { //Interaction with the floor does not depend on  the ignoreCollision, and reflecrt calc are not needed. Ball returned back to launcher
+            OnFloorCollision(hit.collider);
             return;
         }
 
-        if (hit.collider.gameObject.GetComponent<Block>() != null && hit.collider.gameObject.GetComponent<Block>()._type.isCollidable) {
-          hit.collider.gameObject.GetComponent<Block>().interactWithBall();
+        if (ignoreCollision) { //if ignoreCollision return, and skip reflect calc
+            return;
+        } else {
+            if (hit.collider.gameObject.GetComponent<Block>() != null) { //If collision is not ignored and collided with block 
+                hit.collider.gameObject.GetComponent<Block>().interactWithBall(); //Interact with a block 
+
+                if (!hit.collider.gameObject.GetComponent<Block>()._type.isCollidable) { // If the block is not collidable -> return
+                    return;
+                } //else -> go to reflect calc
+            } else {
+                timer = 0;
+            }
         }
 
         //Reflect
@@ -77,19 +91,13 @@ public class Ball : MonoBehaviour {
     }
 
     private void OnFloorCollision(Collider2D collider) {
-      //  Debug.Log("OnFloorCollision");
+        //  Debug.Log("OnFloorCollision");
         //  Ball launcher where the first ball fell
-        if (ballLauncher.BallsReadyToShoot == 0) {
-            GameController.ResetScoreCoefficient();
-            ballLauncher.gameObject.transform.position = new Vector3(transform.position.x, 0, 01f);
-            ballLauncher.gameObject.SetActive(true);
-        }
-        EnableCollision();
         ballLauncher.ReturnBall(this);
+        EnableCollision();
     }
 
     public void DisableCollision() {
-        Debug.Log("Disable collision");
         ignoreCollision = true;
         moveSpeed = moveSpeedFast;
     }

@@ -33,7 +33,6 @@ public class LaserCrossBehaviour : IBehaviour {
 
     // shoot them pretty lasers
     public void ShootLasers() {
-        Debug.Log("shhot cros");
         Color c = laserLine.material.color;
         c.a = 1f;
         laserLine.material.color = c;

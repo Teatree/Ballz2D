@@ -34,8 +34,6 @@ public class LaserHorisontalBehaviour : IBehaviour {
 
     // shoot them pretty lasers
     public void ShootLasers() {
-
-        Debug.Log("Shoot horizontal");
         Color c = laserLine.material.color;
         c.a = 1f;
         laserLine.material.color = c;

@@ -31,14 +31,12 @@ public abstract class IBehaviour {
         block.transform.position = new Vector2(-100, -100);
         for (int i = 0; i < 50; i++) {
             activated = false;
-            Debug.Log("Bobmb coroutine" );
             Color c = laserLine.material.color;
             c.a = c.a - 0.02f;
             laserLine.material.color = c;
             yield return null;
         }
         activated = false;
-        Debug.Log("Bobmb coroutine DestroySelf");
         block.DestroySelf();
     }
 }
