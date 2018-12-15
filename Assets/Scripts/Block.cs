@@ -38,9 +38,9 @@ public class Block : MonoBehaviour {
 
     protected IEnumerator BlockBlink(Color initColor, float waitTime) {
         GetComponent<SpriteRenderer>().color = Color.white;
-        yield return new WaitForSeconds(0.03f);
+        yield return new WaitForSeconds(0.01f);
         GetComponent<SpriteRenderer>().color = initColor;
-        yield return new WaitForSeconds(0.03f);
+        yield return new WaitForSeconds(0.01f);
     }
 
     public void interactWithBall() {

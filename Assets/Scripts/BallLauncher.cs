@@ -18,11 +18,14 @@ public class BallLauncher : MonoBehaviour {
     public int BallsReadyToShoot;
     public static bool canShoot;
     private Vector3 newPos;
+    public bool _slider;
 
     [SerializeField]
     private Ball ballPrefab;
 
+    [Header("UI")]
     public GameObject textCanvas;
+    public Slider Slider;
 
     public static int ExtraBalls = 0;
 
@@ -41,11 +44,18 @@ public class BallLauncher : MonoBehaviour {
 
             if (BallsReadyToShoot == balls.Count && canShoot) { // don't let the player launch until all balls are back.
                                                                 //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.back * -10;
-                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 worldPosition;
+                if (_slider) {
+                    worldPosition = new Vector3(Slider.value, 1f);
+                }
+                else {
+                    worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    //Debug.Log(worldPosition);
+                }
 
                 //controls 
 
-                if (ShouldAim(worldPosition) && canShoot) {
+                if (/*ShouldAim(worldPosition) &&*/ canShoot) {
                     if (Input.GetMouseButtonDown(0)) {
                         SetStartDrag();
                     }
@@ -53,19 +63,14 @@ public class BallLauncher : MonoBehaviour {
                         ContinueDrag(worldPosition);
                     }
                     else if (Input.GetMouseButtonUp(0)) {
-                        EndDrag(worldPosition);
+                        EndDrag();
                     }
                 }
-                else {
-                    //Reset launcher
-                    
-                    Input.ResetInputAxes();
-                    HideGhosts();
-
-                    //gameObject.SetActive(false);
-                    //gameObject.SetActive(true);
-                    //SetStartDrag();
-                }
+                //else {
+                //    //Reset launcher
+                //    Input.ResetInputAxes();
+                //    HideGhosts();
+                //}
             }
         }
     }
@@ -78,7 +83,7 @@ public class BallLauncher : MonoBehaviour {
     }
 
     public void ReturnBall(Ball b) {
-        if (BallsReadyToShoot == 0) { 
+        if (BallsReadyToShoot == 0) {
             newPos = new Vector3(b.transform.position.x, base_y, 00f);
             ballVisual.gameObject.SetActive(true);
             ballVisual.gameObject.transform.position = newPos;
@@ -95,11 +100,13 @@ public class BallLauncher : MonoBehaviour {
             GameController.ResetScoreCoefficient();
 
             gameObject.transform.position = newPos;
-            ballVisual.gameObject.transform.localPosition = new Vector2(0,0);
+            ballVisual.gameObject.transform.localPosition = new Vector2(0, 0);
             textCanvas.gameObject.transform.localPosition = new Vector3(0.27f, 0.17f);
             if (textCanvas.gameObject.transform.position.x > 2.55f) textCanvas.gameObject.transform.position = new Vector3(2.55f, textCanvas.gameObject.transform.position.y);
 
             launchPreview.Init();
+            Slider.value = 0;
+            Slider.gameObject.transform.parent.gameObject.SetActive(true);
         }
         b.transform.position = new Vector2(-100, -100);
         b.moveSpeed = 0;
@@ -115,8 +122,8 @@ public class BallLauncher : MonoBehaviour {
         }
     }
 
-    private void EndDrag(Vector3 worldPos) {
-        //balls.ForEach(b => b.inTheField = false);
+    public void EndDrag() {
+        Slider.gameObject.transform.parent.gameObject.SetActive(false);
         textCanvas.SetActive(false);
         StartCoroutine(LaunchBalls());
         HideGhosts();
@@ -134,11 +141,11 @@ public class BallLauncher : MonoBehaviour {
                 ball.gameObject.SetActive(true);
                 ball.SetDir(LaunchPreview.launchDirection);
                 ball.EnableCollision();
-                yield return new WaitForSeconds(0.015f);
+                yield return new WaitForSeconds(0.03f);
             }
 
             HideGhosts();
-            
+
             //gameObject.SetActive(false);           
         }
     }
@@ -161,21 +168,41 @@ public class BallLauncher : MonoBehaviour {
         }
     }
 
-    private void ContinueDrag(Vector3 worldPosition) {
+    public void ContinueDrag(Vector3 worldPosition) {
         endDragPosition = worldPosition;
+
         if (ShouldAim(worldPosition)) {
+            //Debug.Log(" endDragPosition " + endDragPosition);
+            launchPreview.SetEndPoint(endDragPosition);
+        }
+        else {
+            //    //Reset launcher
+            Input.ResetInputAxes();
+            HideGhosts();
+        }
+    }
+
+    public void ContinueSliderDrag() {
+        endDragPosition = new Vector3(Slider.value, 1f - Mathf.Abs(Slider.value * 0.7f));
+
+        if (ShouldAim(endDragPosition)) {
             //Debug.Log(" endDragPosition " + endDragPosition);
             launchPreview.SetEndPoint(endDragPosition);
         }
     }
 
-    private void SetStartDrag() {
+    public void SetStartDrag() {
         launchPreview.SetStartPoint(transform.position);
         launchPreview.active = true;
         ShowGhosts();
     }
 
     private bool ShouldAim(Vector3 worldPosition) {
-        return worldPosition.y > (transform.position.y*0.9f);
+        return worldPosition.y > (transform.position.y * 0.9f);
+    }
+
+    public void SetSlider(bool r) {
+        _slider = r;
+        Debug.Log("slider = " + _slider);
     }
 }
