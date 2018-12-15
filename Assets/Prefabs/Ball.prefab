@@ -36,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1353940230588586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 1.5799999, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -155.02718, y: -156.80925, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -50,13 +50,13 @@ CircleCollider2D:
   m_GameObject: {fileID: 1353940230588586}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 22e1f9e057c3b4a40b1f1288ddb16e11, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.09
 --- !u!114 &114868672981750182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f78b213997ee72f4c854d12d94ed62ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 0
   ballId: 0
   ignoreCollision: 0
   moveSpeedNorm: 12

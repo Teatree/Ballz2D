@@ -13,6 +13,7 @@ public class LaunchPreview : MonoBehaviour {
 
     //private int _count = 2;
     private void Start() {
+        Init();
         ghosts = new GameObject[11];
         for (int i = 0; i < ghosts.Length; i++) {
             ghosts[i] = Instantiate(ghostGO);
@@ -29,7 +30,7 @@ public class LaunchPreview : MonoBehaviour {
         }
     }
 
-    private void OnEnable() {
+    public void Init() {
         _lineRenderer = GetComponent<LineRenderer>();
         _lineRenderer.positionCount = 3;
         _lineRenderer.useWorldSpace = true;

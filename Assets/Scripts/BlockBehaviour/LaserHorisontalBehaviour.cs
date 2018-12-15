@@ -28,10 +28,6 @@ public class LaserHorisontalBehaviour : IBehaviour {
         }
     }
 
-    public override void OnCollisionExit() {
-        laserLine.positionCount = 0;
-    }
-
     // shoot them pretty lasers
     public void ShootLasers() {
         Color c = laserLine.material.color;
@@ -45,7 +41,9 @@ public class LaserHorisontalBehaviour : IBehaviour {
         block.StartCoroutine(LaserFade(laserLine));
     }
 
-    public override void GetOneLife() {
+    public override void LooseOneLife() {
         //Do something 
     }
+
+    public override void Update() { }
 }

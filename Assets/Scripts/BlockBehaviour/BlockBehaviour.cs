@@ -1,4 +1,7 @@
-﻿public class BlockBehaviour : IBehaviour {
+﻿using System.Collections;
+using UnityEngine;
+
+public class BlockBehaviour : IBehaviour {
 
     public override void setBlock(Block b) {
         this.block = b;
@@ -14,10 +17,9 @@
         block.UpdateVisualState();
     }
 
-    public override void GetOneLife() {
+    public override void LooseOneLife() {
         block.hitsRemaining--;
         if (block.hitsRemaining > 0) {
-            
             block.UpdateVisualState();
         }
         else {
@@ -25,5 +27,7 @@
         }
     }
 
-    public override void OnCollisionExit() { }
+    public override void Update() {
+        
+    }
 }

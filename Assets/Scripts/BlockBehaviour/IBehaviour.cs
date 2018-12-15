@@ -12,9 +12,9 @@ public abstract class IBehaviour {
 
     public abstract void OnCollide();
 
-    public abstract void OnCollisionExit();
+    public abstract void LooseOneLife();
 
-    public abstract void GetOneLife();
+    public abstract void Update();
 
     protected IEnumerator LaserFade(LineRenderer laserLine) {
         for (int i = 0; i < 50; i++) {

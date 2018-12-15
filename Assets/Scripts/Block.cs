@@ -1,14 +1,16 @@
 ﻿using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Block : MonoBehaviour {
 
     public int hitsRemaining = 5;
     public bool wasHit; //set true if should be deleted next move
     public bool destroyed;
+    bool coroutineCalled;
 
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     private TextMeshPro text;
 
     public BlockType _type;
@@ -26,12 +28,26 @@ public class Block : MonoBehaviour {
     public void UpdateVisualState() {
         if (text != null && _type != null && (_type.Family.Equals("Block") || _type.Family.Equals("Bomb"))) {
             text.SetText(hitsRemaining.ToString());
-            spriteRenderer.color = Color.Lerp(Color.white, Color.red, hitsRemaining / 10f);
+
+            if (_type.Family.Equals("Block")) {
+                spriteRenderer.color = Color.Lerp(Color.white, Color.red, hitsRemaining / 10f);
+                StartCoroutine(BlockBlink(spriteRenderer.color, 1));
+            }
         }
     }
 
+    protected IEnumerator BlockBlink(Color initColor, float waitTime) {
+        GetComponent<SpriteRenderer>().color = Color.white;
+        yield return new WaitForSeconds(0.03f);
+        GetComponent<SpriteRenderer>().color = initColor;
+        yield return new WaitForSeconds(0.03f);
+    }
+
     public void interactWithBall() {
-        _behaviour.OnCollide();
+        if (_behaviour == null) {
+            Debug.LogError(_type.ToString());
+        }
+            _behaviour.OnCollide();
     }
 
     public void DestroySelf() {
@@ -62,7 +78,15 @@ public class Block : MonoBehaviour {
     }
 
     public void Hit() {
-        _behaviour.GetOneLife();
+        _behaviour.LooseOneLife();
+    }
+
+    //public BallLauncher GetBallLouncher() {
+    //   return FindObjectOfType<BallLauncher>();
+    //}
+
+    public void Update() {
+        _behaviour.Update();
     }
 }
 

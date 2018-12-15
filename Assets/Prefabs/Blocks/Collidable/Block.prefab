@@ -98,7 +98,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1052273827840646}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 84d383a9d892f8c4ba51b006f2b95940, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -242,6 +242,7 @@ MonoBehaviour:
   hitsRemaining: 5
   wasHit: 0
   destroyed: 0
+  spriteRenderer: {fileID: 0}
   col: 0
   row: 0
 --- !u!212 &212990759036189708
@@ -331,6 +332,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.7906399, y: 1.0432655}
+  m_AnchoredPosition: {x: 2.2663953, y: 0.8643389}
   m_SizeDelta: {x: 0.01, y: 0.01}
   m_Pivot: {x: 0.5, y: 0.5}

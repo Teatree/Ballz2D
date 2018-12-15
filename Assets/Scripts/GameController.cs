@@ -8,20 +8,17 @@ public class GameController : MonoBehaviour {
     public static int levelScore;
     public static int levelScoreCoefficient = levelScoreCoefficientMin ;
 
-    //public int currentLevelIndex;
     public LevelData currentLevel;
-    //public List<LevelData> allLevels = new List<LevelData>();
 
-    // Use this for initialization
+    public static bool isGameOver; 
+
     void Awake() {
-        //allLevels = DataController.LoadLevels();
         currentLevel = AllLevelsData.GetCurrentLevel();
     }
 
     public static void IncreseScore() {       
         levelScore += levelScoreCoefficient;
         levelScoreCoefficient += levelScoreCoefficientStep;
-       // Debug.Log(">>> levelScoreCoefficient > " + levelScore + " >>> ScoreCoefficient > " + levelScoreCoefficient); 0.0167
     }
 
     public static void ResetScoreCoefficient() {
@@ -31,5 +28,10 @@ public class GameController : MonoBehaviour {
     public static void ResetScore() {
         levelScoreCoefficient = levelScoreCoefficientMin;
         levelScore = 0;
+    }
+
+    public static void GameOver() {
+        isGameOver = true;
+        Debug.Log("!!! The game is over");
     }
 }

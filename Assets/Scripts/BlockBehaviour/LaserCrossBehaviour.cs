@@ -27,10 +27,6 @@ public class LaserCrossBehaviour : IBehaviour {
         }
     }
 
-    public override void OnCollisionExit() {
-        laserLine.positionCount = 0;
-    }
-
     // shoot them pretty lasers
     public void ShootLasers() {
         Color c = laserLine.material.color;
@@ -40,7 +36,7 @@ public class LaserCrossBehaviour : IBehaviour {
         laserLine.positionCount = 5;
         laserLine.SetPosition(0, new Vector2(3.15f, block.transform.position.y));
         laserLine.SetPosition(1, new Vector2(-3.15f, block.transform.position.y));
-        laserLine.SetPosition(2, new Vector2(block.transform.position.x, block.transform.position.y));
+        laserLine.SetPosition(2, new Vector3(block.transform.position.x, block.transform.position.y, -100));
 
         laserLine.SetPosition(3, new Vector2(block.transform.position.x, 0));
         laserLine.SetPosition(4, new Vector2(block.transform.position.x, 8.5f));
@@ -52,7 +48,9 @@ public class LaserCrossBehaviour : IBehaviour {
         return LaserFade(laserLine);
     }
 
-    public override void GetOneLife() {
+    public override void LooseOneLife() {
         //Do something 
     }
+
+    public override void Update() { }
 }

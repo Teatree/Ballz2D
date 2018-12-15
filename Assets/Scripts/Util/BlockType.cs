@@ -75,6 +75,9 @@ public class BlockType {
             case "ob": {
                     return new BlockBehaviour();
                 }
+            case "★★": {
+                    return new ExtraBallBehaviour();
+                }
             default: {
                     return new BlockBehaviour();
                 }

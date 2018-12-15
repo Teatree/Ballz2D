@@ -22,7 +22,7 @@
         block.UpdateVisualState();
     }
 
-    public override void GetOneLife() {
+    public override void LooseOneLife() {
         block.hitsRemaining--;
         if (block.hitsRemaining > 0) {
 
@@ -33,8 +33,8 @@
         }
     }
 
-    public override void OnCollisionExit() { }
-
     public void PlayAni() {
     }
+
+    public override void Update() { }
 }

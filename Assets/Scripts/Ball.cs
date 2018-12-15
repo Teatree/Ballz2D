@@ -19,8 +19,6 @@ public class Ball : MonoBehaviour {
     private float timer = 0;
     private Vector3 baseOffsetDirection = Vector3.down * 0.1f;
 
-
-
     private void Start() {
         ballLauncher = FindObjectOfType<BallLauncher>();
         moveSpeed = moveSpeedNorm;
@@ -41,25 +39,10 @@ public class Ball : MonoBehaviour {
         timer += Time.deltaTime;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, moveSpeed * Time.deltaTime * 1.2f, ~(1 << 8));
-        if (!hit)
+
+        if (!hit) {
             return;
-
-
-        //if (!ignoreCollision &&
-        //    (hit.collider.gameObject.GetComponent<Block>() == null || hit.collider.gameObject.GetComponent<Block>()._type.isCollidable)
-        //    && !"BallReturn".Equals(hit.collider.gameObject.tag)
-        //    ) {
-        //    timer = 0; //Do not collide
-        //}
-        //else {
-        //    if ("BallReturn".Equals(hit.collider.gameObject.tag)) {
-        //        OnFloorCollision(hit.collider);
-        //    }
-        //    if (hit.collider.gameObject.GetComponent<Block>() != null && !hit.collider.gameObject.GetComponent<Block>()._type.isCollidable) {
-        //        hit.collider.gameObject.GetComponent<Block>().interactWithBall();
-        //    }
-        //    return;
-        //}
+        }
 
         if ("BallReturn".Equals(hit.collider.gameObject.tag)) { //Interaction with the floor does not depend on  the ignoreCollision, and reflecrt calc are not needed. Ball returned back to launcher
             OnFloorCollision(hit.collider);

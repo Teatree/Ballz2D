@@ -27,7 +27,7 @@ public class BombVerticalBehaviour : IBehaviour {
         block.UpdateVisualState();
     }
 
-    public override void GetOneLife() {
+    public override void LooseOneLife() {
         block.hitsRemaining--;
         if (block.hitsRemaining > 0) {
 
@@ -37,8 +37,6 @@ public class BombVerticalBehaviour : IBehaviour {
             OnDestroy();
         }
     }
-
-    public override void OnCollisionExit() { }
 
     // shoot them pretty lasers
     public void ShootLasers() {
@@ -52,5 +50,7 @@ public class BombVerticalBehaviour : IBehaviour {
 
         block.StartCoroutine(BombLaserFade(laserLine));
     }
+
+    public override void Update() { }
 }
 
