@@ -79,32 +79,42 @@ public class BallLauncher : MonoBehaviour {
 
     public void ReturnBall(Ball b) {
         if (BallsReadyToShoot == 0) {
-            newPos = new Vector3(b.transform.position.x, base_y, 00f);
-            ballVisual.gameObject.SetActive(true);
-            ballVisual.gameObject.transform.position = newPos;
-
-            textCanvas.gameObject.SetActive(true);
-            textCanvas.gameObject.transform.position = newPos + new Vector3(0.27f, 0.17f);
-            if (textCanvas.gameObject.transform.position.x > 2.55f) textCanvas.gameObject.transform.position = new Vector3(2.55f, textCanvas.gameObject.transform.position.y);
-            //transform.position = new Vector3(b.transform.position.x, 0, 00f);
+            UpdateVisualsFirstBall(b);
         }
+
         BallsReadyToShoot++;
         textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
         if (BallsReadyToShoot == balls.Count) {
             blockSpawner.SpawnRowOfBlocks();
             GameController.ResetScoreCoefficient();
 
-            gameObject.transform.position = newPos;
-            ballVisual.gameObject.transform.localPosition = new Vector2(0, 0);
-            textCanvas.gameObject.transform.localPosition = new Vector3(0.27f, 0.17f);
-            if (textCanvas.gameObject.transform.position.x > 2.55f) textCanvas.gameObject.transform.position = new Vector3(2.55f, textCanvas.gameObject.transform.position.y);
-
-            launchPreview.Init();
-            Slider.value = 0;
-            Slider.gameObject.transform.parent.gameObject.SetActive(true);
+            UpdateVisualsLastBall();
+            blockSpawner.DidIwin();
         }
         b.transform.position = new Vector2(-100, -100);
         b.moveSpeed = 0;
+    }
+
+    private void UpdateVisualsFirstBall(Ball b) {
+        newPos = new Vector3(b.transform.position.x, base_y, 00f);
+        ballVisual.gameObject.SetActive(true);
+        ballVisual.gameObject.transform.position = newPos;
+
+        textCanvas.gameObject.SetActive(true);
+        textCanvas.gameObject.transform.position = newPos + new Vector3(0.27f, 0.17f);
+        if (textCanvas.gameObject.transform.position.x > 2.55f) textCanvas.gameObject.transform.position = new Vector3(2.55f, textCanvas.gameObject.transform.position.y);
+        //transform.position = new Vector3(b.transform.position.x, 0, 00f);
+    }
+
+    private void UpdateVisualsLastBall() {
+        gameObject.transform.position = newPos;
+        ballVisual.gameObject.transform.localPosition = new Vector2(0, 0);
+        textCanvas.gameObject.transform.localPosition = new Vector3(0.27f, 0.17f);
+        if (textCanvas.gameObject.transform.position.x > 2.55f) textCanvas.gameObject.transform.position = new Vector3(2.55f, textCanvas.gameObject.transform.position.y);
+
+        launchPreview.Init();
+        Slider.value = 0;
+        Slider.gameObject.transform.parent.gameObject.SetActive(true);
     }
 
     public void CreateBall(int ballsAmount) {
@@ -212,6 +222,11 @@ public class BallLauncher : MonoBehaviour {
     }
 
     public void SummonAllBalls() {
-        StartCoroutine(SummonBalls());
+        //StartCoroutine(SummonBalls());
+        foreach (Ball b in balls) {
+            gameObject.SetActive(true);
+            b.SetDir(transform.position - b.transform.position);
+            b.DisableCollision();
+        }
     }
 }

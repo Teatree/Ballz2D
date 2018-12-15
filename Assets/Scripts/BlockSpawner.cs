@@ -67,17 +67,17 @@ public class BlockSpawner : MonoBehaviour {
                     blocksSpawned.Add(block);
                 }
             }
+            rowsSpawned++;
         }
         //Debug.Log(">>>> " + blocksSpawned[blocksSpawned.Count - 1].transform.position.y);
-        if (blocksSpawned[blocksSpawned.Count -1].transform.position.y <= Warning_y) {
+        if (blocksSpawned[blocksSpawned.Count - 1] != null && blocksSpawned[blocksSpawned.Count - 1].transform.position.y <= Warning_y) {
             GameController.GameWarning();
             return;
         }
-        if (blocksSpawned[blocksSpawned.Count - 1].transform.position.y <= GameOver_y) {
+        if (blocksSpawned[blocksSpawned.Count - 1] != null && blocksSpawned[blocksSpawned.Count - 1].transform.position.y <= GameOver_y) {
             GameController.GameOver();
             return;
         }
-        rowsSpawned++;
         BallLauncher.canShoot = true;
     }
 
@@ -174,5 +174,19 @@ public class BlockSpawner : MonoBehaviour {
         }
 
         return block;
+    }
+
+    public bool DidIwin() {
+        if (gc.currentLevel.rows.Count == rowsSpawned) {
+            foreach (var b in blocksSpawned) {
+                if (b != null && !b.destroyed) {
+                    return false;
+                }
+            }
+            Debug.Log("WOW! you win");
+            return true;
+        } else {
+            return false;
+        }
     }
 }
