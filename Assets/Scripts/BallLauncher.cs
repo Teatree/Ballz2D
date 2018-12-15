@@ -39,7 +39,7 @@ public class BallLauncher : MonoBehaviour {
     }
 
     private void Update() {
-        if (!GameController.isGameOver) {
+        if (!GameController.IsGameStopped()) {
             CheckExtraBall();
 
             if (BallsReadyToShoot == balls.Count && canShoot) { // don't let the player launch until all balls are back.
@@ -55,7 +55,7 @@ public class BallLauncher : MonoBehaviour {
 
                 //controls 
 
-                if (/*ShouldAim(worldPosition) &&*/ canShoot) {
+                if (canShoot) {
                     if (Input.GetMouseButtonDown(0)) {
                         SetStartDrag();
                     }
@@ -66,11 +66,6 @@ public class BallLauncher : MonoBehaviour {
                         EndDrag();
                     }
                 }
-                //else {
-                //    //Reset launcher
-                //    Input.ResetInputAxes();
-                //    HideGhosts();
-                //}
             }
         }
     }
@@ -203,6 +198,20 @@ public class BallLauncher : MonoBehaviour {
 
     public void SetSlider(bool r) {
         _slider = r;
-        Debug.Log("slider = " + _slider);
+       // Debug.Log("slider = " + _slider);
+    }
+
+    private IEnumerator SummonBalls() {
+        BallsReadyToShoot = balls.Count;
+        foreach (Ball b in balls) {
+            gameObject.SetActive(true);
+            b.SetDir(transform.position - b.transform.position);
+            b.DisableCollision();
+            yield return null;
+        }
+    }
+
+    public void SummonAllBalls() {
+        StartCoroutine(SummonBalls());
     }
 }

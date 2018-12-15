@@ -11,7 +11,6 @@ public class LaunchPreview : MonoBehaviour {
     private Vector3 baseOffsetDirection = Vector3.down * 0.1f;
     public bool active = false;
 
-    //private int _count = 2;
     private void Start() {
         Init();
         ghosts = new GameObject[11];
@@ -37,8 +36,6 @@ public class LaunchPreview : MonoBehaviour {
     }
 
     private void Update() {
-        //literally just draw some objects
-        
         if (_lineRenderer != null && active) {
             for (int i = 0; i < ghosts.Length; i++) {
                 Vector3 position = Vector3.Lerp(_lineRenderer.GetPosition(0), _lineRenderer.GetPosition(1), i * 0.1f);

@@ -11,15 +11,10 @@ public class TheButtonScript : MonoBehaviour {
     }
 
     public void HandleClick() {
-        SummonBalls();
+        ballLauncher.StopAllCoroutines();
+        ballLauncher.SummonAllBalls();
     }
 
 
-    private void SummonBalls() {
-        foreach (Ball b in ballLauncher.balls) {
-            ballLauncher.gameObject.SetActive(true);
-            b.SetDir(ballLauncher.transform.position - b.transform.position);
-            b.DisableCollision();
-        }
-    }
+
 }

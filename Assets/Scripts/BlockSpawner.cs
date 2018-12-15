@@ -2,7 +2,8 @@
 using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour {
-
+    private const float Warning_y = 3.6f;
+    private const float GameOver_y = 3.2f;
     private float BlockSize = 0.4519416f;
 
     private GameController gc;
@@ -55,88 +56,28 @@ public class BlockSpawner : MonoBehaviour {
 
     public void SpawnRowOfBlocks() {
         RemoveOneTurnBlocks();
-
         MoveOneLineDown();
-
         //add new line
-        List<CellData> cells = gc.currentLevel.rows[rowsSpawned].GetCells();
-        for (int i = 0; i < playWidth; i++) {
-            if (cells[i] != null && cells[i].type != "") {
-                Block block;
-                switch (cells[i].type) {
-                    case "FF": {
-                            block = Instantiate(fountainPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "★★": {
-                            block = Instantiate(plusBallPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "LH": {
-                            block = Instantiate(laserHorizontalPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "LV": {
-                            block = Instantiate(laserVerticalPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "LC": {
-                            block = Instantiate(laserCrossPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "BM": {
-                            block = Instantiate(bombPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "BV": {
-                            block = Instantiate(bombVerticalPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "BH": {
-                            block = Instantiate(bombHorizontalPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "BC": {
-                            block = Instantiate(bombCrossPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "ob": {
-                            block = Instantiate(obstaclePrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "NW": {
-                            block = Instantiate(triangleNWPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "SW": {
-                            block = Instantiate(triangleSWPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "SE": {
-                            block = Instantiate(triangleSEPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    case "NE": {
-                            block = Instantiate(triangleNEPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
-                    default: {
-                            block = Instantiate(blockPrefab, GetPosition(i), Quaternion.identity);
-                            break;
-                        }
+        if (rowsSpawned < gc.currentLevel.rows.Count) {
+            List<CellData> cells = gc.currentLevel.rows[rowsSpawned].GetCells();
+            for (int i = 0; i < playWidth; i++) {
+                if (cells[i] != null && cells[i].type != "") {
+                    Block block = GetTheBlock(cells, i);
+                    block.Setup(cells[i].type, cells[i].life, rowsSpawned, i);
+                    blocksSpawned.Add(block);
                 }
-
-                block.Setup(cells[i].type, cells[i].life, rowsSpawned, i);
-                blocksSpawned.Add(block);
-                //if (block.transform.position.y <= 0.1) {
-                //    GameController.GameOver();
-                //    return;
-                //}
             }
         }
-
+        //Debug.Log(">>>> " + blocksSpawned[blocksSpawned.Count - 1].transform.position.y);
+        if (blocksSpawned[blocksSpawned.Count -1].transform.position.y <= Warning_y) {
+            GameController.GameWarning();
+            return;
+        }
+        if (blocksSpawned[blocksSpawned.Count - 1].transform.position.y <= GameOver_y) {
+            GameController.GameOver();
+            return;
+        }
         rowsSpawned++;
- 
         BallLauncher.canShoot = true;
     }
 
@@ -165,5 +106,73 @@ public class BlockSpawner : MonoBehaviour {
         position = new Vector3(i * BlockSize - 2.731f, transform.position.y, transform.position.z);
 
         return position;
+    }
+
+    private Block GetTheBlock(List<CellData> cells, int i) {
+        Block block;
+        switch (cells[i].type) {
+            case "FF": {
+                    block = Instantiate(fountainPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "★★": {
+                    block = Instantiate(plusBallPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "LH": {
+                    block = Instantiate(laserHorizontalPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "LV": {
+                    block = Instantiate(laserVerticalPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "LC": {
+                    block = Instantiate(laserCrossPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "BM": {
+                    block = Instantiate(bombPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "BV": {
+                    block = Instantiate(bombVerticalPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "BH": {
+                    block = Instantiate(bombHorizontalPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "BC": {
+                    block = Instantiate(bombCrossPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "ob": {
+                    block = Instantiate(obstaclePrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "NW": {
+                    block = Instantiate(triangleNWPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "SW": {
+                    block = Instantiate(triangleSWPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "SE": {
+                    block = Instantiate(triangleSEPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "NE": {
+                    block = Instantiate(triangleNEPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            default: {
+                    block = Instantiate(blockPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+        }
+
+        return block;
     }
 }

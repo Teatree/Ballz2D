@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     public LevelData currentLevel;
 
     public static bool isGameOver; 
+    public static bool isGamePaused; 
 
     void Awake() {
         currentLevel = AllLevelsData.GetCurrentLevel();
@@ -33,5 +34,18 @@ public class GameController : MonoBehaviour {
     public static void GameOver() {
         isGameOver = true;
         Debug.Log("!!! The game is over");
+    }
+
+    public static void PauseGame() {
+        isGamePaused = true;
+        Debug.Log("!!! The game is over");
+    }
+
+    public static void GameWarning() {
+        Debug.Log(">>> You're going to loose");
+    }
+
+    public static bool IsGameStopped() {
+        return isGameOver || isGamePaused;
     }
 }
