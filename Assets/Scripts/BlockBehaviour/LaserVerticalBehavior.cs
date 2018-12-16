@@ -15,7 +15,7 @@ public class LaserVerticalBehaviour : IBehaviour {
         block.DestroySelf();
     }
 
-    public override void OnCollide() {
+    public override void OnCollide(Ball ball) {
         if (!activated) {
             ShootLasers();
             foreach (Block b in BlockSpawner.blocksSpawned) {
@@ -35,7 +35,7 @@ public class LaserVerticalBehaviour : IBehaviour {
         laserLine.material.color = c;
 
         laserLine.positionCount = 2;
-        laserLine.SetPosition(0, new Vector2(block.transform.position.x, 0));
+        laserLine.SetPosition(0, new Vector2(block.transform.position.x, 0.40f));
         laserLine.SetPosition(1, new Vector2(block.transform.position.x, 8.5f));
 
         block.StartCoroutine(LaserFade(laserLine));

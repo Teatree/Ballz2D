@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class Ball : MonoBehaviour {
-    private Vector3 dir;
+    public Vector3 dir;
     private bool isCollidable;
 
     public float moveSpeed;
@@ -53,7 +53,7 @@ public class Ball : MonoBehaviour {
             return;
         } else {
             if (hit.collider.gameObject.GetComponent<Block>() != null) { //If collision is not ignored and collided with block 
-                hit.collider.gameObject.GetComponent<Block>().interactWithBall(); //Interact with a block 
+                hit.collider.gameObject.GetComponent<Block>().interactWithBall(this); //Interact with a block 
 
                 if (!hit.collider.gameObject.GetComponent<Block>()._type.isCollidable) { // If the block is not collidable -> return
                     return;

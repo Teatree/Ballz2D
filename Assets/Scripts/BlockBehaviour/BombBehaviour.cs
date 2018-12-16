@@ -5,8 +5,8 @@
     }
 
     public override void OnDestroy() {
-        PlayAni();
         GameController.IncreseScore();
+
         foreach (Block b in BlockSpawner.blocksSpawned) {
             if (!b.destroyed &&
                     (b.row >= block.row - 1 && b.row <= block.row + 1) &&
@@ -17,7 +17,7 @@
         block.DestroySelf();
     }
 
-    public override void OnCollide() {
+    public override void OnCollide(Ball ball) {
         block.Hit();
         block.UpdateVisualState();
     }
@@ -31,9 +31,6 @@
         else {
             OnDestroy();
         }
-    }
-
-    public void PlayAni() {
     }
 
     public override void Update() { }

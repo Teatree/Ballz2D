@@ -243,6 +243,9 @@ MonoBehaviour:
   hitsRemaining: 5
   wasHit: 0
   destroyed: 0
+  spriteRenderer: {fileID: 0}
+  DeathParticle: {fileID: 1992232517332788, guid: 5229f677d00b9804297291f48a94fc56,
+    type: 2}
   col: 0
   row: 0
 --- !u!120 &120789552125451352

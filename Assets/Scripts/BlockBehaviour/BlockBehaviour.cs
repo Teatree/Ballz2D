@@ -8,11 +8,12 @@ public class BlockBehaviour : IBehaviour {
     }
 
     public override void OnDestroy() {
+        if (block.DeathParticle != null) block.CreateDeathParticle();
         GameController.IncreseScore();
         block.DestroySelf();
     }
 
-    public override void OnCollide() {
+    public override void OnCollide(Ball ball) {
         block.Hit();
         block.UpdateVisualState();
     }

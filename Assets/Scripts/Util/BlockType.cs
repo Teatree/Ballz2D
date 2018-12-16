@@ -78,6 +78,9 @@ public class BlockType {
             case "★★": {
                     return new ExtraBallBehaviour();
                 }
+            case "FF": {
+                    return new FountainBehaviour();
+                }
             default: {
                     return new BlockBehaviour();
                 }

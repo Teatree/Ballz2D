@@ -15,14 +15,17 @@ public class BombVerticalBehaviour : IBehaviour {
             ShootLasers();
             foreach (Block b in BlockSpawner.blocksSpawned) {
                 if (!b.destroyed && b.col == block.col && b != this.block) {
-                    b.DestroySelf();
+                    if (b._type.isCollidable) {
+                        GameController.IncreseScore();
+                        b.DestroySelf();
+                    } 
                 }
             }
             block.destroyed = true;
         } 
     }
 
-    public override void OnCollide() {
+    public override void OnCollide(Ball ball) {
         block.Hit();
         block.UpdateVisualState();
     }
@@ -45,7 +48,7 @@ public class BombVerticalBehaviour : IBehaviour {
         laserLine.material.color = c;
 
         laserLine.positionCount = 2;
-        laserLine.SetPosition(0, new Vector2(block.transform.position.x, 0));
+        laserLine.SetPosition(0, new Vector2(block.transform.position.x, 0.40f));
         laserLine.SetPosition(1, new Vector2(block.transform.position.x, 8.5f));
 
         block.StartCoroutine(BombLaserFade(laserLine));

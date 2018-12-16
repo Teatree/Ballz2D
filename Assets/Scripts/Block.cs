@@ -10,12 +10,15 @@ public class Block : MonoBehaviour {
     public bool destroyed;
     bool coroutineCalled;
 
+    [HideInInspector]
     public SpriteRenderer spriteRenderer;
     private TextMeshPro text;
 
     public BlockType _type;
     public IBehaviour _behaviour;
 
+    public GameObject DeathParticle;
+    public GameObject BombExplosion;
     public int col;
     public int row;
 
@@ -43,15 +46,17 @@ public class Block : MonoBehaviour {
         yield return new WaitForSeconds(0.01f);
     }
 
-    public void interactWithBall() {
+    public void interactWithBall(Ball ball) {
         if (_behaviour == null) {
             Debug.LogError(_type.ToString());
         }
-            _behaviour.OnCollide();
+        _behaviour.OnCollide(ball);
     }
 
     public void DestroySelf() {
         if (!destroyed) {
+            if (_type.isCollidable) CreateDeathParticle();
+            if (_type.isCollidable && _type.Equals(BlockType.Bomb)) CreateBombExplosion();
             destroyed = true;
             Destroy(gameObject, 0.0000001f);
         }
@@ -87,6 +92,19 @@ public class Block : MonoBehaviour {
 
     public void Update() {
         _behaviour.Update();
+    }
+
+    public void CreateDeathParticle() {
+        var d = Instantiate(DeathParticle);
+        d.transform.GetComponent<BlockDeath>().DeathColor = spriteRenderer.color;
+        d.transform.position = transform.position;
+    }
+
+    public void CreateBombExplosion() {
+        if (BombExplosion != null) {
+            var d = Instantiate(BombExplosion);
+            d.transform.position = transform.position;
+        }
     }
 }
 

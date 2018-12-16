@@ -22,7 +22,7 @@ public class BombCrossBehaviour : IBehaviour {
         }
     }
 
-    public override void OnCollide() {
+    public override void OnCollide(Ball ball) {
         block.Hit();
         block.UpdateVisualState();
     }
@@ -49,7 +49,7 @@ public class BombCrossBehaviour : IBehaviour {
         laserLine.SetPosition(1, new Vector2(-3.15f, block.transform.position.y));
         laserLine.SetPosition(2, new Vector3(block.transform.position.x, block.transform.position.y, -100));
 
-        laserLine.SetPosition(3, new Vector2(block.transform.position.x, 0));
+        laserLine.SetPosition(3, new Vector2(block.transform.position.x, 0.40f));
         laserLine.SetPosition(4, new Vector2(block.transform.position.x, 8.5f));
 
         block.StartCoroutine(BombLaserFade(laserLine));

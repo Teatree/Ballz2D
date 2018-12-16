@@ -15,7 +15,7 @@ public class LaserHorisontalBehaviour : IBehaviour {
         block.DestroySelf();
     }
 
-    public override void OnCollide() {
+    public override void OnCollide(Ball ball) {
         if (!activated) {
             ShootLasers();
             foreach (Block b in BlockSpawner.blocksSpawned) {
