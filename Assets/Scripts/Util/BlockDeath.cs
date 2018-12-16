@@ -10,7 +10,10 @@ public class BlockDeath : MonoBehaviour {
 
     void Start () {
         if (part != null) {
-            part.startColor = Color.white;
+            ParticleSystem.MainModule partmain = part.main;
+            partmain.startColor = DeathColor;
+            //Debug.Log(DeathColor)
+
             part.Play();
         }
 

@@ -249,6 +249,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   DeathParticle: {fileID: 1992232517332788, guid: 5229f677d00b9804297291f48a94fc56,
     type: 2}
+  BombExplosion: {fileID: 0}
   col: 0
   row: 0
 --- !u!212 &212990759036189708
@@ -338,6 +339,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.4440184, y: 6.6913004}
+  m_AnchoredPosition: {x: 2.0456097, y: 3.8766742}
   m_SizeDelta: {x: 0.01, y: 0.01}
   m_Pivot: {x: 0.5, y: 0.5}
