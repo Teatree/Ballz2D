@@ -6,6 +6,7 @@
 
     public override void OnDestroy() {
         GameController.IncreseScore();
+        GameUIController.Instance.UpdateScore(GameController.Score);
 
         this.block.destroyed = true;
         foreach (Block b in BlockSpawner.blocksSpawned) {

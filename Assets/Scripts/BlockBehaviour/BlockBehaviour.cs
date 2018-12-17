@@ -12,7 +12,8 @@ public class BlockBehaviour : IBehaviour {
         block.CreateScoreFeedbacker(score);
 
         if (block.DeathParticle != null) block.CreateDeathParticle();
-        GameController.IncreseScore();
+        GameUIController.Instance.UpdateScore(GameController.Score);
+
         block.DestroySelf();
     }
 

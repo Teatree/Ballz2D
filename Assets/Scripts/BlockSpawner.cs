@@ -69,7 +69,6 @@ public class BlockSpawner : MonoBehaviour {
             }
             rowsSpawned++;
         }
-        //Debug.Log(">>>> " + blocksSpawned[blocksSpawned.Count - 1].transform.position.y);
         if (blocksSpawned[blocksSpawned.Count - 1] != null && blocksSpawned[blocksSpawned.Count - 1].transform.position.y <= Warning_y) {
             GameController.GameWarning();
             return;
