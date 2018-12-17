@@ -1,17 +1,21 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
+public class GameUIController : SceneSingleton<GameUIController> {
 
-public class GameUIController : MonoBehaviour {
-
+    [Header("Score")]
+    public Text ScoreText;
+    public Text BlockText; // text containing the number of blocks left for player to kill to win the level (most likely necessary for calculating req. score for stars) only cunts blocks that have lives
+    public Slider Slider;
+    public Image Star1;
+    public Image Star2;
+    public Image Star3;
     public GameObject WarningBlock;
     private bool _warned;
 
-    void Start() {
 
-    }
-
-    void Update() {
+ void Update() {
 
         if (Input.GetKeyDown("space")) {
             ShowWarning();
@@ -43,7 +47,40 @@ public class GameUIController : MonoBehaviour {
         }
     }
 
-    public void ShowWarning() {
+    public void UpdateScore(int newScore) {
+        StopCoroutine("IncreaseScore");
+        Debug.Log("Increase The Score!");
+        int curScore = int.Parse(ScoreText.text);
+        StartCoroutine(IncreaseScore(curScore, curScore + newScore));
+
+
+
+
+
+    }
+
+    public IEnumerator IncreaseScore(int curScore, int endScore) {
+        Debug.Log("curScore = " + curScore + " endScore = " + endScore);
+        while (curScore < endScore) {
+            curScore += 2;
+            Slider.value = curScore;
+            ScoreText.text = curScore.ToString();
+            yield return null;
+        }
+    }
+
+    public void UpdateStars() {
+        if (Slider.value >= 0) {
+            Star1.color = Color.white;
+        }
+        if (Slider.value >= Slider.maxValue * 0.6f) {
+            Star2.color = Color.white;
+        }
+        if (Slider.value >= Slider.maxValue) {
+            Star3.color = Color.white;
+        }
+    }
+ public void ShowWarning() {
         Debug.LogWarning("Warning!");
         List<GameObject> warnings = new List<GameObject>();
         for (int i = 0; i < 13; i++) {

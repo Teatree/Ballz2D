@@ -67,9 +67,7 @@ public class BlockSpawner : MonoBehaviour {
             }
             rowsSpawned++;
         }
-
-        LastRowSpawnedPos = blocksSpawned[0].transform.position.y;
-        BallLauncher.canShoot = true;
+LastRowSpawnedPos = blocksSpawned[0].transform.position.y;        BallLauncher.canShoot = true;
     }
 
     private void MoveOneLineDown() {

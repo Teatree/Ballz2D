@@ -12,9 +12,10 @@ public class GameController : MonoBehaviour {
     public static int levelScoreCoefficient = levelScoreCoefficientMin ;
 
     public LevelData currentLevel;
+    public static int Score;
 
     public static bool isGameOver; 
-    public static bool isGamePaused; 
+    public static bool isGamePaused;
 
     void Awake() {
         currentLevel = AllLevelsData.GetCurrentLevel();
@@ -24,6 +25,9 @@ public class GameController : MonoBehaviour {
         int scoreEred = levelScoreCoefficient;
         levelScore += levelScoreCoefficient;
         levelScoreCoefficient += levelScoreCoefficientStep;
+
+        Score = scoreEred;
+
         return scoreEred;
     }
 
