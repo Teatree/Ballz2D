@@ -645,17 +645,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1936070846}
-        m_MethodName: StopAllCoroutines
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1936070846}
         m_MethodName: SummonAllBalls
         m_Mode: 1
         m_Arguments:
@@ -713,7 +702,7 @@ GameObject:
   - component: {fileID: 327489961}
   - component: {fileID: 327489960}
   m_Layer: 5
-  m_Name: Image (4)
+  m_Name: LightningBoosterImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2692,7 +2681,7 @@ GameObject:
   - component: {fileID: 1592420565}
   - component: {fileID: 1592420564}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BannerImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3104,7 +3093,7 @@ GameObject:
   - component: {fileID: 1788112041}
   - component: {fileID: 1788112040}
   m_Layer: 5
-  m_Name: Image (5)
+  m_Name: MoreBallsBoosterImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3192,7 +3181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3467d9cca0722384d9df0ce340911c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitBallAmount: 57
+  InitBallAmount: 25
   balls: []
   ballVisual: {fileID: 132243636}
   BallsReadyToShoot: 0

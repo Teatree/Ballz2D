@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114274654401215350}
   - component: {fileID: 114958838010727746}
   m_Layer: 5
-  m_Name: Canvas_BallAmount
+  m_Name: Canvas_Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,6 +37,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224039880774629384}
+  - component: {fileID: 114086402261387098}
   m_Layer: 5
   m_Name: ScoreFeedbacker
   m_TagString: Untagged
@@ -61,6 +62,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114086402261387098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350138362448226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a938e12a88e4794888b202c544edc1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FeedbackCanvas: {fileID: 1319924319169780}
 --- !u!114 &114274654401215350
 MonoBehaviour:
   m_ObjectHideFlags: 1

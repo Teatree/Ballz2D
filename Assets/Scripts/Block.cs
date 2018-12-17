@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -19,6 +20,9 @@ public class Block : MonoBehaviour {
 
     public GameObject DeathParticle;
     public GameObject BombExplosion;
+    public GameObject ScoreFeedbacker;
+
+
     public int col;
     public int row;
 
@@ -48,15 +52,18 @@ public class Block : MonoBehaviour {
 
     public void interactWithBall(Ball ball) {
         if (_behaviour == null) {
-            Debug.LogError(_type.ToString());
+            Debug.LogError(_type);
         }
         _behaviour.OnCollide(ball);
     }
 
     public void DestroySelf() {
         if (!destroyed) {
-            if (_type.isCollidable) CreateDeathParticle();
-            if (_type.isCollidable && _type.Equals(BlockType.Bomb)) CreateBombExplosion();
+            if (_type.isCollidable) {
+                CreateDeathParticle();
+                // CreateScoreFeedbacker();
+            }
+            if (_type.Equals(BlockType.Bomb)) CreateBombExplosion();
             destroyed = true;
             Destroy(gameObject, 0.0000001f);
         }
@@ -76,7 +83,7 @@ public class Block : MonoBehaviour {
 
         //Set block behaviour
         _behaviour = BlockType.getBehaviourByType(blockType);
-   
+
         _behaviour.setBlock(this);
 
         UpdateVisualState();
@@ -85,10 +92,6 @@ public class Block : MonoBehaviour {
     public void Hit() {
         _behaviour.LooseOneLife();
     }
-
-    //public BallLauncher GetBallLouncher() {
-    //   return FindObjectOfType<BallLauncher>();
-    //}
 
     public void Update() {
         _behaviour.Update();
@@ -105,6 +108,12 @@ public class Block : MonoBehaviour {
             var d = Instantiate(BombExplosion);
             d.transform.position = transform.position;
         }
+    }
+
+    public void CreateScoreFeedbacker(int score) {
+        GameObject d = Instantiate(ScoreFeedbacker);
+        d.transform.GetComponent<ScoreFeedbacker>().Score = score;
+        d.transform.position = transform.position;
     }
 }
 

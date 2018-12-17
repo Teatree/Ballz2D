@@ -250,6 +250,8 @@ MonoBehaviour:
   DeathParticle: {fileID: 1992232517332788, guid: 5229f677d00b9804297291f48a94fc56,
     type: 2}
   BombExplosion: {fileID: 0}
+  ScoreFeedbacker: {fileID: 1350138362448226, guid: 003ba17fb2760694391517b47f244913,
+    type: 2}
   col: 0
   row: 0
 --- !u!212 &212990759036189708

@@ -11,13 +11,13 @@ public class BombVerticalBehaviour : IBehaviour {
 
     public override void OnDestroy() {
         if (!block.destroyed) {
+            this.block.destroyed = true;
             GameController.IncreseScore();
             ShootLasers();
             foreach (Block b in BlockSpawner.blocksSpawned) {
-                if (!b.destroyed && b.col == block.col && b != this.block) {
+                if (!b.Equals(this.block) && !b.destroyed && b.col == block.col && b != this.block) {
                     if (b._type.isCollidable) {
-                        GameController.IncreseScore();
-                        b.DestroySelf();
+                        b._behaviour.OnDestroy();
                     } 
                 }
             }

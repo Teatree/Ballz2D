@@ -5,6 +5,9 @@ public class GameController : MonoBehaviour {
     public static int levelScoreCoefficientMin = 10;
     public static int levelScoreCoefficientStep = 10;
 
+    public static int SecondStarScore = 13000;
+    public static int ThirdStarScore = 25000;
+
     public static int levelScore;
     public static int levelScoreCoefficient = levelScoreCoefficientMin ;
 
@@ -17,9 +20,11 @@ public class GameController : MonoBehaviour {
         currentLevel = AllLevelsData.GetCurrentLevel();
     }
 
-    public static void IncreseScore() {       
+    public static int IncreseScore() {
+        int scoreEred = levelScoreCoefficient;
         levelScore += levelScoreCoefficient;
         levelScoreCoefficient += levelScoreCoefficientStep;
+        return scoreEred;
     }
 
     public static void ResetScoreCoefficient() {
@@ -38,7 +43,12 @@ public class GameController : MonoBehaviour {
 
     public static void PauseGame() {
         isGamePaused = true;
-        Debug.Log("!!! The game is over");
+        Debug.Log("! Game is paused");
+    }
+
+    public static void ResumeGame() {
+        isGamePaused = false;
+        Debug.Log("! Game is not paused");
     }
 
     public static void GameWarning() {

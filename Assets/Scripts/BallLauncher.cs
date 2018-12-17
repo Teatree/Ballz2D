@@ -211,18 +211,7 @@ public class BallLauncher : MonoBehaviour {
        // Debug.Log("slider = " + _slider);
     }
 
-    private IEnumerator SummonBalls() {
-        BallsReadyToShoot = balls.Count;
-        foreach (Ball b in balls) {
-            gameObject.SetActive(true);
-            b.SetDir(transform.position - b.transform.position);
-            b.DisableCollision();
-            yield return null;
-        }
-    }
-
     public void SummonAllBalls() {
-        //StartCoroutine(SummonBalls());
         foreach (Ball b in balls) {
             gameObject.SetActive(true);
             b.SetDir(transform.position - b.transform.position);

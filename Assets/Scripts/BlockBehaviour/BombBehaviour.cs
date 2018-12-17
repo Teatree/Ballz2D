@@ -7,13 +7,15 @@
     public override void OnDestroy() {
         GameController.IncreseScore();
 
+        this.block.destroyed = true;
         foreach (Block b in BlockSpawner.blocksSpawned) {
-            if (!b.destroyed &&
+            if (!b.destroyed && !b.Equals(this.block) &&
                     (b.row >= block.row - 1 && b.row <= block.row + 1) &&
                     (b.col >= block.col - 1 && b.col <= block.col + 1)) {
-                b.DestroySelf();
+                b._behaviour.OnDestroy();
             }
         }
+        this.block.destroyed = false;
         block.DestroySelf();
     }
 

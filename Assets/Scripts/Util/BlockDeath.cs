@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BlockDeath : MonoBehaviour {
 
@@ -18,6 +16,5 @@ public class BlockDeath : MonoBehaviour {
         }
 
         Destroy(gameObject, 1);
-        //Debug.Log("should");
 	}
 }

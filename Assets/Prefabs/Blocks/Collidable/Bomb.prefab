@@ -247,6 +247,8 @@ MonoBehaviour:
     type: 2}
   BombExplosion: {fileID: 1992769449995796, guid: 7397239d26c395f49aa7b6f0eae08540,
     type: 2}
+  ScoreFeedbacker: {fileID: 1350138362448226, guid: 003ba17fb2760694391517b47f244913,
+    type: 2}
   col: 0
   row: 0
 --- !u!212 &212990759036189708

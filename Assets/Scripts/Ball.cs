@@ -34,6 +34,9 @@ public class Ball : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        if (GameController.IsGameStopped()) {
+            return;
+        }
         transform.position += dir * Time.deltaTime * moveSpeed;
 
         timer += Time.deltaTime;

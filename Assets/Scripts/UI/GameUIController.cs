@@ -1,23 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameUIController : MonoBehaviour {
 
-	void Start () {
-		
-	}
-	
-	void Update () {
-		
-	}
+    void Start() {
+
+    }
+
+    void Update() {
+
+    }
 
     public void Shop() {
         Debug.LogWarning("Shop!");
     }
 
     public void Pause() {
-        Debug.LogWarning("Pause!");
-        GameController.PauseGame();
+        if (GameController.IsGameStopped()) {
+            GameController.ResumeGame();
+        }
+        else {
+            Debug.LogWarning("Pause!");
+            GameController.PauseGame();
+        }
     }
 }
