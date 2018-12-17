@@ -23,7 +23,6 @@ public class ScoreFeedbacker : MonoBehaviour {
             d.transform.position += new Vector3(0, 0.01f, 0); 
             yield return null;
         }
-        Debug.Log(">>> Destroy" + _t.color.a);
         Destroy(d.gameObject, 0.0000001f);
     }
 }

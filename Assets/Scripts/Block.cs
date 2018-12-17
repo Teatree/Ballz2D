@@ -1,6 +1,5 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -61,7 +60,6 @@ public class Block : MonoBehaviour {
         if (!destroyed) {
             if (_type.isCollidable) {
                 CreateDeathParticle();
-                // CreateScoreFeedbacker();
             }
             if (_type.Equals(BlockType.Bomb)) CreateBombExplosion();
             destroyed = true;
@@ -85,7 +83,6 @@ public class Block : MonoBehaviour {
         _behaviour = BlockType.getBehaviourByType(blockType);
 
         _behaviour.setBlock(this);
-
         UpdateVisualState();
     }
 

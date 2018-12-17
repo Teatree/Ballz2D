@@ -2,9 +2,6 @@
 using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour {
-    private const float Warning_y = 3.6f;
-    private const float GameOver_y = 3.2f;
-    private float BlockSize = 0.4519416f;
 
     private GameController gc;
 
@@ -46,6 +43,7 @@ public class BlockSpawner : MonoBehaviour {
     private int rowsSpawned;
 
     public static List<Block> blocksSpawned = new List<Block>();
+    public static float LastRowSpawnedPos;
 
     private void Start() { //OnLevelWasLoaded
         gc = GetComponent<GameController>();
@@ -69,15 +67,8 @@ public class BlockSpawner : MonoBehaviour {
             }
             rowsSpawned++;
         }
-        //Debug.Log(">>>> " + blocksSpawned[blocksSpawned.Count - 1].transform.position.y);
-        if (blocksSpawned[blocksSpawned.Count - 1] != null && blocksSpawned[blocksSpawned.Count - 1].transform.position.y <= Warning_y) {
-            GameController.GameWarning();
-            return;
-        }
-        if (blocksSpawned[blocksSpawned.Count - 1] != null && blocksSpawned[blocksSpawned.Count - 1].transform.position.y <= GameOver_y) {
-            GameController.GameOver();
-            return;
-        }
+
+        LastRowSpawnedPos = blocksSpawned[0].transform.position.y;
         BallLauncher.canShoot = true;
     }
 
@@ -87,7 +78,7 @@ public class BlockSpawner : MonoBehaviour {
             if (block != null) {
                 RectTransform rt = (RectTransform)block.transform;
                 //width = rt.rect.width * block.transform.localScale.y;
-                block.transform.position = new Vector3(block.transform.position.x, block.transform.position.y - BlockSize, block.transform.position.z);
+                block.transform.position = new Vector3(block.transform.position.x, block.transform.position.y - Constants.BlockSize, block.transform.position.z);
             }
         }
     }
@@ -103,8 +94,8 @@ public class BlockSpawner : MonoBehaviour {
     private Vector3 GetPosition(int i) {
         Vector3 position = transform.position;
         /// 2.731f is a shift to center the whole thing on the screen
-        position = new Vector3(i * BlockSize - 2.731f, transform.position.y, transform.position.z);
-
+        position = new Vector3(i * Constants.BlockSize - 2.731f, transform.position.y, transform.position.z);
+        Debug.Log("pos = " + position);
         return position;
     }
 
