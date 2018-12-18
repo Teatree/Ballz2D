@@ -20,7 +20,7 @@ public class BombHorisontalBehaviour : IBehaviour {
                     b._behaviour.OnDestroy();
                 }
             }
-            GameUIController.Instance.UpdateScore(GameController.Score);
+            GameUIController.Instance.UpdateScore(GameController.levelScore);
             block.destroyed = true;
         }
     }

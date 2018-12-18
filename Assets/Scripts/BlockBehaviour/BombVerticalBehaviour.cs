@@ -21,7 +21,7 @@ public class BombVerticalBehaviour : IBehaviour {
                     } 
                 }
             }
-            GameUIController.Instance.UpdateScore(GameController.Score);
+            GameUIController.Instance.UpdateScore(GameController.levelScore);
             
             block.destroyed = true;
         } 

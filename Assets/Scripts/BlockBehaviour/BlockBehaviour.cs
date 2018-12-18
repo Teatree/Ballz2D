@@ -12,7 +12,7 @@ public class BlockBehaviour : IBehaviour {
         block.CreateScoreFeedbacker(score);
 
         if (block.DeathParticle != null) block.CreateDeathParticle();
-        GameUIController.Instance.UpdateScore(GameController.Score);
+        GameUIController.Instance.UpdateScore(GameController.levelScore);
 
         block.DestroySelf();
     }

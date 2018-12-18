@@ -43,7 +43,6 @@ public class BlockSpawner : MonoBehaviour {
     private int rowsSpawned;
 
     public static List<Block> blocksSpawned = new List<Block>();
-    public static float LastRowSpawnedPos;
 
     private void Start() { //OnLevelWasLoaded
         gc = GetComponent<GameController>();
@@ -67,7 +66,28 @@ public class BlockSpawner : MonoBehaviour {
             }
             rowsSpawned++;
         }
-LastRowSpawnedPos = blocksSpawned[0].transform.position.y;        BallLauncher.canShoot = true;
+        checkLastBlocksLine();
+        BallLauncher.canShoot = true;
+    }
+
+    private void checkLastBlocksLine() {
+
+        float LastRowSpawnedPos = 0;
+        for (int i = 0; i < blocksSpawned.Count; i++) {
+            if (!blocksSpawned[i].destroyed) {
+                LastRowSpawnedPos = blocksSpawned[i].transform.position.y;
+                break;
+            }
+        }
+        if (LastRowSpawnedPos <= Constants.Warning_y) {
+            Warning.Instance.ShowWarning();
+            return;
+        }
+
+        if (LastRowSpawnedPos <= Constants.GameOver_y) {
+            GameUIController.Instance.HandleGameOver();
+            return;
+        }
     }
 
     private void MoveOneLineDown() {
@@ -93,7 +113,6 @@ LastRowSpawnedPos = blocksSpawned[0].transform.position.y;        BallLauncher.c
         Vector3 position = transform.position;
         /// 2.731f is a shift to center the whole thing on the screen
         position = new Vector3(i * Constants.BlockSize - 2.731f, transform.position.y, transform.position.z);
-        Debug.Log("pos = " + position);
         return position;
     }
 
@@ -174,7 +193,8 @@ LastRowSpawnedPos = blocksSpawned[0].transform.position.y;        BallLauncher.c
             }
             Debug.Log("WOW! you win");
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }

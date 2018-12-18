@@ -40,10 +40,8 @@ public class BallLauncher : MonoBehaviour {
 
     private void Update() {
         if (!GameController.IsGameStopped()) {
-            CheckExtraBall();
-
             if (BallsReadyToShoot == balls.Count && canShoot) { // don't let the player launch until all balls are back.
-                                                                //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.back * -10;
+                CheckExtraBalls();                                           //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.back * -10;
                 Vector3 worldPosition;
                 if (_slider) {
                     worldPosition = new Vector3(Slider.value, 1f);
@@ -54,8 +52,7 @@ public class BallLauncher : MonoBehaviour {
                 }
 
                 //controls 
-
-                if (canShoot) {
+                if (canShoot && worldPosition.y > 0.56f && worldPosition.y < 7.16f) {
                     if (Input.GetMouseButtonDown(0)) {
                         SetStartDrag();
                     }
@@ -70,8 +67,10 @@ public class BallLauncher : MonoBehaviour {
         }
     }
 
-    private void CheckExtraBall() {
+    private void CheckExtraBalls() {
+        
         if (ExtraBalls > 0) {
+            Debug.Log(">>> ExtraBalls" + ExtraBalls);
             CreateBall(ExtraBalls);
             ExtraBalls = 0;
         }
@@ -182,7 +181,7 @@ public class BallLauncher : MonoBehaviour {
         }
         else {
             //    //Reset launcher
-            Input.ResetInputAxes();
+         //   Input.ResetInputAxes();
             HideGhosts();
         }
     }

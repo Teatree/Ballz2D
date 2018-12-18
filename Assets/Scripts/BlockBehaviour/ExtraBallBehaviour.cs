@@ -21,10 +21,13 @@ public class ExtraBallBehaviour : IBehaviour {
     public override void Update() {
 
         if (block.wasHit && moveSpeed > 0) {
+          
+            Debug.Log(">>> ExtraBalls c " + BallLauncher.ExtraBalls);
             if (block.transform.position.y >= 0.07) {
                 block.transform.position = new Vector2(block.transform.position.x, block.transform.position.y - moveSpeed * Time.deltaTime);
             } else {
                 moveSpeed = 0;
+                BallLauncher.ExtraBalls++;
                 block.StartCoroutine(addExtraBall());
             }
         }
@@ -35,7 +38,6 @@ public class ExtraBallBehaviour : IBehaviour {
 
     private IEnumerator addExtraBall() {
         yield return new WaitForSeconds(5f);
-        BallLauncher.ExtraBalls++;
         block.DestroySelf();
     }
 }

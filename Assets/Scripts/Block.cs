@@ -5,7 +5,7 @@ using System.Collections;
 
 public class Block : MonoBehaviour {
 
-    public int hitsRemaining = 5;
+    public int hitsRemaining;
     public bool wasHit; //set true if should be deleted next move
     public bool destroyed;
     bool coroutineCalled;
@@ -111,6 +111,11 @@ public class Block : MonoBehaviour {
         GameObject d = Instantiate(ScoreFeedbacker);
         d.transform.GetComponent<ScoreFeedbacker>().Score = score;
         d.transform.position = transform.position;
+    }
+
+    public void GetLightningDamage() {
+        this.hitsRemaining = hitsRemaining > 1 ? Mathf.RoundToInt(this.hitsRemaining/2) : 1;
+        UpdateVisualState();
     }
 }
 
