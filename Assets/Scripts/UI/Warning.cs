@@ -62,7 +62,7 @@ public class Warning : SceneSingleton<Warning> {
     private Vector3 GetWarningPosition(int i) {
         Vector3 position = transform.position;
         /// 2.731f is a shift to center the whole thing on the screen
-        position = new Vector3(i * Constants.BlockSize - 2.731f, Constants.GameOver_y, transform.position.z);
+        position = new Vector3(i * Constants.BlockSize - Constants.ShiftToTheCenter, Constants.GameOver_y, transform.position.z);
         return position;
     }
 }

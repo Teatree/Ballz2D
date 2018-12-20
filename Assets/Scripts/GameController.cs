@@ -3,7 +3,6 @@
 public class GameController : MonoBehaviour {
 
     public static int levelScoreCoefficientMin = 20;
-    public static int levelScoreCoefficientStep = 10;
 
     public static int SecondStarScore = 13000;
     public static int ThirdStarScore = 25000;
@@ -12,7 +11,7 @@ public class GameController : MonoBehaviour {
     public static int levelScoreCoefficient = levelScoreCoefficientMin ;
 
     public LevelData currentLevel;
-    public static int Gems;
+    public static int Gems = 10000;
 
     public static bool isGameOver; 
     public static bool isGamePaused;
@@ -24,7 +23,6 @@ public class GameController : MonoBehaviour {
     public static int IncreseScore() {
         int scoreEred = levelScoreCoefficient;
         levelScore += levelScoreCoefficient;
-        //levelScoreCoefficient += levelScoreCoefficientStep;
 
         return scoreEred;
     }

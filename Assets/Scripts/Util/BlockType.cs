@@ -9,6 +9,7 @@ public class BlockType {
         this.isCollidable = isColl;
     }
 
+    public static BlockType Obstacle = new BlockType("Obstacle", true);
     public static BlockType Block = new BlockType("Block", true);
     public static BlockType TriNW = new BlockType("Block", true);
     public static BlockType TriSW = new BlockType("Block", true);
@@ -31,6 +32,7 @@ public class BlockType {
             if (typesMap == null) {
                 typesMap = new Dictionary<string, BlockType>();
                 typesMap.Add("ob", Block);
+                typesMap.Add("os", Obstacle);
                 typesMap.Add("NW", TriNW);
                 typesMap.Add("NE", TriNE);
                 typesMap.Add("SE", TriSE);
@@ -80,6 +82,9 @@ public class BlockType {
                 }
             case "FF": {
                     return new FountainBehaviour();
+                }
+            case "os": {
+                    return new ObstacleBehaviour();
                 }
             default: {
                     return new BlockBehaviour();

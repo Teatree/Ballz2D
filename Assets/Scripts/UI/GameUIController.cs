@@ -37,11 +37,6 @@ public class GameUIController : SceneSingleton<GameUIController> {
         }
     }
 
-    public void GetMoreBalls() {
-        //UI
-        // GameController.GetMoreBalls();
-    }
-
     #region stars
     public void UpdateScore(int newScore) {
         StopCoroutine("IncreaseScore");
@@ -86,9 +81,9 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
     private void HandleInput() {
         if (Input.GetKeyDown("space")) {
-             LightningPowerup.Instance.ShootLightning();
+             //LightningPowerup.Instance.ShootLightning();
             //GetMoreBalls();
-            //Warning.Instance.ShowWarning();
+            Warning.Instance.ShowWarning();
         }
 
         //Android
@@ -110,4 +105,27 @@ public class GameUIController : SceneSingleton<GameUIController> {
             }
         }
     }
+
+    #region slider 
+    public void ContinueSliderDrag() {
+        BallLauncher.Instance.SetSlider(true);
+        BallLauncher.Instance.ContinueSliderDrag();
+    }
+
+    public void EndDrag() {
+        BallLauncher.Instance.SetSlider(true);
+        BallLauncher.Instance.EndDrag();
+    }
+
+    public void SetStartDrag() {
+        BallLauncher.Instance.SetSlider(true);
+        BallLauncher.Instance.SetStartDrag();
+    }
+
+
+    public void SetSlider(bool r) {
+        BallLauncher.Instance.SetSlider(r);
+        // Debug.Log("slider = " + _slider);
+    }
+    #endregion
 }

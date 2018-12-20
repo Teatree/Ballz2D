@@ -21,8 +21,6 @@ public class ExtraBallBehaviour : IBehaviour {
     public override void Update() {
 
         if (block.wasHit && moveSpeed > 0) {
-          
-            Debug.Log(">>> ExtraBalls c " + BallLauncher.ExtraBalls);
             if (block.transform.position.y >= 0.07) {
                 block.transform.position = new Vector2(block.transform.position.x, block.transform.position.y - moveSpeed * Time.deltaTime);
             } else {

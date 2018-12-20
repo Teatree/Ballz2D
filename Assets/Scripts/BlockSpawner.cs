@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockSpawner : MonoBehaviour {
+public class BlockSpawner : SceneSingleton<BlockSpawner> {
 
     private GameController gc;
 
@@ -43,17 +43,23 @@ public class BlockSpawner : MonoBehaviour {
     private int rowsSpawned;
 
     public static List<Block> blocksSpawned = new List<Block>();
+    private List<Block> obstaclesCoordinates = new List<Block>();
 
     private void Start() { //OnLevelWasLoaded
         gc = GetComponent<GameController>();
         for (int i = 0; i < 18 - gc.currentLevel.emptyRowsCount; i++) {
-            SpawnRowOfBlocks();
+            SpawnRowOfBlocks(true);
+        }
+        foreach (Block b in   blocksSpawned) {
+            if (b._type == BlockType.Obstacle) {
+                obstaclesCoordinates.Add(b);
+            }
         }
     }
 
-    public void SpawnRowOfBlocks() {
+    public void SpawnRowOfBlocks(bool moveObstacles) {
         RemoveOneTurnBlocks();
-        MoveOneLineDown();
+        MoveOneRowDown(moveObstacles);
         //add new line
         if (rowsSpawned < gc.currentLevel.rows.Count) {
             List<CellData> cells = gc.currentLevel.rows[rowsSpawned].GetCells();
@@ -72,31 +78,41 @@ public class BlockSpawner : MonoBehaviour {
 
     private void checkLastBlocksLine() {
 
-        float LastRowSpawnedPos = 0;
+        float lastRowSpawnedPos = 0;
+        int lastRowSpawnedIndex= 0;
         for (int i = 0; i < blocksSpawned.Count; i++) {
             if (!blocksSpawned[i].destroyed) {
-                LastRowSpawnedPos = blocksSpawned[i].transform.position.y;
+                lastRowSpawnedPos = blocksSpawned[i].transform.position.y;
+                lastRowSpawnedIndex = blocksSpawned[i].row;
                 break;
             }
         }
-        if (LastRowSpawnedPos <= Constants.Warning_y) {
+        if (lastRowSpawnedPos <= Constants.Warning_y && lastRowSpawnedPos > Constants.GameOver_y) {
             Warning.Instance.ShowWarning();
-            return;
         }
 
-        if (LastRowSpawnedPos <= Constants.GameOver_y) {
+        if (lastRowSpawnedPos <= Constants.GameOver_y) {
             GameUIController.Instance.HandleGameOver();
+            Revive.RowToDestroyIndex = lastRowSpawnedIndex;
+            Revive.RowToDestroyPosition = lastRowSpawnedPos;
             return;
         }
     }
 
-    private void MoveOneLineDown() {
+    private void MoveOneRowDown(bool moveObstacles) {
         //move blocks down one line
         foreach (var block in blocksSpawned) {
-            if (block != null) {
+            if (block != null && (block._type != BlockType.Obstacle || moveObstacles)) {
                 RectTransform rt = (RectTransform)block.transform;
                 //width = rt.rect.width * block.transform.localScale.y;
-                block.transform.position = new Vector3(block.transform.position.x, block.transform.position.y - Constants.BlockSize, block.transform.position.z);
+                float newY = block.transform.position.y - Constants.BlockSize;
+                foreach (Block ob in obstaclesCoordinates) {
+                    if (ob.col == block.col && ob.transform.position.y == newY) {
+                        newY -= Constants.BlockSize;
+                        break;
+                    }
+                }
+                block.transform.position = new Vector3(block.transform.position.x, newY , block.transform.position.z);
             }
         }
     }
@@ -112,7 +128,7 @@ public class BlockSpawner : MonoBehaviour {
     private Vector3 GetPosition(int i) {
         Vector3 position = transform.position;
         /// 2.731f is a shift to center the whole thing on the screen
-        position = new Vector3(i * Constants.BlockSize - 2.731f, transform.position.y, transform.position.z);
+        position = new Vector3(i * Constants.BlockSize - Constants.ShiftToTheCenter, transform.position.y, transform.position.z);
         return position;
     }
 
@@ -156,6 +172,10 @@ public class BlockSpawner : MonoBehaviour {
                     break;
                 }
             case "ob": {
+                    block = Instantiate(blockPrefab, GetPosition(i), Quaternion.identity);
+                    break;
+                }
+            case "os": {
                     block = Instantiate(obstaclePrefab, GetPosition(i), Quaternion.identity);
                     break;
                 }

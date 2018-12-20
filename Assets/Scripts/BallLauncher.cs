@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BallLauncher : MonoBehaviour {
+public class BallLauncher : SceneSingleton<BallLauncher> {
     private static float base_y;
 
     [SerializeField]
     public int InitBallAmount;
 
     private Vector3 endDragPosition;
-    private BlockSpawner blockSpawner;
     private LaunchPreview launchPreview;
     public List<Ball> balls = new List<Ball>();
     public GameObject ballVisual;
@@ -32,7 +31,6 @@ public class BallLauncher : MonoBehaviour {
     private void Awake() {
         base_y = transform.position.y;
 
-        blockSpawner = FindObjectOfType<BlockSpawner>();
         launchPreview = GetComponent<LaunchPreview>();
         CreateBall(InitBallAmount);
         textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
@@ -41,6 +39,9 @@ public class BallLauncher : MonoBehaviour {
     private void Update() {
         if (!GameController.IsGameStopped()) {
             if (BallsReadyToShoot == balls.Count && canShoot) { // don't let the player launch until all balls are back.
+                LightningPowerup.Instance.EnableButton();
+                MoreBallsPowerup.Instance.EnableButton();
+
                 CheckExtraBalls();                                           //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.back * -10;
                 Vector3 worldPosition;
                 if (_slider) {
@@ -67,10 +68,8 @@ public class BallLauncher : MonoBehaviour {
         }
     }
 
-    private void CheckExtraBalls() {
-        
+    public void CheckExtraBalls() {
         if (ExtraBalls > 0) {
-            Debug.Log(">>> ExtraBalls" + ExtraBalls);
             CreateBall(ExtraBalls);
             ExtraBalls = 0;
         }
@@ -84,11 +83,11 @@ public class BallLauncher : MonoBehaviour {
         BallsReadyToShoot++;
         textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
         if (BallsReadyToShoot == balls.Count) {
-            blockSpawner.SpawnRowOfBlocks();
+            BlockSpawner.Instance.SpawnRowOfBlocks(false);
             GameController.ResetScoreCoefficient();
 
             UpdateVisualsLastBall();
-            blockSpawner.DidIwin();
+            BlockSpawner.Instance.DidIwin();
         }
         b.transform.position = new Vector2(-100, -100);
         b.moveSpeed = 0;
@@ -105,7 +104,7 @@ public class BallLauncher : MonoBehaviour {
         //transform.position = new Vector3(b.transform.position.x, 0, 00f);
     }
 
-    private void UpdateVisualsLastBall() {
+    public void UpdateVisualsLastBall() {
         gameObject.transform.position = newPos;
         ballVisual.gameObject.transform.localPosition = new Vector2(0, 0);
         textCanvas.gameObject.transform.localPosition = new Vector3(0.27f, 0.17f);
@@ -135,6 +134,10 @@ public class BallLauncher : MonoBehaviour {
 
     private IEnumerator LaunchBalls() {
         if (BallsReadyToShoot == balls.Count) {
+
+            LightningPowerup.Instance.DisableButton();
+            MoreBallsPowerup.Instance.DisableButton();
+
             canShoot = false;
             Vector3 direction = endDragPosition - transform.position;
             direction.Normalize();
@@ -149,7 +152,6 @@ public class BallLauncher : MonoBehaviour {
             }
 
             HideGhosts();
-
             //gameObject.SetActive(false);           
         }
     }
