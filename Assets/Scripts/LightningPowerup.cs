@@ -17,7 +17,7 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     public void ShootLightning() {
         if (GameController.Gems >= CostGems) {
             PlayAni();
-            foreach (Block b in BlockSpawner.blocksSpawned) {
+            foreach (Block b in GridController.blocksSpawned) {
                 if (b._type.isCollidable) {
                     b.GetLightningDamage();
                 }

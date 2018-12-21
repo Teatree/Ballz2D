@@ -11,11 +11,14 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public Image Star2;
     public Image Star3;
 
+
     void Update() {
         HandleInput();
         if (!GameController.IsGameStopped()) {
 
         }
+        UpdateBlocksAmount();
+
     }
 
     public void Shop() {
@@ -46,8 +49,12 @@ public class GameUIController : SceneSingleton<GameUIController> {
         StartCoroutine(IncreaseScore(curScore, newScore));
     }
 
+    public void UpdateBlocksAmount() {
+        BlockText.text = "" + GridController.BlocksAmount;
+    }
+
     public IEnumerator IncreaseScore(int curScore, int endScore) {
-      //  Debug.Log("curScore = " + curScore + " endScore = " + endScore);
+        //  Debug.Log("curScore = " + curScore + " endScore = " + endScore);
         while (curScore < endScore) {
             curScore += 5;
             Slider.value = curScore;
@@ -71,8 +78,13 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
     public void HandleGameOver() {
         //Show UI
-        LightningPowerup.Instance.ShootLightning();
+        
+        Revive.Instance.GetRevive();
         //GameController.GameOver();
+    }
+
+    public void HandleWarning() {
+        Warning.Instance.ShowWarning();
     }
 
     public void ShootLightning() {
@@ -81,7 +93,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
     private void HandleInput() {
         if (Input.GetKeyDown("space")) {
-             //LightningPowerup.Instance.ShootLightning();
+            //LightningPowerup.Instance.ShootLightning();
             //GetMoreBalls();
             Warning.Instance.ShowWarning();
         }

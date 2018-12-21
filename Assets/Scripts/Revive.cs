@@ -21,7 +21,8 @@ public class Revive : SceneSingleton<Revive> {
     }
 
     public void GetRevive() {
-        if (GameController.Gems >= CostGems && available) {
+        Debug.Log(GameController.isGameOver);
+        if (GameController.isGameOver && GameController.Gems >= CostGems && available) {
             DestroyBottomLines();
             GameController.Gems -= CostGems;
             available = false;
@@ -33,7 +34,7 @@ public class Revive : SceneSingleton<Revive> {
             ShootLasers(laserLine1.transform.GetComponent<LineRenderer>(), RowToDestroyPosition);
             ShootLasers(laserLine2.transform.GetComponent<LineRenderer>(), RowToDestroyPosition + Constants.BlockSize);
             ShootLasers(laserLine3.transform.GetComponent<LineRenderer>(), RowToDestroyPosition + 2 * Constants.BlockSize);
-            foreach (Block b in BlockSpawner.blocksSpawned) {
+            foreach (Block b in GridController.blocksSpawned) {
                 if (!b.destroyed && (b.row == RowToDestroyIndex || b.row == RowToDestroyIndex+1)) {
                     b._behaviour.OnDestroy();
                 }

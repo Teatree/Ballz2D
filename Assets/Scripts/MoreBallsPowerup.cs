@@ -19,6 +19,7 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
     }
 
     public void GetMoreBalls() {
+        Debug.Log("More balls!");
         if (GameController.Gems >= CostGems) {
             PlayAni();
             BallLauncher.ExtraBalls += ExtraBallsAmount;
@@ -48,7 +49,6 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
             if (i > 0 && _changeSize) {
                 textComponent.fontSize ++;
             } else if (_changeSize){
-                Debug.Log("sadad");
                 textComponent.fontSize--;
             }
             _changeSize = !_changeSize;

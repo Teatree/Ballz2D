@@ -39,4 +39,9 @@ public abstract class IBehaviour {
         activated = false;
         block.DestroySelf();
     }
+
+    protected void UpdateBlocksInfo() {
+        GridController.BlocksAmount--;
+        GameUIController.Instance.UpdateBlocksAmount();
+    }
 }

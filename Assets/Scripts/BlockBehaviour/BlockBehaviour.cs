@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
-
+﻿
 public class BlockBehaviour : IBehaviour {
 
     public override void setBlock(Block b) {
@@ -14,6 +12,7 @@ public class BlockBehaviour : IBehaviour {
         if (block.DeathParticle != null) block.CreateDeathParticle();
         GameUIController.Instance.UpdateScore(GameController.levelScore);
 
+        UpdateBlocksInfo();
         block.DestroySelf();
     }
 

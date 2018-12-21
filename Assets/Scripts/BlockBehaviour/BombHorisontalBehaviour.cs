@@ -15,12 +15,13 @@ public class BombHorisontalBehaviour : IBehaviour {
             this.block.destroyed = true;
             GameController.IncreseScore();
             ShootLasers();
-            foreach (Block b in BlockSpawner.blocksSpawned) {
+            foreach (Block b in GridController.blocksSpawned) {
                 if (!b.Equals(this.block) && !b.destroyed && b.row == block.row && b != this.block) {
                     b._behaviour.OnDestroy();
                 }
             }
             GameUIController.Instance.UpdateScore(GameController.levelScore);
+            UpdateBlocksInfo();
             block.destroyed = true;
         }
     }
@@ -36,6 +37,7 @@ public class BombHorisontalBehaviour : IBehaviour {
             block.UpdateVisualState();
         }
         else {
+            
             OnDestroy();
         }
     }

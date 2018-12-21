@@ -83,11 +83,21 @@ public class PlayerInfo {
 
 [System.Serializable]
 public class LevelData {
-    //public int levelNumber;
-    //public int levelStars;
-    //public bool copleted; 
     public int emptyRowsCount;
     public List<RowData> rows = new List<RowData>();
+
+    public int GetBlocksAmount() {
+        int amount = 0;
+        for (int i = 0; i< rows.Count; i++) {
+            List<CellData> cells = rows[i].GetCells();
+            for (int j=0; j < cells.Count; j++) {
+                if (cells[j] != null && cells[j].isCollidableBlock()) {
+                    amount++;
+                }
+            }
+        }
+        return amount;
+    }
 }
 
 [System.Serializable]
@@ -157,6 +167,10 @@ public class CellData {
         else {
             type = stringVal;
         }
+    }
+
+    public bool isCollidableBlock() {
+        return type != null && type != "" && type != "LV" && type != "LH" && type != "LC" && type != "FF" && type != "★★" && type != "os";
     }
 }
 

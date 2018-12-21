@@ -64,6 +64,9 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                         EndDrag();
                     }
                 }
+                else {
+                    HideGhosts();
+                }
             }
         }
     }
@@ -83,11 +86,11 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         BallsReadyToShoot++;
         textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
         if (BallsReadyToShoot == balls.Count) {
-            BlockSpawner.Instance.SpawnRowOfBlocks(false);
+            GridController.Instance.SpawnRowOfBlocks(false);
             GameController.ResetScoreCoefficient();
 
             UpdateVisualsLastBall();
-            BlockSpawner.Instance.DidIwin();
+            GridController.Instance.DidIwin();
         }
         b.transform.position = new Vector2(-100, -100);
         b.moveSpeed = 0;
@@ -181,11 +184,11 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
             //Debug.Log(" endDragPosition " + endDragPosition);
             launchPreview.SetEndPoint(endDragPosition);
         }
-        else {
+       // else {
             //    //Reset launcher
-         //   Input.ResetInputAxes();
-            HideGhosts();
-        }
+        // Debug.Log("Input.ResetInputAxes()");
+            //HideGhosts();
+      //  }
     }
 
     public void ContinueSliderDrag() {

@@ -36,10 +36,10 @@ public class GameController : MonoBehaviour {
         levelScore = 0;
     }
 
-    public static void GameOver() {
-        isGameOver = true;
-        Debug.Log("!!! The game is over");
-    }
+    //public static void GameOver() {
+    //    isGameOver = true;
+    //    Debug.Log("!!! The game is over");
+    //}
 
     public static void PauseGame() {
         isGamePaused = true;

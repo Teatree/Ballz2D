@@ -2055,6 +2055,7 @@ GameObject:
   - component: {fileID: 763367396}
   - component: {fileID: 763367398}
   - component: {fileID: 763367397}
+  - component: {fileID: 763367399}
   m_Layer: 5
   m_Name: LightningImage
   m_TagString: Untagged
@@ -2115,6 +2116,20 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 763367395}
   m_CullTransparentMesh: 0
+--- !u!114 &763367399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 763367395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b846673cf3b6ae44eaf360efe1b6ae31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Lightning: {fileID: 0}
+  Button: {fileID: 1981396513}
+  Text: {fileID: 1241627364}
 --- !u!1 &786270577
 GameObject:
   m_ObjectHideFlags: 0
@@ -2396,8 +2411,6 @@ GameObject:
   - component: {fileID: 934118962}
   - component: {fileID: 934118961}
   - component: {fileID: 934118965}
-  - component: {fileID: 934118966}
-  - component: {fileID: 934118967}
   m_Layer: 5
   m_Name: Canvas_Main
   m_TagString: MainCamera
@@ -2506,35 +2519,6 @@ MonoBehaviour:
   Star1: {fileID: 1371264839}
   Star2: {fileID: 1069839178}
   Star3: {fileID: 1350642052}
---- !u!114 &934118966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 934118960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b846673cf3b6ae44eaf360efe1b6ae31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Lightning: {fileID: 0}
-  Button: {fileID: 1981396513}
-  Text: {fileID: 1241627364}
---- !u!114 &934118967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 934118960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5acb6f36c276724f8b11b4817adaad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Ani: {fileID: 0}
-  Button: {fileID: 1305803005}
-  Text: {fileID: 601017181}
-  ExtraBallsAmount: 25
 --- !u!1 &961426161
 GameObject:
   m_ObjectHideFlags: 0
@@ -2848,6 +2832,7 @@ MonoBehaviour:
   laserLine1: {fileID: 600919410}
   laserLine2: {fileID: 961426161}
   laserLine3: {fileID: 700307465}
+  button: {fileID: 786270577}
   CostGems: 0
 --- !u!1 &1054705958
 GameObject:
@@ -3367,7 +3352,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 934118967}
+      - m_Target: {fileID: 1788112042}
         m_MethodName: GetMoreBalls
         m_Mode: 1
         m_Arguments:
@@ -4648,6 +4633,7 @@ GameObject:
   - component: {fileID: 1788112039}
   - component: {fileID: 1788112041}
   - component: {fileID: 1788112040}
+  - component: {fileID: 1788112042}
   m_Layer: 5
   m_Name: MoreBallsBoosterImage
   m_TagString: Untagged
@@ -4708,6 +4694,21 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1788112038}
   m_CullTransparentMesh: 0
+--- !u!114 &1788112042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1788112038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5acb6f36c276724f8b11b4817adaad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ani: {fileID: 0}
+  Button: {fileID: 296600753}
+  Text: {fileID: 1760029427}
+  ExtraBallsAmount: 25
 --- !u!1 &1832627964
 GameObject:
   m_ObjectHideFlags: 0
@@ -4827,7 +4828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3467d9cca0722384d9df0ce340911c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitBallAmount: 50
+  InitBallAmount: 60
   balls: []
   ballVisual: {fileID: 132243636}
   BallsReadyToShoot: 0
@@ -5044,7 +5045,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 934118966}
+      - m_Target: {fileID: 763367399}
         m_MethodName: ShootLightning
         m_Mode: 1
         m_Arguments:

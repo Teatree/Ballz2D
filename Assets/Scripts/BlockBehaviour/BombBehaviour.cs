@@ -9,7 +9,7 @@
         GameUIController.Instance.UpdateScore(GameController.levelScore);
 
         this.block.destroyed = true;
-        foreach (Block b in BlockSpawner.blocksSpawned) {
+        foreach (Block b in GridController.blocksSpawned) {
             if (!b.destroyed && !b.Equals(this.block) &&
                     (b.row >= block.row - 1 && b.row <= block.row + 1) &&
                     (b.col >= block.col - 1 && b.col <= block.col + 1)) {
@@ -17,6 +17,7 @@
             }
         }
         this.block.destroyed = false;
+        UpdateBlocksInfo();
         block.DestroySelf();
     }
 

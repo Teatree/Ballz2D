@@ -14,7 +14,7 @@ public class BombVerticalBehaviour : IBehaviour {
             this.block.destroyed = true;
             GameController.IncreseScore();
             ShootLasers();
-            foreach (Block b in BlockSpawner.blocksSpawned) {
+            foreach (Block b in GridController.blocksSpawned) {
                 if (!b.Equals(this.block) && !b.destroyed && b.col == block.col && b != this.block) {
                     if (b._type.isCollidable) {
                         b._behaviour.OnDestroy();
@@ -22,7 +22,7 @@ public class BombVerticalBehaviour : IBehaviour {
                 }
             }
             GameUIController.Instance.UpdateScore(GameController.levelScore);
-            
+            UpdateBlocksInfo();
             block.destroyed = true;
         } 
     }

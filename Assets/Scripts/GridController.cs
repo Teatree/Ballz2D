@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockSpawner : SceneSingleton<BlockSpawner> {
+public class GridController : SceneSingleton<GridController> {
 
     private GameController gc;
 
@@ -41,6 +41,7 @@ public class BlockSpawner : SceneSingleton<BlockSpawner> {
 
     private int playWidth = 13;
     private int rowsSpawned;
+    public static int BlocksAmount;
 
     public static List<Block> blocksSpawned = new List<Block>();
     private List<Block> obstaclesCoordinates = new List<Block>();
@@ -55,6 +56,8 @@ public class BlockSpawner : SceneSingleton<BlockSpawner> {
                 obstaclesCoordinates.Add(b);
             }
         }
+
+        BlocksAmount = gc.currentLevel.GetBlocksAmount();
     }
 
     public void SpawnRowOfBlocks(bool moveObstacles) {
@@ -72,8 +75,8 @@ public class BlockSpawner : SceneSingleton<BlockSpawner> {
             }
             rowsSpawned++;
         }
-        checkLastBlocksLine();
         BallLauncher.canShoot = true;
+        checkLastBlocksLine();
     }
 
     private void checkLastBlocksLine() {
@@ -81,20 +84,22 @@ public class BlockSpawner : SceneSingleton<BlockSpawner> {
         float lastRowSpawnedPos = 0;
         int lastRowSpawnedIndex= 0;
         for (int i = 0; i < blocksSpawned.Count; i++) {
-            if (!blocksSpawned[i].destroyed) {
+            if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle) {
                 lastRowSpawnedPos = blocksSpawned[i].transform.position.y;
                 lastRowSpawnedIndex = blocksSpawned[i].row;
                 break;
             }
         }
-        if (lastRowSpawnedPos <= Constants.Warning_y && lastRowSpawnedPos > Constants.GameOver_y) {
-            Warning.Instance.ShowWarning();
+        if (rowsSpawned > 0 && lastRowSpawnedPos <= Constants.Warning_y && lastRowSpawnedPos > Constants.GameOver_y) {
+            GameUIController.Instance.HandleWarning();
         }
 
-        if (lastRowSpawnedPos <= Constants.GameOver_y) {
-            GameUIController.Instance.HandleGameOver();
+        if (rowsSpawned > 0 && lastRowSpawnedPos <= Constants.GameOver_y) {
+            GameController.isGameOver = true;
             Revive.RowToDestroyIndex = lastRowSpawnedIndex;
             Revive.RowToDestroyPosition = lastRowSpawnedPos;
+            //  GameUIController.Instance.HandleGameOver();
+            Warning.Instance.ShowWarning();
             return;
         }
     }
@@ -115,6 +120,7 @@ public class BlockSpawner : SceneSingleton<BlockSpawner> {
                 block.transform.position = new Vector3(block.transform.position.x, newY , block.transform.position.z);
             }
         }
+       // checkLastBlocksLine();
     }
 
     public void RemoveOneTurnBlocks() {
@@ -218,4 +224,16 @@ public class BlockSpawner : SceneSingleton<BlockSpawner> {
             return false;
         }
     }
+
+//    public int GetBlocksAmount() {
+//        int amount = 0;
+//        foreach (RowData r in gc.currentLevel.rows) {
+//            List<CellData> cells = r.GetCells();
+//            for (int i = 0; i < playWidth; i++) {
+//                if (cells[i] != null && cells[i].type != "" && ) {
+
+//                }
+//        }
+//        return amount;
+//    }
 }

@@ -18,7 +18,7 @@ public class LaserVerticalBehaviour : IBehaviour {
     public override void OnCollide(Ball ball) {
         if (!activated) {
             ShootLasers();
-            foreach (Block b in BlockSpawner.blocksSpawned) {
+            foreach (Block b in GridController.blocksSpawned) {
                 if (!b.destroyed && b.col == block.col) {
                     b.Hit();
                 }
