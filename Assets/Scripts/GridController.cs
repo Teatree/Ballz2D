@@ -117,7 +117,8 @@ public class GridController : SceneSingleton<GridController> {
                         break;
                     }
                 }
-                block.transform.position = new Vector3(block.transform.position.x, newY , block.transform.position.z);
+                //block.transform.position = new Vector3(block.transform.position.x, newY , block.transform.position.z);
+                block.transform.position = new Vector3(0, 0, 0); // THIS IS WHAT'S CAUSING BLOCKS TO BE AT 0,0
             }
         }
        // checkLastBlocksLine();

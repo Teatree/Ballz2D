@@ -8,6 +8,8 @@ public class LevelUI : MonoBehaviour {
     public bool IsCompleted;
     public int StarsNumber;
 
+    public Camera c;
+
     public Button buttonComponent;
 
     [Header("UI")]
@@ -17,6 +19,11 @@ public class LevelUI : MonoBehaviour {
     public Text Star3;
 
     private void Start() {
+        c = Camera.main;
+
+        c.transform.position = transform.position;
+        Debug.Log("c " + c + "c.pos: " + c.transform.position);
+
         levelNumText.text = (LevelNumber + 1).ToString();
         switch (StarsNumber) {
             case 1: {
@@ -38,8 +45,10 @@ public class LevelUI : MonoBehaviour {
                     break;
                 }
         }
-    }
 
+        
+    }
+    
     public void StartGameAtLevel() {
         AllLevelsData.CurrentLevelIndex = LevelNumber;
         GameController.ResetScore();

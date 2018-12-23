@@ -6,33 +6,76 @@ public class DataController {
     private static string levelsFileName = "levels.json";
     private static string playerFileName = "playerInfo.json";
 
+    public static string AjsonData;
+    private const string CASHE_FOLDER = "LocalStorage";
+
+#if UNITY_EDITOR
+    public static string levelfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", levelsFileName);
+    public static string playerfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", playerFileName);
+
+#elif UNITY_IOS
+    private static string levelfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", levelsFileName);
+    private static string playerfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", playerFileName);
+ 
+#elif UNITY_ANDROID
+    public static string levelfilePath = Path.Combine (Application.streamingAssetsPath + "/", levelsFileName);
+    public static string playerfilePath = Path.Combine (Application.streamingAssetsPath + "/", playerFileName);
+    //public static string levelfilePath = Path.Combine ("jar:file://" + Application.streamingAssetsPath  + "!/assets/", levelsFileName);
+    //public static string playerfilePath = Path.Combine ("jar:file://" + Application.streamingAssetsPath  + "!/assets/", playerFileName);
+ 
+#endif
+
     //--------- Player Info ----------
     public static PlayerInfo LoadPlayer() {
-        string filePath = Path.Combine(Application.streamingAssetsPath, playerFileName);
-        if (File.Exists(filePath)) {
-            string jsonData = File.ReadAllText(filePath);
+        if (File.Exists(playerfilePath)) {
+            string jsonData = File.ReadAllText(playerfilePath);
             PlayerInfo pi = JsonUtility.FromJson<PlayerInfo>(jsonData);
             //Debug.Log(">>> PlayerInfo > " + pi);
             return pi;
         }
         else {
-            Debug.LogError("Cannot find the file " + filePath);
+            Debug.LogError("Cannot find the file " + playerfilePath);
             return new PlayerInfo();
         }
     }
 
-    public static void SavePlayer( PlayerInfo pi) {
-        string filePath = Path.Combine(Application.streamingAssetsPath, playerFileName);
+    protected static string ReadString(string fileName) {
+        string path = Path.Combine("jar:file://" + Application.dataPath + "!/assets/", fileName);
+
+        if (!File.Exists(path)) {
+            Debug.LogError("Cannot find the file " + levelfilePath);
+            AjsonData = "<color=#a52a2aff>CANNOT FIND PAAAATH: " + path + "</color>";
+            return null;
+        }
+        AjsonData = "<color=#a52a2aff>ERROR PATH:  " + path + "</color>";
+        using (var stream = new StreamReader(path)) {
+            string result = stream.ReadToEnd();
+            stream.Close();
+            return result;
+        }
+    }
+
+    public static void SavePlayer(PlayerInfo pi) {
         string jsonData = JsonUtility.ToJson(pi);
-        File.WriteAllText(filePath, jsonData);
+        File.WriteAllText(playerfilePath, jsonData);
     }
 
     //------------Load Levels --------------------
     public static List<LevelData> LoadLevels() {
         List<LevelData> lvlsData = new List<LevelData>();
-        string filePath = Path.Combine(Application.streamingAssetsPath, levelsFileName);
-        if (File.Exists(filePath)) {
-            string jsonData = File.ReadAllText(filePath);
+        string jsonData = "";
+
+#if UNITY_EDITOR || UNITY_IOS
+        if (File.Exists(levelfilePath)) {
+            jsonData = File.ReadAllText(levelfilePath);
+        }
+#elif UNITY_ANDROID
+            //WWW reader = new WWW(ReadString);
+            //while (!reader.isDone) {
+            //}
+            jsonData = ReadString(levelsFileName);
+#endif
+        if (jsonData != null) {
             string separ = "Level_?";
             string[] lvls = System.Text.RegularExpressions.Regex.Split(jsonData, separ);
 
@@ -69,14 +112,15 @@ public class DataController {
             return lvlsData;
         }
         else {
-            Debug.LogError("Cannot find the file " + filePath);
+            //Debug.LogError("Cannot find the file " + levelfilePath);
+            //AjsonData = "<color=#a52a2aff>JSON IS NULL</color>";
             return lvlsData;
         }
     }
 
 }
 
-[System.Serializable] 
+[System.Serializable]
 public class PlayerInfo {
     public List<int> starsPerLvl = new List<int>();
 }
@@ -88,9 +132,9 @@ public class LevelData {
 
     public int GetBlocksAmount() {
         int amount = 0;
-        for (int i = 0; i< rows.Count; i++) {
+        for (int i = 0; i < rows.Count; i++) {
             List<CellData> cells = rows[i].GetCells();
-            for (int j=0; j < cells.Count; j++) {
+            for (int j = 0; j < cells.Count; j++) {
                 if (cells[j] != null && cells[j].isCollidableBlock()) {
                     amount++;
                 }
@@ -197,6 +241,3 @@ public static class JsonHelper {
         public T[] Rows;
     }
 }
-
-
-
