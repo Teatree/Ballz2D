@@ -19,9 +19,6 @@ public class UIController : MonoBehaviour {
         AllLevelsData.allLevels = DataController.LoadLevels();
         AllLevelsData.playerInfo = DataController.LoadPlayer();
 
-        Debug.Log("playerInfo > " + AllLevelsData.playerInfo.ToString());
-        Debug.Log("allLevels > " + AllLevelsData.allLevels.ToString());
-
         // debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "\n path: " + DataController.levelfilePath + "\n jsonDataExtracted: " + DataController.AjsonData;
         //Create level buttons
         for (int i = 0; i < AllLevelsData.allLevels.Count; i++) {
