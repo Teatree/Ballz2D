@@ -8,10 +8,6 @@ public class UIController : MonoBehaviour {
     [SerializeField]
     private LevelUI levelUiElementPrefab;
 
-    public GameObject TestPrefab;
-
-    public Text debugText;
-
     public SpriteState sprState = new SpriteState();
 
     void Start() {
@@ -30,23 +26,6 @@ public class UIController : MonoBehaviour {
                 lvl.StarsNumber = (i < AllLevelsData.playerInfo.starsPerLvl.Count) ? AllLevelsData.playerInfo.starsPerLvl[i] : 0;
             }
         }
-
-        //for (int i = 0; i < AllLevelsData.allLevels.Count; i++) {
-        //    GameObject lvl = (GameObject)Instantiate(TestPrefab.gameObject, LevelListParent.transform);
-        //    RectTransform mainRT = lvl.GetComponent<RectTransform>();
-        //    mainRT.SetParent(LevelListParent.transform);
-
-        //    //lvl.LevelNumber = i;
-        //    //lvl.transform.position = new Vector3(0,0,120);
-        //    //lvl.transform.localScale = new Vector3(5,5,5);
-        //    //lvl.GetComponent<Image>().color = Color.red;
-
-        //    DontDestroyOnLoad(lvl);
-        //    //if (i <= AllLevelsData.playerInfo.starsPerLvl.Count) {
-        //    //    //lvl.buttonComponent.interactable = true;
-        //    //    //lvl.StarsNumber = (i < AllLevelsData.playerInfo.starsPerLvl.Count) ? AllLevelsData.playerInfo.starsPerLvl[i] : 0;
-        //    //}
-        //}
     }
 
     void Update() {

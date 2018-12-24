@@ -6,14 +6,23 @@ using UnityEngine.UI;
 public class BallLauncher : SceneSingleton<BallLauncher> {
     private static float base_y;
 
+    public Transform scalingParent;
     [SerializeField]
+    [Header("Ball Settings")]
     public int InitBallAmount;
+    public float ballScale = 1;
+    public Color ballColor = Color.white;
+    public GameObject ballVisual;
+
+    [Header("UI")]
+    public GameObject textCanvas;
+    public Slider Slider;
 
     private Vector3 endDragPosition;
     private LaunchPreview launchPreview;
+    [HideInInspector]
     public List<Ball> balls = new List<Ball>();
-    public GameObject ballVisual;
-
+    [HideInInspector]
     public int BallsReadyToShoot;
     public static bool canShoot;
     private Vector3 newPos;
@@ -22,10 +31,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     [SerializeField]
     private Ball ballPrefab;
 
-    [Header("UI")]
-    public GameObject textCanvas;
-    public Slider Slider;
-
+   
     public static int ExtraBalls = 0;
 
     private void Awake() {
@@ -120,7 +126,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     public void CreateBall(int ballsAmount) {
         for (int i = 0; i < ballsAmount; i++) {
-            var ball = Instantiate(ballPrefab);
+            var ball = Instantiate(ballPrefab, scalingParent);
             ball.transform.position = new Vector3(transform.position.x, transform.position.y - 190);
             ball.ballId = i;
             balls.Add(ball);

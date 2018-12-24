@@ -2,14 +2,22 @@
 
 public class LaunchPreview : MonoBehaviour {
     public static Vector3 launchDirection;
+
+    [Header("Ghosts(boo)")]
     public GameObject ghostGO;
+    [Tooltip("Default is 1")]
+    public float ghostScale = 1;
+    public Color ghostColor = Color.white;
 
     private GameObject[] ghosts = new GameObject[11];
     private GameObject[] ghostsReflect = new GameObject[6];
     private LineRenderer _lineRenderer;
     private Vector3 _dragStartPoint;
     private Vector3 baseOffsetDirection = Vector3.down * 0.1f;
+
+    [Header("Launch Preview Settings")]
     public bool active = false;
+    public LayerMask myLayerMask;
 
     private void Start() {
         Init();
@@ -18,6 +26,8 @@ public class LaunchPreview : MonoBehaviour {
             ghosts[i] = Instantiate(ghostGO);
             ghosts[i].transform.parent = transform;
             ghosts[i].transform.position = new Vector3(-100, -100, 0);
+            ghosts[i].transform.localScale = new Vector3(ghostScale, ghostScale, ghostScale);
+            ghosts[i].GetComponent<SpriteRenderer>().color = ghostColor;
         }
 
         ghostsReflect = new GameObject[6];
@@ -26,6 +36,8 @@ public class LaunchPreview : MonoBehaviour {
             ghostsReflect[i] = Instantiate(ghostGO);
             ghostsReflect[i].transform.parent = transform;
             ghostsReflect[i].transform.position = new Vector3(-100, -100, 0);
+            ghostsReflect[i].transform.localScale = new Vector3(ghostScale, ghostScale, ghostScale);
+            ghostsReflect[i].GetComponent<SpriteRenderer>().color = ghostColor;
         }
     }
 
@@ -75,14 +87,14 @@ public class LaunchPreview : MonoBehaviour {
         Debug.DrawRay(hit.point, hit.point * 2, Color.green);
         if (hit.collider != null) {
             //Debug.Log("hit " + hit.point + " hit " + hit.transform.gameObject.name);
-            _lineRenderer.SetPosition(1, hit.point);
+            _lineRenderer.SetPosition(1, new Vector3(hit.point.x, hit.point.y-0.1f)); // -0.1f so the balls follow a bit more preciely 
 
             Vector3 offsetDirection = Vector3.zero;
             offsetDirection = baseOffsetDirection;
      
             var reflectDir = Vector3.Reflect(launchDirection, hit.normal) + offsetDirection;
 
-            RaycastHit2D reflectRay = Physics2D.Raycast(hit.point * 0.999999f, reflectDir, 20);
+            RaycastHit2D reflectRay = Physics2D.Raycast(hit.point * 0.999999f, reflectDir, 20, myLayerMask);
 
             _lineRenderer.SetPosition(2, reflectRay.point);
         }
