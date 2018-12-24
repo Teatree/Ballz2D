@@ -13,46 +13,31 @@ public class DataController {
     public static string levelfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", levelsFileName);
     public static string playerfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", playerFileName);
 
+#elif UNITY_ANDROID
+    public static string levelfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", levelsFileName);
+    public static string playerfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", playerFileName);
+
 #elif UNITY_IOS
     private static string levelfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", levelsFileName);
     private static string playerfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", playerFileName);
  
-#elif UNITY_ANDROID
-    public static string levelfilePath = Path.Combine (Application.streamingAssetsPath + "/", levelsFileName);
-    public static string playerfilePath = Path.Combine (Application.streamingAssetsPath + "/", playerFileName);
-    //public static string levelfilePath = Path.Combine ("jar:file://" + Application.streamingAssetsPath  + "!/assets/", levelsFileName);
-    //public static string playerfilePath = Path.Combine ("jar:file://" + Application.streamingAssetsPath  + "!/assets/", playerFileName);
  
 #endif
 
     //--------- Player Info ----------
     public static PlayerInfo LoadPlayer() {
-        if (File.Exists(playerfilePath)) {
-            string jsonData = File.ReadAllText(playerfilePath);
-            PlayerInfo pi = JsonUtility.FromJson<PlayerInfo>(jsonData);
-            //Debug.Log(">>> PlayerInfo > " + pi);
-            return pi;
+        string jsonData = "";
+        if (Application.platform == RuntimePlatform.Android) {
+            WWW reader = new WWW(playerfilePath);
+            while (!reader.isDone) { }
+            jsonData = reader.text;
         }
         else {
-            Debug.LogError("Cannot find the file " + playerfilePath);
-            return new PlayerInfo();
+            jsonData = File.ReadAllText(playerfilePath);
         }
-    }
-
-    protected static string ReadString(string fileName) {
-        string path = Path.Combine("jar:file://" + Application.dataPath + "!/assets/", fileName);
-
-        if (!File.Exists(path)) {
-            Debug.LogError("Cannot find the file " + levelfilePath);
-            AjsonData = "<color=#a52a2aff>CANNOT FIND PAAAATH: " + path + "</color>";
-            return null;
-        }
-        AjsonData = "<color=#a52a2aff>ERROR PATH:  " + path + "</color>";
-        using (var stream = new StreamReader(path)) {
-            string result = stream.ReadToEnd();
-            stream.Close();
-            return result;
-        }
+        PlayerInfo pi = JsonUtility.FromJson<PlayerInfo>(jsonData);
+        AjsonData = "<color=#a52a2aff> " + jsonData + "</color>";
+        return pi;
     }
 
     public static void SavePlayer(PlayerInfo pi) {
@@ -64,17 +49,17 @@ public class DataController {
     public static List<LevelData> LoadLevels() {
         List<LevelData> lvlsData = new List<LevelData>();
         string jsonData = "";
+        if (Application.platform == RuntimePlatform.Android) {
+            WWW reader = new WWW(levelfilePath);
+            while (!reader.isDone) { }
 
-#if UNITY_EDITOR || UNITY_IOS
-        if (File.Exists(levelfilePath)) {
+            jsonData = reader.text;
+        }
+        else {
             jsonData = File.ReadAllText(levelfilePath);
         }
-#elif UNITY_ANDROID
-            //WWW reader = new WWW(ReadString);
-            //while (!reader.isDone) {
-            //}
-            jsonData = ReadString(levelsFileName);
-#endif
+        
+
         if (jsonData != null) {
             string separ = "Level_?";
             string[] lvls = System.Text.RegularExpressions.Regex.Split(jsonData, separ);
