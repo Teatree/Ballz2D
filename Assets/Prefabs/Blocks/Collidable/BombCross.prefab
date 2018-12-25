@@ -99,7 +99,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1052273827840646}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 84d383a9d892f8c4ba51b006f2b95940, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -211,11 +211,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23351756264731598}
@@ -251,6 +251,7 @@ MonoBehaviour:
     type: 2}
   col: 0
   row: 0
+  gridRow: 0
 --- !u!120 &120792869979889426
 LineRenderer:
   m_ObjectHideFlags: 1

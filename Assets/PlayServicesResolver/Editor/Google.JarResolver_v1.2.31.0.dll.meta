@@ -1,7 +1,5 @@
 fileFormatVersion: 2
-guid: 0138eb0638b99e342bf9343d5103c0fa
-labels:
-- gpsr
+guid: 456c9e6730ff4345a7c7a75fe65a0fd8
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -11,11 +9,6 @@ PluginImporter:
   isOverridable: 0
   platformData:
   - first:
-      Android: Android
-    second:
-      enabled: 1
-      settings: {}
-  - first:
       Any: 
     second:
       enabled: 0
@@ -23,9 +16,15 @@ PluginImporter:
   - first:
       Editor: Editor
     second:
-      enabled: 0
+      enabled: 1
       settings:
         DefaultValueInitialized: true
+  - first:
+      Windows Store Apps: WindowsStoreApps
+    second:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
   userData: 
   assetBundleName: 
   assetBundleVariant: 

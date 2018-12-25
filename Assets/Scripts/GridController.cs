@@ -8,7 +8,7 @@ public class GridController : SceneSingleton<GridController> {
     public Transform grid;
     [Header("Block Settings")]
     public float blockScale = 1;
-    
+
 
     #region prefabs
     [Header("Block Prefabs")]
@@ -56,7 +56,7 @@ public class GridController : SceneSingleton<GridController> {
         for (int i = 0; i < 18 - gc.currentLevel.emptyRowsCount; i++) {
             SpawnRowOfBlocks(true);
         }
-        foreach (Block b in   blocksSpawned) {
+        foreach (Block b in blocksSpawned) {
             if (b._type == BlockType.Obstacle) {
                 obstaclesCoordinates.Add(b);
             }
@@ -90,7 +90,7 @@ public class GridController : SceneSingleton<GridController> {
 
     private void checkLastBlocksLine() {
         float lastRowSpawnedPos = 0;
-        int lastRowSpawnedIndex= 0;
+        int lastRowSpawnedIndex = 0;
         for (int i = 0; i < blocksSpawned.Count; i++) {
             if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle) {
                 lastRowSpawnedPos = blocksSpawned[i].transform.position.y;
@@ -118,8 +118,8 @@ public class GridController : SceneSingleton<GridController> {
             if (block != null && (block._type != BlockType.Obstacle || moveObstacles)) {
                 RectTransform rt = (RectTransform)block.transform;
                 //width = rt.rect.width * block.transform.localScale.y;
-                //float newY = block.transform.position.y - Constants.BlockSize;
-                float newY = block.transform.GetComponent<RectTransform>().rect.height* block.transform.localScale.x;
+                float newY = block.transform.position.y - Constants.BlockSize;
+                //float newY = block.transform.GetComponent<RectTransform>().rect.height * block.transform.localScale.x;
                 foreach (Block ob in obstaclesCoordinates) {
                     if (ob.col == block.col && ob.transform.position.y == newY) {
                         newY -= ob.transform.GetComponent<RectTransform>().rect.height;
@@ -127,10 +127,14 @@ public class GridController : SceneSingleton<GridController> {
                         break;
                     }
                 }
-                block.transform.position = new Vector3(block.transform.position.x, newY , block.transform.position.z);
+                //block.transform.position = new Vector3(block.transform.position.x, newY, block.transform.position.z);
+                block.gridRow++;
+                block.transform.position = grid.transform.GetChild(block.gridRow).transform.GetChild(block.col).gameObject.transform.position;
+                
+                //Debug.Log("NewY: " + newY);
             }
         }
-       // checkLastBlocksLine();
+        checkLastBlocksLine();
     }
 
     public void RemoveOneTurnBlocks() {
@@ -142,23 +146,16 @@ public class GridController : SceneSingleton<GridController> {
     }
 
     private Vector3 GetPosition(int row, int col) {
-        Debug.Log("world pos" + grid.transform.GetChild(row).transform.GetChild(col).gameObject.transform.position);
-        return grid.transform.GetChild(row).transform.GetChild(col).gameObject.transform.position;
+        //Debug.Log("world pos" + grid.transform.GetChild(0).transform.GetChild(col).gameObject.transform.position);
+        return grid.transform.GetChild(0).transform.GetChild(col).gameObject.transform.position;
     }
 
-    private Vector3 GetPosition(int i) { // Get Ready
-        Vector3 position = transform.localPosition;
-        /// 2.731f is a shift to center the whole thing on the screen
-        position = new Vector3(i * Constants.BlockSize*transform.parent.localScale.x - Constants.ShiftToTheCenter*transform.parent.localScale.x, transform.position.y, transform.position.z);
-        //Debug.Log("Constants.ShiftToTheCenter*transform.parent.localScale.x " + Constants.ShiftToTheCenter * transform.parent.localScale.x);
-        return position;
-    }
 
     private Block GetTheBlock(List<CellData> cells, int row, int col) {
         Block block;
         switch (cells[col].type) {
             case "FF": {
-                    block = Instantiate(fountainPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(fountainPrefab);
                     break;
                 }
             case "★★": {
@@ -218,11 +215,16 @@ public class GridController : SceneSingleton<GridController> {
                     break;
                 }
             default: {
-                    block = Instantiate(blockPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(blockPrefab);
                     break;
                 }
         }
+        //   block.transform.position = GetPosition(row, col);
+        //block.gameObject.transform.SetParent(grid.transform.GetChild(row).gameObject.transform.GetChild(col).transform);
+        //block.gameObject.transform.localPosition = new Vector3(0, 0, 0);
 
+        block.gameObject.transform.localScale = new Vector3(Mathf.Abs(grid.localScale.x) * 0.95f * Mathf.Sign(block.gameObject.transform.localScale.x), Mathf.Abs(grid.localScale.y) * 0.95f * Mathf.Sign(block.gameObject.transform.localScale.y));
+        //Debug.Log("world cell pos" + grid.transform.GetChild(row).transform.GetChild(col).gameObject.transform.position + " block pos = " + block.transform.position);
         return block;
     }
 
@@ -241,15 +243,12 @@ public class GridController : SceneSingleton<GridController> {
         }
     }
 
-//    public int GetBlocksAmount() {
-//        int amount = 0;
-//        foreach (RowData r in gc.currentLevel.rows) {
-//            List<CellData> cells = r.GetCells();
-//            for (int i = 0; i < playWidth; i++) {
-//                if (cells[i] != null && cells[i].type != "" && ) {
+    //private Vector3 GetPosition(int i) { // Get Ready
+    //    Vector3 position = transform.localPosition;
+    //    /// 2.731f is a shift to center the whole thing on the screen
+    //    position = new Vector3(i * Constants.BlockSize * transform.parent.localScale.x - Constants.ShiftToTheCenter * transform.parent.localScale.x, transform.position.y, transform.position.z);
+    //    //Debug.Log("Constants.ShiftToTheCenter*transform.parent.localScale.x " + Constants.ShiftToTheCenter * transform.parent.localScale.x);
+    //    return position;
+    //}
 
-//                }
-//        }
-//        return amount;
-//    }
 }

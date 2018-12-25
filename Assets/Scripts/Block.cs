@@ -24,6 +24,7 @@ public class Block : MonoBehaviour {
 
     public int col;
     public int row;
+    public int gridRow;
 
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -36,7 +37,7 @@ public class Block : MonoBehaviour {
             text.SetText(hitsRemaining.ToString());
 
             if (_type.Family.Equals("Block")) {
-                spriteRenderer.color = Color.Lerp(Color.white, Color.red, hitsRemaining / 10f);
+                spriteRenderer.color = Color.Lerp(Color.white, Color.green, hitsRemaining / 10f);
                 StartCoroutine(BlockBlink(spriteRenderer.color, 1));
             }
         }

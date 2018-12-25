@@ -1736,8 +1736,6 @@ MonoBehaviour:
   LevelListParent: {fileID: 511359688}
   levelUiElementPrefab: {fileID: 114988970704001292, guid: ff7ced476d2c21745aa046a965904fed,
     type: 2}
-  TestPrefab: {fileID: 1774765184977476, guid: d49c4d54a66b01642b48cdf70cfd5964, type: 2}
-  debugText: {fileID: 0}
   sprState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}

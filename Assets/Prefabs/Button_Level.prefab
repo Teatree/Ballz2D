@@ -271,6 +271,7 @@ MonoBehaviour:
   LevelNumber: 0
   IsCompleted: 0
   StarsNumber: 0
+  c: {fileID: 0}
   buttonComponent: {fileID: 114992693812369830}
   levelNumText: {fileID: 114006525663046484}
   Star1: {fileID: 114375979208392576}
