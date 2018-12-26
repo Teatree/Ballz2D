@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Revive : SceneSingleton<Revive> {
+public class Revive : IPopup<Revive> {
 
     public GameObject laserLine1;
     public GameObject laserLine2;
@@ -40,8 +40,6 @@ public class Revive : SceneSingleton<Revive> {
                 }
             }
             GameUIController.Instance.UpdateScore(GameController.levelScore);
-
-
         }
 
     private void ShootLasers(LineRenderer laserLine, float y) {

@@ -11,6 +11,9 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public Image Star2;
     public Image Star3;
 
+    [Header("Popups")]
+    public GameObject RevivePrefab;
+    public GameObject GameOverPrefab;
 
     void Update() {
         HandleInput();
@@ -78,9 +81,19 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
     public void HandleGameOver() {
         //Show UI
-        
-        Revive.Instance.GetRevive();
+        Instantiate(RevivePrefab, transform);
+
+
+
+        //Revive.Instance.GetRevive();
         //GameController.GameOver();
+    }
+
+    public void HandleWin() {
+        //Show UI
+        Debug.Log("Trying to add prefab");
+        Instantiate(GameOverPrefab, transform);
+        
     }
 
     public void HandleWarning() {

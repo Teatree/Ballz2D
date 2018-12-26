@@ -222,6 +222,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     public void SummonAllBalls() {
+        Debug.Log("pressed");
         foreach (Ball b in balls) {
             gameObject.SetActive(true);
             b.SetDir(transform.position - b.transform.position);

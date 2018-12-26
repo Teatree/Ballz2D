@@ -62,6 +62,9 @@ public class GridController : SceneSingleton<GridController> {
             }
         }
 
+        Constants.GameOver_y = grid.childCount-1;
+        Constants.Warning_y = grid.childCount-2;
+
         BlocksAmount = gc.currentLevel.GetBlocksAmount();
     }
 
@@ -82,29 +85,30 @@ public class GridController : SceneSingleton<GridController> {
             rowsSpawned++;
         }
         BallLauncher.canShoot = true;
-        checkLastBlocksLine();
+        //checkLastBlocksLine();
     }
 
     private void checkLastBlocksLine() {
         float lastRowSpawnedPos = 0;
         int lastRowSpawnedIndex = 0;
+        int lastGridRow = 0;
         for (int i = 0; i < blocksSpawned.Count; i++) {
             if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle) {
                 lastRowSpawnedPos = blocksSpawned[i].transform.position.y;
                 lastRowSpawnedIndex = blocksSpawned[i].row;
+                lastGridRow = blocksSpawned[i].gridRow;
                 break;
             }
         }
-        if (rowsSpawned > 0 && lastRowSpawnedPos <= Constants.Warning_y && lastRowSpawnedPos > Constants.GameOver_y) {
+        if (rowsSpawned > 0 && lastGridRow == Constants.Warning_y) {
             GameUIController.Instance.HandleWarning();
         }
 
-        if (rowsSpawned > 0 && lastRowSpawnedPos <= Constants.GameOver_y) {
+        if (rowsSpawned > 0 && lastGridRow == Constants.GameOver_y) {
             GameController.isGameOver = true;
             Revive.RowToDestroyIndex = lastRowSpawnedIndex;
             Revive.RowToDestroyPosition = lastRowSpawnedPos;
-            //  GameUIController.Instance.HandleGameOver();
-            Warning.Instance.ShowWarning();
+            GameUIController.Instance.HandleGameOver();
             return;
         }
     }
@@ -225,6 +229,10 @@ public class GridController : SceneSingleton<GridController> {
                 }
             }
             Debug.Log("WOW! you win");
+
+            //Maybe Change it later
+            GameUIController.Instance.HandleWin();
+
             return true;
         }
         else {
