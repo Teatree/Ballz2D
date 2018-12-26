@@ -63,8 +63,7 @@ public class Block : MonoBehaviour {
                 CreateDeathParticle();
             }
             if (_type.Equals(BlockType.Bomb)) CreateBombExplosion();
-            destroyed = true;
-            Destroy(gameObject, 0.0000001f);
+			destroyed = true;            Destroy(gameObject, 0.0000001f);
         }
     }
 

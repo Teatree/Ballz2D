@@ -18,6 +18,13 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject PreviewPrefab;
     public GameObject PausePrefab;
 
+
+    [Header ("Lasers")]
+    public GameObject laserLine1;
+    public GameObject laserLine2;
+    public GameObject laserLine3;
+
+
     void Start() {
         HandlePreview();
         GameController.PauseGame();
@@ -32,7 +39,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
     }
 
-    public void Shop() {
+    public void ShowShop() {
         Debug.LogWarning("Shop!");
     }
 
@@ -82,11 +89,6 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public void HandleGameOver() {
         //Show UI
         Instantiate(RevivePrefab, transform);
-
-
-
-        //Revive.Instance.GetRevive();
-        //GameController.GameOver();
     }
 
     public void HandleWin() {
@@ -125,10 +127,11 @@ public class GameUIController : SceneSingleton<GameUIController> {
         if (Input.GetKeyDown("space")) {
             //LightningPowerup.Instance.ShootLightning();
             //GetMoreBalls();
-            HandlePreview();
-            GameController.PauseGame();
+            //HandlePreview();
+            //GameController.PauseGame();
 
-            //Warning.Instance.ShowWarning();
+            Warning.Instance.ShowWarning();
+
         }
 
         //Android
@@ -173,4 +176,20 @@ public class GameUIController : SceneSingleton<GameUIController> {
         // Debug.Log("slider = " + _slider);
     }
     #endregion
+
+    public void FadingLasers(LineRenderer laserLine) {
+        StartCoroutine(BombLaserFade(laserLine));
+    }
+
+    private IEnumerator BombLaserFade(LineRenderer laserLine) {
+        Debug.Log("Laser fade");
+        for (int i = 0; i < 50; i++) {
+            Color c = laserLine.material.color;
+            c.a = c.a - 0.02f;
+            Debug.Log("Laser fade");
+            laserLine.material.color = c;
+            yield return null;
+        }
+        GameController.isGameOver = false;
+    }
 }

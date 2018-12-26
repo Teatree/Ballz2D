@@ -63,8 +63,8 @@ public class GridController : SceneSingleton<GridController> {
             }
         }
 
-        Constants.GameOver_y = grid.childCount-1;
-        Constants.Warning_y = grid.childCount-2;
+        Constants.GameOvery_grid_index = grid.childCount-1;
+        Constants.Warning_y_grid_index = grid.childCount-3;
 
         
         BlocksAmount = gc.currentLevel.GetBlocksAmount();
@@ -102,11 +102,15 @@ public class GridController : SceneSingleton<GridController> {
                 break;
             }
         }
-        if (rowsSpawned > 0 && lastGridRow == Constants.Warning_y) {
+
+        Debug.Log("Show warning" + lastGridRow );
+        Debug.Log("Show Warning_y_grid_index" +  Constants.Warning_y_grid_index);
+        if (rowsSpawned > 0 && lastGridRow == Constants.Warning_y_grid_index) {
+            Debug.Log("Show warning");
             GameUIController.Instance.HandleWarning();
         }
 
-        if (rowsSpawned > 0 && lastGridRow == Constants.GameOver_y) {
+        if (rowsSpawned > 0 && lastGridRow == Constants.GameOvery_grid_index) {
             GameController.isGameOver = true;
             Revive.RowToDestroyIndex = lastRowSpawnedIndex;
             Revive.RowToDestroyPosition = lastRowSpawnedPos;

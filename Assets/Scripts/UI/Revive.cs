@@ -7,10 +7,14 @@ public class Revive : IPopup<Revive> {
     public GameObject laserLine1;
     public GameObject laserLine2;
     public GameObject laserLine3;
-    public GameObject button;
 
     public static int RowToDestroyIndex;
     public static float RowToDestroyPosition;
+
+
+    private float line1Y;
+    private float line2Y;
+    private float line3Y;
 
     public int CostGems;
 
@@ -18,29 +22,42 @@ public class Revive : IPopup<Revive> {
 
     public void Start() {
         available = true;
+        laserLine1 = GameUIController.Instance.laserLine1;
+        laserLine2 = GameUIController.Instance.laserLine2;
+        laserLine3 = GameUIController.Instance.laserLine3;
+
+        line1Y = GridController.Instance.grid.GetChild(GridController.Instance.grid.childCount - 3).transform.position.y;
+        line2Y = GridController.Instance.grid.GetChild(GridController.Instance.grid.childCount - 2).transform.position.y;
+        line3Y = GridController.Instance.grid.GetChild(GridController.Instance.grid.childCount - 1).transform.position.y;
+
+        laserLine1.transform.position = new Vector3(-3.15f, line1Y);
+        laserLine2.transform.position = new Vector3(-3.15f, line2Y);
+        laserLine3.transform.position = new Vector3(-3.15f, line3Y);
     }
 
     public void GetRevive() {
         Debug.Log(GameController.isGameOver);
-        if (GameController.isGameOver && GameController.Gems >= CostGems && available) {
+        if (GameController.isGameOver && GameController.Gems >= CostGems) {
             DestroyBottomLines();
             GameController.Gems -= CostGems;
             available = false;
-            DisableButton();
+
+        } else {
+            GameUIController.Instance.ShowShop();
         }
     }
 
     public void DestroyBottomLines() {
-            ShootLasers(laserLine1.transform.GetComponent<LineRenderer>(), RowToDestroyPosition);
-            ShootLasers(laserLine2.transform.GetComponent<LineRenderer>(), RowToDestroyPosition + Constants.BlockSize);
-            ShootLasers(laserLine3.transform.GetComponent<LineRenderer>(), RowToDestroyPosition + 2 * Constants.BlockSize);
-            foreach (Block b in GridController.blocksSpawned) {
-                if (!b.destroyed && (b.row == RowToDestroyIndex || b.row == RowToDestroyIndex+1)) {
-                    b._behaviour.OnDestroy();
-                }
+        ShootLasers(laserLine1.transform.GetComponent<LineRenderer>(), line1Y);
+        ShootLasers(laserLine2.transform.GetComponent<LineRenderer>(), line2Y);
+        ShootLasers(laserLine3.transform.GetComponent<LineRenderer>(), line3Y);
+        foreach (Block b in GridController.blocksSpawned) {
+            if (!b.destroyed && (b.row == RowToDestroyIndex || b.row == RowToDestroyIndex + 1)) {
+                b._behaviour.OnDestroy();
             }
-            GameUIController.Instance.UpdateScore(GameController.levelScore);
         }
+        GameUIController.Instance.UpdateScore(GameController.levelScore);
+    }
 
     private void ShootLasers(LineRenderer laserLine, float y) {
 
@@ -52,30 +69,9 @@ public class Revive : IPopup<Revive> {
         laserLine.SetPosition(0, new Vector2(3.15f, y));
         laserLine.SetPosition(1, new Vector2(-3.15f, y));
 
-        StartCoroutine(BombLaserFade(laserLine));
+        GameUIController.Instance.FadingLasers(laserLine);
     }
 
-    private IEnumerator BombLaserFade(LineRenderer laserLine) {
-        for (int i = 0; i < 50; i++) {
-            Color c = laserLine.material.color;
-            c.a = c.a - 0.02f;
-            laserLine.material.color = c;
-            yield return null;
-        }
-        GameController.isGameOver = false;
-    }
-
-    public void DisableButton() {
-        button.transform.GetComponent<Button>().interactable = false;
-    }
-
-    public void EnableButton() {
-        if (available) {
-            button.transform.GetComponent<Button>().interactable = false;
-        } else {
-            button.transform.GetComponent<Button>().interactable = true;
-        }
-    }
 
     public void OnClick_ShowGameOver() {
         GameUIController.Instance.HandleGameOver();

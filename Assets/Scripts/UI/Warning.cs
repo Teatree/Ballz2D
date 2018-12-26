@@ -9,18 +9,19 @@ public class Warning : SceneSingleton<Warning> {
 
 
     public void ShowWarning() {
-
+       // Debug.Log("sjow warn " + _warned);
         if (!_warned) {
             List<GameObject> warnings = new List<GameObject>();
             for (int i = 0; i < 13; i++) {
+                
                 var d = Instantiate(WarningBlock);
                 SpriteRenderer _t = d.transform.GetComponent<SpriteRenderer>();
                 _t.color = new Color(1, 1, 1, 0);
                 d.transform.position = GetWarningPosition(i);
                 warnings.Add(d);
+               // Debug.Log("sjow warn " + _t.color);
             }
             StartCoroutine(WarnBlockAni(warnings, 0.2f));
-
             _warned = true;
         }
     }
@@ -64,7 +65,10 @@ public class Warning : SceneSingleton<Warning> {
     private Vector3 GetWarningPosition(int i) {
         Vector3 position = transform.position;
         /// 2.731f is a shift to center the whole thing on the screen
-        position = new Vector3(i * Constants.BlockSize - Constants.ShiftToTheCenter, Constants.GameOver_y, transform.position.z + 1);
+        position = new Vector3(
+            GridController.Instance.grid.GetChild(Constants.Warning_y_grid_index+1).GetChild(i).transform.position.x,
+            GridController.Instance.grid.GetChild(Constants.Warning_y_grid_index+1).transform.position.y, 
+            transform.position.z + 1);
         return position;
     }
 }
