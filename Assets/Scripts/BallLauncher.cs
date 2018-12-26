@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class BallLauncher : SceneSingleton<BallLauncher> {
@@ -59,7 +60,8 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 }
 
                 //controls 
-                if (canShoot && worldPosition.y > 0.56f && worldPosition.y < 7.16f) {
+                //if (canShoot && worldPosition.y > 0.56f && worldPosition.y < 7.16f) {
+                if (canShoot && !EventSystem.current.IsPointerOverGameObject()) {
                     if (Input.GetMouseButtonDown(0)) {
                         SetStartDrag();
                     }

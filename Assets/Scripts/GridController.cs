@@ -52,6 +52,7 @@ public class GridController : SceneSingleton<GridController> {
     private List<Block> obstaclesCoordinates = new List<Block>();
 
     private void Start() { //OnLevelWasLoaded
+        blocksSpawned = new List<Block>();
         gc = GetComponent<GameController>();
         for (int i = 0; i < 18 - gc.currentLevel.emptyRowsCount; i++) {
             SpawnRowOfBlocks(true);
@@ -65,6 +66,7 @@ public class GridController : SceneSingleton<GridController> {
         Constants.GameOver_y = grid.childCount-1;
         Constants.Warning_y = grid.childCount-2;
 
+        
         BlocksAmount = gc.currentLevel.GetBlocksAmount();
     }
 

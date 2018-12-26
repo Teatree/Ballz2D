@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class GameUIController : SceneSingleton<GameUIController> {
 
@@ -14,6 +15,13 @@ public class GameUIController : SceneSingleton<GameUIController> {
     [Header("Popups")]
     public GameObject RevivePrefab;
     public GameObject GameOverPrefab;
+    public GameObject PreviewPrefab;
+    public GameObject PausePrefab;
+
+    void Start() {
+        HandlePreview();
+        GameController.PauseGame();
+    }
 
     void Update() {
         HandleInput();
@@ -30,17 +38,9 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
     public void PauseGame() {
         //Show UI
-        GameController.PauseGame();
-    }
+        Instantiate(PausePrefab, transform);
 
-    public void PauseButtonHandler() {
-        if (GameController.IsGameStopped()) {
-            GameController.ResumeGame();
-        }
-        else {
-            Debug.LogWarning("Pause!");
-            PauseGame();
-        }
+        GameController.PauseGame();
     }
 
     #region stars
@@ -96,6 +96,23 @@ public class GameUIController : SceneSingleton<GameUIController> {
         
     }
 
+    public void HandleRestart() {
+        Debug.Log("AllLevelsData.CurrentLevelIndex " + AllLevelsData.CurrentLevelIndex);
+        GameController.ResetScore();
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+    }
+
+    public void HandlePreview() {
+        //Show UI
+        Instantiate(PreviewPrefab, transform);
+
+    }
+
+    public void HandleHomeButton() {
+        //Show UI
+        SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
+    }
+
     public void HandleWarning() {
         Warning.Instance.ShowWarning();
     }
@@ -108,7 +125,10 @@ public class GameUIController : SceneSingleton<GameUIController> {
         if (Input.GetKeyDown("space")) {
             //LightningPowerup.Instance.ShootLightning();
             //GetMoreBalls();
-            Warning.Instance.ShowWarning();
+            HandlePreview();
+            GameController.PauseGame();
+
+            //Warning.Instance.ShowWarning();
         }
 
         //Android

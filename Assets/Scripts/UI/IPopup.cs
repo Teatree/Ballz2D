@@ -4,7 +4,11 @@ using UnityEngine;
 
 public abstract class IPopup<T> : SceneSingleton<IPopup<T>> {
 
-    public void OnClick_Close() {
+    public virtual void OnClick_Close() {
         Destroy(gameObject); // kill self
+    }
+
+    public void OnClick_Home() {
+        GameUIController.Instance.HandleHomeButton();
     }
 }

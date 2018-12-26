@@ -45,12 +45,12 @@ public class GameController : MonoBehaviour {
 
     public static void PauseGame() {
         isGamePaused = true;
-        Debug.Log("! Game is paused");
+        //Debug.Log("! Game is paused");
     }
 
     public static void ResumeGame() {
         isGamePaused = false;
-        Debug.Log("! Game is not paused");
+        //Debug.Log("! Game is not paused");
     }
 
     public static bool IsGameStopped() {

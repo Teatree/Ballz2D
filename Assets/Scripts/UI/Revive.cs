@@ -76,4 +76,8 @@ public class Revive : IPopup<Revive> {
             button.transform.GetComponent<Button>().interactable = true;
         }
     }
+
+    public void OnClick_ShowGameOver() {
+        GameUIController.Instance.HandleGameOver();
+    }
 }
