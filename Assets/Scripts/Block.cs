@@ -115,7 +115,7 @@ public class Block : MonoBehaviour {
     }
 
     public void GetLightningDamage() {
-        this.hitsRemaining = hitsRemaining > 1 ? Mathf.RoundToInt(this.hitsRemaining/2) : 1;
+        this.hitsRemaining = hitsRemaining > 1 ? Mathf.RoundToInt(this.hitsRemaining / 2) : 1;
         UpdateVisualState();
     }
 }

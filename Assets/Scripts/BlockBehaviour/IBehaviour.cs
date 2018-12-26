@@ -37,7 +37,9 @@ public abstract class IBehaviour {
             yield return null;
         }
         activated = false;
+        block.destroyed = false; //to call destroy self method
         block.DestroySelf();
+       
     }
 
     protected void UpdateBlocksInfo() {

@@ -2,13 +2,14 @@
 
 public class GameController : MonoBehaviour {
 
-    public static int levelScoreCoefficientMin = 20;
+    public static int blockScoreMin = 20;
+    private static int blockScoreCoefficientStep = 10;
 
     public static int SecondStarScore = 13000;
     public static int ThirdStarScore = 25000;
 
     public static int levelScore;
-    public static int levelScoreCoefficient = levelScoreCoefficientMin ;
+    public static int blockscore = blockScoreMin ;
 
     public LevelData currentLevel;
     public static int Gems = 10000;
@@ -21,18 +22,19 @@ public class GameController : MonoBehaviour {
     }
 
     public static int IncreseScore() {
-        int scoreEred = levelScoreCoefficient;
-        levelScore += levelScoreCoefficient;
+        blockscore += blockScoreCoefficientStep;
 
-        return scoreEred;
+        levelScore += blockscore;
+
+        return blockscore;
     }
 
     public static void ResetScoreCoefficient() {
-        levelScoreCoefficient = levelScoreCoefficientMin;
+        blockscore = blockScoreMin;
     }
 
     public static void ResetScore() {
-        levelScoreCoefficient = levelScoreCoefficientMin;
+        blockscore = blockScoreMin;
         levelScore = 0;
     }
 

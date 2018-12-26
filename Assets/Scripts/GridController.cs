@@ -77,9 +77,6 @@ public class GridController : SceneSingleton<GridController> {
                     //block.gameObject.transform.localScale = new Vector3(block.gameObject.transform.localScale.x*blockScale, block.gameObject.transform.localScale.y*blockScale); // *NEW
                     block.Setup(cells[i].type, cells[i].life, rowsSpawned, i);
                     blocksSpawned.Add(block);
-                    //Constants.BlockSize = block.GetComponent<RectTransform>().rect.width * Mathf.Abs(block.transform.localScale.x) * Mathf.Abs(block.transform.parent.localScale.x);
-                    //Constants.ShiftToTheCenter *= 
-                    //Debug.Log("Constants.BlockSize " + Constants.BlockSize);
                 }
             }
             rowsSpawned++;
@@ -117,21 +114,16 @@ public class GridController : SceneSingleton<GridController> {
         foreach (var block in blocksSpawned) {
             if (block != null && (block._type != BlockType.Obstacle || moveObstacles)) {
                 RectTransform rt = (RectTransform)block.transform;
-                //width = rt.rect.width * block.transform.localScale.y;
-                float newY = block.transform.position.y - Constants.BlockSize;
-                //float newY = block.transform.GetComponent<RectTransform>().rect.height * block.transform.localScale.x;
+                int newY = ++block.gridRow;
                 foreach (Block ob in obstaclesCoordinates) {
-                    if (ob.col == block.col && ob.transform.position.y == newY) {
-                        newY -= ob.transform.GetComponent<RectTransform>().rect.height;
-
+                    if (ob.col == block.col && ob.gridRow == newY) {
+                        newY++;
+                        block.gridRow = newY;
                         break;
                     }
                 }
-                //block.transform.position = new Vector3(block.transform.position.x, newY, block.transform.position.z);
-                block.gridRow++;
-                block.transform.position = grid.transform.GetChild(block.gridRow).transform.GetChild(block.col).gameObject.transform.position;
-                
-                //Debug.Log("NewY: " + newY);
+              //  block.transform.position = grid.transform.GetChild(block.gridRow).transform.GetChild(block.col).gameObject.transform.position;
+                block.transform.position = GetPosition(newY, block.col);
             }
         }
         checkLastBlocksLine();
@@ -147,7 +139,7 @@ public class GridController : SceneSingleton<GridController> {
 
     private Vector3 GetPosition(int row, int col) {
         //Debug.Log("world pos" + grid.transform.GetChild(0).transform.GetChild(col).gameObject.transform.position);
-        return grid.transform.GetChild(0).transform.GetChild(col).gameObject.transform.position;
+        return grid.transform.GetChild(row).transform.GetChild(col).gameObject.transform.position;
     }
 
 
@@ -155,73 +147,70 @@ public class GridController : SceneSingleton<GridController> {
         Block block;
         switch (cells[col].type) {
             case "FF": {
-                    block = Instantiate(fountainPrefab);
+                    block = Instantiate(fountainPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "★★": {
-                    block = Instantiate(plusBallPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(plusBallPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "LH": {
-                    block = Instantiate(laserHorizontalPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(laserHorizontalPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "LV": {
-                    block = Instantiate(laserVerticalPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(laserVerticalPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "LC": {
-                    block = Instantiate(laserCrossPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(laserCrossPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "BM": {
-                    block = Instantiate(bombPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(bombPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "BV": {
-                    block = Instantiate(bombVerticalPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(bombVerticalPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "BH": {
-                    block = Instantiate(bombHorizontalPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(bombHorizontalPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "BC": {
-                    block = Instantiate(bombCrossPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(bombCrossPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "ob": {
-                    block = Instantiate(blockPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(blockPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "os": {
-                    block = Instantiate(obstaclePrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(obstaclePrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "NW": {
-                    block = Instantiate(triangleNWPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(triangleNWPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "SW": {
-                    block = Instantiate(triangleSWPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(triangleSWPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "SE": {
-                    block = Instantiate(triangleSEPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(triangleSEPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             case "NE": {
-                    block = Instantiate(triangleNEPrefab, GetPosition(row, col), Quaternion.identity, scalingParent);
+                    block = Instantiate(triangleNEPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
             default: {
-                    block = Instantiate(blockPrefab);
+                    block = Instantiate(blockPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
         }
-        //   block.transform.position = GetPosition(row, col);
-        //block.gameObject.transform.SetParent(grid.transform.GetChild(row).gameObject.transform.GetChild(col).transform);
-        //block.gameObject.transform.localPosition = new Vector3(0, 0, 0);
 
         block.gameObject.transform.localScale = new Vector3(Mathf.Abs(grid.localScale.x) * 0.95f * Mathf.Sign(block.gameObject.transform.localScale.x), Mathf.Abs(grid.localScale.y) * 0.95f * Mathf.Sign(block.gameObject.transform.localScale.y));
         //Debug.Log("world cell pos" + grid.transform.GetChild(row).transform.GetChild(col).gameObject.transform.position + " block pos = " + block.transform.position);
