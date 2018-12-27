@@ -2,7 +2,7 @@
 using System;
 using GoogleMobileAds.Api;
 
-public class AdmobController : MonoBehaviour {
+public class AdmobController : SceneSingleton<AdmobController> {
 
 #if UNITY_ANDROID
     string appId = "ca-app-pub-4809397092315700~2101070495";
@@ -24,7 +24,7 @@ public class AdmobController : MonoBehaviour {
 
     private BannerView bannerView;
     private InterstitialAd interstitial;
-    private RewardBasedVideoAd rewardVideo;
+    private RewardBasedVideoAd rewardGemsVideo;
 
     public void Start() {
         // Initialize the Google Mobile Ads SDK.
@@ -43,13 +43,6 @@ public class AdmobController : MonoBehaviour {
         bannerView.LoadAd(request);
     }
 
-    private void InitRewardVideo() {
-        // Get singleton reward based video ad reference.
-        this.rewardVideo = RewardBasedVideoAd.Instance;
-        rewardVideo.OnAdRewarded += HandleRewardBasedVideoRewarded;
-        rewardVideo.OnAdClosed += HandleRewardBasedVideoClosed;
-    }
-
 
     private void RequestInterstitial() {
 
@@ -65,21 +58,9 @@ public class AdmobController : MonoBehaviour {
         // Create an empty ad request.
         AdRequest request = GetTestRequest();
         // Load the rewarded video ad with the request.
-        this.rewardVideo.LoadAd(request, reardVideoId);
+        this.rewardGemsVideo.LoadAd(request, reardVideoId);
     }
 
-    public void HandleRewardBasedVideoRewarded(object sender, Reward args) {
-        string type = args.Type;
-        double amount = args.Amount;
-        MonoBehaviour.print(
-            "HandleRewardBasedVideoRewarded event received for "
-                        + amount.ToString() + " " + type);
-    }
-
-
-    public void HandleRewardBasedVideoClosed(object sender, EventArgs args) {
-        this.RequestRewardBasedVideo();
-    }
 
     public void HandleInterstitialClosed(object sender, EventArgs args) {
         MonoBehaviour.print("HandleInterstitialClosed event received");
@@ -91,4 +72,29 @@ public class AdmobController : MonoBehaviour {
             .AddTestDevice("9457F77F86541E4EA84BF4A7CF6D83A6")
             .Build();
     }
+
+    //REvard!!!!
+
+    public void ShowGemsRevardVideo() {
+        if (rewardGemsVideo.IsLoaded()) {
+            rewardGemsVideo.Show();
+        }
+    }
+
+    private void InitRewardVideo() {
+        // Get singleton reward based video ad reference.
+        this.rewardGemsVideo = RewardBasedVideoAd.Instance;
+        rewardGemsVideo.OnAdRewarded += HandleRewardGemsRewarded;
+        rewardGemsVideo.OnAdClosed += HandleRewardGemsClosed;
+    }
+
+    public void HandleRewardGemsRewarded(object sender, Reward args) {
+        GameController.Gems += 30;
+
+    }
+
+    public void HandleRewardGemsClosed(object sender, EventArgs args) {
+        this.RequestRewardBasedVideo();
+    }
+
 }

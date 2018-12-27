@@ -11,4 +11,8 @@ public abstract class IPopup<T> : SceneSingleton<IPopup<T>> {
     public void OnClick_Home() {
         GameUIController.Instance.HandleHomeButton();
     }
+
+    public void OnClick_AdsForGems() {
+        AdmobController.Instance.ShowGemsRevardVideo();
+    }
 }

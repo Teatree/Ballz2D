@@ -8199,7 +8199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scalingParent: {fileID: 883614036}
-  InitBallAmount: 12
+  InitBallAmount: 70
   ballScale: 1
   ballColor: {r: 1, g: 1, b: 1, a: 1}
   ballVisual: {fileID: 132243636}
@@ -9181,6 +9181,11 @@ Prefab:
       propertyPath: laserLine3
       value: 
       objectReference: {fileID: 1189035050}
+    - target: {fileID: 114356695299044286, guid: c21fdeca8edd0db479c5466e36f51ee3,
+        type: 2}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c21fdeca8edd0db479c5466e36f51ee3, type: 2}
   m_IsPrefabAsset: 0

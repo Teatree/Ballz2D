@@ -88,6 +88,7 @@ public class BlockType {
                 }
             default: {
                     return new BlockBehaviour();
+                    // throw new System.ArgumentException("Block type  " + _type + " is not defined ");
                 }
         }
     }

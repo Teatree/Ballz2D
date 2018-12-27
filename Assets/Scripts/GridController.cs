@@ -236,7 +236,7 @@ public class GridController : SceneSingleton<GridController> {
                     break;
                 }
             default: {
-                    block = Instantiate(blockPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
+                    throw new System.ArgumentException("Block type  " + cells[col].type + " is not defined ");
                     break;
                 }
         }
@@ -254,8 +254,8 @@ public class GridController : SceneSingleton<GridController> {
                 }
             }
             Debug.Log("WOW! you win");
+            SubmitStars();
 
-            //Maybe Change it later
             GameUIController.Instance.HandleWin();
 
             return true;
@@ -265,4 +265,7 @@ public class GridController : SceneSingleton<GridController> {
         }
     }
 
+    private static void SubmitStars() {
+        GameController.TotalStarsAmount += GameController.LevelStarsAmount;
+    }
 }

@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 222113030599685800}
   - component: {fileID: 114844522255121402}
   m_Layer: 5
-  m_Name: Star (2)
+  m_Name: Star3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 222148773830110244}
   - component: {fileID: 114916793756488166}
   m_Layer: 5
-  m_Name: Star
+  m_Name: Star1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 222123516126640858}
   - component: {fileID: 114444726289225822}
   m_Layer: 5
-  m_Name: Star (1)
+  m_Name: Star2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -635,6 +635,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3dd1f350d5a7e4cbf730be0c559844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 1
+  StarsAmount: 0
+  Btn_Group_Single: {fileID: 1664211212529686}
+  Btn_Group_Ads: {fileID: 1507651689944604}
+  Btn_Group_Fail: {fileID: 1021389487296548}
+  Star1: {fileID: 1456113438635490}
+  Star2: {fileID: 1588889651901798}
+  Star3: {fileID: 1025897462659720}
+  StarsSlider: {fileID: 114541893888055114}
+  StatusText: {fileID: 1015018644255378}
+  levelText: {fileID: 1107454839461092}
 --- !u!114 &114015974873288648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -948,8 +959,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: HandleHomeButton
+      - m_Target: {fileID: 114014358114763674}
+        m_MethodName: OnClick_Home
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1212,7 +1223,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114032361096656460}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114014358114763674}
+        m_MethodName: OnClick_Replay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114541893888055114
@@ -1255,7 +1277,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 30
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -1392,7 +1414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.3915094, b: 0.7556073, a: 1}
+  m_Color: {r: 1, g: 0.24313724, b: 0.48595816, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2256,7 +2278,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -183.92}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224396813584659988

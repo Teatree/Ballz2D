@@ -24,10 +24,13 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject laserLine2;
     public GameObject laserLine3;
 
+    public static string currentLevelNumberLable; 
 
     void Start() {
         HandlePreview();
         GameController.PauseGame();
+        currentLevelNumberLable =  "" + (1 + AllLevelsData.CurrentLevelIndex);
+        UpdateStars();
     }
 
     void Update() {
@@ -36,7 +39,6 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
         }
         UpdateBlocksAmount();
-
     }
 
     public void ShowShop() {
@@ -44,10 +46,8 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
     public void PauseGame() {
-        //Show UI
-        Instantiate(PausePrefab, transform);
-
         GameController.PauseGame();
+        Instantiate(PausePrefab, transform);
     }
 
     #region stars
@@ -76,12 +76,15 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public void UpdateStars() {
         if (Slider.value >= 0) {
             Star1.color = Color.white;
+            GameController.LevelStarsAmount = 1;
         }
         if (Slider.value >= Slider.maxValue * 0.6f) {
             Star2.color = Color.white;
+            GameController.LevelStarsAmount = 2;
         }
         if (Slider.value >= Slider.maxValue) {
             Star3.color = Color.white;
+            GameController.LevelStarsAmount = 3;
         }
     }
     #endregion
@@ -95,10 +98,19 @@ public class GameUIController : SceneSingleton<GameUIController> {
         }
     }
 
+
+    public void ShowGameOver() {
+       GameObject go =  Instantiate(GameOverPrefab, transform);
+        GameOver g = go.transform.GetComponent<GameOver>();
+        g._type = GameOver.GameOverType.Fail;
+    }
+
+
     public void HandleWin() {
-        //Show UI;
-        Instantiate(GameOverPrefab, transform);
-        
+        GameObject go = Instantiate(GameOverPrefab, transform);
+        GameOver g = go.transform.GetComponent<GameOver>();
+        g._type = GameOver.GameOverType.Fail;
+        g.StarsAmount = GameController.LevelStarsAmount;
     }
 
     public void HandleRestart() {
@@ -112,15 +124,16 @@ public class GameUIController : SceneSingleton<GameUIController> {
         Instantiate(PreviewPrefab, transform);
 
     }
+    public void LoadNextLevel() {
+        AllLevelsData.CurrentLevelIndex++;
+        GameController.ResetScore();
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+    }
 
     public void HandleHomeButton() {
         //Show UI
         SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
     }
-
-    //public void HandleWarning() {
-    //    Warning.Instance.ShowWarning();
-    //}
 
     public void ShootLightning() {
         LightningPowerup.Instance.ShootLightning();
@@ -133,7 +146,8 @@ public class GameUIController : SceneSingleton<GameUIController> {
             //HandlePreview();
             //GameController.PauseGame();
 
-            Warning.Instance.ShowWarning();
+            // Warning.Instance.ShowWarning();
+            ShowGameOver();
 
         }
 

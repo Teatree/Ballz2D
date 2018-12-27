@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour {
     public static int SecondStarScore = 13000;
     public static int ThirdStarScore = 25000;
 
+    public static int LevelStarsAmount;
+    public static int TotalStarsAmount;
     public static int levelScore;
     public static int blockscore = blockScoreMin ;
 
