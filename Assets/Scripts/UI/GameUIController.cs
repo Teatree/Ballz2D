@@ -87,13 +87,16 @@ public class GameUIController : SceneSingleton<GameUIController> {
     #endregion
 
     public void HandleGameOver() {
-        //Show UI
-        Instantiate(RevivePrefab, transform);
+        if (Revive.available) {
+            Debug.LogWarning("Revive!");
+            Instantiate(RevivePrefab, transform);
+        } else {
+            Instantiate(GameOverPrefab, transform);
+        }
     }
 
     public void HandleWin() {
-        //Show UI
-        Debug.Log("Trying to add prefab");
+        //Show UI;
         Instantiate(GameOverPrefab, transform);
         
     }
@@ -115,9 +118,9 @@ public class GameUIController : SceneSingleton<GameUIController> {
         SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
     }
 
-    public void HandleWarning() {
-        Warning.Instance.ShowWarning();
-    }
+    //public void HandleWarning() {
+    //    Warning.Instance.ShowWarning();
+    //}
 
     public void ShootLightning() {
         LightningPowerup.Instance.ShootLightning();
@@ -182,11 +185,9 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
     private IEnumerator BombLaserFade(LineRenderer laserLine) {
-        Debug.Log("Laser fade");
         for (int i = 0; i < 50; i++) {
             Color c = laserLine.material.color;
             c.a = c.a - 0.02f;
-            Debug.Log("Laser fade");
             laserLine.material.color = c;
             yield return null;
         }

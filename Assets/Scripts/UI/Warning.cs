@@ -6,30 +6,25 @@ public class Warning : SceneSingleton<Warning> {
 
     public GameObject WarningBlock;
     private bool _warned;
-
+    private List<GameObject> warnings;
 
     public void ShowWarning() {
-       // Debug.Log("sjow warn " + _warned);
         if (!_warned) {
-            List<GameObject> warnings = new List<GameObject>();
+            warnings = new List<GameObject>();
             for (int i = 0; i < 13; i++) {
-                
                 var d = Instantiate(WarningBlock);
                 SpriteRenderer _t = d.transform.GetComponent<SpriteRenderer>();
                 _t.color = new Color(1, 1, 1, 0);
                 d.transform.position = GetWarningPosition(i);
                 warnings.Add(d);
-               // Debug.Log("sjow warn " + _t.color);
             }
-            StartCoroutine(WarnBlockAni(warnings, 0.2f));
+            StartCoroutine(WarnBlockAni( 0.2f));
             _warned = true;
         }
     }
 
-    private IEnumerator WarnBlockAni(List<GameObject> warnings, float fadeOutTime) {
-
+    private IEnumerator WarnBlockAni( float fadeOutTime) {
         while (BallLauncher.canShoot) {
-
             for (float t = 0.01f; t < fadeOutTime / 4; t += Time.deltaTime) {
                 foreach (GameObject w in warnings) {
                     SpriteRenderer _t = w.transform.GetComponent<SpriteRenderer>();
@@ -56,11 +51,23 @@ public class Warning : SceneSingleton<Warning> {
             yield return null;
         }
 
+        DestroyWarnings();
+    }
+
+    public void DestroyWarnings() {
+        StopCoroutine("WarnBlockAni");
         foreach (var w in warnings) {
             Destroy(w, 0.0001f);
         }
         _warned = false;
+        warnings = new List<GameObject>();
     }
+
+    public void StopAndDestroyWarnings() {
+        StopCoroutine("WarnBlockAni");
+        DestroyWarnings();
+    }
+
 
     private Vector3 GetWarningPosition(int i) {
         Vector3 position = transform.position;

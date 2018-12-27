@@ -60,7 +60,6 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 }
 
                 //controls 
-                //if (canShoot && worldPosition.y > 0.56f && worldPosition.y < 7.16f) {
                 if (canShoot && !EventSystem.current.IsPointerOverGameObject()) {
                     if (Input.GetMouseButtonDown(0)) {
                         SetStartDrag();

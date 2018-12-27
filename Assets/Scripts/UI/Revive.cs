@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 
 public class Revive : IPopup<Revive> {
 
@@ -21,7 +19,7 @@ public class Revive : IPopup<Revive> {
     public static bool available = false;
 
     public void Start() {
-        available = true;
+
         laserLine1 = GameUIController.Instance.laserLine1;
         laserLine2 = GameUIController.Instance.laserLine2;
         laserLine3 = GameUIController.Instance.laserLine3;
@@ -41,7 +39,6 @@ public class Revive : IPopup<Revive> {
             DestroyBottomLines();
             GameController.Gems -= CostGems;
             available = false;
-
         } else {
             GameUIController.Instance.ShowShop();
         }
@@ -52,11 +49,12 @@ public class Revive : IPopup<Revive> {
         ShootLasers(laserLine2.transform.GetComponent<LineRenderer>(), line2Y);
         ShootLasers(laserLine3.transform.GetComponent<LineRenderer>(), line3Y);
         foreach (Block b in GridController.blocksSpawned) {
-            if (!b.destroyed && (b.row == RowToDestroyIndex || b.row == RowToDestroyIndex + 1)) {
+            if (!b.destroyed && (b.row == RowToDestroyIndex || b.row == RowToDestroyIndex + 1 || b.row == RowToDestroyIndex + 2)) {
                 b._behaviour.OnDestroy();
             }
         }
         GameUIController.Instance.UpdateScore(GameController.levelScore);
+        Warning.Instance.StopAndDestroyWarnings();
     }
 
     private void ShootLasers(LineRenderer laserLine, float y) {

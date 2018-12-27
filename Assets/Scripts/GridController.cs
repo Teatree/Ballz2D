@@ -63,11 +63,13 @@ public class GridController : SceneSingleton<GridController> {
             }
         }
 
-        Constants.GameOvery_grid_index = grid.childCount-1;
-        Constants.Warning_y_grid_index = grid.childCount-3;
+        Constants.GameOver_y_grid_index = grid.childCount-1;
+        Constants.Warning_y_grid_index = grid.childCount-2;
 
         
         BlocksAmount = gc.currentLevel.GetBlocksAmount();
+
+        Revive.available = true; //Level just started Revive is available
     }
 
     public void SpawnRowOfBlocks(bool moveObstacles) {
@@ -87,7 +89,6 @@ public class GridController : SceneSingleton<GridController> {
             rowsSpawned++;
         }
         BallLauncher.canShoot = true;
-        //checkLastBlocksLine();
     }
 
     private void checkLastBlocksLine() {
@@ -103,18 +104,17 @@ public class GridController : SceneSingleton<GridController> {
             }
         }
 
-        Debug.Log("Show warning" + lastGridRow );
-        Debug.Log("Show Warning_y_grid_index" +  Constants.Warning_y_grid_index);
-        if (rowsSpawned > 0 && lastGridRow == Constants.Warning_y_grid_index) {
-            Debug.Log("Show warning");
-            GameUIController.Instance.HandleWarning();
+        if (rowsSpawned > 0 && lastGridRow == Constants.Warning_y_grid_index) { //Show warnings ani
+            BallLauncher.canShoot = true;
+            Warning.Instance.ShowWarning();
+            return;
         }
 
-        if (rowsSpawned > 0 && lastGridRow == Constants.GameOvery_grid_index) {
+        if (rowsSpawned > 0 && lastGridRow == Constants.GameOver_y_grid_index) { // Show gameOver popup
             GameController.isGameOver = true;
             Revive.RowToDestroyIndex = lastRowSpawnedIndex;
             Revive.RowToDestroyPosition = lastRowSpawnedPos;
-            GameUIController.Instance.HandleGameOver();
+            GameUIController.Instance.HandleGameOver(); 
             return;
         }
     }
@@ -122,21 +122,40 @@ public class GridController : SceneSingleton<GridController> {
     private void MoveOneRowDown(bool moveObstacles) {
         //move blocks down one line
         foreach (var block in blocksSpawned) {
-            if (block != null && (block._type != BlockType.Obstacle || moveObstacles)) {
+            if (block != null && !block.destroyed && (block._type != BlockType.Obstacle || moveObstacles)) {
                 RectTransform rt = (RectTransform)block.transform;
                 int newY = ++block.gridRow;
-                foreach (Block ob in obstaclesCoordinates) {
-                    if (ob.col == block.col && ob.gridRow == newY) {
-                        newY++;
-                        block.gridRow = newY;
-                        break;
-                    }
+                ConsiderObstacles(block, ref newY);
+
+                if (!isSpecialCase(block, newY)) {
+                    block.transform.position = GetPosition(newY, block.col);
                 }
-              //  block.transform.position = grid.transform.GetChild(block.gridRow).transform.GetChild(block.col).gameObject.transform.position;
-                block.transform.position = GetPosition(newY, block.col);
             }
         }
         checkLastBlocksLine();
+    }
+
+    private bool isSpecialCase(Block b, int newY) {
+        if (newY == Constants.GameOver_y_grid_index) {
+           if (!b._type.isCollidable ) {
+                if (b._type == BlockType.ExtraBall) {
+                    ExtraBallBehaviour beh = b._behaviour as ExtraBallBehaviour;
+                    beh.GetExtraBall();
+                }
+                b.DestroySelf();
+            } 
+        }
+        return false;
+    }
+
+    private void ConsiderObstacles(Block block, ref int newY) {
+        foreach (Block ob in obstaclesCoordinates) { //ignore obstacles 
+            if (ob.col == block.col && ob.gridRow == newY) {
+                newY++;
+                block.gridRow = newY;
+                break;
+            }
+        }
     }
 
     public void RemoveOneTurnBlocks() {
@@ -148,7 +167,7 @@ public class GridController : SceneSingleton<GridController> {
     }
 
     private Vector3 GetPosition(int row, int col) {
-        //Debug.Log("world pos" + grid.transform.GetChild(0).transform.GetChild(col).gameObject.transform.position);
+
         return grid.transform.GetChild(row).transform.GetChild(col).gameObject.transform.position;
     }
 
@@ -245,13 +264,5 @@ public class GridController : SceneSingleton<GridController> {
             return false;
         }
     }
-
-    //private Vector3 GetPosition(int i) { // Get Ready
-    //    Vector3 position = transform.localPosition;
-    //    /// 2.731f is a shift to center the whole thing on the screen
-    //    position = new Vector3(i * Constants.BlockSize * transform.parent.localScale.x - Constants.ShiftToTheCenter * transform.parent.localScale.x, transform.position.y, transform.position.z);
-    //    //Debug.Log("Constants.ShiftToTheCenter*transform.parent.localScale.x " + Constants.ShiftToTheCenter * transform.parent.localScale.x);
-    //    return position;
-    //}
 
 }

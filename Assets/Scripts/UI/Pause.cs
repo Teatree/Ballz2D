@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Pause : IPopup<Pause> {
+﻿public class Pause : IPopup<Pause> {
 
 	// Use this for initialization
 	void Start () {

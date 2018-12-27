@@ -24,17 +24,21 @@ public class ExtraBallBehaviour : IBehaviour {
             if (block.transform.position.y >= 0.07) {
                 block.transform.position = new Vector2(block.transform.position.x, block.transform.position.y - moveSpeed * Time.deltaTime);
             } else {
-                moveSpeed = 0;
-                BallLauncher.ExtraBalls++;
-                block.StartCoroutine(addExtraBall());
+                GetExtraBall();
+                block.StartCoroutine(DestroySelfLater());
             }
         }
+    }
+
+    public void GetExtraBall() {
+        moveSpeed = 0;
+        BallLauncher.ExtraBalls++;
     }
 
     public override void LooseOneLife() {
     }
 
-    private IEnumerator addExtraBall() {
+    private IEnumerator DestroySelfLater() {
         yield return new WaitForSeconds(5f);
         block.DestroySelf();
     }
