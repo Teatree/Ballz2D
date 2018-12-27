@@ -56,21 +56,25 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
         //Debug.Log("Increase The Score!");
         int curScore = int.Parse(ScoreText.text);
-        StartCoroutine(IncreaseScore(curScore, newScore));
+        int dif = newScore - curScore;
+        StartCoroutine(IncreaseScore(curScore, newScore, dif));
     }
 
     public void UpdateBlocksAmount() {
         BlockText.text = "" + GridController.BlocksAmount;
     }
 
-    public IEnumerator IncreaseScore(int curScore, int endScore) {
+    public IEnumerator IncreaseScore(int curScore, int endScore, int dif) {
         //  Debug.Log("curScore = " + curScore + " endScore = " + endScore);
         while (curScore < endScore) {
-            curScore += 5;
+            int increment = Mathf.RoundToInt((float)dif / 20) + 1;
+            curScore += increment;
             Slider.value = curScore;
             ScoreText.text = curScore.ToString();
             yield return null;
+            
         }
+        curScore = endScore;
     }
 
     public void UpdateStars() {

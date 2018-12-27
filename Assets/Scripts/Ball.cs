@@ -7,7 +7,6 @@ public class Ball : MonoBehaviour {
 
     public float moveSpeed;
     public int ballId;
-    private BallLauncher ballLauncher;
     public bool ignoreCollision;
 
     [SerializeField]
@@ -20,7 +19,6 @@ public class Ball : MonoBehaviour {
     private Vector3 baseOffsetDirection = Vector3.down * 0.1f;
 
     private void Start() {
-        ballLauncher = FindObjectOfType<BallLauncher>();
         moveSpeed = moveSpeedNorm;
     }
 
@@ -79,7 +77,7 @@ public class Ball : MonoBehaviour {
     private void OnFloorCollision(Collider2D collider) {
         //  Debug.Log("OnFloorCollision");
         //  Ball launcher where the first ball fell
-        ballLauncher.ReturnBall(this);
+        BallLauncher.Instance.ReturnBall(this);
         EnableCollision();
     }
 

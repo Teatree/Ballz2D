@@ -32,7 +32,9 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     [SerializeField]
     private Ball ballPrefab;
 
-   
+    public Coroutine launcherBallRoutine;
+
+
     public static int ExtraBalls = 0;
 
     private void Awake() {
@@ -56,7 +58,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 }
                 else {
                     worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    //Debug.Log(worldPosition);
+                    //Debug.Log("worldPosition: " + worldPosition);
                 }
 
                 //controls 
@@ -138,7 +140,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     public void EndDrag() {
         Slider.gameObject.transform.parent.gameObject.SetActive(false);
         textCanvas.SetActive(false);
-        StartCoroutine(LaunchBalls());
+        launcherBallRoutine = StartCoroutine(LaunchBalls());
         HideGhosts();
     }
 
@@ -224,10 +226,22 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     public void SummonAllBalls() {
         Debug.Log("pressed");
+        StopCoroutine(launcherBallRoutine);
+
+        //gameObject.SetActive(true);
         foreach (Ball b in balls) {
-            gameObject.SetActive(true);
             b.SetDir(transform.position - b.transform.position);
             b.DisableCollision();
         }
+
+        BallsReadyToShoot = balls.Count;
+        canShoot = true;
+
+        //textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
+        //GridController.Instance.SpawnRowOfBlocks(false);
+        //GameController.ResetScoreCoefficient();
+
+        //UpdateVisualsLastBall();
+        //GridController.Instance.DidIwin();
     }
 }
