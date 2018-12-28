@@ -21,6 +21,7 @@ public class Block : MonoBehaviour {
     public GameObject BombExplosion;
     public GameObject ScoreFeedbacker;
 
+    public LayerMask WallsMask; // this might not be the best place for it, but it will have to do for now. This mask is necessary for lasers to know where the edges of their reach are. This value can be null
 
     public int col;
     public int row;

@@ -88,7 +88,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     public void ReturnBall(Ball b) {
-        if (BallsReadyToShoot == 0) {
+        if (BallsReadyToShoot == 0 || (b.ignoreCollision && newPos.y == 0)) {
             UpdateVisualsFirstBall(b);
         }
 
@@ -101,12 +101,15 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
             UpdateVisualsLastBall();
             GridController.Instance.DidIwin();
         }
+
         b.transform.position = new Vector2(-100, -100);
         b.moveSpeed = 0;
     }
 
     private void UpdateVisualsFirstBall(Ball b) {
-        newPos = new Vector3(b.transform.position.x, base_y, 00f);
+        newPos = b.ignoreCollision ? transform.position : new Vector3(b.transform.position.x, base_y, 0f);
+        Debug.Log("newPos: " + newPos);
+
         ballVisual.gameObject.SetActive(true);
         ballVisual.gameObject.transform.position = newPos;
 
@@ -125,6 +128,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         launchPreview.Init();
         Slider.value = 0;
         Slider.gameObject.transform.parent.gameObject.SetActive(true);
+        newPos = new Vector3();
     }
 
     public void CreateBall(int ballsAmount) {
@@ -169,7 +173,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         }
     }
 
-    private void HideGhosts() {
+    public void HideGhosts() {
         //GetComponent<LineRenderer>().positionCount = 0;
 
         launchPreview.active = false;

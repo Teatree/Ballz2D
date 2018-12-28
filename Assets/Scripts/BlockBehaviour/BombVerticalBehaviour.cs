@@ -49,9 +49,12 @@ public class BombVerticalBehaviour : IBehaviour {
         c.a = 1f;
         laserLine.material.color = c;
 
+        RaycastHit2D hitUp = Physics2D.Raycast(block.transform.position, Vector2.up, 50f, block.WallsMask);
+        RaycastHit2D hitDown = Physics2D.Raycast(block.transform.position, Vector2.down, 50f, block.WallsMask);
+
         laserLine.positionCount = 2;
-        laserLine.SetPosition(0, new Vector2(block.transform.position.x, 0.40f));
-        laserLine.SetPosition(1, new Vector2(block.transform.position.x, 8.5f));
+        laserLine.SetPosition(0, new Vector2(block.transform.position.x, hitDown.point.y));
+        laserLine.SetPosition(1, new Vector2(block.transform.position.x, hitUp.point.y));
 
         block.StartCoroutine(BombLaserFade(laserLine));
     }

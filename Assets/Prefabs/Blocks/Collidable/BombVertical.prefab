@@ -249,6 +249,9 @@ MonoBehaviour:
   BombExplosion: {fileID: 0}
   ScoreFeedbacker: {fileID: 1350138362448226, guid: 003ba17fb2760694391517b47f244913,
     type: 2}
+  WallsMask:
+    serializedVersion: 2
+    m_Bits: 512
   col: 0
   row: 0
   gridRow: 0

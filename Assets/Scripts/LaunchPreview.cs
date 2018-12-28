@@ -17,7 +17,8 @@ public class LaunchPreview : MonoBehaviour {
 
     [Header("Launch Preview Settings")]
     public bool active = false;
-    public LayerMask myLayerMask;
+    public LayerMask myWallsMask;
+
 
     private void Start() {
         Init();
@@ -92,7 +93,7 @@ public class LaunchPreview : MonoBehaviour {
 
         //_lineRenderer.SetPosition(1, launchDirection);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, launchDirection, 20);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, launchDirection, 20, myWallsMask);
         Debug.DrawRay(hit.point, hit.point * 2, Color.green);
         if (hit.collider != null) {
             //Debug.Log("hit " + hit.point + " hit " + hit.transform.gameObject.name);
@@ -103,7 +104,7 @@ public class LaunchPreview : MonoBehaviour {
      
             var reflectDir = Vector3.Reflect(launchDirection, hit.normal) + offsetDirection;
 
-            RaycastHit2D reflectRay = Physics2D.Raycast(hit.point * 0.999999f, reflectDir, 20, myLayerMask);
+            RaycastHit2D reflectRay = Physics2D.Raycast(hit.point * 0.999999f, reflectDir, 20, myWallsMask);
 
             _lineRenderer.SetPosition(2, reflectRay.point);
         }

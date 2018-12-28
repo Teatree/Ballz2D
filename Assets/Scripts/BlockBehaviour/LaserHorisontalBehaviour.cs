@@ -34,9 +34,12 @@ public class LaserHorisontalBehaviour : IBehaviour {
         c.a = 1f;
         laserLine.material.color = c;
 
+        RaycastHit2D hitLeft = Physics2D.Raycast(block.transform.position, Vector2.left, 50f, block.WallsMask);
+        RaycastHit2D hitRight = Physics2D.Raycast(block.transform.position, Vector2.right, 50f, block.WallsMask);
+
         laserLine.positionCount = 2;
-        laserLine.SetPosition(0, new Vector2(3.15f, block.transform.position.y));
-        laserLine.SetPosition(1, new Vector2(-3.15f, block.transform.position.y));
+        laserLine.SetPosition(0, new Vector2(hitRight.point.x, block.transform.position.y));
+        laserLine.SetPosition(1, new Vector2(hitLeft.point.x, block.transform.position.y));
 
         block.StartCoroutine(LaserFade(laserLine));
     }

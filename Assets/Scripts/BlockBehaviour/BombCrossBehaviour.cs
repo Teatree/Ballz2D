@@ -47,13 +47,18 @@ public class BombCrossBehaviour : IBehaviour {
         c.a = 1f;
         laserLine.material.color = c;
 
+        RaycastHit2D hitLeft = Physics2D.Raycast(block.transform.position, Vector2.left, 50f, block.WallsMask);
+        RaycastHit2D hitRight = Physics2D.Raycast(block.transform.position, Vector2.right, 50f, block.WallsMask);
+        RaycastHit2D hitUp = Physics2D.Raycast(block.transform.position, Vector2.up, 50f, block.WallsMask);
+        RaycastHit2D hitDown = Physics2D.Raycast(block.transform.position, Vector2.down, 50f, block.WallsMask);
+
         laserLine.positionCount = 5;
-        laserLine.SetPosition(0, new Vector2(3.15f, block.transform.position.y));
-        laserLine.SetPosition(1, new Vector2(-3.15f, block.transform.position.y));
+        laserLine.SetPosition(0, new Vector2(hitRight.point.x, block.transform.position.y));
+        laserLine.SetPosition(1, new Vector2(hitLeft.point.x, block.transform.position.y));
         laserLine.SetPosition(2, new Vector3(block.transform.position.x, block.transform.position.y, -100));
 
-        laserLine.SetPosition(3, new Vector2(block.transform.position.x, 0.40f));
-        laserLine.SetPosition(4, new Vector2(block.transform.position.x, 8.5f));
+        laserLine.SetPosition(3, new Vector2(block.transform.position.x, hitDown.point.y));
+        laserLine.SetPosition(4, new Vector2(block.transform.position.x, hitUp.point.y));
 
         block.StartCoroutine(BombLaserFade(laserLine));
     }

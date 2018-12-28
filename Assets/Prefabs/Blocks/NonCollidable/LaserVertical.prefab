@@ -73,6 +73,9 @@ MonoBehaviour:
   DeathParticle: {fileID: 0}
   BombExplosion: {fileID: 0}
   ScoreFeedbacker: {fileID: 0}
+  WallsMask:
+    serializedVersion: 2
+    m_Bits: 512
   col: 0
   row: 0
   gridRow: 0

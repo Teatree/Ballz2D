@@ -1429,7 +1429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.9889666, b: 0.18396229, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2191,6 +2191,9 @@ MonoBehaviour:
     type: 2}
   PausePrefab: {fileID: 1712393861608756, guid: b83137052334fc74eba78ae9bc2950ab,
     type: 2}
+  laserLine1: {fileID: 0}
+  laserLine2: {fileID: 0}
+  laserLine3: {fileID: 0}
 --- !u!114 &114855524624765164
 MonoBehaviour:
   m_ObjectHideFlags: 1
