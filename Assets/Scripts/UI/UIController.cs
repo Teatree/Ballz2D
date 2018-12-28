@@ -8,6 +8,9 @@ public class UIController : MonoBehaviour {
     [SerializeField]
     private LevelUI levelUiElementPrefab;
 
+
+    public Text gems; 
+
     public SpriteState sprState = new SpriteState();
 
     void Start() {
@@ -29,6 +32,11 @@ public class UIController : MonoBehaviour {
     }
 
     void Update() {
+        gems.text = "Gems >>> " +  GameController.Gems;
         //debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "      path: " + DataController.levelfilePath;
+    }
+
+    public void getGems() {
+        AdmobController.Instance.ShowGemsRevardVideo();
     }
 }

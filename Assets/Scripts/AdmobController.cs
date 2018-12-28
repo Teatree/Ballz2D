@@ -31,7 +31,7 @@ public class AdmobController : SceneSingleton<AdmobController> {
         MobileAds.Initialize(appId);
 
         this.RequestBanner();
-        InitRewardVideo();
+        InitGemRewardVideo();
     }
 
     private void RequestBanner() {
@@ -54,8 +54,9 @@ public class AdmobController : SceneSingleton<AdmobController> {
         this.interstitial.LoadAd(request);
     }
 
-    private void RequestRewardBasedVideo() {
+    private void RequestRewardVideo() {
         // Create an empty ad request.
+        this.rewardGemsVideo = RewardBasedVideoAd.Instance;
         AdRequest request = GetTestRequest();
         // Load the rewarded video ad with the request.
         this.rewardGemsVideo.LoadAd(request, reardVideoId);
@@ -78,12 +79,14 @@ public class AdmobController : SceneSingleton<AdmobController> {
     public void ShowGemsRevardVideo() {
         if (rewardGemsVideo.IsLoaded()) {
             rewardGemsVideo.Show();
+        } else {
+            GameController.Gems = 404;
         }
     }
 
-    private void InitRewardVideo() {
-        // Get singleton reward based video ad reference.
-        this.rewardGemsVideo = RewardBasedVideoAd.Instance;
+    private void InitGemRewardVideo() {
+        RequestRewardVideo();
+        // Get singleton reward based video ad reference
         rewardGemsVideo.OnAdRewarded += HandleRewardGemsRewarded;
         rewardGemsVideo.OnAdClosed += HandleRewardGemsClosed;
     }
@@ -94,7 +97,7 @@ public class AdmobController : SceneSingleton<AdmobController> {
     }
 
     public void HandleRewardGemsClosed(object sender, EventArgs args) {
-        this.RequestRewardBasedVideo();
+        this.RequestRewardVideo();
     }
 
 }
