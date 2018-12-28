@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour {
     public Vector3 dir;
-    private bool isCollidable;
 
     public float moveSpeed;
     public int ballId;
     public bool ignoreCollision;
+    public bool active;
 
     [SerializeField]
     public float moveSpeedNorm;
@@ -23,7 +23,6 @@ public class Ball : MonoBehaviour {
     }
 
     private void OnEnable() {
-        isCollidable = true;
     }
 
     public void SetDir(Vector3 newDir) {
@@ -52,14 +51,16 @@ public class Ball : MonoBehaviour {
 
         if (ignoreCollision) { //if ignoreCollision return, and skip reflect calc
             return;
-        } else {
+        }
+        else {
             if (hit.collider.gameObject.GetComponent<Block>() != null) { //If collision is not ignored and collided with block 
                 hit.collider.gameObject.GetComponent<Block>().interactWithBall(this); //Interact with a block 
 
                 if (!hit.collider.gameObject.GetComponent<Block>()._type.isCollidable) { // If the block is not collidable -> return
                     return;
-                } //else -> go to reflect calc
-            } else {
+                } 
+            }
+            else {
                 timer = 0;
             }
         }
@@ -75,10 +76,9 @@ public class Ball : MonoBehaviour {
     }
 
     private void OnFloorCollision(Collider2D collider) {
-        //  Debug.Log("OnFloorCollision");
-        //  Ball launcher where the first ball fell
         BallLauncher.Instance.ReturnBall(this);
         EnableCollision();
+        active = false;
     }
 
     public void DisableCollision() {

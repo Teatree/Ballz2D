@@ -145,8 +145,8 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     private IEnumerator LaunchBalls() {
-        if (BallsReadyToShoot == balls.Count) {
 
+        if (BallsReadyToShoot == balls.Count) {
             LightningPowerup.Instance.DisableButton();
             MoreBallsPowerup.Instance.DisableButton();
 
@@ -160,6 +160,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 ball.gameObject.SetActive(true);
                 ball.SetDir(LaunchPreview.launchDirection);
                 ball.EnableCollision();
+                ball.active = true;
                 yield return new WaitForSeconds(0.03f);
             }
 
@@ -193,11 +194,11 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
             //Debug.Log(" endDragPosition " + endDragPosition);
             launchPreview.SetEndPoint(endDragPosition);
         }
-       // else {
-            //    //Reset launcher
+        // else {
+        //    //Reset launcher
         // Debug.Log("Input.ResetInputAxes()");
-            //HideGhosts();
-      //  }
+        //HideGhosts();
+        //  }
     }
 
     public void ContinueSliderDrag() {
@@ -221,11 +222,10 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     public void SetSlider(bool r) {
         _slider = r;
-       // Debug.Log("slider = " + _slider);
+        // Debug.Log("slider = " + _slider);
     }
 
     public void SummonAllBalls() {
-        Debug.Log("pressed");
         StopCoroutine(launcherBallRoutine);
 
         //gameObject.SetActive(true);
@@ -233,15 +233,12 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
             b.SetDir(transform.position - b.transform.position);
             b.DisableCollision();
         }
-
-        BallsReadyToShoot = balls.Count;
-        canShoot = true;
-
-        //textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
-        //GridController.Instance.SpawnRowOfBlocks(false);
-        //GameController.ResetScoreCoefficient();
-
-        //UpdateVisualsLastBall();
-        //GridController.Instance.DidIwin();
+        int ballsAlreadyThere = 0;
+        foreach (Ball b in balls) {
+            if (!b.active) {
+                ballsAlreadyThere++;
+            }
+        }
+        BallsReadyToShoot = ballsAlreadyThere;
     }
 }
