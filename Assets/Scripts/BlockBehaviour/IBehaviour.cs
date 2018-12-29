@@ -5,6 +5,7 @@ public abstract class IBehaviour {
 
     protected Block block;
     protected bool activated;
+    protected Coroutine fadeRoutine;
 
     public abstract void setBlock(Block b);
 
@@ -16,14 +17,16 @@ public abstract class IBehaviour {
 
     public abstract void Update();
 
+
     protected IEnumerator LaserFade(LineRenderer laserLine) {
+        activated = false;
         for (int i = 0; i < 50; i++) {
             Color c = laserLine.material.color;
             c.a = c.a - 0.02f;
             laserLine.material.color = c;
             yield return null;
         }
-        activated = false;
+        
     }
 
     protected IEnumerator BombLaserFade(LineRenderer laserLine) {
@@ -40,6 +43,9 @@ public abstract class IBehaviour {
         block.destroyed = false; //to call destroy self method
         block.DestroySelf();
 
+    }
+    protected void StopFadeRoutine() {
+        block.StopCoroutine(fadeRoutine);
     }
 
     protected void UpdateBlocksInfo() {

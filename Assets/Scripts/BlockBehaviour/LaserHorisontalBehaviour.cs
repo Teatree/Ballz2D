@@ -30,6 +30,9 @@ public class LaserHorisontalBehaviour : IBehaviour {
 
     // shoot them pretty lasers
     public void ShootLasers() {
+        if (fadeRoutine != null) {
+            StopFadeRoutine();
+        }
         Color c = laserLine.material.color;
         c.a = 1f;
         laserLine.material.color = c;
@@ -41,7 +44,7 @@ public class LaserHorisontalBehaviour : IBehaviour {
         laserLine.SetPosition(0, new Vector2(hitRight.point.x, block.transform.position.y));
         laserLine.SetPosition(1, new Vector2(hitLeft.point.x, block.transform.position.y));
 
-        block.StartCoroutine(LaserFade(laserLine));
+        fadeRoutine = block.StartCoroutine(LaserFade(laserLine));
     }
 
     public override void LooseOneLife() {

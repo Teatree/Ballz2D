@@ -16,8 +16,8 @@ public class LaserCrossBehaviour : IBehaviour {
     }
 
     public override void OnCollide(Ball ball) {
+        ShootLasers();
         if (!activated) {
-            ShootLasers();
             foreach (Block b in GridController.blocksSpawned) {
                 if (!b.destroyed && (b.row == block.row || b.col == block.col)) {
                     b.Hit();
@@ -29,7 +29,11 @@ public class LaserCrossBehaviour : IBehaviour {
 
     // shoot them pretty lasers
     public void ShootLasers() {
+        if (fadeRoutine != null) {
+            StopFadeRoutine();
+        }
         Debug.Log("pew pew ");
+        
         Color c = laserLine.material.color;
         c.a = 1f;
         laserLine.material.color = c;
@@ -47,7 +51,7 @@ public class LaserCrossBehaviour : IBehaviour {
         laserLine.SetPosition(3, new Vector2(block.transform.position.x, hitDown.point.y));
         laserLine.SetPosition(4, new Vector2(block.transform.position.x, hitUp.point.y));
 
-        block.StartCoroutine(LaserFade(laserLine));
+        fadeRoutine = block.StartCoroutine(LaserFade(laserLine));
     }
 
     public override void LooseOneLife() {

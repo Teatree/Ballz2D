@@ -24,9 +24,11 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject laserLine2;
     public GameObject laserLine3;
 
-    public static string currentLevelNumberLable; 
+    public static string currentLevelNumberLable;
 
     void Start() {
+        SceneController.sceneController.UnloadMenu();
+
         HandlePreview();
         GameController.PauseGame();
         currentLevelNumberLable =  "" + (1 + AllLevelsData.CurrentLevelIndex);

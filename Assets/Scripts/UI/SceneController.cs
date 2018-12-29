@@ -26,33 +26,44 @@ public class SceneController : MonoBehaviour {
     }
 
     private void UnloadScene(string scene) {
-        Debug.Log("> u >" + sceneStateTracker[scene]);
+      //  Debug.Log("> u >" + sceneStateTracker[scene]);
         if (sceneStateTracker[scene]) {
            
             StartCoroutine(Unload(scene));
-            sceneStateTracker.Add(scene, false);
+            sceneStateTracker[scene] = false;
         }
     }
 
     private void LoadScene(string scene) {
         if (!sceneStateTracker[scene]) {
-            Debug.Log("> l >" + scene);
+            //Debug.Log("> l >" + scene);
             SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
-            sceneStateTracker.Add(scene, true);
+            sceneStateTracker[scene] = true;
         }
     }
 
     public void LoadGame() {
-        LoadScene("GameScene");
         UnloadScene("MenuScene");
+        LoadScene("GameScene");
+        
     }
 
     public void LoadMenu() {
-        LoadScene("MenuScene");
         UnloadScene("GameScene");
+        LoadScene("MenuScene");
+        
+    }
+
+    public void UnloadGame() {
+        UnloadScene("GameScene");
+    }
+
+    public void UnloadMenu() {
+        UnloadScene("MenuScene");
     }
 
     private IEnumerator Unload(string scene) {
         yield return null;
+        SceneManager.UnloadSceneAsync(scene);
     }
 }

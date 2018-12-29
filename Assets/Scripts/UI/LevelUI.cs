@@ -18,10 +18,11 @@ public class LevelUI : MonoBehaviour {
     public Text Star3;
 
     private void Start() {
-        c = Camera.main;
+        SceneController.sceneController.UnloadGame();
 
+        c = Camera.main;
         c.transform.position = transform.position;
-        Debug.Log("c " + c + "c.pos: " + c.transform.position);
+       // Debug.Log("c " + c + "c.pos: " + c.transform.position);
 
         levelNumText.text = (LevelNumber + 1).ToString();
         switch (StarsNumber) {
