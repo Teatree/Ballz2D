@@ -13,6 +13,6 @@ public abstract class IPopup<T> : SceneSingleton<IPopup<T>> {
     }
 
     public void OnClick_AdsForGems() {
-        AdmobController.Instance.ShowGemsRevardVideo();
+      //  AdmobController.admob.ShowGemsRevardVideo();
     }
 }

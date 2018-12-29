@@ -120,7 +120,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public void HandleRestart() {
         Debug.Log("AllLevelsData.CurrentLevelIndex " + AllLevelsData.CurrentLevelIndex);
         GameController.ResetScore();
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SceneController.sceneController.LoadGame();
     }
 
     public void HandlePreview() {
@@ -131,12 +131,12 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public void LoadNextLevel() {
         AllLevelsData.CurrentLevelIndex++;
         GameController.ResetScore();
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SceneController.sceneController.LoadGame();
     }
 
     public void HandleHomeButton() {
         //Show UI
-        SceneManager.LoadScene("MenuScene", LoadSceneMode.Single);
+        SceneController.sceneController.LoadMenu();
     }
 
     public void ShootLightning() {

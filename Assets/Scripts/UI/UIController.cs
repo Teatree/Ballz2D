@@ -37,6 +37,6 @@ public class UIController : MonoBehaviour {
     }
 
     public void getGems() {
-        AdmobController.Instance.ShowGemsRevardVideo();
+       // AdmobController.admob.ShowGemsRevardVideo();
     }
 }

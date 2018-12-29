@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelUI : MonoBehaviour {
@@ -52,6 +51,7 @@ public class LevelUI : MonoBehaviour {
     public void StartGameAtLevel() {
         AllLevelsData.CurrentLevelIndex = LevelNumber;
         GameController.ResetScore();
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        //SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SceneController.sceneController.LoadGame();
     }
 }

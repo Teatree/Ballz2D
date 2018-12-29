@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
+using System.Collections;
 using GoogleMobileAds.Api;
 
-public class AdmobController : SceneSingleton<AdmobController> {
+public class AdmobController : MonoBehaviour {
 
 #if UNITY_ANDROID
     string appId = "ca-app-pub-4809397092315700~2101070495";
