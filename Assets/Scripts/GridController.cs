@@ -96,7 +96,7 @@ public class GridController : SceneSingleton<GridController> {
         int lastRowSpawnedIndex = 0;
         int lastGridRow = 0;
         for (int i = 0; i < blocksSpawned.Count; i++) {
-            if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle) {
+            if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle && !blocksSpawned[i]._type.isCollidable) {
                 lastRowSpawnedPos = blocksSpawned[i].transform.position.y;
                 lastRowSpawnedIndex = blocksSpawned[i].row;
                 lastGridRow = blocksSpawned[i].gridRow;

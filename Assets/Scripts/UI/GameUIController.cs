@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class GameUIController : SceneSingleton<GameUIController> {
 
@@ -97,8 +96,8 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
     public void HandleGameOver() {
         if (Revive.available) {
-            Debug.LogWarning("Revive!");
             Instantiate(RevivePrefab, transform);
+            Debug.Log(">>> revive inst");
         } else {
             Instantiate(GameOverPrefab, transform);
         }

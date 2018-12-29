@@ -421,7 +421,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114830867570453422}
-        m_MethodName: OnClick_Close
+        m_MethodName: OnClick_ShowGameOver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -432,7 +432,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 114830867570453422}
-        m_MethodName: OnClick_ShowGameOver
+        m_MethodName: OnClick_Close
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -638,9 +638,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a4591b2966429448908160ce4b8929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserLine1: {fileID: 1269973908569428, guid: 76cd36e257695cc48a21873a0307c784, type: 2}
-  laserLine2: {fileID: 1269973908569428, guid: 76cd36e257695cc48a21873a0307c784, type: 2}
-  laserLine3: {fileID: 1269973908569428, guid: 76cd36e257695cc48a21873a0307c784, type: 2}
+  laserLine1: {fileID: 0}
+  laserLine2: {fileID: 0}
+  laserLine3: {fileID: 0}
   CostGems: 0
 --- !u!114 &114878864571457496
 MonoBehaviour:

@@ -37,7 +37,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     public static int ExtraBalls = 0;
 
-    private void Awake() {
+    private void Start() {
         base_y = transform.position.y;
 
         launchPreview = GetComponent<LaunchPreview>();
@@ -57,7 +57,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                     worldPosition = new Vector3(Slider.value, 1f);
                 }
                 else {
-                    worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                   worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     //Debug.Log("worldPosition: " + worldPosition);
                 }
 
@@ -67,6 +67,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                         SetStartDrag();
                     }
                     else if (Input.GetMouseButton(0)) {
+                        
                         ContinueDrag(worldPosition);
                     }
                     else if (Input.GetMouseButtonUp(0)) {
@@ -108,7 +109,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     private void UpdateVisualsFirstBall(Ball b) {
         newPos = b.ignoreCollision ? transform.position : new Vector3(b.transform.position.x, base_y, 0f);
-        Debug.Log("newPos: " + newPos);
+        //Debug.Log("newPos: " + newPos);
 
         ballVisual.gameObject.SetActive(true);
         ballVisual.gameObject.transform.position = newPos;
@@ -193,16 +194,11 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     public void ContinueDrag(Vector3 worldPosition) {
         endDragPosition = worldPosition;
-
+        
         if (ShouldAim(worldPosition)) {
             //Debug.Log(" endDragPosition " + endDragPosition);
             launchPreview.SetEndPoint(endDragPosition);
         }
-        // else {
-        //    //Reset launcher
-        // Debug.Log("Input.ResetInputAxes()");
-        //HideGhosts();
-        //  }
     }
 
     public void ContinueSliderDrag() {

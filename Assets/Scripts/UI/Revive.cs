@@ -72,6 +72,7 @@ public class Revive : IPopup<Revive> {
 
 
     public void OnClick_ShowGameOver() {
+        Revive.available = false;
         GameUIController.Instance.HandleGameOver();
     }
 }

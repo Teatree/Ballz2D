@@ -106,10 +106,17 @@ public class GameOver : IPopup<GameOver> {
     }
 
     public void OnClick_Replay() {
-        GameUIController.Instance.HandleRestart();
+        //GameUIController.Instance.HandleRestart();
+        SceneController.sceneController.LoadGame();
     }
 
     public void OnClick_Next() {
         GameUIController.Instance.LoadNextLevel();
     }
+
+    public override void OnClick_Close() {
+        SceneController.sceneController.LoadMenu();
+        Destroy(gameObject); // kill self
+    }
+
 }
