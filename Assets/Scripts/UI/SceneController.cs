@@ -5,33 +5,44 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour {
 
-    private static Dictionary<string, bool> sceneStateTracker = new Dictionary<string, bool>();
+    private static Dictionary<string, bool> sceneStateTracker;
     public static SceneController sceneController;
     bool gameStart;
+    public static string initScene = "MenuScene";
 
     public AdmobController admob;
 
     public void Awake() {
-
         if (!gameStart) {
-
-            sceneStateTracker = new Dictionary<string, bool>();
-            sceneStateTracker.Add("GameScene", false);
-            sceneStateTracker.Add("MenuScene", false);
-
+            if (sceneStateTracker == null) {
+                sceneStateTracker = new Dictionary<string, bool> {
+                    { "GameScene", false },
+                    { "MenuScene", false }
+                };
+            }
             sceneController = this;
-            LoadMenu();
+            if (initScene != null && "GameScene".Equals(initScene)) {
+                sceneStateTracker["GameScene"] = false;
+                LoadGame();
+            }
+            else {
+                LoadMenu();
+            }
             gameStart = true;
         }
     }
 
     private void UnloadScene(string scene) {
-      //  Debug.Log("> u >" + sceneStateTracker[scene]);
+        //Debug.Log("> u >" + sceneStateTracker[scene]);
         if (sceneStateTracker[scene]) {
-           
+
             StartCoroutine(Unload(scene));
             sceneStateTracker[scene] = false;
         }
+    }
+
+    private void UnloadScene(int scene) {
+        StartCoroutine(Unload(scene));
     }
 
     private void LoadScene(string scene) {
@@ -43,15 +54,14 @@ public class SceneController : MonoBehaviour {
     }
 
     public void LoadGame() {
-        UnloadScene("MenuScene");
+        //UnloadScene("MenuScene");
         LoadScene("GameScene");
-        
     }
 
     public void LoadMenu() {
-        UnloadScene("GameScene");
+        // UnloadScene("GameScene");
         LoadScene("MenuScene");
-        
+
     }
 
     public void UnloadGame() {
@@ -65,5 +75,15 @@ public class SceneController : MonoBehaviour {
     private IEnumerator Unload(string scene) {
         yield return null;
         SceneManager.UnloadSceneAsync(scene);
+    }
+
+    private IEnumerator Unload(int scene) {
+        yield return null;
+        SceneManager.UnloadSceneAsync(scene);
+    }
+
+    private IEnumerator RestartGame() {
+        yield return null;
+        SceneManager.UnloadSceneAsync(2);
     }
 }

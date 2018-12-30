@@ -27,7 +27,6 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
     void Start() {
         SceneController.sceneController.UnloadMenu();
-
         HandlePreview();
         GameController.PauseGame();
         currentLevelNumberLable =  "" + (1 + AllLevelsData.CurrentLevelIndex);
@@ -97,7 +96,6 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public void HandleGameOver() {
         if (Revive.available) {
             Instantiate(RevivePrefab, transform);
-            Debug.Log(">>> revive inst");
         } else {
             Instantiate(GameOverPrefab, transform);
         }
@@ -128,11 +126,6 @@ public class GameUIController : SceneSingleton<GameUIController> {
         //Show UI
         Instantiate(PreviewPrefab, transform);
 
-    }
-    public void LoadNextLevel() {
-        AllLevelsData.CurrentLevelIndex++;
-        GameController.ResetScore();
-        SceneController.sceneController.LoadGame();
     }
 
     public void HandleHomeButton() {

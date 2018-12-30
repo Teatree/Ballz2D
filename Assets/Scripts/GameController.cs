@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour {
 
     void Awake() {
         currentLevel = AllLevelsData.GetCurrentLevel();
+        isGameOver = false;
+        isGamePaused = false;
     }
 
     public static int IncreseScore() {

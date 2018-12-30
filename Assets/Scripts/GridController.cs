@@ -63,7 +63,7 @@ public class GridController : SceneSingleton<GridController> {
             }
         }
 
-        Constants.GameOver_y_grid_index = grid.childCount-2;
+        Constants.GameOver_y_grid_index = grid.childCount-1;
         Constants.Warning_y_grid_index = grid.childCount-2;
 
         
@@ -95,22 +95,13 @@ public class GridController : SceneSingleton<GridController> {
         float lastRowSpawnedPos = 0;
         int lastRowSpawnedIndex = 0;
         int lastGridRow = 0;
-        //for (int i = 0; i < blocksSpawned.Count; i++) {
-        //    if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle && !blocksSpawned[i]._type.isCollidable) {
-        //        lastRowSpawnedPos = blocksSpawned[i].transform.position.y;
-        //        lastRowSpawnedIndex = blocksSpawned[i].row;
-        //        lastGridRow = blocksSpawned[i].gridRow;
-        //        break;
-        //    }
-        //}
-       // Debug.Log(">> blocksSpawned.Count");
         for (int i = 0; i < blocksSpawned.Count; i++) {
-           // Debug.Log(">> blocksSpawned[i].gridRow  > " + i + " /" + blocksSpawned[i].gridRow);
-            if (blocksSpawned[i].gridRow >= lastGridRow && 
-                                !blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle && !blocksSpawned[i]._type.isCollidable) {
+            if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle) { 
+                //&& blocksSpawned[i]._type.isCollidable) {
                 lastRowSpawnedPos = blocksSpawned[i].transform.position.y;
                 lastRowSpawnedIndex = blocksSpawned[i].row;
                 lastGridRow = blocksSpawned[i].gridRow;
+                break;
             }
         }
 
@@ -119,9 +110,6 @@ public class GridController : SceneSingleton<GridController> {
             Warning.Instance.ShowWarning();
            // return;
         }
-
-       // Debug.Log(">> lastGridRow > " + lastGridRow);
-      //  Debug.Log(">> Constants.GameOver_y_grid_index > " + Constants.GameOver_y_grid_index + " - " + grid.childCount); 
         if (rowsSpawned > 0 && lastGridRow == Constants.GameOver_y_grid_index) { // Show gameOver popup
             GameController.isGameOver = true;
             Revive.RowToDestroyIndex = lastRowSpawnedIndex;
@@ -179,7 +167,6 @@ public class GridController : SceneSingleton<GridController> {
     }
 
     private Vector3 GetPosition(int row, int col) {
-
         return grid.transform.GetChild(row).transform.GetChild(col).gameObject.transform.position;
     }
 
@@ -249,7 +236,6 @@ public class GridController : SceneSingleton<GridController> {
                 }
             default: {
                     throw new System.ArgumentException("Block type  " + cells[col].type + " is not defined ");
-                    break;
                 }
         }
 
@@ -268,7 +254,6 @@ public class GridController : SceneSingleton<GridController> {
             SubmitStars();
 
             GameUIController.Instance.HandleWin();
-
             return true;
         }
         else {

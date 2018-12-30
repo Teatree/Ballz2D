@@ -38,8 +38,9 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     public static int ExtraBalls = 0;
 
     private void Start() {
+        canShoot = true;
         base_y = transform.position.y;
-
+        Debug.Log("> start!");
         launchPreview = GetComponent<LaunchPreview>();
         CreateBall(InitBallAmount);
         textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
@@ -196,7 +197,6 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         endDragPosition = worldPosition;
         
         if (ShouldAim(worldPosition)) {
-            //Debug.Log(" endDragPosition " + endDragPosition);
             launchPreview.SetEndPoint(endDragPosition);
         }
     }
@@ -227,8 +227,6 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     public void SummonAllBalls() {
         StopCoroutine(launcherBallRoutine);
-
-        //gameObject.SetActive(true);
         foreach (Ball b in balls) {
             b.SetDir(transform.position - b.transform.position);
             b.DisableCollision();

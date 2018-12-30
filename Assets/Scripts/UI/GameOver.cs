@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOver : IPopup<GameOver> {
 
@@ -106,12 +107,18 @@ public class GameOver : IPopup<GameOver> {
     }
 
     public void OnClick_Replay() {
-        //GameUIController.Instance.HandleRestart();
-        SceneController.sceneController.LoadGame();
+        ReloadGameScene();
+    }
+
+    private static void ReloadGameScene() {
+        SceneController.initScene = "GameScene";
+        SceneManager.LoadScene("Permanent", LoadSceneMode.Single);
     }
 
     public void OnClick_Next() {
-        GameUIController.Instance.LoadNextLevel();
+        AllLevelsData.CurrentLevelIndex++;
+        GameController.ResetScore();
+        ReloadGameScene();
     }
 
     public override void OnClick_Close() {
