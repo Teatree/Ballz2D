@@ -13,6 +13,9 @@ public class UIController : MonoBehaviour {
 
     public SpriteState sprState = new SpriteState();
 
+    [Header("Popups")]
+    public GameObject SettingsPrefab;
+
     void Start() {
         //Load data
         AllLevelsData.allLevels = DataController.LoadLevels();
@@ -38,5 +41,9 @@ public class UIController : MonoBehaviour {
 
     public void getGems() {
        // AdmobController.admob.ShowGemsRevardVideo();
+    }
+
+    public void OpenSettings() {
+        Instantiate(SettingsPrefab, transform);
     }
 }

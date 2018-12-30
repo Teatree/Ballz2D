@@ -17,6 +17,8 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject PreviewPrefab;
     public GameObject PausePrefab;
 
+    [Header("SpeedUPIcon")]
+    public GameObject SpeedUpIcon;
 
     [Header ("Lasers")]
     public GameObject laserLine1;
@@ -209,5 +211,13 @@ public class GameUIController : SceneSingleton<GameUIController> {
             yield return null;
         }
         GameController.isGameOver = false;
+    }
+
+    public void TurnSpeedUpIcon_ON() {
+        SpeedUpIcon.SetActive(true);
+    }
+
+    public void TurnSpeedUpIcon_OFF() {
+        SpeedUpIcon.SetActive(false);
     }
 }
