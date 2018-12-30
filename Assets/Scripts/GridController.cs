@@ -63,7 +63,7 @@ public class GridController : SceneSingleton<GridController> {
             }
         }
 
-        Constants.GameOver_y_grid_index = grid.childCount-1;
+        Constants.GameOver_y_grid_index = grid.childCount-2;
         Constants.Warning_y_grid_index = grid.childCount-2;
 
         
@@ -95,21 +95,33 @@ public class GridController : SceneSingleton<GridController> {
         float lastRowSpawnedPos = 0;
         int lastRowSpawnedIndex = 0;
         int lastGridRow = 0;
+        //for (int i = 0; i < blocksSpawned.Count; i++) {
+        //    if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle && !blocksSpawned[i]._type.isCollidable) {
+        //        lastRowSpawnedPos = blocksSpawned[i].transform.position.y;
+        //        lastRowSpawnedIndex = blocksSpawned[i].row;
+        //        lastGridRow = blocksSpawned[i].gridRow;
+        //        break;
+        //    }
+        //}
+       // Debug.Log(">> blocksSpawned.Count");
         for (int i = 0; i < blocksSpawned.Count; i++) {
-            if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle && !blocksSpawned[i]._type.isCollidable) {
+           // Debug.Log(">> blocksSpawned[i].gridRow  > " + i + " /" + blocksSpawned[i].gridRow);
+            if (blocksSpawned[i].gridRow >= lastGridRow && 
+                                !blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle && !blocksSpawned[i]._type.isCollidable) {
                 lastRowSpawnedPos = blocksSpawned[i].transform.position.y;
                 lastRowSpawnedIndex = blocksSpawned[i].row;
                 lastGridRow = blocksSpawned[i].gridRow;
-                break;
             }
         }
 
         if (rowsSpawned > 0 && lastGridRow == Constants.Warning_y_grid_index) { //Show warnings ani
             BallLauncher.canShoot = true;
             Warning.Instance.ShowWarning();
-            return;
+           // return;
         }
 
+       // Debug.Log(">> lastGridRow > " + lastGridRow);
+      //  Debug.Log(">> Constants.GameOver_y_grid_index > " + Constants.GameOver_y_grid_index + " - " + grid.childCount); 
         if (rowsSpawned > 0 && lastGridRow == Constants.GameOver_y_grid_index) { // Show gameOver popup
             GameController.isGameOver = true;
             Revive.RowToDestroyIndex = lastRowSpawnedIndex;
@@ -253,7 +265,6 @@ public class GridController : SceneSingleton<GridController> {
                     return false;
                 }
             }
-            Debug.Log("WOW! you win");
             SubmitStars();
 
             GameUIController.Instance.HandleWin();
