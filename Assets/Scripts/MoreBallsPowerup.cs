@@ -20,10 +20,10 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
 
     public void GetMoreBalls() {
         Debug.Log("More balls!");
-        if (GameController.Gems >= CostGems) {
+        if (PlayerController.player.gems >= CostGems) {
             PlayAni();
             BallLauncher.ExtraBalls += ExtraBallsAmount;
-            GameController.Gems -= CostGems;
+            PlayerController.player.gems -= CostGems;
             CostGems += 100;
         }
        TextCanvasUpdate();
@@ -67,7 +67,7 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
     }
 
     public void EnableButton() {
-        if (_buttonComponent != null && GameController.Gems > CostGems) {
+        if (_buttonComponent != null && PlayerController.player.gems > CostGems) {
             _buttonComponent.interactable = true;
         }
     }
@@ -77,7 +77,7 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
             Text.GetComponent<Text>().text = CostGems > 0 ? "" + CostGems : "";
         }
 
-        if (GameController.Gems < CostGems) {
+        if (PlayerController.player.gems < CostGems) {
             DisableButton();
         }
     }

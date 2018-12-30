@@ -82,7 +82,7 @@ public class AdmobController : MonoBehaviour {
         if (rewardGemsVideo.IsLoaded()) {
             rewardGemsVideo.Show();
         } else {
-            GameController.Gems = 404;
+            PlayerController.player.gems = 404;
         }
     }
 
@@ -94,8 +94,7 @@ public class AdmobController : MonoBehaviour {
     }
 
     public void HandleRewardGemsRewarded(object sender, Reward args) {
-        GameController.Gems += 30;
-
+        PlayerController.player.gems += 30;
     }
 
     public void HandleRewardGemsClosed(object sender, EventArgs args) {

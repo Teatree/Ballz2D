@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour {
     public static int blockscore = blockScoreMin ;
 
     public LevelData currentLevel;
-    public static int Gems = 10000;
 
     public static bool isGameOver; 
     public static bool isGamePaused;

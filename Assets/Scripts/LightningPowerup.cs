@@ -15,14 +15,14 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
         UpdateVisual();
     }
     public void ShootLightning() {
-        if (GameController.Gems >= CostGems) {
+        if (PlayerController.player.gems >= CostGems) {
             PlayAni();
             foreach (Block b in GridController.blocksSpawned) {
                 if (b._type.isCollidable) {
                     b.GetLightningDamage();
                 }
             }
-            GameController.Gems -= CostGems;
+            PlayerController.player.gems -= CostGems;
             CostGems += 100;
         }
         UpdateVisual();
@@ -35,7 +35,7 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     }
 
     public void EnableButton() {
-        if (_buttonComponent != null && GameController.Gems >= CostGems) {
+        if (_buttonComponent != null && PlayerController.player.gems >= CostGems) {
            
             _buttonComponent.interactable = true;
         }
@@ -46,7 +46,7 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
             Text.GetComponent<Text>().text = CostGems > 0 ? "" + CostGems : "";
         }
 
-        if (GameController.Gems < CostGems) {
+        if (PlayerController.player.gems < CostGems) {
             DisableButton();
         }
     }

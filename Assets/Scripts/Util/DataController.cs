@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
+using System;
 
 public class DataController {
     private static string levelsFileName = "levels.json";
@@ -25,7 +26,7 @@ public class DataController {
 #endif
 
     //--------- Player Info ----------
-    public static PlayerInfo LoadPlayer() {
+    public static PlayerData LoadPlayer() {
         string jsonData = "";
         if (Application.platform == RuntimePlatform.Android) {
             WWW reader = new WWW(playerfilePath);
@@ -35,12 +36,12 @@ public class DataController {
         else {
             jsonData = File.ReadAllText(playerfilePath);
         }
-        PlayerInfo pi = JsonUtility.FromJson<PlayerInfo>(jsonData);
+        PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
         AjsonData = "<color=#a52a2aff> " + jsonData + "</color>";
         return pi;
     }
 
-    public static void SavePlayer(PlayerInfo pi) {
+    public static void SavePlayer(PlayerData pi) {
         string jsonData = JsonUtility.ToJson(pi);
         File.WriteAllText(playerfilePath, jsonData);
     }
@@ -106,7 +107,12 @@ public class DataController {
 }
 
 [System.Serializable]
-public class PlayerInfo {
+public class PlayerData {
+    public int gems;
+    public int stars;
+    public string lastLogin;
+    public bool noAds;
+
     public List<int> starsPerLvl = new List<int>();
 }
 

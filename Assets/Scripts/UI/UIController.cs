@@ -19,7 +19,6 @@ public class UIController : MonoBehaviour {
     void Start() {
         //Load data
         AllLevelsData.allLevels = DataController.LoadLevels();
-        AllLevelsData.playerInfo = DataController.LoadPlayer();
 
         // debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "\n path: " + DataController.levelfilePath + "\n jsonDataExtracted: " + DataController.AjsonData;
         //Create level buttons
@@ -27,15 +26,15 @@ public class UIController : MonoBehaviour {
             var lvl = Instantiate(levelUiElementPrefab);
             lvl.LevelNumber = i;
             lvl.transform.parent = LevelListParent.transform;
-            if (i <= AllLevelsData.playerInfo.starsPerLvl.Count) {
+            if (i <= PlayerController.player.starsPerLvl.Count) {
                 lvl.buttonComponent.interactable = true;
-                lvl.StarsNumber = (i < AllLevelsData.playerInfo.starsPerLvl.Count) ? AllLevelsData.playerInfo.starsPerLvl[i] : 0;
+                lvl.StarsNumber = (i < PlayerController.player.starsPerLvl.Count) ? PlayerController.player.starsPerLvl[i] : 0;
             }
         }
     }
 
     void Update() {
-        gems.text = "Gems >>> " +  GameController.Gems;
+       // gems.text = "Gems >>> " +  PlayerController.player.gems;
         //debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "      path: " + DataController.levelfilePath;
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class AllLevelsData {
     public static List<LevelData> allLevels = new List<LevelData>();
-    public static PlayerInfo playerInfo; 
+   // public static PlayerData playerInfo; 
 
     public static int CurrentLevelIndex = 0;
 

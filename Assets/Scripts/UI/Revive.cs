@@ -35,9 +35,9 @@ public class Revive : IPopup<Revive> {
 
     public void GetRevive() {
         Debug.Log(GameController.isGameOver);
-        if (GameController.isGameOver && GameController.Gems >= CostGems) {
+        if (GameController.isGameOver && PlayerController.player.gems >= CostGems) {
             DestroyBottomLines();
-            GameController.Gems -= CostGems;
+            PlayerController.player.gems -= CostGems;
             available = false;
         } else {
             GameUIController.Instance.ShowShop();
