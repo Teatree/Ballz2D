@@ -90,6 +90,4 @@ public class Ball : MonoBehaviour {
         ignoreCollision = false;
         moveSpeed = moveSpeedNorm;
     }
-
-
 }

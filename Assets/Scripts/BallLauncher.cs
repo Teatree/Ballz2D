@@ -34,10 +34,15 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     public Coroutine launcherBallRoutine;
 
-
     public static int ExtraBalls = 0;
 
+    private float outTime = 0;
+    private float outTimeLimit = 40;
+
     private void Start() {
+        SpeedUP_remove();
+        outTime = 0;
+
         base_y = transform.position.y;
 
         launchPreview = GetComponent<LaunchPreview>();
@@ -51,7 +56,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 LightningPowerup.Instance.EnableButton();
                 MoreBallsPowerup.Instance.EnableButton();
 
-                CheckExtraBalls();                                           //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.back * -10;
+                CheckExtraBalls();        //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.back * -10;
                 Vector3 worldPosition;
                 if (_slider) {
                     worldPosition = new Vector3(Slider.value, 1f);
@@ -78,6 +83,15 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                     HideGhosts();
                 }
             }
+
+            // Check whether balls were out for too long and speed up
+            if(BallsReadyToShoot != balls.Count && outTime > outTimeLimit) {
+                SpeedUP();
+            }
+            else if(BallsReadyToShoot != balls.Count && outTime <= outTimeLimit && Time.timeScale != 2f) {
+                Debug.Log("outTime = " + outTime);
+                outTime += Time.deltaTime * 10;
+            }
         }
     }
 
@@ -101,6 +115,10 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
             UpdateVisualsLastBall();
             GridController.Instance.DidIwin();
+
+            // resetting the speedup
+            SpeedUP_remove();
+            outTime = 0;
         }
 
         b.transform.position = new Vector2(-100, -100);
@@ -240,5 +258,21 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
             }
         }
         BallsReadyToShoot = ballsAlreadyThere;
+    }
+
+    public void SpeedUP() {
+        if (Time.timeScale == 1f) {
+            Debug.Log("Speeding Up!");
+            GameUIController.Instance.TurnSpeedUpIcon_ON();
+            Time.timeScale = 2f;
+        }
+    }
+
+    public void SpeedUP_remove() {
+        if (Time.timeScale == 2f) {
+            Debug.Log("Speeding Down!");
+            GameUIController.Instance.TurnSpeedUpIcon_OFF();
+            Time.timeScale = 1f;
+        }
     }
 }
