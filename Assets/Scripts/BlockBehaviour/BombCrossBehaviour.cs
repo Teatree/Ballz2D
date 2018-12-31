@@ -12,14 +12,14 @@ public class BombCrossBehaviour : IBehaviour {
     public override void OnDestroy() {
         if (!block.destroyed) {
             this.block.destroyed = true;
-            GameController.IncreseScore();
+            LevelController.IncreseScore();
             ShootLasers();
             foreach (Block b in GridController.blocksSpawned) {
                 if (!b.Equals(this.block) && !b.destroyed && (b.col == block.col || b.row == block.row))  {
                     b._behaviour.OnDestroy();
                 }
             }
-            GameUIController.Instance.UpdateScore(GameController.levelScore);
+            GameUIController.Instance.UpdateScore(LevelController.levelScore);
             UpdateBlocksInfo();
             block.destroyed = true;
         }

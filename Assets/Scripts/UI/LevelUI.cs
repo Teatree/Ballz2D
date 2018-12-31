@@ -51,7 +51,7 @@ public class LevelUI : MonoBehaviour {
     
     public void StartGameAtLevel() {
         AllLevelsData.CurrentLevelIndex = LevelNumber;
-        GameController.ResetScore();
+        LevelController.ResetScore();
         //SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
         SceneController.sceneController.LoadGame();
     }

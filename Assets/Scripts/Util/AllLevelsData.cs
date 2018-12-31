@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public static class AllLevelsData {
     public static List<LevelData> allLevels = new List<LevelData>();

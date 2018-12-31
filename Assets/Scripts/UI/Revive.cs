@@ -34,8 +34,8 @@ public class Revive : IPopup<Revive> {
     }
 
     public void GetRevive() {
-        Debug.Log(GameController.isGameOver);
-        if (GameController.isGameOver && PlayerController.player.gems >= CostGems) {
+        Debug.Log(LevelController.isGameOver);
+        if (LevelController.isGameOver && PlayerController.player.gems >= CostGems) {
             DestroyBottomLines();
             PlayerController.player.gems -= CostGems;
             available = false;
@@ -53,7 +53,7 @@ public class Revive : IPopup<Revive> {
                 b._behaviour.OnDestroy();
             }
         }
-        GameUIController.Instance.UpdateScore(GameController.levelScore);
+        GameUIController.Instance.UpdateScore(LevelController.levelScore);
         Warning.Instance.StopAndDestroyWarnings();
     }
 

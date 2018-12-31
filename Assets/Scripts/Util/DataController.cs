@@ -43,6 +43,7 @@ public class DataController {
 
     public static void SavePlayer(PlayerData pi) {
         string jsonData = JsonUtility.ToJson(pi);
+       // Debug.Log(">>> player info > " + jsonData);
         File.WriteAllText(playerfilePath, jsonData);
     }
 
@@ -113,9 +114,18 @@ public class PlayerData {
     public string lastLogin;
     public bool noAds;
 
-    public List<int> starsPerLvl = new List<int>();
+    public List<CompletedLevel> completedLvls = new List<CompletedLevel>();
 }
+[System.Serializable]
+public class CompletedLevel {
+    public int number;
+    public int stars;
 
+    public CompletedLevel (int i, int j) {
+        this.number = i;
+        this.stars = j;
+    }
+}
 [System.Serializable]
 public class LevelData {
     public int emptyRowsCount;

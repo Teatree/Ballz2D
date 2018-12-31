@@ -30,14 +30,14 @@ public class GameUIController : SceneSingleton<GameUIController> {
     void Start() {
         SceneController.sceneController.UnloadMenu();
         HandlePreview();
-        GameController.PauseGame();
+        LevelController.PauseGame();
         currentLevelNumberLable =  "" + (1 + AllLevelsData.CurrentLevelIndex);
         UpdateStars();
     }
 
     void Update() {
         HandleInput();
-        if (!GameController.IsGameStopped()) {
+        if (!LevelController.IsGameStopped()) {
 
         }
         UpdateBlocksAmount();
@@ -48,7 +48,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
     public void PauseGame() {
-        GameController.PauseGame();
+        LevelController.PauseGame();
         Instantiate(PausePrefab, transform);
     }
 
@@ -82,15 +82,15 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public void UpdateStars() {
         if (Slider.value >= 0) {
             Star1.color = Color.white;
-            GameController.LevelStarsAmount = 1;
+            LevelController.LevelStarsAmount = 1;
         }
         if (Slider.value >= Slider.maxValue * 0.6f) {
             Star2.color = Color.white;
-            GameController.LevelStarsAmount = 2;
+            LevelController.LevelStarsAmount = 2;
         }
         if (Slider.value >= Slider.maxValue) {
             Star3.color = Color.white;
-            GameController.LevelStarsAmount = 3;
+            LevelController.LevelStarsAmount = 3;
         }
     }
     #endregion
@@ -114,13 +114,14 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public void HandleWin() {
         GameObject go = Instantiate(GameOverPrefab, transform);
         GameOver g = go.transform.GetComponent<GameOver>();
-        g._type = GameOver.GameOverType.Fail;
-        g.StarsAmount = GameController.LevelStarsAmount;
+        g._type = GameOver.GameOverType.Win;
+        g.StarsAmount = LevelController.LevelStarsAmount;
+        PlayerController.Instance.AddNewCompletedLevel(AllLevelsData.CurrentLevelIndex, LevelController.LevelStarsAmount);
     }
 
     public void HandleRestart() {
         Debug.Log("AllLevelsData.CurrentLevelIndex " + AllLevelsData.CurrentLevelIndex);
-        GameController.ResetScore();
+        LevelController.ResetScore();
         SceneController.sceneController.LoadGame();
     }
 
@@ -210,7 +211,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
             laserLine.material.color = c;
             yield return null;
         }
-        GameController.isGameOver = false;
+        LevelController.isGameOver = false;
     }
 
     public void TurnSpeedUpIcon_ON() {

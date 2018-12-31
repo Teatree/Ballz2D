@@ -22,13 +22,15 @@ public class UIController : MonoBehaviour {
 
         // debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "\n path: " + DataController.levelfilePath + "\n jsonDataExtracted: " + DataController.AjsonData;
         //Create level buttons
-        for (int i = 0; i < AllLevelsData.allLevels.Count; i++) {
-            var lvl = Instantiate(levelUiElementPrefab);
-            lvl.LevelNumber = i;
-            lvl.transform.parent = LevelListParent.transform;
-            if (i <= PlayerController.player.starsPerLvl.Count) {
-                lvl.buttonComponent.interactable = true;
-                lvl.StarsNumber = (i < PlayerController.player.starsPerLvl.Count) ? PlayerController.player.starsPerLvl[i] : 0;
+        if (PlayerController.player != null ) {
+            for (int i = 0; i < AllLevelsData.allLevels.Count; i++) {
+                var lvl = Instantiate(levelUiElementPrefab);
+                lvl.LevelNumber = i;
+                lvl.transform.parent = LevelListParent.transform;
+                if (i <= PlayerController.Instance.starsPerLvl.Count ) {
+                    lvl.buttonComponent.interactable = true;
+                    lvl.StarsNumber = (i < PlayerController.Instance.starsPerLvl.Count) ? PlayerController.Instance.starsPerLvl[i] : 0;
+                }
             }
         }
     }

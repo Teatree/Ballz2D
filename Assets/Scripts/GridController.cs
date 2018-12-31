@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GridController : SceneSingleton<GridController> {
 
-    private GameController gc;
+    private LevelController gc;
     public Transform scalingParent;
     public Transform grid;
     [Header("Block Settings")]
@@ -53,7 +53,7 @@ public class GridController : SceneSingleton<GridController> {
 
     private void Start() { //OnLevelWasLoaded
         blocksSpawned = new List<Block>();
-        gc = GetComponent<GameController>();
+        gc = GetComponent<LevelController>();
         for (int i = 0; i < 18 - gc.currentLevel.emptyRowsCount; i++) {
             SpawnRowOfBlocks(true);
         }
@@ -111,7 +111,7 @@ public class GridController : SceneSingleton<GridController> {
            // return;
         }
         if (rowsSpawned > 0 && lastGridRow == Constants.GameOver_y_grid_index) { // Show gameOver popup
-            GameController.isGameOver = true;
+            LevelController.isGameOver = true;
             Revive.RowToDestroyIndex = lastRowSpawnedIndex;
             Revive.RowToDestroyPosition = lastRowSpawnedPos;
             GameUIController.Instance.HandleGameOver(); 
@@ -252,7 +252,6 @@ public class GridController : SceneSingleton<GridController> {
                 }
             }
             SubmitStars();
-
             GameUIController.Instance.HandleWin();
             return true;
         }
@@ -262,6 +261,6 @@ public class GridController : SceneSingleton<GridController> {
     }
 
     private static void SubmitStars() {
-        GameController.TotalStarsAmount += GameController.LevelStarsAmount;
+        LevelController.TotalStarsAmount += LevelController.LevelStarsAmount;
     }
 }

@@ -17,7 +17,7 @@ public class Preview : IPopup<Preview> {
 
     
     public override void OnClick_Close() {
-        GameController.ResumeGame();
+        LevelController.ResumeGame();
         base.OnClick_Close();
     } 
 

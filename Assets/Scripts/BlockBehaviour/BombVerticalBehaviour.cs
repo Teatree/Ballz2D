@@ -12,7 +12,7 @@ public class BombVerticalBehaviour : IBehaviour {
     public override void OnDestroy() {
         if (!block.destroyed) {
             this.block.destroyed = true;
-            GameController.IncreseScore();
+            LevelController.IncreseScore();
             ShootLasers();
             foreach (Block b in GridController.blocksSpawned) {
                 if (!b.Equals(this.block) && !b.destroyed && b.col == block.col && b != this.block) {
@@ -21,7 +21,7 @@ public class BombVerticalBehaviour : IBehaviour {
                     } 
                 }
             }
-            GameUIController.Instance.UpdateScore(GameController.levelScore);
+            GameUIController.Instance.UpdateScore(LevelController.levelScore);
             UpdateBlocksInfo();
             block.destroyed = true;
         } 

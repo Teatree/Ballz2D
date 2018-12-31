@@ -40,16 +40,16 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     private float outTimeLimit = 40;
 
     private void Start() {
-SpeedUP_remove();
-        outTime = 0;canShoot = true;        base_y = transform.position.y;
-        Debug.Log("> start!");
+        SpeedUP_remove();
+        outTime = 0; canShoot = true;
+        base_y = transform.position.y;
         launchPreview = GetComponent<LaunchPreview>();
         CreateBall(InitBallAmount);
         textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
     }
 
     private void Update() {
-        if (!GameController.IsGameStopped()) {
+        if (!LevelController.IsGameStopped()) {
             if (BallsReadyToShoot == balls.Count && canShoot) { // don't let the player launch until all balls are back.
                 LightningPowerup.Instance.EnableButton();
                 MoreBallsPowerup.Instance.EnableButton();
@@ -60,7 +60,7 @@ SpeedUP_remove();
                     worldPosition = new Vector3(Slider.value, 1f);
                 }
                 else {
-                   worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     //Debug.Log("worldPosition: " + worldPosition);
                 }
 
@@ -70,7 +70,7 @@ SpeedUP_remove();
                         SetStartDrag();
                     }
                     else if (Input.GetMouseButton(0)) {
-                        
+
                         ContinueDrag(worldPosition);
                     }
                     else if (Input.GetMouseButtonUp(0)) {
@@ -83,13 +83,13 @@ SpeedUP_remove();
             }
 
             // Check whether balls were out for too long and speed up
-            if(BallsReadyToShoot != balls.Count && outTime > outTimeLimit) {
+            if (BallsReadyToShoot != balls.Count && outTime > outTimeLimit) {
                 SpeedUP();
-        }
-            else if(BallsReadyToShoot != balls.Count && outTime <= outTimeLimit && Time.timeScale != 2f) {
-                Debug.Log("outTime = " + outTime);
+            }
+            else if (BallsReadyToShoot != balls.Count && outTime <= outTimeLimit && Time.timeScale != 2f) {
+              //  Debug.Log("outTime = " + outTime);
                 outTime += Time.deltaTime * 10;
-    }
+            }
         }
     }
 
@@ -109,7 +109,7 @@ SpeedUP_remove();
         textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
         if (BallsReadyToShoot == balls.Count) {
             GridController.Instance.SpawnRowOfBlocks(false);
-            GameController.ResetScoreCoefficient();
+            LevelController.ResetScoreCoefficient();
 
             UpdateVisualsLastBall();
             GridController.Instance.DidIwin();
@@ -210,7 +210,7 @@ SpeedUP_remove();
 
     public void ContinueDrag(Vector3 worldPosition) {
         endDragPosition = worldPosition;
-        
+
         if (ShouldAim(worldPosition)) {
             launchPreview.SetEndPoint(endDragPosition);
         }
@@ -257,15 +257,15 @@ SpeedUP_remove();
 
     public void SpeedUP() {
         if (Time.timeScale == 1f) {
-            Debug.Log("Speeding Up!");
+          //  Debug.Log("Speeding Up!");
             GameUIController.Instance.TurnSpeedUpIcon_ON();
             Time.timeScale = 2f;
-}
+        }
     }
 
     public void SpeedUP_remove() {
         if (Time.timeScale == 2f) {
-            Debug.Log("Speeding Down!");
+        //    Debug.Log("Speeding Down!");
             GameUIController.Instance.TurnSpeedUpIcon_OFF();
             Time.timeScale = 1f;
         }

@@ -23,10 +23,10 @@ public class GameOver : IPopup<GameOver> {
 
     public void Start() {
 
-        if (GameController.TotalStarsAmount >= StarsSlider.maxValue) {
+        if (LevelController.TotalStarsAmount >= StarsSlider.maxValue) {
             _type = GameOverType.WinBox;
         }
-        StarsSlider.value = GameController.TotalStarsAmount;
+        StarsSlider.value = LevelController.TotalStarsAmount;
 
 
         switch (_type) {
@@ -117,7 +117,7 @@ public class GameOver : IPopup<GameOver> {
 
     public void OnClick_Next() {
         AllLevelsData.CurrentLevelIndex++;
-        GameController.ResetScore();
+        LevelController.ResetScore();
         ReloadGameScene();
     }
 

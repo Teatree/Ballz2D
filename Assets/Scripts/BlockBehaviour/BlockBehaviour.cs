@@ -6,11 +6,11 @@ public class BlockBehaviour : IBehaviour {
     }
 
     public override void OnDestroy() {
-        int score = GameController.IncreseScore();
+        int score = LevelController.IncreseScore();
         block.CreateScoreFeedbacker(score);
 
         if (block.DeathParticle != null) block.CreateDeathParticle();
-        GameUIController.Instance.UpdateScore(GameController.levelScore);
+        GameUIController.Instance.UpdateScore(LevelController.levelScore);
 
         UpdateBlocksInfo();
         block.DestroySelf();
