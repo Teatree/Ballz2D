@@ -9,7 +9,6 @@ public class GridController : SceneSingleton<GridController> {
     [Header("Block Settings")]
     public float blockScale = 1;
 
-
     #region prefabs
     [Header("Block Prefabs")]
     [SerializeField]
