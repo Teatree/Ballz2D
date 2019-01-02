@@ -24,7 +24,6 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
             PlayAni();
             BallLauncher.ExtraBalls += ExtraBallsAmount;
             PlayerController.player.gems -= CostGems;
-            CostGems += 100;
         }
        TextCanvasUpdate();
         UpdateVisual();

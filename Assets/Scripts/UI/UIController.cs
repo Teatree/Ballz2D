@@ -42,7 +42,11 @@ public class UIController : MonoBehaviour {
     }
 
     public void getGems() {
-       // AdmobController.admob.ShowGemsRevardVideo();
+        AdmobController.Instance.ShowGemsRevardVideo();
+    }
+
+    public void Share() {
+        ShareController.Instance.ShareScreenshotWithText("check out this balls");
     }
 
     public void OpenSettings() {

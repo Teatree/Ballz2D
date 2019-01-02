@@ -23,7 +23,6 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
                 }
             }
             PlayerController.player.gems -= CostGems;
-            CostGems += 100;
         }
         UpdateVisual();
     }

@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System;
-using System.Collections;
 using GoogleMobileAds.Api;
 
-public class AdmobController : MonoBehaviour {
+public class AdmobController : SceneSingleton<AdmobController> {
 
 #if UNITY_ANDROID
     string appId = "ca-app-pub-4809397092315700~2101070495";
@@ -76,13 +74,12 @@ public class AdmobController : MonoBehaviour {
             .Build();
     }
 
-    //REvard!!!!
-
+    //REvard
     public void ShowGemsRevardVideo() {
         if (rewardGemsVideo.IsLoaded()) {
             rewardGemsVideo.Show();
         } else {
-            PlayerController.player.gems = 404;
+            
         }
     }
 
