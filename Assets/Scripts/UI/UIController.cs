@@ -9,7 +9,7 @@ public class UIController : MonoBehaviour {
     private LevelUI levelUiElementPrefab;
 
 
-    public Text gems; 
+    public Text gems;
 
     public SpriteState sprState = new SpriteState();
 
@@ -23,12 +23,12 @@ public class UIController : MonoBehaviour {
 
         // debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "\n path: " + DataController.levelfilePath + "\n jsonDataExtracted: " + DataController.AjsonData;
         //Create level buttons
-        if (PlayerController.player != null ) {
+        if (PlayerController.player != null) {
             for (int i = 0; i < AllLevelsData.allLevels.Count; i++) {
                 var lvl = Instantiate(levelUiElementPrefab);
                 lvl.LevelNumber = i;
                 lvl.transform.parent = LevelListParent.transform;
-                if (i <= PlayerController.Instance.starsPerLvl.Count ) {
+                if (i <= PlayerController.Instance.starsPerLvl.Count) {
                     lvl.buttonComponent.interactable = true;
                     lvl.StarsNumber = (i < PlayerController.Instance.starsPerLvl.Count) ? PlayerController.Instance.starsPerLvl[i] : 0;
                 }
@@ -37,7 +37,7 @@ public class UIController : MonoBehaviour {
     }
 
     void Update() {
-       // gems.text = "Gems >>> " +  PlayerController.player.gems;
+        // gems.text = "Gems >>> " +  PlayerController.player.gems;
         //debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "      path: " + DataController.levelfilePath;
     }
 
@@ -56,4 +56,5 @@ public class UIController : MonoBehaviour {
     public void OpenShop() {
         Instantiate(ShopPrefab, transform);
     }
+   
 }

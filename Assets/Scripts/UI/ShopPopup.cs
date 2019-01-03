@@ -1,13 +1,11 @@
 ﻿public class ShopPopup : IPopup<Pause> {
 
-    // Use this for initialization
-    void Start() {
-
+    public void BuyGems100() {
+        Purchaser.purchaser.BuyGems100();
     }
 
-    // Update is called once per frame
-    void Update() {
 
+    public void BuyNoAds() {
+        Purchaser.purchaser.BuyNoAds();
     }
-
 }

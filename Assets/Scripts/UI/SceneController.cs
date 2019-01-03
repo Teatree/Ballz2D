@@ -54,12 +54,12 @@ public class SceneController : MonoBehaviour {
     }
 
     public void LoadGame() {
-        //UnloadScene("MenuScene");
+        UnloadScene("MenuScene");
         LoadScene("GameScene");
     }
 
     public void LoadMenu() {
-        // UnloadScene("GameScene");
+        UnloadScene("GameScene");
         LoadScene("MenuScene");
 
     }
