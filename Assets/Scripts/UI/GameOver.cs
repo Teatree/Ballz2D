@@ -100,6 +100,7 @@ public class GameOver : IPopup<GameOver> {
                     break;
                 }
         }
+        
     }
 
     public enum GameOverType {

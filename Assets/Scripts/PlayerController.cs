@@ -7,7 +7,7 @@ public class PlayerController : SceneSingleton<PlayerController> {
 
     private void Start() {
 
-        player = DataController.LoadPlayer() != null ? DataController.LoadPlayer() : new PlayerData();
+        player = DataController.LoadPlayer() != null && player == null ? DataController.LoadPlayer() : new PlayerData();
         DateTime dt = DateTime.Now;
         player.lastLogin = dt.ToString("yyyy-MM-dd");
 
@@ -18,6 +18,8 @@ public class PlayerController : SceneSingleton<PlayerController> {
             }
         }
     }
+
+    
 
     public void AddNewCompletedLevel(int lvlNum, int stars) {
         if (starsPerLvl.ContainsKey(lvlNum)) {

@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour {
 
 
     public Text gems;
+    public Text stars;
 
     public SpriteState sprState = new SpriteState();
 
@@ -34,9 +35,14 @@ public class UIController : MonoBehaviour {
                 }
             }
         }
+
+
+        stars.text = PlayerController.player.GetStarsAmount().ToString();
     }
 
     void Update() {
+        gems.text = PlayerController.player.gems.ToString();
+        
         // gems.text = "Gems >>> " +  PlayerController.player.gems;
         //debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "      path: " + DataController.levelfilePath;
     }

@@ -13,9 +13,9 @@ public class LevelUI : MonoBehaviour {
 
     [Header("UI")]
     public Text levelNumText;
-    public Text Star1;
-    public Text Star2;
-    public Text Star3;
+    public Image Star1;
+    public Image Star2;
+    public Image Star3;
 
     private void Start() {
         SceneController.sceneController.UnloadGame();

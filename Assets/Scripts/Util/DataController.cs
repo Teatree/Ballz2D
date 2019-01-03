@@ -115,6 +115,14 @@ public class PlayerData {
     public bool noAds;
 
     public List<CompletedLevel> completedLvls = new List<CompletedLevel>();
+
+    public int GetStarsAmount() {
+        int sum = 0;
+        foreach (CompletedLevel lvl in completedLvls) {
+            sum += lvl.stars;
+        }
+        return sum;
+    }
 }
 [System.Serializable]
 public class CompletedLevel {
