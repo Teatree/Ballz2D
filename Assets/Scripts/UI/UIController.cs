@@ -29,9 +29,9 @@ public class UIController : MonoBehaviour {
                 var lvl = Instantiate(levelUiElementPrefab);
                 lvl.LevelNumber = i;
                 lvl.transform.parent = LevelListParent.transform;
-                if (i <= PlayerController.Instance.starsPerLvl.Count) {
+                if (i <= PlayerController.starsPerLvl.Count) {
                     lvl.buttonComponent.interactable = true;
-                    lvl.StarsNumber = (i < PlayerController.Instance.starsPerLvl.Count) ? PlayerController.Instance.starsPerLvl[i] : 0;
+                    lvl.StarsNumber = (i < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i] : 0;
                 }
             }
         }

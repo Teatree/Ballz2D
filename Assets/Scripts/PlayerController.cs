@@ -1,20 +1,27 @@
 ﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class PlayerController : SceneSingleton<PlayerController> {
     public static PlayerData player;
-    public Dictionary<int, int> starsPerLvl;
+    public static Dictionary<int, int> starsPerLvl;
 
     private void Start() {
+        if (player != null) {
+            Debug.Log(">>> start player " + player.ToString());
+           // Debug.Log(">>> start > " + starsPerLvl.ToString());
+        }
 
-        player = DataController.LoadPlayer() != null && player == null ? DataController.LoadPlayer() : new PlayerData();
-        DateTime dt = DateTime.Now;
-        player.lastLogin = dt.ToString("yyyy-MM-dd");
+        if (player == null) {
+            player = DataController.LoadPlayer() != null ? DataController.LoadPlayer() : new PlayerData();
+            DateTime dt = DateTime.Now;
+            player.lastLogin = dt.ToString("yyyy-MM-dd");
 
-        starsPerLvl = new Dictionary<int, int>();
-        if (player.completedLvls != null && player.completedLvls.Count > 0) {
-            foreach (CompletedLevel lvl in player.completedLvls) {
-                starsPerLvl.Add(lvl.number, lvl.stars);
+            starsPerLvl = new Dictionary<int, int>();
+            if (player.completedLvls != null && player.completedLvls.Count > 0) {
+                foreach (CompletedLevel lvl in player.completedLvls) {
+                    starsPerLvl.Add(lvl.number, lvl.stars);
+                }
             }
         }
     }
