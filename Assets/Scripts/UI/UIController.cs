@@ -8,7 +8,6 @@ public class UIController : MonoBehaviour {
     [SerializeField]
     private LevelUI levelUiElementPrefab;
 
-
     public Text gems;
     public Text stars;
 
@@ -36,7 +35,6 @@ public class UIController : MonoBehaviour {
             }
         }
 
-
         stars.text = PlayerController.player.GetStarsAmount().ToString();
     }
 
@@ -52,7 +50,8 @@ public class UIController : MonoBehaviour {
     }
 
     public void Share() {
-        ShareController.Instance.ShareScreenshotWithText("check out this balls");
+        ShareController.Instance.ShareScreenshotWithText("c" +
+            "heck out this balls");
     }
 
     public void OpenSettings() {

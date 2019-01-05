@@ -39,18 +39,22 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     private float outTime = 0;
     private float outTimeLimit = 40;
 
-    private void Start() {
+    private void Awake() {
         SpeedUP_remove();
-        outTime = 0; canShoot = true;
+        outTime = 0; 
         base_y = transform.position.y;
         launchPreview = GetComponent<LaunchPreview>();
         CreateBall(InitBallAmount);
         textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
+        canShoot = true;
+        GameUIController.Instance.SetDebugText("AWAKEN!");
     }
 
     private void Update() {
         if (!LevelController.IsGameStopped()) {
+            
             if (BallsReadyToShoot == balls.Count && canShoot) { // don't let the player launch until all balls are back.
+                GameUIController.Instance.SetDebugText("Balls Are back!");
                 LightningPowerup.Instance.EnableButton();
                 MoreBallsPowerup.Instance.EnableButton();
 
@@ -65,7 +69,8 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 }
 
                 //controls 
-                if (canShoot && !EventSystem.current.IsPointerOverGameObject()) {
+                if (canShoot && !IsPointerOverUIObject()) {
+                    GameUIController.Instance.SetDebugText(" I AM NOT OVER ANY OBJECT OR NOTHING !");
                     if (Input.GetMouseButtonDown(0)) {
                         SetStartDrag();
                     }
@@ -159,6 +164,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     public void EndDrag() {
+        GameUIController.Instance.SetDebugText("Shooting! ");
         Slider.gameObject.transform.parent.gameObject.SetActive(false);
         textCanvas.SetActive(false);
         launcherBallRoutine = StartCoroutine(LaunchBalls());
@@ -269,5 +275,14 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
             GameUIController.Instance.TurnSpeedUpIcon_OFF();
             Time.timeScale = 1f;
         }
+    }
+
+    // Checks if it's over UI object, a workaround fro mobile
+    private bool IsPointerOverUIObject() {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 }
