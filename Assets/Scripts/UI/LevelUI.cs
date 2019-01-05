@@ -45,8 +45,6 @@ public class LevelUI : MonoBehaviour {
                     break;
                 }
         }
-
-        
     }
     
     public void StartGameAtLevel() {
