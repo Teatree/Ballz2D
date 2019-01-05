@@ -188,7 +188,8 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 ball.SetDir(LaunchPreview.launchDirection);
                 ball.EnableCollision();
                 ball.active = true;
-                yield return new WaitForSeconds(0.03f);
+                Debug.Log(0.03f * Time.deltaTime);
+                yield return new WaitForSeconds(2f*Time.deltaTime);
             }
 
             HideGhosts();
