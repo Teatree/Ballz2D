@@ -47,14 +47,14 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         CreateBall(InitBallAmount);
         textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
         canShoot = true;
-        GameUIController.Instance.SetDebugText("AWAKEN!");
+        //GameUIController.Instance.SetDebugText("AWAKEN!");
     }
 
     private void Update() {
         if (!LevelController.IsGameStopped()) {
             
             if (BallsReadyToShoot == balls.Count && canShoot) { // don't let the player launch until all balls are back.
-                GameUIController.Instance.SetDebugText("Balls Are back!");
+                //GameUIController.Instance.SetDebugText("Balls Are back!");
                 LightningPowerup.Instance.EnableButton();
                 MoreBallsPowerup.Instance.EnableButton();
 
@@ -70,7 +70,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
                 //controls 
                 if (canShoot && !IsPointerOverUIObject()) {
-                    GameUIController.Instance.SetDebugText(" I AM NOT OVER ANY OBJECT OR NOTHING !");
+                    //GameUIController.Instance.SetDebugText(" I AM NOT OVER ANY OBJECT OR NOTHING !");
                     if (Input.GetMouseButtonDown(0)) {
                         SetStartDrag();
                     }
@@ -164,7 +164,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     public void EndDrag() {
-        GameUIController.Instance.SetDebugText("Shooting! ");
+        //GameUIController.Instance.SetDebugText("Shooting! ");
         Slider.gameObject.transform.parent.gameObject.SetActive(false);
         textCanvas.SetActive(false);
         launcherBallRoutine = StartCoroutine(LaunchBalls());
