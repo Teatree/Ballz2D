@@ -2,8 +2,7 @@
 
 
     public void BuyGems100() {
-        //Purchaser.purchaser.BuyGems100();
-        PlayerController.player.gems += 100;
+        Purchaser.purchaser.BuyGems100();
     }
 
 
