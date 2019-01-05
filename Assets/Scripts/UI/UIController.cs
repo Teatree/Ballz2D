@@ -36,12 +36,11 @@ public class UIController : MonoBehaviour {
             }
         }
 
-
-        stars.text = PlayerController.player.GetStarsAmount().ToString();
+        stars.text = PlayerController.player != null ? PlayerController.player.GetStarsAmount().ToString() : "0";
     }
 
     void Update() {
-        gems.text = PlayerController.player.gems.ToString();
+        gems.text = PlayerController.player != null ?  PlayerController.player.gems.ToString() : "0";
         
         // gems.text = "Gems >>> " +  PlayerController.player.gems;
         //debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "      path: " + DataController.levelfilePath;

@@ -31,7 +31,9 @@ public class AdmobController : SceneSingleton<AdmobController> {
         MobileAds.Initialize(appId);
 
         this.RequestBanner();
+        
         InitGemRewardVideo();
+        bannerView.Show();
     }
 
     private void RequestBanner() {
