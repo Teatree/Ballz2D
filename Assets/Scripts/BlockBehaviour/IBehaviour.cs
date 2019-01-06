@@ -55,16 +55,15 @@ public abstract class IBehaviour {
     }
 
     public void UpdateSavedBlocks() {
-        Debug.Log(">>>> UpdateSavedBlocks > ");
         if (GridController.Instance.blocksSpawnedSaved != null && GridController.Instance.blocksSpawnedSaved.Count > 0) {
             foreach (BlockClone b in GridController.Instance.blocksSpawnedSaved) {
                 if (b.row == block.row && b.col == block.col) {
-                    Debug.Log(">>>> UpdateSavedBlocks > " + block.col + " / " + block.row);
+
                     return;
                 }
             }
         }
-        Debug.Log(">>>> UpdateSavedBlocks > " + block.col + " / " + block.row);
+
         GridController.Instance.blocksSpawnedSaved.Add(new BlockClone(block));
     }
 }

@@ -101,7 +101,6 @@ public class GridController : SceneSingleton<GridController> {
         int lastGridRow = 0;
 
         for (int i = 0; i < blocksSpawned.Count; i++) {
-            Debug.Log(">>> blocksSpawned[ " + i + "].gridRow  > " + blocksSpawned[i].gridRow);
             if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle 
                                 && blocksSpawned[i].gridRow > lastGridRow) { 
                 lastRowSpawnedPos = blocksSpawned[i].transform.position.y;
@@ -109,7 +108,6 @@ public class GridController : SceneSingleton<GridController> {
                 lastGridRow = blocksSpawned[i].gridRow;
                // break;
             }
-            Debug.Log(">>> lastGridRow> " + lastGridRow);
         }
 
         if (rowsSpawned > 0 && lastGridRow == Constants.Warning_y_grid_index) { //Show warnings ani

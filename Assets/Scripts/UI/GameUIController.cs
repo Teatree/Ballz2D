@@ -16,6 +16,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject GameOverPrefab;
     public GameObject PreviewPrefab;
     public GameObject PausePrefab;
+    public GameObject ShopPrefab;
 
     [Header("SpeedUPIcon")]
     public GameObject SpeedUpIcon;
@@ -44,7 +45,8 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
     public void ShowShop() {
-        Debug.LogWarning("Shop!");
+        LevelController.PauseGame();
+        Instantiate(ShopPrefab, transform);
     }
 
     public void PauseGame() {
@@ -120,24 +122,18 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
     public void HandleRestart() {
-        Debug.Log("AllLevelsData.CurrentLevelIndex " + AllLevelsData.CurrentLevelIndex);
+        //Debug.Log("AllLevelsData.CurrentLevelIndex " + AllLevelsData.CurrentLevelIndex);
         LevelController.ResetScore();
         SceneController.sceneController.LoadGame();
     }
 
     public void HandlePreview() {
-        //Show UI
         Instantiate(PreviewPrefab, transform);
 
     }
 
     public void HandleHomeButton() {
-        //Show UI
         SceneController.sceneController.LoadMenu();
-    }
-
-    public void ShootLightning() {
-        LightningPowerup.Instance.ShootLightning();
     }
 
     private void HandleInput() {

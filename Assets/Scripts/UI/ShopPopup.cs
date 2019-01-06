@@ -8,4 +8,10 @@
     public void BuyNoAds() {
         Purchaser.purchaser.BuyNoAds();
     }
+
+    public override void OnClick_Close() {
+        LevelController.ResumeGame();
+        base.OnClick_Close();
+    }
+
 }
