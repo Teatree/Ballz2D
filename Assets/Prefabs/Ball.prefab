@@ -73,8 +73,8 @@ MonoBehaviour:
   ballId: 0
   ignoreCollision: 0
   active: 0
-  moveSpeedNorm: 9
-  moveSpeedFast: 14
+  moveSpeedNorm: 8
+  moveSpeedFast: 13
 --- !u!212 &212723517670425870
 SpriteRenderer:
   m_ObjectHideFlags: 1
