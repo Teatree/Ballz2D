@@ -12,6 +12,7 @@ public class FountainBehaviour : IBehaviour {
     }
 
     public override void OnCollide(Ball ball) {
+        UpdateSavedBlocks();
         ball.SetDir(new Vector3(Random.Range(-0.75f, 0.75f), Mathf.Abs(ball.dir.y)));
 
         block.wasHit = true;

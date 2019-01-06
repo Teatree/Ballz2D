@@ -16,6 +16,7 @@ public class LaserCrossBehaviour : IBehaviour {
     }
 
     public override void OnCollide(Ball ball) {
+        UpdateSavedBlocks();
         ShootLasers();
         if (!activated) {
             foreach (Block b in GridController.blocksSpawned) {
@@ -32,7 +33,7 @@ public class LaserCrossBehaviour : IBehaviour {
         if (fadeRoutine != null) {
             StopFadeRoutine();
         }
-        Debug.Log("pew pew ");
+       // Debug.Log("pew pew ");
         
         Color c = laserLine.material.color;
         c.a = 1f;

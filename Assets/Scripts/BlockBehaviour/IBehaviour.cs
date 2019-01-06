@@ -12,7 +12,6 @@ public abstract class IBehaviour {
     public abstract void OnDestroy();
 
     public abstract void OnCollide(Ball ball);
-
     public abstract void LooseOneLife();
 
     public abstract void Update();
@@ -26,7 +25,7 @@ public abstract class IBehaviour {
             laserLine.material.color = c;
             yield return null;
         }
-        
+
     }
 
     protected IEnumerator BombLaserFade(LineRenderer laserLine) {
@@ -49,7 +48,23 @@ public abstract class IBehaviour {
     }
 
     protected void UpdateBlocksInfo() {
-        GridController.BlocksAmount--;
-        GameUIController.Instance.UpdateBlocksAmount();
+        if (GridController.BlocksAmount > 0 && block._type.isCollidable) {
+            GridController.BlocksAmount--;
+            GameUIController.Instance.UpdateBlocksAmount();
+        }
+    }
+
+    public void UpdateSavedBlocks() {
+        Debug.Log(">>>> UpdateSavedBlocks > ");
+        if (GridController.Instance.blocksSpawnedSaved != null && GridController.Instance.blocksSpawnedSaved.Count > 0) {
+            foreach (BlockClone b in GridController.Instance.blocksSpawnedSaved) {
+                if (b.row == block.row && b.col == block.col) {
+                    Debug.Log(">>>> UpdateSavedBlocks > " + block.col + " / " + block.row);
+                    return;
+                }
+            }
+        }
+        Debug.Log(">>>> UpdateSavedBlocks > " + block.col + " / " + block.row);
+        GridController.Instance.blocksSpawnedSaved.Add(new BlockClone(block));
     }
 }

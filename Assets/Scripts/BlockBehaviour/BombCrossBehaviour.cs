@@ -26,6 +26,7 @@ public class BombCrossBehaviour : IBehaviour {
     }
 
     public override void OnCollide(Ball ball) {
+        UpdateSavedBlocks();
         block.Hit();
         block.UpdateVisualState();
     }

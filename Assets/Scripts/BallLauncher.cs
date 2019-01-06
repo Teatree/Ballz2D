@@ -174,6 +174,8 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     private IEnumerator LaunchBalls() {
 
         if (BallsReadyToShoot == balls.Count) {
+            GridController.doNotMoveRowDown = false;
+
             LightningPowerup.Instance.DisableButton();
             MoreBallsPowerup.Instance.DisableButton();
 
@@ -188,7 +190,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 ball.SetDir(LaunchPreview.launchDirection);
                 ball.EnableCollision();
                 ball.active = true;
-                Debug.Log(0.03f * Time.deltaTime);
+               // Debug.Log(0.03f * Time.deltaTime);
                 yield return new WaitForSeconds(2f*Time.deltaTime);
             }
 

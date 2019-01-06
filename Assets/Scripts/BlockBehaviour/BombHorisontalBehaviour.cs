@@ -27,6 +27,7 @@ public class BombHorisontalBehaviour : IBehaviour {
     }
 
     public override void OnCollide(Ball ball) {
+        UpdateSavedBlocks();
         block.Hit();
         block.UpdateVisualState();
     }

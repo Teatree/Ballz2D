@@ -48,7 +48,10 @@ public class GridController : SceneSingleton<GridController> {
     public static int BlocksAmount;
 
     public static List<Block> blocksSpawned = new List<Block>();
+    public List<BlockClone> blocksSpawnedSaved = new List<BlockClone>();
+
     private List<Block> obstaclesCoordinates = new List<Block>();
+    public static bool doNotMoveRowDown;
 
     private void Start() { //OnLevelWasLoaded
         blocksSpawned = new List<Block>();
@@ -72,20 +75,23 @@ public class GridController : SceneSingleton<GridController> {
     }
 
     public void SpawnRowOfBlocks(bool moveObstacles) {
-        RemoveOneTurnBlocks();
-        MoveOneRowDown(moveObstacles);
-        //add new line
-        if (rowsSpawned < gc.currentLevel.rows.Count) {
-            List<CellData> cells = gc.currentLevel.rows[rowsSpawned].GetCells();
-            for (int i = 0; i < playWidth; i++) {
-                if (cells[i] != null && cells[i].type != "") {
-                    Block block = GetTheBlock(cells, rowsSpawned, i);
-                    //block.gameObject.transform.localScale = new Vector3(block.gameObject.transform.localScale.x*blockScale, block.gameObject.transform.localScale.y*blockScale); // *NEW
-                    block.Setup(cells[i].type, cells[i].life, rowsSpawned, i);
-                    blocksSpawned.Add(block);
+        if (!doNotMoveRowDown) {
+            RemoveOneTurnBlocks();
+            MoveOneRowDown(moveObstacles);
+            //add new line
+            if (rowsSpawned < gc.currentLevel.rows.Count) {
+                List<CellData> cells = gc.currentLevel.rows[rowsSpawned].GetCells();
+                for (int i = 0; i < playWidth; i++) {
+                    if (cells[i] != null && cells[i].type != "") {
+                        Block block = GetTheBlock(cells, rowsSpawned, i);
+                        //block.gameObject.transform.localScale = new Vector3(block.gameObject.transform.localScale.x*blockScale, block.gameObject.transform.localScale.y*blockScale); // *NEW
+                        block.Setup(cells[i].type, cells[i].life, rowsSpawned, i);
+                        blocksSpawned.Add(block);
+                    }
                 }
+                rowsSpawned++;
             }
-            rowsSpawned++;
+          
         }
         BallLauncher.canShoot = true;
     }
@@ -132,6 +138,7 @@ public class GridController : SceneSingleton<GridController> {
             }
         }
         checkLastBlocksLine();
+        blocksSpawnedSaved = new List<BlockClone>();
     }
 
     private bool isSpecialCase(Block b, int newY) {
@@ -159,7 +166,7 @@ public class GridController : SceneSingleton<GridController> {
 
     public void RemoveOneTurnBlocks() {
         foreach (Block b in blocksSpawned) {
-            if (b.wasHit) {
+            if (b.wasHit ) {
                 b.DestroySelf();
             }
         }

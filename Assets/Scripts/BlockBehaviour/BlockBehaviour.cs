@@ -1,4 +1,6 @@
-﻿
+﻿using UnityEngine;
+
+
 public class BlockBehaviour : IBehaviour {
 
     public override void setBlock(Block b) {
@@ -17,6 +19,7 @@ public class BlockBehaviour : IBehaviour {
     }
 
     public override void OnCollide(Ball ball) {
+        UpdateSavedBlocks();
         block.Hit();
         block.UpdateVisualState();
     }
@@ -32,6 +35,6 @@ public class BlockBehaviour : IBehaviour {
     }
 
     public override void Update() {
-        
+
     }
 }

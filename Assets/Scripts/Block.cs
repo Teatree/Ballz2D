@@ -5,6 +5,8 @@ using System.Collections;
 
 public class Block : MonoBehaviour {
 
+    public static Vector2 faraway = new Vector2(-100, -100);
+
     public int hitsRemaining;
     public bool wasHit; //set true if should be deleted next move
     public bool destroyed;
@@ -64,7 +66,9 @@ public class Block : MonoBehaviour {
                 CreateDeathParticle();
             }
             if (_type.Equals(BlockType.Bomb)) CreateBombExplosion();
-			destroyed = true;            Destroy(gameObject, 0.0000001f);
+            destroyed = true;
+            transform.position = faraway;
+            Destroy(gameObject, 0.0000001f);
         }
     }
 
@@ -109,14 +113,41 @@ public class Block : MonoBehaviour {
     }
 
     public void CreateScoreFeedbacker(int score) {
-        GameObject d = Instantiate(ScoreFeedbacker);
-        d.transform.GetComponent<ScoreFeedbacker>().Score = score;
-        d.transform.position = transform.position;
+        if (!destroyed) {
+            GameObject d = Instantiate(ScoreFeedbacker);
+            d.transform.GetComponent<ScoreFeedbacker>().Score = score;
+            d.transform.position = transform.position;
+        }
     }
 
     public void GetLightningDamage() {
         this.hitsRemaining = hitsRemaining > 1 ? Mathf.RoundToInt(this.hitsRemaining / 2) : 1;
         UpdateVisualState();
+    }
+
+    public Block() {
+
+    }
+
+
+}
+
+public class BlockClone {
+
+    public int col;
+    public int row;
+    public int gridRow;
+    public BlockType _type;
+    public IBehaviour _behaviour;
+    public int hitsRemaining;
+
+    public BlockClone(Block b) {
+        this._type = b._type;
+        this._behaviour = b._behaviour;
+        this.hitsRemaining = b.hitsRemaining;
+        this.col = b.col;
+        this.row = b.row;
+        this.gridRow = b.gridRow;
     }
 }
 

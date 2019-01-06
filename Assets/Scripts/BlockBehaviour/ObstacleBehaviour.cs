@@ -11,6 +11,7 @@ public class ObstacleBehaviour : IBehaviour {
     }
 
     public override void OnCollide(Ball ball) {
+
     }
 
     public override void LooseOneLife() {
