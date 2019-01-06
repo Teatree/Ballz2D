@@ -7,10 +7,6 @@ public class PlayerController : SceneSingleton<PlayerController> {
     public static Dictionary<int, int> starsPerLvl;
 
     private void Start() {
-        if (player != null) {
-            Debug.Log(">>> start player " + player.ToString());
-           // Debug.Log(">>> start > " + starsPerLvl.ToString());
-        }
 
         if (player == null) {
             player = DataController.LoadPlayer() != null ? DataController.LoadPlayer() : new PlayerData();

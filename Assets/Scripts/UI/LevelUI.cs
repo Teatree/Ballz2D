@@ -50,7 +50,7 @@ public class LevelUI : MonoBehaviour {
     public void StartGameAtLevel() {
         AllLevelsData.CurrentLevelIndex = LevelNumber;
         LevelController.ResetScore();
-        //SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        AdmobController.Instance.ShowIterstitial();
         SceneController.sceneController.LoadGame();
     }
 }

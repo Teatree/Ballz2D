@@ -57,6 +57,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 //GameUIController.Instance.SetDebugText("Balls Are back!");
                 LightningPowerup.Instance.EnableButton();
                 MoreBallsPowerup.Instance.EnableButton();
+                CancelPowerup.Instance.DisableButton();
 
                 CheckExtraBalls();                                           //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.back * -10;
                 Vector3 worldPosition;
@@ -177,6 +178,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
             LightningPowerup.Instance.DisableButton();
             MoreBallsPowerup.Instance.DisableButton();
+            CancelPowerup.Instance.EnableButton();
 
             canShoot = false;
             Vector3 direction = endDragPosition - transform.position;

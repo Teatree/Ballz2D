@@ -16,6 +16,7 @@ public class Block : MonoBehaviour {
     public SpriteRenderer spriteRenderer;
     private TextMeshPro text;
 
+    public string typeCode;
     public BlockType _type;
     public IBehaviour _behaviour;
 
@@ -134,6 +135,7 @@ public class Block : MonoBehaviour {
 
 public class BlockClone {
 
+    public string typeCode;
     public int col;
     public int row;
     public int gridRow;
@@ -142,6 +144,7 @@ public class BlockClone {
     public int hitsRemaining;
 
     public BlockClone(Block b) {
+        this.typeCode = b.typeCode;
         this._type = b._type;
         this._behaviour = b._behaviour;
         this.hitsRemaining = b.hitsRemaining;
