@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d455da3f1046efa47ba47da9d728dc87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  admob: {fileID: 0}
+  admob: {fileID: 1512515700}
 --- !u!4 &1784900067
 Transform:
   m_ObjectHideFlags: 0
