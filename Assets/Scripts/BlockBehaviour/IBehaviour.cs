@@ -25,7 +25,6 @@ public abstract class IBehaviour {
             laserLine.material.color = c;
             yield return null;
         }
-
     }
 
     protected IEnumerator BombLaserFade(LineRenderer laserLine) {

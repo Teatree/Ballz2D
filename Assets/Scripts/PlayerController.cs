@@ -26,8 +26,6 @@ public class PlayerController : SceneSingleton<PlayerController> {
         }
     }
 
-    
-
     public void AddNewCompletedLevel(int lvlNum, int stars) {
         if (starsPerLvl.ContainsKey(lvlNum)) {
             starsPerLvl[lvlNum] = stars;

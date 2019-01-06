@@ -91,7 +91,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
             if (BallsReadyToShoot != balls.Count && outTime > outTimeLimit) {
                 SpeedUP();
             }
-            else if (BallsReadyToShoot != balls.Count && outTime <= outTimeLimit && Time.timeScale != 2f) {
+            else if (BallsReadyToShoot != balls.Count && outTime <= outTimeLimit && Time.deltaTime != 2f) {
               //  Debug.Log("outTime = " + outTime);
                 outTime += Time.deltaTime * 10;
             }
@@ -172,7 +172,6 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     private IEnumerator LaunchBalls() {
-
         if (BallsReadyToShoot == balls.Count) {
             GridController.doNotMoveRowDown = false;
 
@@ -188,20 +187,20 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 ball.moveSpeed = ball.moveSpeedNorm;
                 ball.gameObject.SetActive(true);
                 ball.SetDir(LaunchPreview.launchDirection);
+                //ball.AddForceBall(LaunchPreview.launchDirection);
                 ball.EnableCollision();
                 ball.active = true;
- float waitingTime = 2f * Time.fixedDeltaTime;
-                //Debug.Log(waitingTime);
-                yield return new WaitForSeconds(waitingTime);            }
 
+                float waitingTime = 2f * Time.fixedUnscaledDeltaTime;
+                //Debug.Log(waitingTime);
+                yield return new WaitForSeconds(waitingTime);
+            }
             HideGhosts();
             //gameObject.SetActive(false);           
         }
     }
 
     public void HideGhosts() {
-        //GetComponent<LineRenderer>().positionCount = 0;
-
         launchPreview.active = false;
         foreach (Transform gos in transform) {
             if (gos.gameObject.name.Contains("Ghost")) {
