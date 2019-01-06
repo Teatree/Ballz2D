@@ -68,7 +68,6 @@ public class GridController : SceneSingleton<GridController> {
         Constants.GameOver_y_grid_index = grid.childCount-1;
         Constants.Warning_y_grid_index = grid.childCount-2;
 
-        
         BlocksAmount = gc.currentLevel.GetBlocksAmount();
 
         Revive.available = true; //Level just started Revive is available
@@ -83,7 +82,7 @@ public class GridController : SceneSingleton<GridController> {
                 List<CellData> cells = gc.currentLevel.rows[rowsSpawned].GetCells();
                 for (int i = 0; i < playWidth; i++) {
                     if (cells[i] != null && cells[i].type != "") {
-                        Block block = GetTheBlock(cells, rowsSpawned, i);
+                        Block block = GetTheBlock(cells[i].type, rowsSpawned, i);
                         //block.gameObject.transform.localScale = new Vector3(block.gameObject.transform.localScale.x*blockScale, block.gameObject.transform.localScale.y*blockScale); // *NEW
                         block.Setup(cells[i].type, cells[i].life, rowsSpawned, i);
                         blocksSpawned.Add(block);
@@ -100,14 +99,17 @@ public class GridController : SceneSingleton<GridController> {
         float lastRowSpawnedPos = 0;
         int lastRowSpawnedIndex = 0;
         int lastGridRow = 0;
+
         for (int i = 0; i < blocksSpawned.Count; i++) {
-            if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle) { 
-                //&& blocksSpawned[i]._type.isCollidable) {
+            Debug.Log(">>> blocksSpawned[ " + i + "].gridRow  > " + blocksSpawned[i].gridRow);
+            if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle 
+                                && blocksSpawned[i].gridRow > lastGridRow) { 
                 lastRowSpawnedPos = blocksSpawned[i].transform.position.y;
                 lastRowSpawnedIndex = blocksSpawned[i].row;
                 lastGridRow = blocksSpawned[i].gridRow;
-                break;
+               // break;
             }
+            Debug.Log(">>> lastGridRow> " + lastGridRow);
         }
 
         if (rowsSpawned > 0 && lastGridRow == Constants.Warning_y_grid_index) { //Show warnings ani
@@ -172,14 +174,15 @@ public class GridController : SceneSingleton<GridController> {
         }
     }
 
-    private Vector3 GetPosition(int row, int col) {
+    public Vector3 GetPosition(int row, int col) {
         return grid.transform.GetChild(row).transform.GetChild(col).gameObject.transform.position;
     }
 
 
-    private Block GetTheBlock(List<CellData> cells, int row, int col) {
+    public Block GetTheBlock(string type, int row, int col) {
         Block block;
-        switch (cells[col].type) {
+    
+        switch (type) {
             case "FF": {
                     block = Instantiate(fountainPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
@@ -241,9 +244,10 @@ public class GridController : SceneSingleton<GridController> {
                     break;
                 }
             default: {
-                    throw new System.ArgumentException("Block type  " + cells[col].type + " is not defined ");
+                    throw new System.ArgumentException("Block type  " + type + " is not defined ");
                 }
         }
+        block.typeCode = type;
 
         block.gameObject.transform.localScale = new Vector3(Mathf.Abs(grid.localScale.x) * 0.95f * Mathf.Sign(block.gameObject.transform.localScale.x), Mathf.Abs(grid.localScale.y) * 0.95f * Mathf.Sign(block.gameObject.transform.localScale.y));
         //Debug.Log("world cell pos" + grid.transform.GetChild(row).transform.GetChild(col).gameObject.transform.position + " block pos = " + block.transform.position);
