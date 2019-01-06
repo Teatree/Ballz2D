@@ -33,40 +33,8 @@ public class AdmobController : SceneSingleton<AdmobController> {
         this.RequestBanner();
         
         InitGemRewardVideo();
+        RequestInterstitial();
         bannerView.Show();
-    }
-
-    private void RequestBanner() {
-        // Create a 320x50 banner at the top of the screen.
-        bannerView = new BannerView(bannerId, AdSize.Banner, AdPosition.Top);
-        AdRequest request = GetTestRequest();
-
-        // Load the banner with the request.
-        bannerView.LoadAd(request);
-    }
-
-
-    private void RequestInterstitial() {
-
-        // Initialize an InterstitialAd.
-        this.interstitial = new InterstitialAd(interstitialId);
-        // Create an empty ad request.
-        AdRequest request = GetTestRequest();
-        // Load the interstitial with the request.
-        this.interstitial.LoadAd(request);
-    }
-
-    private void RequestRewardVideo() {
-        // Create an empty ad request.
-        this.rewardGemsVideo = RewardBasedVideoAd.Instance;
-        AdRequest request = GetTestRequest();
-        // Load the rewarded video ad with the request.
-        this.rewardGemsVideo.LoadAd(request, reardVideoId);
-    }
-
-
-    public void HandleInterstitialClosed(object sender, EventArgs args) {
-        MonoBehaviour.print("HandleInterstitialClosed event received");
     }
 
     private static AdRequest GetTestRequest() {
@@ -76,7 +44,39 @@ public class AdmobController : SceneSingleton<AdmobController> {
             .Build();
     }
 
-    //REvard
+    private void RequestBanner() {
+        bannerView = new BannerView(bannerId, AdSize.Banner, AdPosition.Top);
+        AdRequest request = GetTestRequest();
+        bannerView.LoadAd(request);
+    }
+
+    #region Interstitial
+    private void RequestInterstitial() {
+        this.interstitial = new InterstitialAd(interstitialId);
+        AdRequest request = GetTestRequest();
+        this.interstitial.LoadAd(request);
+    }
+
+    public void ShowIterstitial() {
+        if (this.interstitial.IsLoaded()) {
+            this.interstitial.Show();
+        }
+    }
+    public void HandleInterstitialClosed(object sender, EventArgs args) {
+        MonoBehaviour.print("HandleInterstitialClosed event received");
+    }
+    #endregion
+
+    #region revards
+
+    private void RequestRewardVideo() {
+        // Create an empty ad request.
+        this.rewardGemsVideo = RewardBasedVideoAd.Instance;
+        AdRequest request = GetTestRequest();
+        // Load the rewarded video ad with the request.
+        this.rewardGemsVideo.LoadAd(request, reardVideoId);
+    }
+
     public void ShowGemsRevardVideo() {
         if (rewardGemsVideo.IsLoaded()) {
             rewardGemsVideo.Show();
@@ -100,4 +100,31 @@ public class AdmobController : SceneSingleton<AdmobController> {
         this.RequestRewardVideo();
     }
 
+
+    //MoreBalls
+    public void ShowBallsRevardVideo() {
+        if (rewardGemsVideo.IsLoaded()) {
+            rewardGemsVideo.Show();
+        }
+        else {
+
+        }
+    }
+
+    private void InitBallsRewardVideo() {
+        RequestRewardVideo();
+        // Get singleton reward based video ad reference
+        rewardGemsVideo.OnAdRewarded += HandleRewardBallsRewarded;
+        rewardGemsVideo.OnAdClosed += HandleRewardBallsClosed;
+    }
+
+    public void HandleRewardBallsRewarded(object sender, Reward args) {
+        BallLauncher.ExtraBalls += UnityEngine.Random.Range(1, 6);
+    }
+
+    public void HandleRewardBallsClosed(object sender, EventArgs args) {
+        this.RequestRewardVideo();
+    }
+
+    #endregion 
 }
