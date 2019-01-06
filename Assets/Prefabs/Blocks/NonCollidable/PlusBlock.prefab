@@ -39,7 +39,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -53,8 +53,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.00935, y: 0.00935}
-  m_EdgeRadius: 0.015
+  m_Size: {x: 0.0105, y: 0.0105}
+  m_EdgeRadius: 0
 --- !u!114 &114838009722516278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,6 +73,9 @@ MonoBehaviour:
   DeathParticle: {fileID: 0}
   BombExplosion: {fileID: 0}
   ScoreFeedbacker: {fileID: 0}
+  WallsMask:
+    serializedVersion: 2
+    m_Bits: 0
   col: 0
   row: 0
   gridRow: 0
@@ -229,6 +232,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.3123393, y: 5.45026}
+  m_AnchoredPosition: {x: -1.99938, y: 4.7282047}
   m_SizeDelta: {x: 0.01, y: 0.01}
   m_Pivot: {x: 0.5, y: 0.5}

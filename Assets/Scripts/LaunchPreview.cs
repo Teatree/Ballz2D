@@ -102,7 +102,8 @@ public class LaunchPreview : MonoBehaviour {
             Vector3 offsetDirection = Vector3.zero;
             offsetDirection = baseOffsetDirection;
      
-            var reflectDir = Vector3.Reflect(launchDirection, hit.normal) + offsetDirection;
+            var reflectDir = Vector3.Reflect(launchDirection, hit.normal)/* + offsetDirection*/;
+            //Debug.Log("hit.normal = " + hit.normal + " launchDirection = " + launchDirection + " , BUT reflectDir);
 
             RaycastHit2D reflectRay = Physics2D.Raycast(hit.point * 0.999999f, reflectDir, 20, myWallsMask);
 

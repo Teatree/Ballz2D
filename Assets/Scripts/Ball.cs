@@ -9,28 +9,31 @@ public class Ball : MonoBehaviour {
     public bool ignoreCollision;
     public bool active;
 
+    public string personalLog;
+
     [SerializeField]
     public float moveSpeedNorm;
     [SerializeField]
     public float moveSpeedFast;
 
-    private float timeToConsiderBeingStuck = 15f;
+    private float timeToConsiderBeingStuck = 0.5f;
     private float timer = 0;
     private Vector3 baseOffsetDirection = Vector3.down * 0.1f;
+
+    // I think declaring some of these as fields helps with performance
+    RaycastHit2D hit;
 
     private void Start() {
         moveSpeed = moveSpeedNorm;
     }
 
-    private void OnEnable() {
-    }
-
     public void SetDir(Vector3 newDir) {
+        gameObject.SetActive(true);
         dir = newDir;
         dir = dir.normalized;
     }
 
-    private void FixedUpdate() {
+    private void Update() {
         if (LevelController.IsGameStopped()) {
             return;
         }
@@ -38,7 +41,7 @@ public class Ball : MonoBehaviour {
 
         timer += Time.deltaTime;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, moveSpeed * Time.deltaTime * 1.2f, ~(1 << 8));
+        hit = Physics2D.Raycast(transform.position, dir, moveSpeed * Time.deltaTime * 1.2f, ~(1 << 8));
 
         if (!hit) {
             return;
@@ -58,7 +61,7 @@ public class Ball : MonoBehaviour {
 
                 if (!hit.collider.gameObject.GetComponent<Block>()._type.isCollidable) { // If the block is not collidable -> return
                     return;
-                } 
+                }
             }
             else {
                 timer = 0;
@@ -66,19 +69,23 @@ public class Ball : MonoBehaviour {
         }
 
         //Reflect
-        Vector3 offsetDirection = Vector3.zero;
+        Vector2 offsetDirection = Vector2.zero;
         if (timer >= timeToConsiderBeingStuck) {
             timer = 0;
             offsetDirection = baseOffsetDirection;
         }
 
-        dir = Vector3.Reflect(dir, hit.normal) + offsetDirection;
+        personalLog += "\n dir = " + dir;
+        Vector2 v = Vector2.Reflect(dir, hit.normal) + offsetDirection;
+        dir = new Vector3(v.x, v.y, 0);
+        personalLog += "\n reflecting from " + hit.collider.name + " hit.point = " + hit.point + " hit.normal = " + hit.normal;
     }
 
     private void OnFloorCollision(Collider2D collider) {
         BallLauncher.Instance.ReturnBall(this);
         EnableCollision();
         active = false;
+        gameObject.SetActive(false);
     }
 
     public void DisableCollision() {
@@ -90,4 +97,8 @@ public class Ball : MonoBehaviour {
         ignoreCollision = false;
         moveSpeed = moveSpeedNorm;
     }
+
+    //public void AddForceBall(Vector2 dir) {
+    //    GetComponent<Rigidbody2D>().AddForce(dir * moveSpeed * 20);
+    //}
 }

@@ -113,7 +113,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.01}
+  m_Size: {x: 0.0105, y: 0.0105}
   m_EdgeRadius: 0
 --- !u!114 &114504280809085978
 MonoBehaviour:
@@ -210,11 +210,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23351756264731598}
@@ -248,6 +248,9 @@ MonoBehaviour:
   BombExplosion: {fileID: 0}
   ScoreFeedbacker: {fileID: 1350138362448226, guid: 003ba17fb2760694391517b47f244913,
     type: 2}
+  WallsMask:
+    serializedVersion: 2
+    m_Bits: 0
   col: 0
   row: 0
   gridRow: 0
@@ -338,6 +341,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.9982966, y: 6.2636743}
+  m_AnchoredPosition: {x: -2.045065, y: 4.5216827}
   m_SizeDelta: {x: 0.01, y: 0.01}
   m_Pivot: {x: 0.5, y: 0.5}
