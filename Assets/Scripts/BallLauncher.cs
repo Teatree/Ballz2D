@@ -266,7 +266,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     public void SpeedUP() {
-        if (Time.timeScale == 1f) {
+        if (Time.timeScale == 1f && !LevelController.isGamePaused && !BallLauncher.canShoot) {
           //  Debug.Log("Speeding Up!");
             GameUIController.Instance.TurnSpeedUpIcon_ON();
             Time.timeScale = 2f;

@@ -70,6 +70,7 @@ MonoBehaviour:
   wasHit: 0
   destroyed: 0
   spriteRenderer: {fileID: 0}
+  typeCode: 
   DeathParticle: {fileID: 0}
   BombExplosion: {fileID: 0}
   ScoreFeedbacker: {fileID: 0}
@@ -86,7 +87,7 @@ LineRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052273827840646}
   m_Enabled: 1
-  m_CastShadows: 2
+  m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 0

@@ -4,6 +4,7 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
 
     public GameObject Lightning;
     public GameObject Button;
+    public GameObject playArea;
 
     public int CostGems;
 
@@ -36,11 +37,13 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     }
 
     private void PlayAni() {
-
+        GameObject inst = Instantiate(Lightning);
+        inst.transform.SetParent(transform.parent.transform.parent, false);
+        inst.SetActive(true);
+        Destroy(inst, 0.5f);
     }
 
     public void OnClick_Lightning() {
-        Debug.Log(">>> Lightning cost > " + PlayerController.player.gems);
         if (PlayerController.player.gems >= CostGems) {
             PlayerController.player.gems -= CostGems;
             ShootLightning();
