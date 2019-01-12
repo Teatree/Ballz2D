@@ -9,19 +9,9 @@ public class Purchaser : MonoBehaviour, IStoreListener {
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
     
-    public static string kProductIDConsumable = "consumable";
-    public static string kProductIDNonConsumable = "no_ads";
-
+    public static string noAds = "no_ads";
     public static string GEMS_100 = "100_gems";
     public static string NO_ADS = "no_ads";
-
-   // public static string kProductIDSubscription = "subscription";
-
-    // Apple App Store-specific product identifier for the subscription product.
-    private static string kProductNameAppleSubscription = "com.unity3d.subscription.new";
-
-    // Google Play Store-specific product identifier subscription product.
-    private static string kProductNameGooglePlaySubscription = "com.unity3d.subscription.original";
 
     public void Awake() {
         purchaser = this;
@@ -46,21 +36,9 @@ public class Purchaser : MonoBehaviour, IStoreListener {
 
         builder.AddProduct(GEMS_100, ProductType.Consumable);
         builder.AddProduct(NO_ADS, ProductType.NonConsumable);
-        
-        
-        // And finish adding the subscription product. Notice this uses store-specific IDs, illustrating
-        // if the Product ID was configured differently between Apple and Google stores. Also note that
-        // one uses the general kProductIDSubscription handle inside the game - the store-specific IDs 
-        // must only be referenced here. 
-        //builder.AddProduct(
-        //    kProductIDSubscription, ProductType.Subscription, new IDs(){
-        //        { kProductNameAppleSubscription, AppleAppStore.Name },
-        //        { kProductNameGooglePlaySubscription, GooglePlay.Name },
-        //    });
 
         UnityPurchasing.Initialize(this, builder);
     }
-
 
     private bool IsInitialized() {
         // Only say we are initialized if both the Purchasing references are set.
@@ -75,39 +53,28 @@ public class Purchaser : MonoBehaviour, IStoreListener {
         BuyProductID(NO_ADS);
     }
 
-    //public void BuySubscription() {
-    //    // Buy the subscription product using its the general identifier. Expect a response either 
-    //    // through ProcessPurchase or OnPurchaseFailed asynchronously.
-    //    // Notice how we use the general product identifier in spite of this ID being mapped to
-    //    // custom store-specific identifiers above.
-    //    BuyProductID(kProductIDSubscription);
-    //}
-
+    public string GetLocalPrice(string prodId) {
+        return m_StoreController.products.WithID(prodId).metadata.localizedPriceString;
+    }
 
     private void BuyProductID(string productId) {
-        // If Purchasing has been initialized ...
         if (IsInitialized()) {
-            // ... look up the Product reference with the general product identifier and the Purchasing 
-            // system's products collection.
+            // ... look up the Product reference with the general product identifier and the Purchasing system's products collection.
             Product product = m_StoreController.products.WithID(productId);
 
             // If the look up found a product for this device's store and that product is ready to be sold ... 
             if (product != null && product.availableToPurchase) {
                 Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
-                // ... buy the product. Expect a response either through ProcessPurchase or OnPurchaseFailed 
-                // asynchronously.
+                // ... buy the product. Expect a response either through ProcessPurchase or OnPurchaseFailed asynchronously.
                 m_StoreController.InitiatePurchase(product);
             }
-            // Otherwise ...
             else {
                 // ... report the product look-up failure situation  
                 Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
             }
         }
-        // Otherwise ...
         else {
-            // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or 
-            // retrying initiailization.
+            // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or retrying initiailization.
             Debug.Log("BuyProductID FAIL. Not initialized.");
         }
     }
@@ -161,35 +128,12 @@ public class Purchaser : MonoBehaviour, IStoreListener {
         m_StoreExtensionProvider = extensions;
     }
 
-
     public void OnInitializeFailed(InitializationFailureReason error) {
         // Purchasing set-up has not succeeded. Check error for reason. Consider sharing this reason with the user.
         Debug.Log("OnInitializeFailed InitializationFailureReason:" + error);
     }
 
-
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args) {
-        // A consumable product has been purchased by this user.
-        //if (String.Equals(args.purchasedProduct.definition.id, kProductIDConsumable, StringComparison.Ordinal)) {
-        //    Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
-        //    // The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
-        //    // ScoreManager.score += 100;
-        //}
-        //// Or ... a non-consumable product has been purchased by this user.
-        //else if (String.Equals(args.purchasedProduct.definition.id, kProductIDNonConsumable, StringComparison.Ordinal)) {
-        //    Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
-        //    // TODO: The non-consumable item has been successfully purchased, grant this item to the player.
-        //}
-        ////// Or ... a subscription product has been purchased by this user.
-        ////else if (String.Equals(args.purchasedProduct.definition.id, kProductIDSubscription, StringComparison.Ordinal)) {
-        ////    Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
-        ////    // TODO: The subscription item has been successfully purchased, grant this to the player.
-        ////}
-        //// Or ... an unknown product has been purchased by this user. Fill in additional products here....
-        //else {
-        //    Debug.Log(string.Format("ProcessPurchase: FAIL. Unrecognized product: '{0}'", args.purchasedProduct.definition.id));
-        //}
-
         if (String.Equals(args.purchasedProduct.definition.id, GEMS_100, StringComparison.Ordinal)) {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             PlayerController.player.gems += 100;
@@ -205,11 +149,11 @@ public class Purchaser : MonoBehaviour, IStoreListener {
         return PurchaseProcessingResult.Complete;
     }
 
-
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason) {
         // A product purchase attempt did not succeed. Check failureReason for more detail. Consider sharing 
         // this reason with the user to guide their troubleshooting actions.
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
     }
+
 
 }

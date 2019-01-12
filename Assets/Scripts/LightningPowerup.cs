@@ -40,7 +40,7 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
         GameObject inst = Instantiate(Lightning);
         inst.transform.SetParent(transform.parent.transform.parent, false);
         inst.SetActive(true);
-        Destroy(inst, 0.5f);
+        Destroy(inst, 0.3f);
     }
 
     public void OnClick_Lightning() {
