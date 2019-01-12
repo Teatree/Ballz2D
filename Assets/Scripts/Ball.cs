@@ -3,6 +3,7 @@
 public class Ball : MonoBehaviour {
     public Vector3 dir;
 
+   
     public float moveSpeed;
     public int ballId;
     public bool ignoreCollision;
@@ -14,6 +15,8 @@ public class Ball : MonoBehaviour {
     public float moveSpeedNorm;
     [SerializeField]
     public float moveSpeedFast;
+
+    public GameObject ballSprite;
 
     private float timeToConsiderBeingStuck = 0.5f;
     private float timer = 0;
@@ -36,7 +39,7 @@ public class Ball : MonoBehaviour {
         if (LevelController.IsGameStopped()) {
             return;
         }
-       // Rotating();
+        Rotating();
         transform.position += dir * Time.deltaTime * moveSpeed;
 
         timer += Time.deltaTime;
@@ -99,6 +102,7 @@ public class Ball : MonoBehaviour {
     }
 
     private void Rotating() {
+        ballSprite.transform.Rotate(new Vector3(0, 0, 18));
     }
     //public void AddForceBall(Vector2 dir) {
     //    GetComponent<Rigidbody2D>().AddForce(dir * moveSpeed * 20);
