@@ -14,6 +14,7 @@ public class LevelController : MonoBehaviour {
     public static int blockscore = blockScoreMin ;
 
     public LevelData currentLevel;
+    public static string SpecialBall;
 
     public static bool isGameOver; 
     public static bool isGamePaused;
@@ -40,11 +41,6 @@ public class LevelController : MonoBehaviour {
         blockscore = blockScoreMin;
         levelScore = 0;
     }
-
-    //public static void GameOver() {
-    //    isGameOver = true;
-    //    Debug.Log("!!! The game is over");
-    //}
 
     public static void PauseGame() {
         isGamePaused = true;

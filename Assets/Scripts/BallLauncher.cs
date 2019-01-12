@@ -47,7 +47,6 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         CreateBall(InitBallAmount);
         textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
         canShoot = true;
-        //GameUIController.Instance.SetDebugText("AWAKEN!");
     }
 
     private void Update() {
@@ -157,7 +156,10 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     public void CreateBall(int ballsAmount) {
         for (int i = 0; i < ballsAmount; i++) {
             var ball = Instantiate(ballPrefab, scalingParent);
-            ball.transform.position = new Vector3(transform.position.x, transform.position.y - 190);
+
+            UPdateBallSprite(ball);
+
+            ball.transform.position = new Vector3(transform.position.x, transform.position.y - 190, 100);
             ball.ballId = i;
             balls.Add(ball);
             BallsReadyToShoot++;
@@ -288,5 +290,13 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
+    }
+
+
+    private static void UPdateBallSprite(Ball ball) {
+        if (LevelController.SpecialBall != null) {
+            Sprite s = Resources.Load<Sprite>("balls/" + LevelController.SpecialBall);
+            ball.transform.GetComponent<SpriteRenderer>().sprite = s;
+        }
     }
 }

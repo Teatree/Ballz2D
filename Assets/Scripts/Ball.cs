@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Ball : MonoBehaviour {
     public Vector3 dir;
@@ -37,6 +36,7 @@ public class Ball : MonoBehaviour {
         if (LevelController.IsGameStopped()) {
             return;
         }
+       // Rotating();
         transform.position += dir * Time.deltaTime * moveSpeed;
 
         timer += Time.deltaTime;
@@ -98,6 +98,8 @@ public class Ball : MonoBehaviour {
         moveSpeed = moveSpeedNorm;
     }
 
+    private void Rotating() {
+    }
     //public void AddForceBall(Vector2 dir) {
     //    GetComponent<Rigidbody2D>().AddForce(dir * moveSpeed * 20);
     //}

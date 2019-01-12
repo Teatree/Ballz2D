@@ -2,7 +2,6 @@
 
 public class ObstacleBehaviour : IBehaviour {
 
-
     public override void setBlock(Block b) {
         this.block = b;
     }
