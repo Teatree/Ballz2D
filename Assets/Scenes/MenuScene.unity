@@ -988,7 +988,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 284934486}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2066143726}
+        m_MethodName: OpenBoxOpen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &284934486
@@ -3109,7 +3120,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1785619430}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2066143726}
+        m_MethodName: OpenBoxOpen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1785619430
@@ -3404,6 +3426,8 @@ MonoBehaviour:
   SettingsPrefab: {fileID: 1305703286730776, guid: 9d25620c88531a846a0342469935e834,
     type: 2}
   ShopPrefab: {fileID: 1094745606953602, guid: a8c37f914cf2dbd46aec93f3f8a89f7e, type: 2}
+  BoxPopupPrefab: {fileID: 1393861602802556, guid: bfa265d38308df0419eb1e11e0ec040f,
+    type: 2}
 --- !u!1 &2130635610
 GameObject:
   m_ObjectHideFlags: 0
