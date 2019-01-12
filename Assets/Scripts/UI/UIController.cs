@@ -16,6 +16,7 @@ public class UIController : MonoBehaviour {
     [Header("Popups")]
     public GameObject SettingsPrefab;
     public GameObject ShopPrefab;
+    public GameObject BoxPopupPrefab;
 
     void Start() {
         //Load data
@@ -60,5 +61,8 @@ public class UIController : MonoBehaviour {
     public void OpenShop() {
         Instantiate(ShopPrefab, transform);
     }
-   
+
+    public void OpenBoxOpen() {
+        Instantiate(BoxPopupPrefab, transform);
+    }
 }
