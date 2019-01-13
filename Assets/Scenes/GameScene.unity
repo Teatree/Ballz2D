@@ -8558,7 +8558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scalingParent: {fileID: 883614036}
-  InitBallAmount: 40
+  InitBallAmount: 10
   ballScale: 1
   ballColor: {r: 1, g: 1, b: 1, a: 1}
   ballVisual: {fileID: 132243636}

@@ -148,8 +148,15 @@ public class PlayerData {
 public class ItemData {
     public int costGems;
     public string name;
-    public int probability;
     public int amount;
+    public bool enabled;
+
+    public ItemData(ItemObject io) {
+        this.costGems = io.costGems;
+        this.name = io.name;
+        this.amount = io.amount;
+        this.enabled = io.enabled;
+    }
 }
 
 [System.Serializable]

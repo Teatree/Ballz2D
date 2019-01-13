@@ -32,14 +32,16 @@ public class Ball : MonoBehaviour {
     public void SetDir(Vector3 newDir) {
         gameObject.SetActive(true);
         dir = newDir;
+        ballSprite.transform.Rotate(new Vector3(0, 0, -Vector2.Angle(transform.position, dir)));
         dir = dir.normalized;
+       
     }
 
     private void Update() {
         if (LevelController.IsGameStopped()) {
             return;
         }
-        Rotating();
+
         transform.position += dir * Time.deltaTime * moveSpeed;
 
         timer += Time.deltaTime;
@@ -81,6 +83,7 @@ public class Ball : MonoBehaviour {
         personalLog += "\n dir = " + dir;
         Vector2 v = Vector2.Reflect(dir, hit.normal) + offsetDirection;
         dir = new Vector3(v.x, v.y, 0);
+        ballSprite.transform.Rotate(new Vector3(0, 0, Vector2.Angle(Vector3.up, dir)));
         personalLog += "\n reflecting from " + hit.collider.name + " hit.point = " + hit.point + " hit.normal = " + hit.normal;
     }
 

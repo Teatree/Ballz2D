@@ -124,7 +124,7 @@ MonoBehaviour:
   ignoreCollision: 0
   active: 0
   personalLog: 
-  moveSpeedNorm: 8
+  moveSpeedNorm: 6
   moveSpeedFast: 13
   ballSprite: {fileID: 1256165743586508}
 --- !u!212 &212100571002316874

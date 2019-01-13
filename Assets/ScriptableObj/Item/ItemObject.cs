@@ -12,7 +12,7 @@ public class ItemObject : ScriptableObject {
     public Sprite shopImage;
     public string assetImage;
 
-
+    public bool enabled;
 
     public enum ItemType { Ball, Booster, Currency };
 }
