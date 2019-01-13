@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
-using System;
 
 public class DataController {
     private static string levelsFileName = "levels.json";
+    private static string itemsFileName = "items.json";
     private static string playerFileName = "playerInfo.json";
 
     public static string AjsonData;
@@ -12,14 +12,17 @@ public class DataController {
 
 #if UNITY_EDITOR
     public static string levelfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", levelsFileName);
+    public static string itemsfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", itemsFileName);
     public static string playerfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", playerFileName);
 
 #elif UNITY_ANDROID
     public static string levelfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", levelsFileName);
+    public static string itemsfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", itemsFileName);
     public static string playerfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", playerFileName);
 
 #elif UNITY_IOS
     private static string levelfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", levelsFileName);
+    private static string itemsfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", itemsFileName);
     private static string playerfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", playerFileName);
  
  
@@ -43,8 +46,23 @@ public class DataController {
 
     public static void SavePlayer(PlayerData pi) {
         string jsonData = JsonUtility.ToJson(pi);
-       // Debug.Log(">>> player info > " + jsonData);
+        // Debug.Log(">>> player info > " + jsonData);
         File.WriteAllText(playerfilePath, jsonData);
+    }
+
+    //------------Items ---------------------------
+    public static List<ItemData> LoadItems() {
+        string jsonData = "";
+        if (Application.platform == RuntimePlatform.Android) {
+            WWW reader = new WWW(itemsfilePath);
+            while (!reader.isDone) { }
+            jsonData = reader.text;
+        }
+        else {
+            jsonData = File.ReadAllText(itemsfilePath);
+        }
+        ItemData[] id = JsonHelper.FromJson<ItemData>(jsonData);
+        return new List<ItemData>(id);
     }
 
     //------------Load Levels --------------------
@@ -60,7 +78,7 @@ public class DataController {
         else {
             jsonData = File.ReadAllText(levelfilePath);
         }
-        
+
 
         if (jsonData != null) {
             string separ = "Level_?";
@@ -115,6 +133,7 @@ public class PlayerData {
     public bool noAds;
 
     public List<CompletedLevel> completedLvls = new List<CompletedLevel>();
+    public List<ItemData> items = new List<ItemData>();
 
     public int GetStarsAmount() {
         int sum = 0;
@@ -124,12 +143,21 @@ public class PlayerData {
         return sum;
     }
 }
+
+[System.Serializable]
+public class ItemData {
+    public int costGems;
+    public string name;
+    public int probability;
+    public int amount;
+}
+
 [System.Serializable]
 public class CompletedLevel {
     public int number;
     public int stars;
 
-    public CompletedLevel (int i, int j) {
+    public CompletedLevel(int i, int j) {
         this.number = i;
         this.stars = j;
     }
@@ -226,6 +254,7 @@ public class CellData {
         return type != null && type != "" && type != "LV" && type != "LH" && type != "LC" && type != "FF" && type != "★★" && type != "os";
     }
 }
+
 
 public static class JsonHelper {
     public static T[] FromJson<T>(string json) {

@@ -296,7 +296,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     private static void UPdateBallSprite(Ball ball) {
         if (LevelController.SpecialBall != null) {
             Sprite s = Resources.Load<Sprite>("balls/" + LevelController.SpecialBall);
-            ball.transform.GetComponent<SpriteRenderer>().sprite = s;
+            ball.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = s;
         }
     }
 }

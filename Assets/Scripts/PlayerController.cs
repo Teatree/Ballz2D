@@ -7,7 +7,6 @@ public class PlayerController : SceneSingleton<PlayerController> {
     public static Dictionary<int, int> starsPerLvl;
 
     private void Start() {
-
         if (player == null) {
             player = DataController.LoadPlayer() != null ? DataController.LoadPlayer() : new PlayerData();
             DateTime dt = DateTime.Now;
@@ -39,5 +38,20 @@ public class PlayerController : SceneSingleton<PlayerController> {
         DataController.SavePlayer(player);
     }
 
+    private int getAmountOfItem(string iname) {
+        if (player.items != null && player.items.Count > 0) {
+            ItemData idata = player.items.Find(x => x.name.Equals(iname));
+            return idata != null ? idata.amount : 0;
+        } else {
+            return 0;
+        }
+    }
 
+    public int GetAmountOfLigntnings() {
+        return getAmountOfItem("lightning");
+    }
+
+    public int GetAmountOfExtraBalls() {
+        return getAmountOfItem("extraball");
+    }
 }

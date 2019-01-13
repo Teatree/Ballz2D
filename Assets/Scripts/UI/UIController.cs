@@ -63,6 +63,7 @@ public class UIController : MonoBehaviour {
     }
 
     public void OpenBoxOpen() {
-        Instantiate(BoxPopupPrefab, transform);
+        var Box = Instantiate(BoxPopupPrefab, transform);
+        Box.GetComponent<BoxPopup>().itemToReceive = BoxOpener.Instance.GetBoxContents_BoxAd();
     }
 }

@@ -2,7 +2,7 @@
 
 public static class AllLevelsData {
     public static List<LevelData> allLevels = new List<LevelData>();
-   // public static PlayerData playerInfo; 
+
 
     public static int CurrentLevelIndex = 0;
 

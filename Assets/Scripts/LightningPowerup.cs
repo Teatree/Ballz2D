@@ -6,6 +6,8 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     public GameObject Button;
     public GameObject playArea;
 
+    public static ItemData idata;
+
     public int CostGems;
 
     public void Start() {

@@ -379,6 +379,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58055ce4d9ef60448a5ba8d2d34017a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemToReceive: {fileID: 0}
+  itemImage: {fileID: 114669408694656506}
+  itemText: {fileID: 1158699011979472}
+  itemName: {fileID: 114248971097068480}
 --- !u!114 &114233454031343586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -806,7 +810,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114311369578848868}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114201714402541672}
+        m_MethodName: OnClick_Close
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114201714402541672}
+        m_MethodName: OnClick_Equip
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114859829234711428

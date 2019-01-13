@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5349a0ddadbf344bbc53f0cdfe6cdd, type: 3}
+  m_Name: BoxDay
+  m_EditorClassIdentifier: 
+  objectName: BoxDay
+  items:
+  - {fileID: 11400000, guid: ff5caf5e13ad8b34a854c64a70d77ecb, type: 2}
+  - {fileID: 11400000, guid: 52838865ad0aa2540b5640104fd413c5, type: 2}
+  - {fileID: 11400000, guid: 779bcc37e4b97724f94eb4b7c3cfe170, type: 2}
+  itemProbabilities:
+  - 0.1
+  - 0.1
+  - 0.8

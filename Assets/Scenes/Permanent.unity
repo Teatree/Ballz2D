@@ -193,6 +193,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bceebcfaddd3164f91f6970a41080b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1517596996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1517596998}
+  - component: {fileID: 1517596997}
+  m_Layer: 0
+  m_Name: BoxOpener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1517596997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1517596996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df646f69555e944898c11a84af2bee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoxAd: {fileID: 11400000, guid: 1db5fd2c72d745a48ac9c51e247dd501, type: 2}
+  BoxDay: {fileID: 11400000, guid: 7ff4c41e1957b51409762e051c14330a, type: 2}
+  BoxStars: {fileID: 11400000, guid: c44da912428f5874e9a9ffe7d7ddf394, type: 2}
+  BoxShop1: {fileID: 11400000, guid: ee100ef067e08db4cbf74b7678e42919, type: 2}
+  BoxShop2: {fileID: 11400000, guid: 0051e3fe6ccf7b54e8faba51799bf7d3, type: 2}
+--- !u!4 &1517596998
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1517596996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.924804, y: 201.16211, z: -1.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1784900065
 GameObject:
   m_ObjectHideFlags: 0
