@@ -15,4 +15,9 @@ public abstract class IPopup<T> : SceneSingleton<IPopup<T>> {
     public void OnClick_AdsForGems() {
         AdmobController.Instance.ShowGemsRevardVideo();
     }
+
+    public virtual void SwitchToShopHCTab() {
+        //hcTab.SetContentActive();
+        Debug.Log("Dmitriy");
+    }
 }
