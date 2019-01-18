@@ -5,6 +5,7 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     public GameObject Lightning;
     public GameObject Button;
     public GameObject playArea;
+    public GameObject HC_cost;
 
     public static ItemData idata;
 

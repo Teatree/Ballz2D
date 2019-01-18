@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class LevelController : MonoBehaviour {
+public class LevelController : SceneSingleton<LevelController> {
 
     public static int blockScoreMin = 20;
     private static int blockScoreCoefficientStep = 10;

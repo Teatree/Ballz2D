@@ -1,14 +1,11 @@
-﻿public class Pause : IPopup<Pause> {
+﻿using UnityEngine.UI;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public class Pause : IPopup<Pause> {
+    public Text LevelText;
+
+    void Start() {
+        LevelText.text = "Level: " + (AllLevelsData.CurrentLevelIndex + 1).ToString();
+    }
 
     public override void OnClick_Close() {
         LevelController.ResumeGame();

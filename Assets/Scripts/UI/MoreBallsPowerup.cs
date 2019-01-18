@@ -6,6 +6,7 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
 
     public GameObject Ani;
     public GameObject Button;
+    public GameObject HC_cost;
     public int CostGems;
 
     public int ExtraBallsAmount;

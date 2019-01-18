@@ -2,6 +2,7 @@
 
 public class CancelPowerup : SceneSingleton<CancelPowerup> {
     public GameObject Button;
+    public GameObject HC_cost;
 
     public int CostGems = 200;
 

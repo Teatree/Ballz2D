@@ -12,35 +12,35 @@ public class GridController : SceneSingleton<GridController> {
     #region prefabs
     [Header("Block Prefabs")]
     [SerializeField]
-    private Block obstaclePrefab;
+    public Block obstaclePrefab;
     [SerializeField]
-    private Block blockPrefab;
+    public Block blockPrefab;
     [SerializeField]
-    private Block triangleNWPrefab;
+    public Block triangleNWPrefab;
     [SerializeField]
-    private Block triangleNEPrefab;
+    public Block triangleNEPrefab;
     [SerializeField]
-    private Block triangleSEPrefab;
+    public Block triangleSEPrefab;
     [SerializeField]
-    private Block triangleSWPrefab;
+    public Block triangleSWPrefab;
     [SerializeField]
-    private Block laserHorizontalPrefab;
+    public Block laserHorizontalPrefab;
     [SerializeField]
-    private Block laserVerticalPrefab;
+    public Block laserVerticalPrefab;
     [SerializeField]
-    private Block laserCrossPrefab;
+    public Block laserCrossPrefab;
     [SerializeField]
-    private Block bombPrefab;
+    public Block bombPrefab;
     [SerializeField]
-    private Block bombCrossPrefab;
+    public Block bombCrossPrefab;
     [SerializeField]
-    private Block bombVerticalPrefab;
+    public Block bombVerticalPrefab;
     [SerializeField]
-    private Block bombHorizontalPrefab;
+    public Block bombHorizontalPrefab;
     [SerializeField]
-    private Block plusBallPrefab;
+    public Block plusBallPrefab;
     [SerializeField]
-    private Block fountainPrefab;
+    public Block fountainPrefab;
     #endregion
 
     private int playWidth = 13;
@@ -175,7 +175,6 @@ public class GridController : SceneSingleton<GridController> {
     public Vector3 GetPosition(int row, int col) {
         return grid.transform.GetChild(row).transform.GetChild(col).gameObject.transform.position;
     }
-
 
     public Block GetTheBlock(string type, int row, int col) {
         Block block;
