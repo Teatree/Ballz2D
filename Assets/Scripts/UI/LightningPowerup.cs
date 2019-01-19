@@ -30,17 +30,15 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     }
 
     public void EnableButton() {
-        bool showHC = true;
-        showHC = !hasLightnigItem();
-        HC_cost.SetActive(showHC);
+        HC_cost.SetActive(hasLightnigItem() < 0);
         Button.SetActive(true);
     }
 
-    private bool hasLightnigItem() {
-        bool has = false;
-        foreach (ItemData i in PlayerController.player.items) {
-            if (i.name.Equals("Lightning")) {
-                has = true;
+    private int hasLightnigItem() {
+        int has = -1;
+        for (int i = 0; i < PlayerController.player.items.Count; i++) {
+            if (PlayerController.player.items[i].name.Equals("Lightning")) {
+                has = i;
             }
         }
 
@@ -61,16 +59,31 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     }
 
     public void OnClick_Lightning() {
-        if (PlayerController.player.gems >= CostGems) {
+        int hasItem = hasLightnigItem();
+        Debug.Log(">>> hasItem > " + hasItem);
+    
+        if (hasItem >= 0) {
+            ShootLightning();
+
+            if (PlayerController.player.items[hasItem].amount > 1) {
+                PlayerController.player.items[hasItem].amount--;
+                Debug.Log(">>> use  > " + PlayerController.player.items[hasItem].amount);
+            }
+            else {
+                Debug.Log(">>> " + hasItem);
+                PlayerController.player.items.RemoveAt(hasItem);
+                Debug.Log(">>> " + PlayerController.player.items);
+            }
+        }
+        else if (PlayerController.player.gems >= CostGems) {
+            Debug.Log(">>> buy > ");
             PlayerController.player.gems -= CostGems;
             ShootLightning();
-        } else if (hasLightnigItem()) {
-            ShootLightning();   
-
-            //remove from items list
         }
         else {
             GameUIController.Instance.ShowShop();
         }
+        Debug.Log(">>> " + PlayerController.player.items);
+        EnableButton();
     }
 }

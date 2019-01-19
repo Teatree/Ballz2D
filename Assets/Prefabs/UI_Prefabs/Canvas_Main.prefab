@@ -1796,7 +1796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ani: {fileID: 1435151246723922}
   Button: {fileID: 1337789212019462}
-  HC_cost: {fileID: 0}
+  HC_cost: {fileID: 1337789212019462}
   CostGems: 100
   ExtraBallsAmount: 25
 --- !u!114 &114319864082270866
