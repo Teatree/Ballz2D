@@ -30,7 +30,21 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     }
 
     public void EnableButton() {
+        bool showHC = true;
+        showHC = !hasLightnigItem();
+        HC_cost.SetActive(showHC);
         Button.SetActive(true);
+    }
+
+    private bool hasLightnigItem() {
+        bool has = false;
+        foreach (ItemData i in PlayerController.player.items) {
+            if (i.name.Equals("Lightning")) {
+                has = true;
+            }
+        }
+
+        return has;
     }
 
     public void UpdateVisual() {
@@ -50,6 +64,10 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
         if (PlayerController.player.gems >= CostGems) {
             PlayerController.player.gems -= CostGems;
             ShootLightning();
+        } else if (hasLightnigItem()) {
+            ShootLightning();   
+
+            //remove from items list
         }
         else {
             GameUIController.Instance.ShowShop();

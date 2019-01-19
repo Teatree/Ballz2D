@@ -56,6 +56,13 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
     }
 
     public void EnableButton() {
+        bool showHC = true;
+        foreach (ItemData i in PlayerController.player.items) {
+            if (i.name.Equals("ExtraBalls")) {
+                showHC = false;
+            }
+        }
+        HC_cost.SetActive(showHC);
         Button.SetActive(true);
     }
 
