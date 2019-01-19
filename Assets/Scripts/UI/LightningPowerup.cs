@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class LightningPowerup : SceneSingleton<LightningPowerup> {
 
     public GameObject Lightning;
     public GameObject Button;
+    public Text AmountText;
     public GameObject playArea;
     public GameObject HC_cost;
 
@@ -30,7 +32,9 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     }
 
     public void EnableButton() {
-        HC_cost.SetActive(hasLightnigItem() < 0);
+        int has = hasLightnigItem();
+        HC_cost.SetActive(has < 0);
+        AmountText.text = has >= 0 ? PlayerController.player.items[has].amount.ToString() : "";
         Button.SetActive(true);
     }
 
@@ -60,30 +64,24 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
 
     public void OnClick_Lightning() {
         int hasItem = hasLightnigItem();
-        Debug.Log(">>> hasItem > " + hasItem);
     
         if (hasItem >= 0) {
             ShootLightning();
 
             if (PlayerController.player.items[hasItem].amount > 1) {
                 PlayerController.player.items[hasItem].amount--;
-                Debug.Log(">>> use  > " + PlayerController.player.items[hasItem].amount);
             }
             else {
-                Debug.Log(">>> " + hasItem);
                 PlayerController.player.items.RemoveAt(hasItem);
-                Debug.Log(">>> " + PlayerController.player.items);
             }
         }
         else if (PlayerController.player.gems >= CostGems) {
-            Debug.Log(">>> buy > ");
             PlayerController.player.gems -= CostGems;
             ShootLightning();
         }
         else {
             GameUIController.Instance.ShowShop();
         }
-        Debug.Log(">>> " + PlayerController.player.items);
         EnableButton();
     }
 }

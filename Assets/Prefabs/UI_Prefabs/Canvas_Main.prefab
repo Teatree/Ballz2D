@@ -1797,6 +1797,7 @@ MonoBehaviour:
   Ani: {fileID: 1435151246723922}
   Button: {fileID: 1337789212019462}
   HC_cost: {fileID: 1337789212019462}
+  AmountText: {fileID: 114684480741942234}
   CostGems: 100
   ExtraBallsAmount: 25
 --- !u!114 &114319864082270866
@@ -3147,6 +3148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lightning: {fileID: 1519226728874120, guid: 8146ed448bda7914eb9b265c51d63d6d, type: 2}
   Button: {fileID: 1063484154147102}
+  AmountText: {fileID: 114065334236812040}
   playArea: {fileID: 0}
   HC_cost: {fileID: 1510718331406068}
   CostGems: 100

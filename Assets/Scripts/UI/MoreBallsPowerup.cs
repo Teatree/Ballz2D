@@ -7,6 +7,7 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
     public GameObject Ani;
     public GameObject Button;
     public GameObject HC_cost;
+    public Text AmountText;
     public int CostGems;
 
     public int ExtraBallsAmount;
@@ -56,7 +57,9 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
     }
 
     public void EnableButton() {
+        int has = hasExtraBallsItem();
         HC_cost.SetActive(hasExtraBallsItem() < 0);
+        AmountText.text = has >= 0 ? PlayerController.player.items[has].amount.ToString() : "";
         Button.SetActive(true);
     }
 
