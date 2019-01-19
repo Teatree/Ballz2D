@@ -121,12 +121,13 @@ MonoBehaviour:
   dir: {x: 0, y: 0, z: 0}
   moveSpeed: 0
   ballId: 0
-  ignoreCollision: 0
   active: 0
   personalLog: 
-  moveSpeedNorm: 6
+  moveSpeedNorm: 3
   moveSpeedFast: 13
   ballSprite: {fileID: 1256165743586508}
+  ignoreCollision: 0
+  rb: {fileID: 50122553291929004}
 --- !u!212 &212100571002316874
 SpriteRenderer:
   m_ObjectHideFlags: 1

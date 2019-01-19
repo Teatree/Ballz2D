@@ -98,7 +98,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1762702544093280}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f1cbeb186b759f646ad962ab2292501d, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -115,10 +115,11 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.005, y: 0.005}
-      - {x: -0.005, y: -0.005}
+      - {x: -0.0050020637, y: -0.004895646}
+      - {x: -0.004885749, y: -0.0050126943}
       - {x: 0.005, y: -0.005}
-      - {x: 0.005, y: -0.00453125}
-      - {x: -0.00453125, y: 0.005}
+      - {x: 0.004815676, y: -0.004577331}
+      - {x: -0.0046695005, y: 0.0049539185}
 --- !u!114 &114086506282812414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,11 +248,15 @@ MonoBehaviour:
   wasHit: 0
   destroyed: 0
   spriteRenderer: {fileID: 0}
+  typeCode: 
   DeathParticle: {fileID: 1992232517332788, guid: 5229f677d00b9804297291f48a94fc56,
     type: 2}
   BombExplosion: {fileID: 0}
   ScoreFeedbacker: {fileID: 1350138362448226, guid: 003ba17fb2760694391517b47f244913,
     type: 2}
+  WallsMask:
+    serializedVersion: 2
+    m_Bits: 0
   col: 0
   row: 0
   gridRow: 0

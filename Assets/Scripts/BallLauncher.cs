@@ -190,7 +190,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 ball.transform.position = transform.position;
                 ball.moveSpeed = ball.moveSpeedNorm;
                 ball.gameObject.SetActive(true);
-                ball.SetDir(LaunchPreview.launchDirection);
+                ball.AddForceBall(LaunchPreview.launchDirection);
                 //ball.AddForceBall(LaunchPreview.launchDirection);
                 ball.EnableCollision();
                 ball.active = true;
@@ -255,7 +255,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     public void SummonAllBalls() {
         StopCoroutine(launcherBallRoutine);
         foreach (Ball b in balls) {
-            b.SetDir(transform.position - b.transform.position);
+            b.AddForceBall(transform.position - b.transform.position);
             b.DisableCollision();
         }
         int ballsAlreadyThere = 0;
