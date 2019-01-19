@@ -17,8 +17,8 @@ TagManager:
   - 
   - Ball
   - Walls
-  - 
-  - 
+  - IgnoreCollision
+  - ReturnBall
   - 
   - 
   - 
