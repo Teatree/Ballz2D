@@ -54,6 +54,9 @@ public class GridController : SceneSingleton<GridController> {
     public static bool doNotMoveRowDown;
 
     private void Start() { //OnLevelWasLoaded
+
+        PlayServicesUI.Instance.Unlock1Achievement();
+
         blocksSpawned = new List<Block>();
         gc = GetComponent<LevelController>();
         for (int i = 0; i < 18 - gc.currentLevel.emptyRowsCount; i++) {
@@ -260,6 +263,8 @@ public class GridController : SceneSingleton<GridController> {
             }
             SubmitStars();
             GameUIController.Instance.HandleWin();
+
+            PlayServicesController.Instance.PublishScoreToLeaderBoard(LevelController.levelScore);
             return true;
         }
         else {
