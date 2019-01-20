@@ -7,6 +7,7 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
     public GameObject Ani;
     public GameObject Button;
     public GameObject HC_cost;
+    public Text AmountText;
     public int CostGems;
 
     public int ExtraBallsAmount;
@@ -56,29 +57,49 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
     }
 
     public void EnableButton() {
-        bool showHC = true;
-        foreach (ItemData i in PlayerController.player.items) {
-            if (i.name.Equals("ExtraBalls")) {
-                showHC = false;
-            }
-        }
-        HC_cost.SetActive(showHC);
+        int has = hasExtraBallsItem();
+        HC_cost.SetActive(hasExtraBallsItem() < 0);
+        AmountText.text = has >= 0 ? PlayerController.player.items[has].amount.ToString() : "";
         Button.SetActive(true);
     }
 
-    public void UpdateVisual() { 
+    public void UpdateVisual() {
         if (PlayerController.player.gems < CostGems) {
             DisableButton();
         }
     }
 
     public void OnClick_GetMoreBalls() {
-        if (PlayerController.player.gems >= CostGems) {
+        int hasItem = hasExtraBallsItem();
+
+        if (hasItem >= 0) {
+            GetMoreBalls();
+            if (PlayerController.player.items[hasItem].amount > 1) {
+                PlayerController.player.items[hasItem].amount--;
+            }
+            else {
+                PlayerController.player.items.RemoveAt(hasItem);
+            }
+        }
+        else
+         if (PlayerController.player.gems >= CostGems) {
             PlayerController.player.gems -= CostGems;
             GetMoreBalls();
         }
         else {
             GameUIController.Instance.ShowShop();
         }
+        EnableButton();
+    }
+
+    private int hasExtraBallsItem() {
+        int has = -1;
+        for (int i = 0; i < PlayerController.player.items.Count; i++) {
+            if (PlayerController.player.items[i].name.Equals("ExtraBalls")) {
+                has = i;
+            }
+        }
+
+        return has;
     }
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class BlockBehaviour : IBehaviour {
 
     public override void setBlock(Block b) {

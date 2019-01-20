@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class LightningPowerup : SceneSingleton<LightningPowerup> {
 
     public GameObject Lightning;
     public GameObject Button;
+    public Text AmountText;
     public GameObject playArea;
     public GameObject HC_cost;
 
@@ -30,17 +32,17 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     }
 
     public void EnableButton() {
-        bool showHC = true;
-        showHC = !hasLightnigItem();
-        HC_cost.SetActive(showHC);
+        int has = hasLightnigItem();
+        HC_cost.SetActive(has < 0);
+        AmountText.text = has >= 0 ? PlayerController.player.items[has].amount.ToString() : "";
         Button.SetActive(true);
     }
 
-    private bool hasLightnigItem() {
-        bool has = false;
-        foreach (ItemData i in PlayerController.player.items) {
-            if (i.name.Equals("Lightning")) {
-                has = true;
+    private int hasLightnigItem() {
+        int has = -1;
+        for (int i = 0; i < PlayerController.player.items.Count; i++) {
+            if (PlayerController.player.items[i].name.Equals("Lightning")) {
+                has = i;
             }
         }
 
@@ -61,16 +63,25 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     }
 
     public void OnClick_Lightning() {
-        if (PlayerController.player.gems >= CostGems) {
+        int hasItem = hasLightnigItem();
+    
+        if (hasItem >= 0) {
+            ShootLightning();
+
+            if (PlayerController.player.items[hasItem].amount > 1) {
+                PlayerController.player.items[hasItem].amount--;
+            }
+            else {
+                PlayerController.player.items.RemoveAt(hasItem);
+            }
+        }
+        else if (PlayerController.player.gems >= CostGems) {
             PlayerController.player.gems -= CostGems;
             ShootLightning();
-        } else if (hasLightnigItem()) {
-            ShootLightning();   
-
-            //remove from items list
         }
         else {
             GameUIController.Instance.ShowShop();
         }
+        EnableButton();
     }
 }
