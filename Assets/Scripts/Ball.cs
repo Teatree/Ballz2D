@@ -52,6 +52,11 @@ public class Ball : MonoBehaviour {
         transform.rotation = Quaternion.AngleAxis(lookAngle, Vector3.forward);
         //transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z-100, transform.rotation.w);
         //rb.velocity = rb.velocity.normalized * moveSpeed;
+
+        //sorry
+        if (transform.position.y < 0.1) {
+            EnableCollision();
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision) {

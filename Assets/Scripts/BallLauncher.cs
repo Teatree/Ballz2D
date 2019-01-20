@@ -89,6 +89,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
             // Check whether balls were out for too long and speed up
             if (BallsReadyToShoot != balls.Count && outTime > outTimeLimit) {
+                Debug.Log(">>> BallsReadyToShoot > " + BallsReadyToShoot);
                 SpeedUP();
             }
             else if (BallsReadyToShoot != balls.Count && outTime <= outTimeLimit && Time.deltaTime != 2f) {
@@ -106,6 +107,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     public void ReturnBall(Ball b) {
+        Debug.Log("Return balls");
         if (BallsReadyToShoot == 0 || (b.ignoreCollision && newPos.y == 0)) {
             UpdateVisualsFirstBall(b);
         }
