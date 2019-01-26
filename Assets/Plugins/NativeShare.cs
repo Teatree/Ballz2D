@@ -39,9 +39,10 @@ public static class NativeShare
     public static void ShareMultiple(string body, string[] filePaths = null, string url = null, string subject = "", string mimeType = "text/html", bool chooser = false, string chooserText = "Select sharing app")
     {
 #if UNITY_ANDROID
-		ShareAndroid(body, subject, url, filePaths, mimeType, chooser, chooserText);
+		ShareAndroid(body, subject, url, null, mimeType, chooser, chooserText);
+		//ShareAndroid(body, subject, url, filePaths, mimeType, chooser, chooserText);
 #elif UNITY_IOS
-		ShareIOS(body, subject, url, filePaths);
+		ShareIOS(body, subject, url, null);
 #else
         Debug.Log("No sharing set up for this platform.");
         Debug.Log("Subject: " + subject);
@@ -57,11 +58,9 @@ public static class NativeShare
 		{
 			using (intentObject.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND")))
 			{ }
-			using (intentObject.Call<AndroidJavaObject>("setType", mimeType))
-			{ }
-			using (intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), subject))
-			{ }
-			using (intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), body))
+            using (intentObject.Call<AndroidJavaObject>("setType", mimeType)) { }
+            using (intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), subject)) { }
+            using (intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), body))
 			{ }
 
 			if (!string.IsNullOrEmpty(url))

@@ -50,8 +50,7 @@ public class UIController : MonoBehaviour {
     }
 
     public void Share() {
-        ShareController.Instance.ShareScreenshotWithText("c" +
-            "heck out this balls");
+        ShareController.Instance.ShareScreenshotWithText("This game has balls! ");
     }
 
     public void OpenSettings() {

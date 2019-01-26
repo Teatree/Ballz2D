@@ -18,21 +18,33 @@ public class PlayServicesController : SceneSingleton<PlayServicesController> {
 
     #region achievemnts
     public void UnlockAchievement(string id) {
-        Social.ReportProgress(id, 100, success => { });
+        if (PlayGamesPlatform.Instance.localUser.authenticated) { 
+            Social.ReportProgress(id, 100, success => { });
+        }
     }
 
     public void ShowAchievemntsUI() {
-        Social.ShowAchievementsUI();
+        if (PlayGamesPlatform.Instance.localUser.authenticated) {
+            Social.ShowAchievementsUI();
+        } else {
+            Social.localUser.Authenticate(success => { Social.ShowAchievementsUI(); });
+        }
     }
     #endregion
 
     #region leaderboard
     public void PublishScoreToLeaderBoard( long score) {
-        Social.ReportScore(score, GPGSIds.leaderboard_ballsy_leaders, success => { });
+        if (PlayGamesPlatform.Instance.localUser.authenticated) {
+            Social.ReportScore(score, GPGSIds.leaderboard_ballsy_leaders, success => { });
+        } 
     }
 
     public void ShowLeaderboardsUI() {
-        Social.ShowAchievementsUI();
+        if (PlayGamesPlatform.Instance.localUser.authenticated) {
+            Social.ShowLeaderboardUI();
+        } else {
+            Social.localUser.Authenticate(success => { Social.ShowLeaderboardUI(); });
+        }
     }
     #endregion
 }

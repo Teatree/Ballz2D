@@ -6,22 +6,29 @@ using System;
 public class ShareController : SceneSingleton<ShareController> {
 
     public string ScreenshotName = "screenshot.png";
+#if UNITY_ANDROID
+    String gameUrl = "https://play.google.com/apps/testing/com.FearlessDoodlez.BirckTheBalls";
+#endif
+#if UNITY_IOS
+        String gameUrl = "https://play.google.com/apps/testing/com.FearlessDoodlez.BirckTheBalls";
+#endif
+
 
     public void ShareScreenshotWithText(string text) {
         string screenShotPath = Application.persistentDataPath + "/" + ScreenshotName;
         if (File.Exists(screenShotPath)) File.Delete(screenShotPath);
 
-        ScreenCapture.CaptureScreenshot(ScreenshotName);
+     //   ScreenCapture.CaptureScreenshot(ScreenshotName);
 
-        StartCoroutine(delayedShare(screenShotPath, text));
+        StartCoroutine(delayedShare(screenShotPath, text + gameUrl));
     }
 
     //CaptureScreenshot runs asynchronously, so you'll need to either capture the screenshot early and wait a fixed time
     //for it to save, or set a unique image name and check if the file has been created yet before sharing.
     IEnumerator delayedShare(string screenShotPath, string text) {
-        while (!File.Exists(screenShotPath)) {
+       // while (!File.Exists(screenShotPath)) {
             yield return new WaitForSeconds(.05f);
-        }
+        //}
 
         NativeShare.Share(text, screenShotPath, "", "", "image/png", true, "");
     }
