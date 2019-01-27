@@ -47,6 +47,10 @@ public class Block : MonoBehaviour {
         }
     }
 
+    public void OnTriggerEnter2D(Collider2D collision) {
+        Debug.Log("well done!");
+    }
+
     protected IEnumerator BlockBlink(Color initColor, float waitTime) {
         GetComponent<SpriteRenderer>().color = Color.white;
         yield return new WaitForSeconds(0.01f);
@@ -54,11 +58,11 @@ public class Block : MonoBehaviour {
         yield return new WaitForSeconds(0.01f);
     }
 
-    public void interactWithBall(Ball ball) {
+    public void interactWithBall() {
         if (_behaviour == null) {
             Debug.LogError(_type);
         }
-        _behaviour.OnCollide(ball);
+        _behaviour.OnCollide();
     }
 
     public void DestroySelf() {

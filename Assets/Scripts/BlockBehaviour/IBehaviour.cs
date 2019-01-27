@@ -11,7 +11,7 @@ public abstract class IBehaviour {
 
     public abstract void OnDestroy();
 
-    public abstract void OnCollide(Ball ball);
+    public abstract void OnCollide();
     public abstract void LooseOneLife();
 
     public abstract void Update();

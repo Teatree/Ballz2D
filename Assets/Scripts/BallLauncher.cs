@@ -8,6 +8,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     private static float base_y;
 
     public Transform scalingParent;
+    public ParticleSystem ballShooter;
     [SerializeField]
     [Header("Ball Settings")]
     public int InitBallAmount;
@@ -89,7 +90,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
             // Check whether balls were out for too long and speed up
             if (BallsReadyToShoot != balls.Count && outTime > outTimeLimit) {
-                Debug.Log(">>> BallsReadyToShoot > " + BallsReadyToShoot);
+                //Debug.Log(">>> BallsReadyToShoot > " + BallsReadyToShoot);
                 SpeedUP();
             }
             else if (BallsReadyToShoot != balls.Count && outTime <= outTimeLimit && Time.deltaTime != 2f) {
@@ -176,6 +177,10 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         HideGhosts();
     }
 
+    public void shootBallPart() {
+        ballShooter.Emit(1);
+    }
+
     private IEnumerator LaunchBalls() {
         if (BallsReadyToShoot == balls.Count) {
             GridController.doNotMoveRowDown = false;
@@ -192,8 +197,8 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 ball.transform.position = transform.position;
                 ball.moveSpeed = ball.moveSpeedNorm;
                 ball.gameObject.SetActive(true);
-                ball.AddForceBall(LaunchPreview.launchDirection);
                 //ball.AddForceBall(LaunchPreview.launchDirection);
+                shootBallPart();
                 ball.EnableCollision();
                 ball.active = true;
 
