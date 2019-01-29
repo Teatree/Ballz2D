@@ -74,6 +74,11 @@ public class GridController : SceneSingleton<GridController> {
         BlocksAmount = gc.currentLevel.GetBlocksAmount();
 
         Revive.available = true; //Level just started Revive is available
+
+        foreach (Block b in blocksSpawned) {
+            b.transform.position = new Vector3(b.transform.position.x, b.transform.position.y, 10.791512f); // really weird fix for a really weird bug
+            //Debug.Log("b.transform.position = " + b.transform.position);
+        }
     }
 
     public void SpawnRowOfBlocks(bool moveObstacles) {
@@ -89,11 +94,11 @@ public class GridController : SceneSingleton<GridController> {
                         //block.gameObject.transform.localScale = new Vector3(block.gameObject.transform.localScale.x*blockScale, block.gameObject.transform.localScale.y*blockScale); // *NEW
                         block.Setup(cells[i].type, cells[i].life, rowsSpawned, i);
                         blocksSpawned.Add(block);
+                        
                     }
                 }
                 rowsSpawned++;
             }
-          
         }
         BallLauncher.canShoot = true;
     }
@@ -131,15 +136,17 @@ public class GridController : SceneSingleton<GridController> {
         //move blocks down one line
         foreach (var block in blocksSpawned) {
             if (block != null && !block.destroyed && (block._type != BlockType.Obstacle || moveObstacles)) {
-                RectTransform rt = (RectTransform)block.transform;
                 int newY = ++block.gridRow;
                 ConsiderObstacles(block, ref newY);
 
                 if (!isSpecialCase(block, newY)) {
                     block.transform.position = GetPosition(newY, block.col);
+                    RectTransform rt = block.GetComponent<RectTransform>();
+                    rt.position = new Vector3(rt.position.x, rt.position.y, 0);
                 }
             }
         }
+
         checkLastBlocksLine();
         blocksSpawnedSaved = new List<BlockClone>();
     }

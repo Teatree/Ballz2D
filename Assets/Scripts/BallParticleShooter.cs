@@ -2,20 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TESTES : MonoBehaviour {
+public class BallParticleShooter : MonoBehaviour {
 
     public ParticleSystem ps;
     List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
+    private ParticleSystem.Particle[] m_particles = new ParticleSystem.Particle[10]; // amount SE T THE AMOUTN
+    public TEST t;
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start() {
+        
+    }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Update() {
+        int numParticlesAlive = ps.GetParticles(m_particles);
+
+        //Debug.Log("m_particles = " + m_particles);
+        for (int i = 0; i < numParticlesAlive; i++) {
+            //t.isCollidingNonCollidable(m_particles[i].position);
+
+            foreach (Block b in GridController.blocksSpawned) {
+                //Debug.Log("Particle Pos: " + m_particles[i].position);
+                b.isCollidingNonCollidable(m_particles[i].position);
+            }
+        }
+
+        ps.SetParticles(m_particles, numParticlesAlive);
+    }
 
     void OnParticleTrigger() {
         int numEnter = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter);

@@ -19,6 +19,7 @@ public class Block : MonoBehaviour {
     public string typeCode;
     public BlockType _type;
     public IBehaviour _behaviour;
+    private BoxCollider2D boxCollider;
 
     public GameObject DeathParticle;
     public GameObject BombExplosion;
@@ -33,6 +34,8 @@ public class Block : MonoBehaviour {
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         text = GetComponentInChildren<TextMeshPro>();
+        boxCollider = GetComponent<BoxCollider2D>();
+
         UpdateVisualState();
     }
 
@@ -95,6 +98,17 @@ public class Block : MonoBehaviour {
         _behaviour.setBlock(this);
         UpdateVisualState();
     }
+    
+    public void isCollidingNonCollidable(Vector3 pos) {
+        if (!destroyed && !_type.isCollidable) {
+            //Debug.Log("boxCollider.bounds = " + boxCollider + "  " + boxCollider.bounds.center);
+            //Debug.Log("Block Pos: " + transform.position);
+            if (boxCollider.bounds.Contains(pos)) {
+                //Debug.Log("well done!");
+                interactWithBall();
+            }
+        }
+    }
 
     public void Hit() {
         _behaviour.LooseOneLife();
@@ -133,7 +147,6 @@ public class Block : MonoBehaviour {
     public Block() {
 
     }
-
 
 }
 

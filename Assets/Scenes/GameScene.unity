@@ -12119,7 +12119,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -13195,6 +13195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 1931644103}
+  t: {fileID: 0}
 --- !u!1 &1934373467
 GameObject:
   m_ObjectHideFlags: 0
