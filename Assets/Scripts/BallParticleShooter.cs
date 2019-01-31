@@ -6,7 +6,7 @@ public class BallParticleShooter : MonoBehaviour {
 
     public ParticleSystem ps;
     List<ParticleSystem.Particle> enter = new List<ParticleSystem.Particle>();
-    private ParticleSystem.Particle[] m_particles = new ParticleSystem.Particle[10]; // amount SE T THE AMOUTN
+    private ParticleSystem.Particle[] m_particles = new ParticleSystem.Particle[10]; // amount SET THE AMOUTN
     public TEST t;
 
     // Use this for initialization
@@ -21,10 +21,17 @@ public class BallParticleShooter : MonoBehaviour {
         for (int i = 0; i < numParticlesAlive; i++) {
             //t.isCollidingNonCollidable(m_particles[i].position);
 
-            foreach (Block b in GridController.blocksSpawned) {
-                //Debug.Log("Particle Pos: " + m_particles[i].position);
-                b.isCollidingNonCollidable(m_particles[i].position);
+            if (t.isCollidingNonCollidable(m_particles[i].position)) {
+                float lateralSpeed = new Vector2(m_particles[i].velocity.x, m_particles[i].velocity.z).magnitude;
+
+                Debug.Log("m_particles[i].velocity " + m_particles[i].velocity + " lateralSpeed: " + lateralSpeed);
+                m_particles[i].velocity = new Vector3(m_particles[i].velocity.x, m_particles[i].velocity.y, m_particles[i].velocity.z);
             }
+
+            //foreach (Block b in GridController.blocksSpawned) {
+            //    //Debug.Log("Particle Pos: " + m_particles[i].position);
+            //    b.isCollidingNonCollidable(m_particles[i].position);
+            //}
         }
 
         ps.SetParticles(m_particles, numParticlesAlive);

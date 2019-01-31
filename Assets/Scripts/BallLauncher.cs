@@ -197,8 +197,8 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 ball.transform.position = transform.position;
                 ball.moveSpeed = ball.moveSpeedNorm;
                 ball.gameObject.SetActive(true);
-                //ball.AddForceBall(LaunchPreview.launchDirection);
-                shootBallPart();
+                ball.AddForceBall(LaunchPreview.launchDirection);
+                //shootBallPart();
                 ball.EnableCollision();
                 ball.active = true;
 

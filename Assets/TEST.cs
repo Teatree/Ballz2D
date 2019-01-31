@@ -14,9 +14,11 @@ public class TEST : MonoBehaviour {
 		
 	}
 
-    public void isCollidingNonCollidable(Vector3 pos) {
+    public bool isCollidingNonCollidable(Vector3 pos) {
         if (circleCollider.bounds.Contains(pos)) {
             Debug.Log("well done!");
+            return true;
         }
+        return false;
     }
 }

@@ -9,7 +9,6 @@ public class BoxOpener : SceneSingleton<BoxOpener> {
     public BoxObject BoxStars;
     public BoxObject BoxShop1;
     public BoxObject BoxShop2;
-    
 
 	void Start () {
 		
