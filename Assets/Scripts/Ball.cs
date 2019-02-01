@@ -69,7 +69,7 @@ public class Ball : MonoBehaviour {
 
     private void ProcessBlockCOllision(Collider2D collider) {
         if (collider.gameObject.GetComponent<Block>() != null) { //If collision is not ignored and collided with block 
-            collider.gameObject.GetComponent<Block>().interactWithBall(this); //Interact with a block 
+            collider.gameObject.GetComponent<Block>().interactWithBall(); //Interact with a block 
 
             if (!collider.gameObject.GetComponent<Block>()._type.isCollidable) { // If the block is not collidable -> return
                 return;

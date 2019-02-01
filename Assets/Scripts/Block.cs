@@ -19,6 +19,7 @@ public class Block : MonoBehaviour {
     public string typeCode;
     public BlockType _type;
     public IBehaviour _behaviour;
+    private BoxCollider2D boxCollider;
 
     public GameObject DeathParticle;
     public GameObject BombExplosion;
@@ -33,6 +34,8 @@ public class Block : MonoBehaviour {
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         text = GetComponentInChildren<TextMeshPro>();
+        boxCollider = GetComponent<BoxCollider2D>();
+
         UpdateVisualState();
     }
 
@@ -47,6 +50,10 @@ public class Block : MonoBehaviour {
         }
     }
 
+    public void OnTriggerEnter2D(Collider2D collision) {
+        Debug.Log("well done!");
+    }
+
     protected IEnumerator BlockBlink(Color initColor, float waitTime) {
         GetComponent<SpriteRenderer>().color = Color.white;
         yield return new WaitForSeconds(0.01f);
@@ -54,11 +61,11 @@ public class Block : MonoBehaviour {
         yield return new WaitForSeconds(0.01f);
     }
 
-    public void interactWithBall(Ball ball) {
+    public void interactWithBall() {
         if (_behaviour == null) {
             Debug.LogError(_type);
         }
-        _behaviour.OnCollide(ball);
+        _behaviour.OnCollide();
     }
 
     public void DestroySelf() {
@@ -90,6 +97,17 @@ public class Block : MonoBehaviour {
 
         _behaviour.setBlock(this);
         UpdateVisualState();
+    }
+    
+    public void isCollidingNonCollidable(Vector3 pos) {
+        if (!destroyed && !_type.isCollidable) {
+            //Debug.Log("boxCollider.bounds = " + boxCollider + "  " + boxCollider.bounds.center);
+            //Debug.Log("Block Pos: " + transform.position);
+            if (boxCollider.bounds.Contains(pos)) {
+                //Debug.Log("well done!");
+                interactWithBall();
+            }
+        }
     }
 
     public void Hit() {
@@ -129,7 +147,6 @@ public class Block : MonoBehaviour {
     public Block() {
 
     }
-
 
 }
 

@@ -244,7 +244,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 2
   androidSplashScreen: {fileID: 2800000, guid: f0b4d6f7e690f854387f66a6c3bcfb3e, type: 3}
-  AndroidKeystoreName: C:/Project/Ballz2D/ballsKey.keystore
+  AndroidKeystoreName: D:/avatars_vrchat/turnbasedtut/Ballz2D/Ballz2D/ballsKey.keystore
   AndroidKeyaliasName: ballskey
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

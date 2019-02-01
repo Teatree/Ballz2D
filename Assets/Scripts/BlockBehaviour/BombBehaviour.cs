@@ -21,7 +21,7 @@
         block.DestroySelf();
     }
 
-    public override void OnCollide(Ball ball) {
+    public override void OnCollide() {
         UpdateSavedBlocks();
         block.Hit();
         block.UpdateVisualState();

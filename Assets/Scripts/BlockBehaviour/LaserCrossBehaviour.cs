@@ -15,7 +15,7 @@ public class LaserCrossBehaviour : IBehaviour {
         block.DestroySelf();
     }
 
-    public override void OnCollide(Ball ball) {
+    public override void OnCollide() {
         UpdateSavedBlocks();
         ShootLasers();
         if (!activated) {

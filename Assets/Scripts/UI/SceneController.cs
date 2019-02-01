@@ -13,6 +13,7 @@ public class SceneController : MonoBehaviour {
     public AdmobController admob;
 
     public void Awake() {
+        Application.targetFrameRate = 60;
         if (!gameStart) {
             if (sceneStateTracker == null) {
                 sceneStateTracker = new Dictionary<string, bool> {

@@ -15,7 +15,7 @@ public class LaserVerticalBehaviour : IBehaviour {
         block.DestroySelf();
     }
 
-    public override void OnCollide(Ball ball) {
+    public override void OnCollide() {
         UpdateSavedBlocks();
         if (!activated) {
             ShootLasers();

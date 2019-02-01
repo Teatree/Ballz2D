@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61177527315333796}
   - component: {fileID: 120280069219053942}
   - component: {fileID: 114838009722516278}
-  m_Layer: 2
+  m_Layer: 12
   m_Name: PlusBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,6 +70,7 @@ MonoBehaviour:
   wasHit: 0
   destroyed: 0
   spriteRenderer: {fileID: 0}
+  typeCode: 
   DeathParticle: {fileID: 0}
   BombExplosion: {fileID: 0}
   ScoreFeedbacker: {fileID: 0}

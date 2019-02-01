@@ -9,7 +9,7 @@ public class ExtraBallBehaviour : IBehaviour {
         this.block = b;
     }
 
-    public override void OnCollide(Ball ball) {
+    public override void OnCollide() {
         UpdateSavedBlocks();
         if (!block.wasHit) {
             block.wasHit = true;

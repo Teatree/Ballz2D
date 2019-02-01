@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61177527315333796}
   - component: {fileID: 120280069219053942}
   - component: {fileID: 114838009722516278}
-  m_Layer: 2
+  m_Layer: 12
   m_Name: LaserHotizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
