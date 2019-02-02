@@ -51,7 +51,7 @@ public class Block : MonoBehaviour {
     }
 
     public void OnTriggerEnter2D(Collider2D collision) {
-        Debug.Log("well done!");
+        //Debug.Log("well done!");
     }
 
     protected IEnumerator BlockBlink(Color initColor, float waitTime) {
