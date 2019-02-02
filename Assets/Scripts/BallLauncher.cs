@@ -209,6 +209,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 yield return new WaitForSeconds(waitingTime);
             }
             HideGhosts();
+            _slider = false;
             //gameObject.SetActive(false);           
         }
     }
