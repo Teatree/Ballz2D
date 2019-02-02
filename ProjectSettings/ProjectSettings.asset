@@ -16,15 +16,15 @@ PlayerSettings:
   productName: BirckTheBalls
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
+  m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
-  m_SplashScreenAnimation: 1
+  m_SplashScreenAnimation: 2
   m_SplashScreenLogoStyle: 1
   m_SplashScreenDrawMode: 0
   m_SplashScreenBackgroundAnimationZoom: 1
-  m_SplashScreenLogoAnimationZoom: 1
+  m_SplashScreenLogoAnimationZoom: 0.936
   m_SplashScreenBackgroundLandscapeAspect: 1.5286624
   m_SplashScreenBackgroundPortraitAspect: 1.5286624
   m_SplashScreenBackgroundLandscapeUvs:
@@ -39,8 +39,11 @@ PlayerSettings:
     y: 0
     width: 1
     height: 1
-  m_SplashScreenLogos: []
-  m_VirtualRealitySplashScreen: {fileID: 0}
+  m_SplashScreenLogos:
+  - logo: {fileID: 21300000, guid: d81b7e0fd8120834692e9ae1cf3df7dd, type: 3}
+    duration: 3.4
+  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: a8ab8e1f6fb0baf48bc149f188ca70fc,
+    type: 3}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
   defaultScreenHeight: 768
@@ -243,7 +246,7 @@ PlayerSettings:
   templateDefaultScene: Assets/Scenes/SampleScene.unity
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 2
-  androidSplashScreen: {fileID: 2800000, guid: f0b4d6f7e690f854387f66a6c3bcfb3e, type: 3}
+  androidSplashScreen: {fileID: 2800000, guid: a8ab8e1f6fb0baf48bc149f188ca70fc, type: 3}
   AndroidKeystoreName: D:/avatars_vrchat/turnbasedtut/Ballz2D/Ballz2D/ballsKey.keystore
   AndroidKeyaliasName: ballskey
   AndroidBuildApkPerCpuArchitecture: 0
@@ -262,7 +265,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: fa8f243177c9ca8428117da8feb00959, type: 3}
+      m_Icon: {fileID: 2800000, guid: aeb86253da9d1af4bb80bcd43b97db24, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -650,10 +653,8 @@ PlayerSettings:
   psp2InfoBarOnStartup: 0
   psp2InfoBarColor: 0
   psp2ScriptOptimizationLevel: 0
-  splashScreenBackgroundSourceLandscape: {fileID: 21300000, guid: f0b4d6f7e690f854387f66a6c3bcfb3e,
-    type: 3}
-  splashScreenBackgroundSourcePortrait: {fileID: 21300000, guid: f0b4d6f7e690f854387f66a6c3bcfb3e,
-    type: 3}
+  splashScreenBackgroundSourceLandscape: {fileID: 0}
+  splashScreenBackgroundSourcePortrait: {fileID: 0}
   spritePackerPolicy: 
   webGLMemorySize: 256
   webGLExceptionSupport: 1

@@ -121,12 +121,6 @@ public class GameUIController : SceneSingleton<GameUIController> {
         PlayerController.Instance.AddNewCompletedLevel(AllLevelsData.CurrentLevelIndex, LevelController.LevelStarsAmount);
     }
 
-    public void HandleRestart() {
-        //Debug.Log("AllLevelsData.CurrentLevelIndex " + AllLevelsData.CurrentLevelIndex);
-        LevelController.ResetScore();
-        SceneController.sceneController.LoadGame();
-    }
-
     public void HandlePreview() {
         Instantiate(PreviewPrefab, transform);
 

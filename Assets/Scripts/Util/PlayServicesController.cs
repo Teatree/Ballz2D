@@ -34,9 +34,11 @@ public class PlayServicesController : SceneSingleton<PlayServicesController> {
 
     #region leaderboard
     public void PublishScoreToLeaderBoard( long score) {
+#if UNITY_ANDROID
         if (PlayGamesPlatform.Instance.localUser.authenticated) {
             Social.ReportScore(score, GPGSIds.leaderboard_ballsy_leaders, success => { });
-        } 
+        }
+#endif
     }
 
     public void ShowLeaderboardsUI() {
