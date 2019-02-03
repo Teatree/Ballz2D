@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 224673570516001904}
   - component: {fileID: 212990759036189708}
   - component: {fileID: 114838009722516278}
-  - component: {fileID: 60834013368063518}
+  - component: {fileID: 60060577152350274}
   m_Layer: 0
   m_Name: TriangleNW
   m_TagString: Untagged
@@ -90,7 +90,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1047441085165380}
   m_Mesh: {fileID: 0}
---- !u!60 &60834013368063518
+--- !u!60 &60060577152350274
 PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -321,7 +321,7 @@ RectTransform:
   m_GameObject: {fileID: 1047441085165380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0016215194, y: 0.0016215203, z: 0.0016215203}
+  m_LocalScale: {x: -0.001621519, y: 0.0016215203, z: 0.0016215203}
   m_Children: []
   m_Father: {fileID: 224673570516001904}
   m_RootOrder: 0
@@ -339,7 +339,7 @@ RectTransform:
   m_GameObject: {fileID: 1052273827840646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 43, y: 43, z: 61.458843}
+  m_LocalScale: {x: -43, y: 43, z: 61.458843}
   m_Children:
   - {fileID: 224157517216533112}
   m_Father: {fileID: 0}
@@ -347,6 +347,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.0456097, y: 3.8766742}
+  m_AnchoredPosition: {x: 2.1035833, y: 4.4781528}
   m_SizeDelta: {x: 0.01, y: 0.01}
   m_Pivot: {x: 0.5, y: 0.5}

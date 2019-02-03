@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 222092692461351882}
   - component: {fileID: 114598273804272428}
   - component: {fileID: 114173288729083726}
+  - component: {fileID: 114436707945937610}
   m_Layer: 5
   m_Name: ButtonReturnBalls
   m_TagString: Untagged
@@ -74,6 +75,7 @@ GameObject:
   - component: {fileID: 222478506048601674}
   - component: {fileID: 114315481990225332}
   - component: {fileID: 114546873483828188}
+  - component: {fileID: 114484345205891032}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -319,6 +321,7 @@ GameObject:
   - component: {fileID: 222309852646869224}
   - component: {fileID: 114855524624765164}
   - component: {fileID: 114307447406419434}
+  - component: {fileID: 114691880690869978}
   m_Layer: 5
   m_Name: MoreBallsButton
   m_TagString: Untagged
@@ -405,6 +408,7 @@ GameObject:
   - component: {fileID: 222573178021873258}
   - component: {fileID: 114033081974096406}
   - component: {fileID: 114744119450291200}
+  - component: {fileID: 114791929047296924}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -677,6 +681,7 @@ GameObject:
   - component: {fileID: 222332883459532892}
   - component: {fileID: 114458410935511224}
   - component: {fileID: 114540792652532812}
+  - component: {fileID: 114501175400635616}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -695,6 +700,7 @@ GameObject:
   - component: {fileID: 222024464685325148}
   - component: {fileID: 114080291468784858}
   - component: {fileID: 114904655138358786}
+  - component: {fileID: 114706163554830338}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1940,6 +1946,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114436707945937610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1049886533327706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114455979627369258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2043,6 +2063,34 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114484345205891032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063484154147102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
+--- !u!114 &114501175400635616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697259697090272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114509458847250638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2528,6 +2576,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &114691880690869978
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1337789212019462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114693609687929908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2594,6 +2656,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: S
+--- !u!114 &114706163554830338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1721270967137914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114724614265516102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2714,6 +2790,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114791929047296924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1438501083463370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114797349486664030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3586,7 +3676,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -37, y: 0}
-  m_SizeDelta: {x: 110, y: 49.67}
+  m_SizeDelta: {x: 110, y: 61.92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224117636725244368
 RectTransform:
@@ -3698,7 +3788,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 35.2, y: 0}
-  m_SizeDelta: {x: 110, y: 49.7}
+  m_SizeDelta: {x: 110, y: 61.92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224239851778493002
 RectTransform:
