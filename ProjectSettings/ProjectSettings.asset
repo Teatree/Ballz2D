@@ -246,7 +246,7 @@ PlayerSettings:
   templateDefaultScene: Assets/Scenes/SampleScene.unity
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 2
-  androidSplashScreen: {fileID: 2800000, guid: a8ab8e1f6fb0baf48bc149f188ca70fc, type: 3}
+  androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: D:/avatars_vrchat/turnbasedtut/Ballz2D/Ballz2D/ballsKey.keystore
   AndroidKeyaliasName: ballskey
   AndroidBuildApkPerCpuArchitecture: 0
