@@ -81,7 +81,7 @@ public class DataController {
 
 
         if (jsonData != null) {
-            string separ = "Level_?";
+            string separ = "Level_[0-9][0-9]";
             string[] lvls = System.Text.RegularExpressions.Regex.Split(jsonData, separ);
 
             for (int i = 1; i < lvls.Length; i++) {
