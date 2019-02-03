@@ -27,6 +27,7 @@ public class UIController : SceneSingleton<UIController> {
 
         // debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "\n path: " + DataController.levelfilePath + "\n jsonDataExtracted: " + DataController.AjsonData;
         //Create level buttons
+
         if (PlayerController.player != null) {
             for (int i = 0; i < AllLevelsData.allLevels.Count; i++) {
                 var lvl = Instantiate(levelUiElementPrefab, LevelListParent);

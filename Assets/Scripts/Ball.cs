@@ -35,7 +35,7 @@ public class Ball : MonoBehaviour {
         //ballSprite.transform.LookAt(dir);
         dir = dir.normalized;
         rb.velocity = new Vector2();
-        rb.AddForce(dir * 500);
+        rb.AddForce(dir * 750);
     }
 
     private void Update() {
