@@ -58,8 +58,8 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
 
     public void EnableButton() {
         int has = hasExtraBallsItem();
-        HC_cost.SetActive(hasExtraBallsItem() < 0);
-        AmountText.text = has >= 0 ? PlayerController.player.items[has].amount.ToString() : "";
+        HC_cost.SetActive(has < 0);
+        AmountText.text = has >= 0 ? "x" + PlayerController.player.items[has].amount.ToString() : "";
         Button.SetActive(true);
     }
 
@@ -95,7 +95,7 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
     private int hasExtraBallsItem() {
         int has = -1;
         for (int i = 0; i < PlayerController.player.items.Count; i++) {
-            if (PlayerController.player.items[i].name.Equals("ExtraBalls")) {
+            if (PlayerController.player.items[i].name.Equals("extraball")) {
                 has = i;
             }
         }

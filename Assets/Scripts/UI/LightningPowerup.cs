@@ -34,14 +34,14 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     public void EnableButton() {
         int has = hasLightnigItem();
         HC_cost.SetActive(has < 0);
-        AmountText.text = has >= 0 ? PlayerController.player.items[has].amount.ToString() : "";
+        AmountText.text = has >= 0 ? "x" + PlayerController.player.items[has].amount.ToString() : "";
         Button.SetActive(true);
     }
 
     private int hasLightnigItem() {
         int has = -1;
         for (int i = 0; i < PlayerController.player.items.Count; i++) {
-            if (PlayerController.player.items[i].name.Equals("Lightning")) {
+            if (PlayerController.player.items[i].name.Equals("lightning")) {
                 has = i;
             }
         }

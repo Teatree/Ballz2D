@@ -10,6 +10,8 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public Image Star1;
     public Image Star2;
     public Image Star3;
+    public Sprite Star_Complete;
+    public Sprite Star_InComplete;
 
     [Header("Popups")]
     public GameObject RevivePrefab;
@@ -83,15 +85,15 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
     public void UpdateStars() {
         if (Slider.value >= 0) {
-            Star1.color = Color.white;
+            Star1.sprite = Star_Complete;
             LevelController.LevelStarsAmount = 1;
         }
         if (Slider.value >= Slider.maxValue * 0.6f) {
-            Star2.color = Color.white;
+            Star2.sprite = Star_Complete;
             LevelController.LevelStarsAmount = 2;
         }
         if (Slider.value >= Slider.maxValue) {
-            Star3.color = Color.white;
+            Star3.sprite = Star_Complete;
             LevelController.LevelStarsAmount = 3;
         }
     }

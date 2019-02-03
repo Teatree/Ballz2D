@@ -31,10 +31,11 @@ public class UIController : SceneSingleton<UIController> {
                 var lvl = Instantiate(levelUiElementPrefab, LevelListParent);
                 lvl.LevelNumber = i;
                 //lvl.transform.parent = LevelListParent.transform;
-                if (i <= PlayerController.starsPerLvl.Count) {
-                    lvl.buttonComponent.interactable = true;
+                //if (i <= PlayerController.starsPerLvl.Count) {
                     lvl.StarsNumber = (i < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i] : 0;
-                }
+                    lvl.buttonComponent.interactable = i <= PlayerController.starsPerLvl.Count ? true : false;
+                    lvl.UpdateButtonVisuals(lvl.StarsNumber);
+                //}
             }
         }
 
