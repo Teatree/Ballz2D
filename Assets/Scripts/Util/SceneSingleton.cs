@@ -16,8 +16,17 @@ public class SceneSingleton<T> : MonoBehaviour, IInitable where T : MonoBehaviou
     }
 
     static void Fetch() {
-        _instance = (T)FindObjectOfType(typeof(T));
-        (_instance as IInitable).Init();
+        try {
+           
+            _instance = (T)FindObjectOfType(typeof(T));
+            if (_instance != null) {
+                (_instance as IInitable).Init();
+            } else {
+                Debug.Log(">>>> fetch singleton > " + typeof(T));
+            }
+        } catch (MissingReferenceException e) {
+            Debug.Log(">>>> e fetch singleton > " + typeof(T));
+        }
     }
 
     public virtual void Init() {

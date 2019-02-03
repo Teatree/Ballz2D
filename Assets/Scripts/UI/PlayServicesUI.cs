@@ -8,9 +8,11 @@ public class PlayServicesUI : SceneSingleton<PlayServicesUI> {
 		
 	}
 
-    public void Unlock1Achievement () {
+    public static void Unlock1Achievement () {
 #if UNITY_ANDROID
-        PlayServicesController.Instance.UnlockAchievement(GPGSIds.achievement_started);
+        if (PlayServicesUI.Instance != null) {
+            PlayServicesController.Instance.UnlockAchievement(GPGSIds.achievement_started);
+        }
 #endif
     }
 

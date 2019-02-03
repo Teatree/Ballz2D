@@ -138,7 +138,6 @@ public class Preview : IPopup<Preview> {
 
         for (int i = 0; i < 18 - LevelController.Instance.currentLevel.rows.Count; i++) {
             SpawnRowOfBlocks();
-            Debug.Log(">>>");
         }
     }
 }

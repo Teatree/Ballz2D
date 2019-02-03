@@ -55,7 +55,7 @@ public class GridController : SceneSingleton<GridController> {
 
     private void Start() { //OnLevelWasLoaded
 
-        PlayServicesUI.Instance.Unlock1Achievement();
+        PlayServicesUI.Unlock1Achievement();
 
         blocksSpawned = new List<Block>();
         gc = GetComponent<LevelController>();

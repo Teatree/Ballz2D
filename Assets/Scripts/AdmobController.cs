@@ -8,20 +8,20 @@ public class AdmobController : SceneSingleton<AdmobController> {
     string appId = "ca-app-pub-4809397092315700~2101070495";
     string bannerId = "ca-app-pub-4809397092315700/7133905324"; //Sizes https://developers.google.com/admob/unity/banner#banner_sizes
     string interstitialId = "ca-app-pub-4809397092315700/3492498628";
-    string revardVideoId = "ca-app-pub-4809397092315700/9646843432";
-    string boxRevardVideoId = "ca-app-pub-4809397092315700/9646843432";
+    string rewardVideoId = "ca-app-pub-4809397092315700/9646843432";
+    string boxrewardVideoId = "ca-app-pub-4809397092315700/4309780879";
 #elif UNITY_IPHONE
      string appId = "ca-app-pub-4809397092315700~2101070495";
     string bannerId = "ca-app-pub-4809397092315700/7133905324";
     string interstitialId = "ca-app-pub-4809397092315700/3492498628";
-    string revardVideoId = "ca-app-pub-4809397092315700/9646843432";
-     string boxRevardVideoId = "ca-app-pub-4809397092315700/9646843432";
+    string rewardVideoId = "ca-app-pub-4809397092315700/9646843432";
+     string boxrewardVideoId = "ca-app-pub-4809397092315700/9646843432";
 #else
     string appId = "ca-app-pub-4809397092315700~2101070495";
     string bannerId = "ca-app-pub-4809397092315700/7133905324";
     string interstitialId = "ca-app-pub-4809397092315700/3492498628";
-    string revardVideoId = "ca-app-pub-4809397092315700/9646843432";
-     string boxRevardVideoId = "ca-app-pub-4809397092315700/9646843432";
+    string rewardVideoId = "ca-app-pub-4809397092315700/9646843432";
+     string boxrewardVideoId = "ca-app-pub-4809397092315700/9646843432";
 #endif
 
 
@@ -31,18 +31,16 @@ public class AdmobController : SceneSingleton<AdmobController> {
     private RewardBasedVideoAd rewardBoxVideo;
 
     public void Start() {
-        // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(appId);
 
         this.RequestBanner();
-        
         InitGemRewardVideo();
+        InitBoxRewardVideo();
         RequestInterstitial();
         bannerView.Show();
     }
 
     private static AdRequest GetTestRequest() {
-        // Create an empty ad request.
         return new AdRequest.Builder()
             .AddTestDevice("9457F77F86541E4EA84BF4A7CF6D83A6")
             .Build();
@@ -71,20 +69,19 @@ public class AdmobController : SceneSingleton<AdmobController> {
     }
     #endregion
 
-    #region revards
+    #region rewards
 
     private void RequestGemsRewardVideo() {
-        // Create an empty ad request.
         this.rewardGemsVideo = RewardBasedVideoAd.Instance;
         AdRequest request = GetTestRequest();
-        // Load the rewarded video ad with the request.
-        this.rewardGemsVideo.LoadAd(request, revardVideoId);
+        this.rewardGemsVideo.LoadAd(request, rewardVideoId);
     }
 
-    public void ShowGemsRevardVideo() {
+    public void ShowGemsrewardVideo() {
         if (rewardGemsVideo.IsLoaded()) {
             rewardGemsVideo.Show();
-        } else {
+        }
+        else {
             RequestGemsRewardVideo();
             rewardGemsVideo.Show();
         }
@@ -92,7 +89,6 @@ public class AdmobController : SceneSingleton<AdmobController> {
 
     private void InitGemRewardVideo() {
         RequestGemsRewardVideo();
-        // Get singleton reward based video ad reference
         rewardGemsVideo.OnAdRewarded += HandleRewardGemsRewarded;
         rewardGemsVideo.OnAdClosed += HandleRewardGemsClosed;
     }
@@ -108,42 +104,45 @@ public class AdmobController : SceneSingleton<AdmobController> {
 
     //Box 
     private void RequestBoxRewardVideo() {
-        // Create an empty ad request.
         this.rewardBoxVideo = RewardBasedVideoAd.Instance;
         AdRequest request = GetTestRequest();
-        // Load the rewarded video ad with the request.
-        this.rewardBoxVideo.LoadAd(request, revardVideoId);
-        if (rewardGemsVideo.IsLoaded()) {
-            UIController.Instance.SetEnabledAdBox(false);
-        } else {
-            UIController.Instance.SetEnabledAdBox(true);
-        }
+        this.rewardBoxVideo.LoadAd(request, boxrewardVideoId);
+        if (UIController.Instance != null)
+            if (rewardBoxVideo.IsLoaded()) {
+                UIController.Instance.SetEnabledAdBox(true);
+            }
+            else {
+                UIController.Instance.SetEnabledAdBox(false);
+            }
     }
 
-    public void ShowBoxRevardVideo() {
-        if (rewardGemsVideo.IsLoaded()) {
-            rewardGemsVideo.Show();
-        } else {
-            UIController.Instance.SetEnabledAdBox(false); 
+    public void ShowBoxrewardVideo() {
+        if (rewardBoxVideo.IsLoaded()) {
+            Debug.Log(">>>> show box reward");
+            rewardBoxVideo.Show();
+        }
+        else {
+            UIController.Instance.SetEnabledAdBox(false);
         }
     }
 
     private void InitBoxRewardVideo() {
         RequestBoxRewardVideo();
-        rewardGemsVideo.OnAdRewarded += HandleRewardGemsRewarded;
-        rewardGemsVideo.OnAdClosed += HandleRewardGemsClosed;
+        rewardBoxVideo.OnAdRewarded += HandleRewardBoxRewarded;
+        rewardBoxVideo.OnAdClosed += HandleRewardBoxClosed;
     }
 
     public void HandleRewardBoxRewarded(object sender, Reward args) {
         UIController.Instance.OpenBoxOpen();
+        UIController.Instance.SetEnabledAdBox(false);
     }
 
     public void HandleRewardBoxClosed(object sender, EventArgs args) {
-        this.RequestGemsRewardVideo();
+        this.RequestBoxRewardVideo();
     }
 
     ////MoreBalls
-    //public void ShowBallsRevardVideo() {
+    //public void ShowBallsrewardVideo() {
     //    if (rewardGemsVideo.IsLoaded()) {
     //        rewardGemsVideo.Show();
     //    }
@@ -167,5 +166,5 @@ public class AdmobController : SceneSingleton<AdmobController> {
     //    this.RequestRewardVideo();
     //}
 
-    #endregion 
+    #endregion
 }

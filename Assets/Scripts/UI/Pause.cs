@@ -1,5 +1,4 @@
 ﻿using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class Pause : IPopup<Pause> {
     public Text LevelText;
@@ -15,7 +14,7 @@ public class Pause : IPopup<Pause> {
 
     public void OnClick_Replay() {
         LevelController.ResetScore();
-        SceneController.initScene = "GameScene";
-        SceneManager.LoadScene("Permanent", LoadSceneMode.Single);
+        SceneController.sceneController.UnloadGame();
+        SceneController.sceneController.RestartGame();
     }
 }

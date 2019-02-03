@@ -233,7 +233,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     public void ContinueDrag(Vector3 worldPosition) {
         endDragPosition = worldPosition;
 
-        Debug.Log(" endDragPosition: " + endDragPosition);
+       // Debug.Log(" endDragPosition: " + endDragPosition);
         launchPreview.SetEndPoint(endDragPosition);
     }
 
@@ -241,12 +241,12 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         endDragPosition = new Vector3(transform.position.x + Slider.value, 1f - Mathf.Abs(Slider.value * 0.7f));
         endDragPosition = new Vector3(endDragPosition.x, endDragPosition.y, -10);
 
-        Debug.Log(" endDragPosition slider: " + endDragPosition);
+       // Debug.Log(" endDragPosition slider: " + endDragPosition);
         launchPreview.SetEndPoint(endDragPosition);
     }
 
     public void SetStartDrag() {
-        Debug.Log("starting drag");
+        //Debug.Log("starting drag");
         launchPreview.SetStartPoint(transform.position);
         launchPreview.active = true;
         ShowGhosts();
