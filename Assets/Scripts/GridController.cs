@@ -264,7 +264,7 @@ public class GridController : SceneSingleton<GridController> {
     public bool DidIwin() {
         if (gc.currentLevel.rows.Count == rowsSpawned) {
             foreach (var b in blocksSpawned) {
-                if (b != null && !b.destroyed) {
+                if (b != null && !b.destroyed && b._type.isCollidable) {
                     return false;
                 }
             }
