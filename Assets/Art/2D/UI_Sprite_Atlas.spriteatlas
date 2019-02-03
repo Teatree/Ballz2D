@@ -43,6 +43,20 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 049f84e66a6f11b4ba4e21c544e9a7ca, type: 3}
   - {fileID: 21300000, guid: bef485870e9afb6408e386da894594c8, type: 3}
   - {fileID: 21300000, guid: 5d16e39843f15a4438f5e4db39e718af, type: 3}
+  - {fileID: 21300022, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300020, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300026, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300024, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300012, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300014, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300008, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300010, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300004, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300006, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300000, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300002, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300016, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300018, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
   - {fileID: 21300000, guid: 0c29ac0bcd551554f9e4231a988842d8, type: 3}
   - {fileID: 21300000, guid: e9a6ff2b4a4c7e244bbb436feb0c3217, type: 3}
   - {fileID: 21300000, guid: 669e955c7d1f04a4fac2f92e67010abb, type: 3}
@@ -62,6 +76,20 @@ SpriteAtlas:
   - Leaderboard_Icon
   - Level_Completed
   - Achievements_Icon
+  - Confetti_11
+  - Confetti_10
+  - Confetti_13
+  - Confetti_12
+  - Confetti_6
+  - Confetti_7
+  - Confetti_4
+  - Confetti_5
+  - Confetti_2
+  - Confetti_3
+  - Confetti_0
+  - Confetti_1
+  - Confetti_8
+  - Confetti_9
   - bunny
   - Undo_Icon
   - Star_Icon

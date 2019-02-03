@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameOver : IPopup<GameOver> {
 
@@ -71,6 +72,9 @@ public class GameOver : IPopup<GameOver> {
         Btn_Group_Ads.SetActive(false);
         Btn_Group_Fail.SetActive(false);
         Btn_Group_Single.SetActive(true);
+
+        Window_Confetti.Instance.ReleaseConfetti();
+        StartCoroutine(stopConfetti());
     }
 
     public void InitWinBox() {
@@ -118,6 +122,7 @@ public class GameOver : IPopup<GameOver> {
     }
 
     public void OnClick_Next() {
+        Window_Confetti.Instance.active = false;
         AllLevelsData.CurrentLevelIndex++;
         ReloadGameScene();
     }
@@ -127,4 +132,8 @@ public class GameOver : IPopup<GameOver> {
         Destroy(gameObject); // kill self
     }
 
+    private IEnumerator stopConfetti() {
+        yield return new WaitForSeconds(2);
+        Window_Confetti.Instance.active = false;
+    }
 }
