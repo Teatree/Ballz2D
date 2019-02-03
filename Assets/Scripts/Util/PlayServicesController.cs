@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayServicesController : SceneSingleton<PlayServicesController> {
 
 	void Start () {
+        Debug.Log(">>>> Player Services start");
         PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
         PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.Activate();

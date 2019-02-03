@@ -14,6 +14,7 @@ public class SceneController : MonoBehaviour {
 
     public void Awake() {
         Application.targetFrameRate = 60;
+        Debug.Log(" >>>>> scene " + initScene);
         if (!gameStart) {
             if (sceneStateTracker == null) {
                 sceneStateTracker = new Dictionary<string, bool> {
@@ -36,7 +37,6 @@ public class SceneController : MonoBehaviour {
     private void UnloadScene(string scene) {
         //Debug.Log("> u >" + sceneStateTracker[scene]);
         if (sceneStateTracker[scene]) {
-
             StartCoroutine(Unload(scene));
             sceneStateTracker[scene] = false;
         }
@@ -83,8 +83,8 @@ public class SceneController : MonoBehaviour {
         SceneManager.UnloadSceneAsync(scene);
     }
 
-    private IEnumerator RestartGame() {
-        yield return null;
-        SceneManager.UnloadSceneAsync(2);
+    public void RestartGame() {
+        initScene = "GameScene";
+        SceneManager.LoadScene("Permanent", LoadSceneMode.Single);
     }
 }

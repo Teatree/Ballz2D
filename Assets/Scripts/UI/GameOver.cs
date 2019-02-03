@@ -112,13 +112,13 @@ public class GameOver : IPopup<GameOver> {
     }
 
     private static void ReloadGameScene() {
-        SceneController.initScene = "GameScene";
-        SceneManager.LoadScene("Permanent", LoadSceneMode.Single);
+        LevelController.ResetScore();
+        SceneController.sceneController.UnloadGame();
+        SceneController.sceneController.RestartGame();
     }
 
     public void OnClick_Next() {
         AllLevelsData.CurrentLevelIndex++;
-        LevelController.ResetScore();
         ReloadGameScene();
     }
 

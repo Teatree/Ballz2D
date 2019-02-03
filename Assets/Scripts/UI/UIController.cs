@@ -19,6 +19,7 @@ public class UIController : SceneSingleton<UIController> {
     public GameObject BoxPopupPrefab;
 
     public GameObject BoxAdButton;
+    private Button boxAdButtonCmp;
 
     void Start() {
         //Load data
@@ -49,7 +50,7 @@ public class UIController : SceneSingleton<UIController> {
     }
 
     public void getGems() {
-        AdmobController.Instance.ShowGemsRevardVideo();
+       // AdmobController.Instance.ShowGemsrewardVideo();
     }
 
     public void Share() {
@@ -65,18 +66,17 @@ public class UIController : SceneSingleton<UIController> {
     }
 
     public void OpenBoxOpen() {
+      
         var Box = Instantiate(BoxPopupPrefab, transform);
         Box.GetComponent<BoxPopup>().itemToReceive = BoxOpener.Instance.GetBoxContents_BoxAd();
     }
 
     public void SetEnabledAdBox(bool b) {
-        //#if UNITY_ANDROID
-        //        BoxAdButton.SetActive(b);
-        //#endif
-        BoxAdButton.SetActive(b);
+        boxAdButtonCmp = BoxAdButton.GetComponent<Button>();
+        boxAdButtonCmp.interactable = b;
     }
 
     public void ShowAdBox() {
-        AdmobController.Instance.ShowBoxRevardVideo();
+        AdmobController.Instance.ShowBoxrewardVideo();
     }
 }
