@@ -17,7 +17,7 @@ public class BlockBehaviour : IBehaviour {
         block.DestroySelf();
     }
 
-    public override void OnCollide() {
+    public override void OnCollide(Ball b){
         UpdateSavedBlocks();
         block.Hit();
         block.UpdateVisualState();

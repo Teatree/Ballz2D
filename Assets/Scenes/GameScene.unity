@@ -4624,13 +4624,13 @@ MonoBehaviour:
     type: 2}
   blockPrefab: {fileID: 114838009722516278, guid: ffd51ba95e58dfe4dbae3f3867a6e27e,
     type: 2}
-  triangleNWPrefab: {fileID: 114838009722516278, guid: 0d59061606300c7428abb9f7661092fa,
+  triangleNWPrefab: {fileID: 114838009722516278, guid: f12054762660c2146b6ce18ddef669bf,
     type: 2}
-  triangleNEPrefab: {fileID: 114838009722516278, guid: f12054762660c2146b6ce18ddef669bf,
+  triangleNEPrefab: {fileID: 114838009722516278, guid: 0d59061606300c7428abb9f7661092fa,
     type: 2}
-  triangleSEPrefab: {fileID: 114131903841729098, guid: e98f540acb10f0245be383266cdd596f,
+  triangleSEPrefab: {fileID: 114629025373439364, guid: 36544205242d5ad4cb8e18a71225193d,
     type: 2}
-  triangleSWPrefab: {fileID: 114629025373439364, guid: 36544205242d5ad4cb8e18a71225193d,
+  triangleSWPrefab: {fileID: 114131903841729098, guid: e98f540acb10f0245be383266cdd596f,
     type: 2}
   laserHorizontalPrefab: {fileID: 114838009722516278, guid: 32758e2d31077c04b944b4552758efa2,
     type: 2}
@@ -4949,7 +4949,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0027808899}
+  m_Offset: {x: 0.0007363111, y: -0.0038570408}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4960,7 +4960,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13000068, y: 0.008877756}
+  m_Size: {x: 0.15548843, y: 0.011030057}
   m_EdgeRadius: 0
 --- !u!1 &1042193473
 GameObject:
@@ -7687,6 +7687,7 @@ MonoBehaviour:
   - {r: 1, g: 0.9793993, b: 0, a: 1}
   - {r: 1, g: 0.4669811, b: 0.7930715, a: 1}
   - {r: 1, g: 0.7483255, b: 0.08018869, a: 1}
+  active: 0
 --- !u!1 &1668471524
 GameObject:
   m_ObjectHideFlags: 0

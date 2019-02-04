@@ -10,9 +10,9 @@ public class FountainBehaviour : IBehaviour {
         block.DestroySelf();
     }
 
-    public override void OnCollide() {
+    public override void OnCollide(Ball ball) {
         UpdateSavedBlocks();
-        //ball.AddForceBall(new Vector3(Random.Range(-0.75f, 0.75f), Mathf.Abs(ball.dir.y)));
+        ball.AddForceBall(new Vector3(Random.Range(-0.75f, 0.75f), Mathf.Abs(ball.dir.y)));
 
         block.wasHit = true;
     }

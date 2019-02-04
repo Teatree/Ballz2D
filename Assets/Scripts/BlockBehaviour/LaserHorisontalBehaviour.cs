@@ -6,7 +6,6 @@ public class LaserHorisontalBehaviour : IBehaviour {
     private LineRenderer laserLine;
 
     public override void setBlock(Block b) {
-
         this.block = b;
         laserLine = block.gameObject.GetComponent<LineRenderer>();
     }
@@ -15,7 +14,7 @@ public class LaserHorisontalBehaviour : IBehaviour {
         block.DestroySelf();
     }
 
-    public override void OnCollide() {
+    public override void OnCollide(Ball ball) {
         UpdateSavedBlocks();
         if (!activated) {
             ShootLasers();
@@ -25,15 +24,16 @@ public class LaserHorisontalBehaviour : IBehaviour {
                 }
             }
             block.wasHit = true;
-            activated = true;
+            activated = false;
         }
     }
 
     // shoot them pretty lasers
     public void ShootLasers() {
-        if (fadeRoutine != null) {
-            StopFadeRoutine();
-        }
+        //if (fadeRoutine != null) {
+        //    StopFadeRoutine();
+        //}
+        Debug.Log("Egg but green");
         Color c = laserLine.material.color;
         c.a = 1f;
         laserLine.material.color = c;
@@ -45,6 +45,7 @@ public class LaserHorisontalBehaviour : IBehaviour {
         laserLine.SetPosition(0, new Vector2(hitRight.point.x, block.transform.position.y));
         laserLine.SetPosition(1, new Vector2(hitLeft.point.x, block.transform.position.y));
 
+        //activated = false;
         fadeRoutine = block.StartCoroutine(LaserFade(laserLine));
     }
 

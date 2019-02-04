@@ -15,7 +15,7 @@ public class LaserVerticalBehaviour : IBehaviour {
         block.DestroySelf();
     }
 
-    public override void OnCollide() {
+    public override void OnCollide(Ball ball) {
         UpdateSavedBlocks();
         if (!activated) {
             ShootLasers();
@@ -25,15 +25,15 @@ public class LaserVerticalBehaviour : IBehaviour {
                 }
             }
             block.wasHit = true;
-            activated = true;
+            activated = false;
         }
     }
 
     // shoot them pretty lasers
     public void ShootLasers() {
-        if (fadeRoutine != null) {
-            StopFadeRoutine();
-        }
+        //if (fadeRoutine != null) {
+        //    StopFadeRoutine();
+        //}
 
         Color c = laserLine.material.color;
         c.a = 1f;

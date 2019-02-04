@@ -9,7 +9,7 @@ public class ObstacleBehaviour : IBehaviour {
     public override void OnDestroy() {
     }
 
-    public override void OnCollide() {
+    public override void OnCollide(Ball b) {
 
     }
 

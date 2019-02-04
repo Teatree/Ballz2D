@@ -15,7 +15,7 @@ public class LaserCrossBehaviour : IBehaviour {
         block.DestroySelf();
     }
 
-    public override void OnCollide() {
+    public override void OnCollide(Ball ball) {
         UpdateSavedBlocks();
         ShootLasers();
         if (!activated) {
@@ -26,13 +26,14 @@ public class LaserCrossBehaviour : IBehaviour {
             }
             block.wasHit = true;
         }
+        activated = false;
     }
 
     // shoot them pretty lasers
     public void ShootLasers() {
-        if (fadeRoutine != null) {
-            StopFadeRoutine();
-        }
+        //if (fadeRoutine != null) {
+        //    StopFadeRoutine();
+        //}
        // Debug.Log("pew pew ");
         
         Color c = laserLine.material.color;

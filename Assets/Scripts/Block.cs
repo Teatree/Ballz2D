@@ -61,11 +61,11 @@ public class Block : MonoBehaviour {
         yield return new WaitForSeconds(0.01f);
     }
 
-    public void interactWithBall() {
+    public void interactWithBall(Ball ball) {
         if (_behaviour == null) {
             Debug.LogError(_type);
         }
-        _behaviour.OnCollide();
+        _behaviour.OnCollide(ball);
     }
 
     public void DestroySelf() {
@@ -99,16 +99,16 @@ public class Block : MonoBehaviour {
         UpdateVisualState();
     }
     
-    public void isCollidingNonCollidable(Vector3 pos) {
-        if (!destroyed && !_type.isCollidable) {
-            //Debug.Log("boxCollider.bounds = " + boxCollider + "  " + boxCollider.bounds.center);
-            //Debug.Log("Block Pos: " + transform.position);
-            if (boxCollider.bounds.Contains(pos)) {
-                //Debug.Log("well done!");
-                interactWithBall();
-            }
-        }
-    }
+    //public void isCollidingNonCollidable(Vector3 pos) {
+    //    if (!destroyed && !_type.isCollidable) {
+    //        //Debug.Log("boxCollider.bounds = " + boxCollider + "  " + boxCollider.bounds.center);
+    //        //Debug.Log("Block Pos: " + transform.position);
+    //        if (boxCollider.bounds.Contains(pos)) {
+    //            //Debug.Log("well done!");
+    //            interactWithBall();
+    //        }
+    //    }
+    //}
 
     public void Hit() {
         _behaviour.LooseOneLife();

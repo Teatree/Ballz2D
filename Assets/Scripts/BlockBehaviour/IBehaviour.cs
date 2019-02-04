@@ -11,7 +11,7 @@ public abstract class IBehaviour {
 
     public abstract void OnDestroy();
 
-    public abstract void OnCollide();
+    public abstract void OnCollide(Ball b);
     public abstract void LooseOneLife();
 
     public abstract void Update();
@@ -28,7 +28,6 @@ public abstract class IBehaviour {
     }
 
     protected IEnumerator BombLaserFade(LineRenderer laserLine) {
-
         block.transform.position = new Vector2(-100, -100);
         for (int i = 0; i < 50; i++) {
             activated = false;
