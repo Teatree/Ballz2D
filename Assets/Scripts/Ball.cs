@@ -61,6 +61,8 @@ public class Ball : MonoBehaviour {
 
     public void OnCollisionEnter2D(Collision2D collision) {
         ProcessBlockCOllision(collision.collider);
+
+        rb.velocity = ClampMagnitude(rb.velocity, 12.525f, 12.520f);
     }
 
     public void OnTriggerEnter2D(Collider2D collider) {
@@ -101,5 +103,12 @@ public class Ball : MonoBehaviour {
 
     private void Rotating() {
         ballSprite.transform.Rotate(new Vector3(0, 0, 18));
+    }
+
+    private Vector3 ClampMagnitude(Vector3 v, float max, float min) {
+        double sm = v.sqrMagnitude;
+        if (sm > (double)max * (double)max) return v.normalized * max;
+        else if (sm < (double)min * (double)min) return v.normalized * min;
+        return v;
     }
 }
