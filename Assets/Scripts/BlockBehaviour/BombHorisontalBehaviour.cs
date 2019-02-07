@@ -16,7 +16,7 @@ public class BombHorisontalBehaviour : IBehaviour {
             LevelController.IncreseScore();
             ShootLasers();
             foreach (Block b in GridController.blocksSpawned) {
-                if (!b.Equals(this.block) && !b.destroyed && b.row == block.row && b != this.block) {
+                if (!b.Equals(this.block) && !b.destroyed && b.row == block.row && b != this.block && b._type.isCollidable) {
                     b._behaviour.OnDestroy();
                 }
             }

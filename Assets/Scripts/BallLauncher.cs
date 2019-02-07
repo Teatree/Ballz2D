@@ -8,7 +8,6 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     private static float base_y;
 
     public Transform scalingParent;
-    public ParticleSystem ballShooter;
     [SerializeField]
     [Header("Ball Settings")]
     public int InitBallAmount;
@@ -180,10 +179,12 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     public void shootBallPart() {
-        ballShooter.Emit(1);
+        //ballShooter.Emit(1);
     }
 
     private IEnumerator LaunchBalls() {
+        GameUIController.Instance.HideAdButtonFromTop();
+
         if (BallsReadyToShoot == balls.Count) {
             GridController.doNotMoveRowDown = false;
 
@@ -259,7 +260,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     public void SummonAllBalls() {
         StopCoroutine(launcherBallRoutine);
         foreach (Ball b in balls) {
-            b.AddForceBall(transform.position - b.transform.position);
+            b.AddForceBall(ballVisual.transform.position - b.transform.position);
             b.DisableCollision();
         }
         int ballsAlreadyThere = 0;

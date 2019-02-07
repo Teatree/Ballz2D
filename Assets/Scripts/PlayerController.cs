@@ -28,14 +28,14 @@ public class PlayerController : SceneSingleton<PlayerController> {
         }
     }
 
-    private void OnApplicationPause(bool pause) {
-        List<CompletedLevel> lvls = new List<CompletedLevel>();
-        foreach (KeyValuePair<int, int> lvl in starsPerLvl) {
-            lvls.Add(new CompletedLevel(lvl.Key, lvl.Value));
-        }
-        player.completedLvls = lvls;
-        DataController.SavePlayer(player);
-    }
+    //private void OnApplicationPause(bool pause) {
+    //    List<CompletedLevel> lvls = new List<CompletedLevel>();
+    //    foreach (KeyValuePair<int, int> lvl in starsPerLvl) {
+    //        lvls.Add(new CompletedLevel(lvl.Key, lvl.Value));
+    //    }
+    //    player.completedLvls = lvls;
+    //    DataController.SavePlayer(player);
+    //}
     
     void OnApplicationQuit() {
         List<CompletedLevel> lvls = new List<CompletedLevel>();

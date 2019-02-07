@@ -24,6 +24,8 @@ public class LevelController : SceneSingleton<LevelController> {
         isGameOver = false;
         isGamePaused = false;
         Debug.Log(">>>> lvl > " + AllLevelsData.GetCurrentLevel());
+
+        ResumeGame();
     }
 
     public static int IncreseScore() {

@@ -12,7 +12,7 @@
         foreach (Block b in GridController.blocksSpawned) {
             if (!b.destroyed && !b.Equals(this.block) &&
                     (b.row >= block.row - 1 && b.row <= block.row + 1) &&
-                    (b.col >= block.col - 1 && b.col <= block.col + 1)) {
+                    (b.col >= block.col - 1 && b.col <= block.col + 1) && b._type.isCollidable) {
                 b._behaviour.OnDestroy();
             }
         }

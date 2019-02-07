@@ -15,7 +15,7 @@ public class BombCrossBehaviour : IBehaviour {
             LevelController.IncreseScore();
             ShootLasers();
             foreach (Block b in GridController.blocksSpawned) {
-                if (!b.Equals(this.block) && !b.destroyed && (b.col == block.col || b.row == block.row))  {
+                if (!b.Equals(this.block) && !b.destroyed && (b.col == block.col || b.row == block.row) && b._type.isCollidable)  {
                     b._behaviour.OnDestroy();
                 }
             }

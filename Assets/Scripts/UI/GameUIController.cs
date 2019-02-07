@@ -16,7 +16,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     [Header("Popups")]
     public GameObject RevivePrefab;
     public GameObject GameOverPrefab;
-    public GameObject PreviewPrefab;
+    //public GameObject PreviewPrefab;
     public GameObject PausePrefab;
     public GameObject ShopPrefab;
 
@@ -28,12 +28,15 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject laserLine2;
     public GameObject laserLine3;
 
+    public GameObject Ad_Button;
+
     public static string currentLevelNumberLable;
 
     void Start() {
         SceneController.sceneController.UnloadMenu();
         HandlePreview();
-        LevelController.PauseGame();
+        Ad_Button.SetActive(true);
+        //LevelController.PauseGame();
         currentLevelNumberLable =  "" + (1 + AllLevelsData.CurrentLevelIndex);
         UpdateStars();
     }
@@ -108,6 +111,12 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
 
+    public void HideAdButtonFromTop() {
+        if (Ad_Button.activeSelf) {
+            Ad_Button.SetActive(false);
+        }
+    }
+
     public void ShowGameOver() {
        GameObject go =  Instantiate(GameOverPrefab, transform);
         GameOver g = go.transform.GetComponent<GameOver>();
@@ -124,8 +133,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
     public void HandlePreview() {
-        Instantiate(PreviewPrefab, transform);
-
+        //Instantiate(PreviewPrefab, transform);
     }
 
     public void HandleHomeButton() {
