@@ -5,8 +5,7 @@ public class LevelController : SceneSingleton<LevelController> {
     public static int blockScoreMin = 20;
     private static int blockScoreCoefficientStep = 10;
 
-    public static int SecondStarScore = 13000;
-    public static int ThirdStarScore = 25000;
+    public static int ThirdStarScore = 9;
 
     public static int LevelStarsAmount;
     public static int TotalStarsAmount;
@@ -26,6 +25,8 @@ public class LevelController : SceneSingleton<LevelController> {
         Debug.Log(">>>> lvl > " + AllLevelsData.GetCurrentLevel());
 
         ResumeGame();
+
+        ThirdStarScore = currentLevel.GetBlocksAmount() * 65;
     }
 
     public static int IncreseScore() {

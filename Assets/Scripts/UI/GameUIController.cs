@@ -39,6 +39,8 @@ public class GameUIController : SceneSingleton<GameUIController> {
         //LevelController.PauseGame();
         currentLevelNumberLable =  "" + (1 + AllLevelsData.CurrentLevelIndex);
         UpdateStars();
+
+        Slider.maxValue = LevelController.ThirdStarScore;
     }
 
     void Update() {
@@ -80,10 +82,11 @@ public class GameUIController : SceneSingleton<GameUIController> {
             curScore += increment;
             Slider.value = curScore;
             ScoreText.text = curScore.ToString();
-            yield return null;
-            
+            yield return null;     
         }
+
         curScore = endScore;
+        ScoreText.text = "" + endScore;
     }
 
     public void UpdateStars() {
