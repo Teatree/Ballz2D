@@ -41,7 +41,7 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     private int hasLightnigItem() {
         int has = -1;
         for (int i = 0; i < PlayerController.player.items.Count; i++) {
-            if (PlayerController.player.items[i].name.Equals("lightning")) {
+            if (PlayerController.player.items[i].name.Equals("Booster Lightning")) {
                 has = i;
             }
         }

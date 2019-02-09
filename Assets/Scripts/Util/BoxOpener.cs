@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class BoxOpener : SceneSingleton<BoxOpener> {
 
@@ -18,14 +19,15 @@ public class BoxOpener : SceneSingleton<BoxOpener> {
     public ItemObject GetBoxContents_BoxAd() {
         Dictionary<float, ItemObject> dic = new Dictionary<float, ItemObject>();
 
-        float prob = 0;
+        double prob = 0;
+        int sumWeightsOfItems = BoxAd.itemWights.Take(BoxAd.itemWights.Length).Sum();
+
         for (int i = 0; i<BoxAd.items.Length; i++) {
-            prob += BoxAd.itemProbabilities[i];
-            dic.Add(prob, BoxAd.items[i]);
+            prob += (float)BoxAd.itemWights[i] / (float)sumWeightsOfItems;
+            dic.Add((float)prob, BoxAd.items[i]);
         }
 
         float rand = Random.Range(0.0f, 1.0f);
-        Debug.Log("rand : " + rand);
 
         List<float> dicKeys = new List<float>(dic.Keys);
 
@@ -35,21 +37,28 @@ public class BoxOpener : SceneSingleton<BoxOpener> {
                 return dic[dicKeys[y]];
             }
         }
-        return dic[dicKeys[dic.Count - 1]];
+
+        var item = dic[dicKeys[dic.Count - 1]];
+        if (item.itemType.Equals(ItemObject.ItemType.Currency)) {
+            PlayerController.player.gems += item.amount;
+        }
+
+        return item;
     }
 
     public ItemObject GetBoxContents_BoxStars(int index) {
         BoxStars1 = PlayerController.Instance.starBoxes[PlayerController.player.numStarBoxesOpened];
         Dictionary<float, ItemObject> dic = new Dictionary<float, ItemObject>();
 
-        float prob = 0;
+        double prob = 0;
+        int sumWeightsOfItems = BoxStars1.itemWights.Take(BoxAd.itemWights.Length).Sum();
+
         for (int i = 0; i < BoxStars1.items.Length; i++) {
-            prob += BoxStars1.itemProbabilities[i];
-            dic.Add(prob, BoxStars1.items[i]);
+            prob += (float)BoxStars1.itemWights[i] / (float)sumWeightsOfItems;
+            dic.Add((float)prob, BoxStars1.items[i]);
         }
 
         float rand = Random.Range(0.0f, 1.0f);
-        Debug.Log("rand : " + rand);
 
         List<float> dicKeys = new List<float>(dic.Keys);
 
@@ -59,6 +68,12 @@ public class BoxOpener : SceneSingleton<BoxOpener> {
                 return dic[dicKeys[y]];
             }
         }
-        return dic[dicKeys[dic.Count - 1]];
+
+        var item = dic[dicKeys[dic.Count - 1]];
+        if (item.itemType.Equals(ItemObject.ItemType.Currency)) {
+            PlayerController.player.gems += item.amount;
+        }
+
+        return item;
     }
 }

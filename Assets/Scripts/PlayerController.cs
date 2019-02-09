@@ -61,10 +61,10 @@ public class PlayerController : SceneSingleton<PlayerController> {
     }
 
     public int GetAmountOfLigntnings() {
-        return getAmountOfItem("lightning");
+        return getAmountOfItem("Booster Lightning");
     }
 
     public int GetAmountOfExtraBalls() {
-        return getAmountOfItem("extraball");
+        return getAmountOfItem("Booster Balls");
     }
 }

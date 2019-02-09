@@ -26,7 +26,7 @@ public class LevelController : SceneSingleton<LevelController> {
 
         ResumeGame();
 
-        ThirdStarScore = currentLevel.GetBlocksAmount() *95; // this is where the fuckyou were doing that
+        ThirdStarScore = currentLevel.GetBlocksAmount() * 85; // this is where the fuckyou were doing that
     }
 
     public static int IncreseScore() {
