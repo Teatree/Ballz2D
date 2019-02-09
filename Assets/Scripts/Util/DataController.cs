@@ -13,12 +13,13 @@ public class DataController {
 #if UNITY_EDITOR
     public static string levelfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", levelsFileName);
     public static string itemsfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", itemsFileName);
-    public static string playerfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", playerFileName);
+    //public static string playerfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", playerFileName);
+    public static string playerfilePath = Path.Combine(Application.persistentDataPath, playerFileName);
 
 #elif UNITY_ANDROID
     public static string levelfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", levelsFileName);
     public static string itemsfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", itemsFileName);
-    public static string playerfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", playerFileName);
+    public static string playerfilePath = Path.Combine ( Application.persistentDataPath,  playerFileName);
 
 #elif UNITY_IOS
     private static string levelfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", levelsFileName);
@@ -31,13 +32,24 @@ public class DataController {
     //--------- Player Info ----------
     public static PlayerData LoadPlayer() {
         string jsonData = "";
-        if (Application.platform == RuntimePlatform.Android) {
-            WWW reader = new WWW(playerfilePath);
-            while (!reader.isDone) { }
-            jsonData = reader.text;
+        //if (Application.platform == RuntimePlatform.Android) {
+
+        if (!File.Exists(playerfilePath)) {
+            TextAsset file = Resources.Load("playerInfo") as TextAsset;
+            jsonData = file.ToString();
+
+            //StreamReader f = new StreamReader(playerfilePath);
+            //jsonData = f.ReadToEnd();
+            //f.Close();
+
+
+            //WWW reader = new WWW(playerfilePath);
+            //while (!reader.isDone) { }
+            //jsonData = reader.text;
         }
         else {
             jsonData = File.ReadAllText(playerfilePath);
+            Debug.Log(">>>> jsonData > " + jsonData);
         }
         PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
         AjsonData = "<color=#a52a2aff> " + jsonData + "</color>";
@@ -47,7 +59,13 @@ public class DataController {
     public static void SavePlayer(PlayerData pi) {
         string jsonData = JsonUtility.ToJson(pi);
         // Debug.Log(">>> player info > " + jsonData);
-        File.WriteAllText(playerfilePath, jsonData);
+        // if (Application.platform == RuntimePlatform.Android) {
+        StreamWriter writer = new StreamWriter(playerfilePath, false);
+        writer.WriteLine(jsonData);
+        writer.Close();
+        //} else {
+        //    File.WriteAllText(playerfilePath, jsonData);
+        //} 
     }
 
     //------------Items ---------------------------

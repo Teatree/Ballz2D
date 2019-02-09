@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerController : SceneSingleton<PlayerController> {
     public static PlayerData player;
@@ -33,22 +34,28 @@ public class PlayerController : SceneSingleton<PlayerController> {
         }
     }
 
-    //private void OnApplicationPause(bool pause) {
-    //    List<CompletedLevel> lvls = new List<CompletedLevel>();
-    //    foreach (KeyValuePair<int, int> lvl in starsPerLvl) {
-    //        lvls.Add(new CompletedLevel(lvl.Key, lvl.Value));
-    //    }
-    //    player.completedLvls = lvls;
-    //    DataController.SavePlayer(player);
-    //}
-    
-    void OnApplicationQuit() {
+    private void OnApplicationPause(bool pause) {
+        Debug.Log(">>> OnApplicationPause ? " + player.completedLvls);
+        SavePlayer();
+    }
+
+    private static void SavePlayer() {
         List<CompletedLevel> lvls = new List<CompletedLevel>();
-        foreach (KeyValuePair<int, int> lvl in starsPerLvl) {
-            lvls.Add(new CompletedLevel(lvl.Key, lvl.Value));
-        }
+            foreach (KeyValuePair<int, int> lvl in starsPerLvl) {
+                lvls.Add(new CompletedLevel(lvl.Key, lvl.Value));
+            }
         player.completedLvls = lvls;
         DataController.SavePlayer(player);
+    }
+
+    void OnApplicationQuit() {
+        SavePlayer();
+        //List<CompletedLevel> lvls = new List<CompletedLevel>();
+        //foreach (KeyValuePair<int, int> lvl in starsPerLvl) {
+        //    lvls.Add(new CompletedLevel(lvl.Key, lvl.Value));
+        //}
+        //player.completedLvls = lvls;
+        //DataController.SavePlayer(player);
     }
 
     private int getAmountOfItem(string iname) {
