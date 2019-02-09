@@ -205,6 +205,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     #endregion
 
     public void OpenBoxOpen() {
+        Debug.Log("Opening Box");
         var Box = Instantiate(BoxPopupPrefab, transform);
         Box.GetComponent<BoxPopup>().itemToReceive = BoxOpener.Instance.GetBoxContents_BoxStars(PlayerController.player.numStarBoxesOpened);
 

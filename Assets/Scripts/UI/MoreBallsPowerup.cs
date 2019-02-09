@@ -95,7 +95,7 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
     private int hasExtraBallsItem() {
         int has = -1;
         for (int i = 0; i < PlayerController.player.items.Count; i++) {
-            if (PlayerController.player.items[i].name.Equals("extraball")) {
+            if (PlayerController.player.items[i].name.Equals("Booster Balls")) {
                 has = i;
             }
         }

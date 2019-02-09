@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cfe258167756a04995fe788e803c598, type: 3}
   m_Name: Booster_Balls_1
   m_EditorClassIdentifier: 
-  name: Heart
-  itemType: 0
-  costGems: 200
-  amount: 0
-  shopImage: {fileID: 21300000, guid: 42692b52e76508f43ba0de0b423c19e8, type: 3}
+  name: Booster Balls
+  itemType: 1
+  costGems: 400
+  amount: 1
+  shopImage: {fileID: 21300000, guid: efe6f6184003c02468c86ec104cfa430, type: 3}
   assetImage: heart
   enabled: 0

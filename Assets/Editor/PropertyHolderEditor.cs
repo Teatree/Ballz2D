@@ -41,6 +41,7 @@ public class PropertyHolderEditor : Editor {
                 break;
             case ItemObject.ItemType.Currency:
                 EditorGUILayout.PropertyField(amount_Prop, new GUIContent("amount"));
+                EditorGUILayout.PropertyField(shopImage_Prop, new GUIContent("shopImage"));
 
                 break;
             case ItemObject.ItemType.Booster:

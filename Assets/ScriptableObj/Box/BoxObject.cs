@@ -8,6 +8,6 @@ public class BoxObject : ScriptableObject {
     public int starCost;
 
     public ItemObject[] items;
-    public float[] itemProbabilities;
+    public int[] itemWights;
     
 }

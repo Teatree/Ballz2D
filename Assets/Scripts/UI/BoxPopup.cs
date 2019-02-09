@@ -11,8 +11,17 @@ public class BoxPopup : IPopup<BoxPopup> {
     public GameObject itemText;
     public Text itemName;
 
-	void Start () {
+    [Header("Buttonz")]
+    public GameObject panelBalls;
+    public GameObject panelDefault;
+
+    [Header("Fade In Elements")]
+    public Image Box;
+    public Image Bg;
+
+    void Start () {
         Debug.Log(itemToReceive);
+        StartCoroutine(FadeIn());
 
         itemImage.sprite = itemToReceive.shopImage;
         itemImage.SetNativeSize();
@@ -20,13 +29,26 @@ public class BoxPopup : IPopup<BoxPopup> {
 
         if (itemToReceive.amount <= 0) {
             itemText.SetActive(false);
+            panelBalls.SetActive(true);
+            panelDefault.SetActive(false);
+
         }
         else {
             itemText.SetActive(true);
             itemText.GetComponent<Text>().text = itemToReceive.amount.ToString();
+            panelBalls.SetActive(false);
+            panelDefault.SetActive(true);
         }
     }
-	
+
+    public IEnumerator FadeIn() {
+        while (Box.color.a < 1) {
+            Box.color = new Color(Box.color.r, Box.color.g, Box.color.b, Box.color.a + Time.deltaTime*3);
+            Bg.color = new Color(Bg.color.r, Bg.color.g, Bg.color.b, Bg.color.a + Time.deltaTime * 3);
+            yield return null;
+        }
+    }
+
     public void OnClick_Equip() {
         ItemsController.EquipSpecialBall(itemToReceive);
     }

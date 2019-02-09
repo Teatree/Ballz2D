@@ -23,12 +23,26 @@ public class GameOver : IPopup<GameOver> {
 
     public void Start() {
         StarsSlider.maxValue = PlayerController.Instance.starBoxes[PlayerController.player.numStarBoxesOpened].starCost;
-        StarsSlider.value = PlayerController.player.stars;
 
-        if (StarsSlider.value >= StarsSlider.maxValue) {
+        Debug.Log("GridController.oldStarsNumForGameOver = " + GridController.oldStarsNumForGameOver + " LevelController.LevelStarsAmount = " + LevelController.LevelStarsAmount);
+
+        if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
+            StarsSlider.value = PlayerController.player.stars - Mathf.Abs(GridController.oldStarsNumForGameOver - LevelController.LevelStarsAmount);
+            Debug.Log("PlayerController.player.stars - (GridController.oldStarsNumForGameOver - LevelController.LevelStarsAmount); " +
+                (PlayerController.player.stars - (GridController.oldStarsNumForGameOver - LevelController.LevelStarsAmount)));
+        }
+        else {
+            StarsSlider.value = PlayerController.player.stars;
+        }
+
+        if (PlayerController.player.stars >= StarsSlider.maxValue) {
             _type = GameOverType.WinBox;
         }
 
+        InitThings();
+    }
+
+    private void InitThings() {
         switch (_type) {
             case GameOverType.Fail: {
                     InitFail();
@@ -84,9 +98,6 @@ public class GameOver : IPopup<GameOver> {
         Btn_Group_Ads.SetActive(true);
 
         Debug.Log("I reached this!");
-        if(StarsSlider.value >= StarsSlider.maxValue) {
-            GameUIController.Instance.OpenBoxOpen();
-        }
     }
 
     private void InitWinText() {
@@ -96,18 +107,56 @@ public class GameOver : IPopup<GameOver> {
     }
 
     private void InitWinSatrs() {
+        StartCoroutine(InitStars());
+    }
+
+    public IEnumerator InitStars() {
         switch (StarsAmount) {
             case 1: {
+                    Star1.transform.GetComponent<Animator>().SetTrigger("TurnIntoGold");
+                    if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
+                        StarsSlider.value += 1;
+                    }
+                    yield return new WaitForSeconds(0.3f);
                     Star2.transform.GetComponent<Image>().color = Color.grey;
                     Star3.transform.GetComponent<Image>().color = Color.grey;
                     break;
                 }
             case 2: {
+                    Star1.transform.GetComponent<Animator>().SetTrigger("TurnIntoGold");
+                    if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
+                        StarsSlider.value += 1;
+                    }
+                    yield return new WaitForSeconds(0.3f);
+                    Star2.transform.GetComponent<Animator>().SetTrigger("TurnIntoGold");
+                    if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
+                        StarsSlider.value += 1;
+                    }
                     Star3.transform.GetComponent<Image>().color = Color.grey;
                     break;
                 }
+            case 3: {
+                    Star1.transform.GetComponent<Animator>().SetTrigger("TurnIntoGold");
+                    if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
+                        StarsSlider.value += 1;
+                    }
+                    yield return new WaitForSeconds(0.3f);
+                    Star2.transform.GetComponent<Animator>().SetTrigger("TurnIntoGold");
+                    if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
+                        StarsSlider.value += 1;
+                    }
+                    yield return new WaitForSeconds(0.3f);
+                    Star3.transform.GetComponent<Animator>().SetTrigger("TurnIntoGold");
+                    if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
+                        StarsSlider.value += 1;
+                    }
+                    break;
+                }
         }
-        
+        yield return null;
+        if (StarsSlider.value >= StarsSlider.maxValue) {
+            GameUIController.Instance.OpenBoxOpen();
+        }
     }
 
     public enum GameOverType {
