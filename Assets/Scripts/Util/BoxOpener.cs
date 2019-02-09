@@ -6,13 +6,14 @@ public class BoxOpener : SceneSingleton<BoxOpener> {
 
     public BoxObject BoxAd;
     public BoxObject BoxDay;
-    public BoxObject BoxStars1;
     public BoxObject BoxShop1;
     public BoxObject BoxShop2;
 
-	void Start () {
-		
-	}
+    private BoxObject BoxStars1;
+
+    void Start () {
+        BoxStars1 = new BoxObject();
+    }
 	
     public ItemObject GetBoxContents_BoxAd() {
         Dictionary<float, ItemObject> dic = new Dictionary<float, ItemObject>();
@@ -37,7 +38,8 @@ public class BoxOpener : SceneSingleton<BoxOpener> {
         return dic[dicKeys[dic.Count - 1]];
     }
 
-    public ItemObject GetBoxContents_BoxStars1() {
+    public ItemObject GetBoxContents_BoxStars(int index) {
+        BoxStars1 = PlayerController.Instance.starBoxes[PlayerController.player.numStarBoxesOpened];
         Dictionary<float, ItemObject> dic = new Dictionary<float, ItemObject>();
 
         float prob = 0;
