@@ -193,6 +193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff36b20969ef0e49bc6f9dcd5f73f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starBoxes:
+  - {fileID: 11400000, guid: c44da912428f5874e9a9ffe7d7ddf394, type: 2}
+  - {fileID: 11400000, guid: f674ae4629546604f98ce3ff0bb2e268, type: 2}
+  - {fileID: 11400000, guid: c30d92d2de53c164cb997166f2062b9f, type: 2}
+  - {fileID: 11400000, guid: e78163f711a856a409e18afc2cc5bb47, type: 2}
 --- !u!1 &1512515698
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoxAd: {fileID: 11400000, guid: 1db5fd2c72d745a48ac9c51e247dd501, type: 2}
   BoxDay: {fileID: 11400000, guid: 7ff4c41e1957b51409762e051c14330a, type: 2}
-  BoxStars: {fileID: 11400000, guid: c44da912428f5874e9a9ffe7d7ddf394, type: 2}
+  BoxStars1: {fileID: 11400000, guid: c44da912428f5874e9a9ffe7d7ddf394, type: 2}
   BoxShop1: {fileID: 11400000, guid: ee100ef067e08db4cbf74b7678e42919, type: 2}
   BoxShop2: {fileID: 11400000, guid: 0051e3fe6ccf7b54e8faba51799bf7d3, type: 2}
 --- !u!4 &1517596998

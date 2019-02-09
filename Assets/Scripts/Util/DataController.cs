@@ -129,6 +129,7 @@ public class DataController {
 public class PlayerData {
     public int gems;
     public int stars;
+    public int numStarBoxesOpened; // how many boxs were already opened
     public string lastLogin;
     public bool noAds;
 
@@ -140,6 +141,7 @@ public class PlayerData {
         foreach (CompletedLevel lvl in completedLvls) {
             sum += lvl.stars;
         }
+        stars = sum;
         return sum;
     }
 }

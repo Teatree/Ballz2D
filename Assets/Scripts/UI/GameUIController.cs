@@ -18,6 +18,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject GameOverPrefab;
     //public GameObject PreviewPrefab;
     public GameObject PausePrefab;
+    public GameObject BoxPopupPrefab;
     public GameObject ShopPrefab;
 
     [Header("SpeedUPIcon")]
@@ -202,6 +203,12 @@ public class GameUIController : SceneSingleton<GameUIController> {
         // Debug.Log("slider = " + _slider);
     }
     #endregion
+
+    public void OpenBoxOpen() {
+        var Box = Instantiate(BoxPopupPrefab, transform);
+        Box.GetComponent<BoxPopup>().itemToReceive = BoxOpener.Instance.GetBoxContents_BoxStars1();
+        PlayerController.player.numStarBoxesOpened += 1;
+    }
 
     public void FadingLasers(LineRenderer laserLine) {
         StartCoroutine(BombLaserFade(laserLine));

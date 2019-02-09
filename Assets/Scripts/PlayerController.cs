@@ -5,7 +5,10 @@ public class PlayerController : SceneSingleton<PlayerController> {
     public static PlayerData player;
     public static Dictionary<int, int> starsPerLvl;
 
+    public List<BoxObject> starBoxes;
+
     private void Start() {
+
         if (player == null) {
             player = DataController.LoadPlayer() != null ? DataController.LoadPlayer() : new PlayerData();
             DateTime dt = DateTime.Now;
@@ -22,7 +25,9 @@ public class PlayerController : SceneSingleton<PlayerController> {
 
     public void AddNewCompletedLevel(int lvlNum, int stars) {
         if (starsPerLvl.ContainsKey(lvlNum)) {
-            starsPerLvl[lvlNum] = stars;
+            if (starsPerLvl[lvlNum] < stars) { 
+                starsPerLvl[lvlNum] = stars;
+            }
         } else {
             starsPerLvl.Add(lvlNum, stars);
         }

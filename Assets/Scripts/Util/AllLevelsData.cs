@@ -3,7 +3,6 @@
 public static class AllLevelsData {
     public static List<LevelData> allLevels = new List<LevelData>();
 
-
     public static int CurrentLevelIndex = 0;
 
     public static LevelData GetCurrentLevel() {

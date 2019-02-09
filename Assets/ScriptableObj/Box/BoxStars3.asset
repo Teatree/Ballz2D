@@ -9,9 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db5349a0ddadbf344bbc53f0cdfe6cdd, type: 3}
-  m_Name: BoxStars
+  m_Name: BoxStars3
   m_EditorClassIdentifier: 
-  objectName: BoxStars
+  objectName: BoxStars3
+  starCost: 12
   items:
   - {fileID: 11400000, guid: ff5caf5e13ad8b34a854c64a70d77ecb, type: 2}
   - {fileID: 11400000, guid: 52838865ad0aa2540b5640104fd413c5, type: 2}

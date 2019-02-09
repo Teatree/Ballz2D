@@ -268,6 +268,7 @@ public class GridController : SceneSingleton<GridController> {
                     return false;
                 }
             }
+            
             SubmitStars();
             GameUIController.Instance.HandleWin();
 
@@ -280,6 +281,13 @@ public class GridController : SceneSingleton<GridController> {
     }
 
     private static void SubmitStars() {
-        LevelController.TotalStarsAmount += LevelController.LevelStarsAmount;
+        if (PlayerController.starsPerLvl.ContainsKey(AllLevelsData.CurrentLevelIndex)) {
+            if(PlayerController.starsPerLvl[AllLevelsData.CurrentLevelIndex] < LevelController.LevelStarsAmount) {
+                PlayerController.player.stars += LevelController.LevelStarsAmount - PlayerController.starsPerLvl[AllLevelsData.CurrentLevelIndex];
+            }
+        }
+        else {
+            PlayerController.player.stars += LevelController.LevelStarsAmount;
+        }
     }
 }

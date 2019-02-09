@@ -21,14 +21,13 @@ public class GameOver : IPopup<GameOver> {
     public GameObject StatusText;
     public GameObject levelText;
 
-
     public void Start() {
+        StarsSlider.maxValue = PlayerController.Instance.starBoxes[PlayerController.player.numStarBoxesOpened].starCost;
+        StarsSlider.value = PlayerController.player.stars;
 
-        if (LevelController.TotalStarsAmount >= StarsSlider.maxValue) {
+        if (StarsSlider.value >= StarsSlider.maxValue) {
             _type = GameOverType.WinBox;
         }
-        StarsSlider.value = LevelController.TotalStarsAmount;
-
 
         switch (_type) {
             case GameOverType.Fail: {
@@ -49,7 +48,6 @@ public class GameOver : IPopup<GameOver> {
                 }
         }
     }
-
 
     private void InitFail() {
         StatusText.transform.GetComponent<Text>().text = "FAILED";
@@ -84,6 +82,11 @@ public class GameOver : IPopup<GameOver> {
         Btn_Group_Fail.SetActive(false);
         Btn_Group_Single.SetActive(false);
         Btn_Group_Ads.SetActive(true);
+
+        Debug.Log("I reached this!");
+        if(StarsSlider.value >= StarsSlider.maxValue) {
+            GameUIController.Instance.OpenBoxOpen();
+        }
     }
 
     private void InitWinText() {

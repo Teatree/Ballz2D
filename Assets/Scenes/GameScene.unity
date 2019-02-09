@@ -3776,8 +3776,8 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.0000000037252903, y: 0.0050000004}
-      - {x: -0.005025411, y: 0.0030461266}
-      - {x: -0.004959829, y: -0.0040458934}
+      - {x: -0.0048394403, y: 0.0030431824}
+      - {x: -0.004866844, y: -0.004041478}
       - {x: 0.0029389232, y: -0.004045085}
       - {x: 0.004755279, y: 0.0015450857}
 --- !u!1 &730897702
@@ -7668,6 +7668,12 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114817632410744238, guid: c21fdeca8edd0db479c5466e36f51ee3,
+        type: 2}
+      propertyPath: BoxPopupPrefab
+      value: 
+      objectReference: {fileID: 1393861602802556, guid: bfa265d38308df0419eb1e11e0ec040f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c21fdeca8edd0db479c5466e36f51ee3, type: 2}
   m_IsPrefabAsset: 0
