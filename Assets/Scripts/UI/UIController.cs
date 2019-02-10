@@ -17,6 +17,7 @@ public class UIController : SceneSingleton<UIController> {
     public GameObject SettingsPrefab;
     public GameObject ShopPrefab;
     public GameObject BoxPopupPrefab;
+    public GameObject waitForItPrefab;
 
     public GameObject BoxAdButton;
     private Button boxAdButtonCmp; 
@@ -81,5 +82,10 @@ public class UIController : SceneSingleton<UIController> {
 
     public void ShowAdBox() {
         AdmobController.Instance.ShowBoxrewardVideo();
+    }
+
+    public void showWaitForItPopup() {
+        Debug.Log(">>>> Wait for it");
+        Instantiate(waitForItPrefab, transform);
     }
 }

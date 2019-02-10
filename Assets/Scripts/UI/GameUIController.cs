@@ -20,6 +20,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject PausePrefab;
     public GameObject BoxPopupPrefab;
     public GameObject ShopPrefab;
+ 
 
     [Header("SpeedUPIcon")]
     public GameObject SpeedUpIcon;
@@ -233,4 +234,5 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public void TurnSpeedUpIcon_OFF() {
         SpeedUpIcon.SetActive(false);
     }
+
 }

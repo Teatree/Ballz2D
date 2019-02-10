@@ -27,7 +27,10 @@ public class SceneController : MonoBehaviour {
                 sceneStateTracker["GameScene"] = false;
                 LoadGame();
             }
-            else {
+            else if (initScene != null && "MenuScene".Equals(initScene)) {
+                sceneStateTracker["MenuScene"] = false;
+                LoadMenu();
+            } else {
                 LoadMenu();
             }
             gameStart = true;
@@ -85,6 +88,11 @@ public class SceneController : MonoBehaviour {
 
     public void RestartGame() {
         initScene = "GameScene";
+        SceneManager.LoadScene("Permanent", LoadSceneMode.Single);
+    }
+
+    public void ReloadMenu() {
+        initScene = "MenuScene";
         SceneManager.LoadScene("Permanent", LoadSceneMode.Single);
     }
 }
