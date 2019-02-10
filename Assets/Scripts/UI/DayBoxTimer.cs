@@ -1,33 +1,38 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DayBoxTimer : MonoBehaviour {
+public class DayBoxTimer : SceneSingleton<DayBoxTimer>{
 
     public Text timerText;
     public GameObject dayBoxWaitButtton;
 
 
-    public float timeLeftMin = 360; //6h
+    public float timeLeftMin = 0; //6h
+    private float timeLeftSec = 0; //6h
     public static bool stop = true;
 
     private float minutes;
     private float hours;
 
     void Start() {
-        startTimer(10);
+        if (timeLeftMin > 0) {
+            startTimer(timeLeftMin);
+            UIController.Instance.ShowDayBoxWaitButton();
+        }
     }
 
     void Update() {
         if (stop) {
             if (dayBoxWaitButtton.activeSelf) {
-                dayBoxWaitButtton.SetActive(false);
+                UIController.Instance.ShowDayBoxButton();
             }
             return;
         }
 
-
-        timeLeftMin -= Time.deltaTime;
+        timeLeftSec -= Time.deltaTime;
+        timeLeftMin = timeLeftSec / 60;
 
         hours = Mathf.Floor(timeLeftMin / 60);
         minutes = timeLeftMin % 60;
@@ -43,6 +48,7 @@ public class DayBoxTimer : MonoBehaviour {
         dayBoxWaitButtton.SetActive(true);
         stop = false;
         timeLeftMin = fromInMin;
+        timeLeftSec = fromInMin * 60;
         Update();
         StartCoroutine(Countdown());
     }
@@ -59,4 +65,9 @@ public class DayBoxTimer : MonoBehaviour {
         UIController.Instance.showWaitForItPopup();
     }
 
+    public void SetCountDownTo(DateTime to) {
+        TimeSpan t = DateTime.Now - to;
+        timeLeftMin = (float) t.TotalMinutes;
+        Debug.Log(">>>> timespan " + t.TotalMinutes);
+    }
 }

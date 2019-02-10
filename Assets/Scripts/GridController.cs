@@ -53,8 +53,6 @@ public class GridController : SceneSingleton<GridController> {
     private List<Block> obstaclesCoordinates = new List<Block>();
     public static bool doNotMoveRowDown;
 
-    public static int oldStarsNumForGameOver = 0;
-
     private void Start() { //OnLevelWasLoaded
 
         PlayServicesUI.Unlock1Achievement();
@@ -270,8 +268,6 @@ public class GridController : SceneSingleton<GridController> {
                     return false;
                 }
             }
-            
-            SubmitStars();
             GameUIController.Instance.HandleWin();
 
             PlayServicesController.Instance.PublishScoreToLeaderBoard(LevelController.levelScore);
@@ -279,19 +275,6 @@ public class GridController : SceneSingleton<GridController> {
         }
         else {
             return false;
-        }
-    }
-
-    private static void SubmitStars() {
-        if (PlayerController.starsPerLvl.ContainsKey(AllLevelsData.CurrentLevelIndex)) {
-            oldStarsNumForGameOver = PlayerController.starsPerLvl[AllLevelsData.CurrentLevelIndex];
-            if (PlayerController.starsPerLvl[AllLevelsData.CurrentLevelIndex] < LevelController.LevelStarsAmount) {
-                PlayerController.player.stars += LevelController.LevelStarsAmount - PlayerController.starsPerLvl[AllLevelsData.CurrentLevelIndex];
-            }
-        }
-        else {
-            oldStarsNumForGameOver = 0;
-            PlayerController.player.stars += LevelController.LevelStarsAmount;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController : SceneSingleton<UIController> {
@@ -17,7 +18,11 @@ public class UIController : SceneSingleton<UIController> {
     public GameObject SettingsPrefab;
     public GameObject ShopPrefab;
     public GameObject BoxPopupPrefab;
+
+    //Daily boxes
     public GameObject waitForItPrefab;
+    public GameObject BoxDayButton;
+    public GameObject BoxDayWaitButton;
 
     public GameObject BoxAdButton;
     private Button boxAdButtonCmp; 
@@ -75,6 +80,11 @@ public class UIController : SceneSingleton<UIController> {
         Box.GetComponent<BoxPopup>().itemToReceive = BoxOpener.Instance.GetBoxContents_BoxAd();
     }
 
+    public void GetDayBox() {
+        DayBoxTimer.Instance.SetCountDownTo(DateTime.Now.AddHours(6));
+        PlayerController.player.giveBoxAt = DateTime.Now.AddHours(6).ToString("yyyy-MM-dd HH:mm");
+        OpenBoxOpen();
+    }
     public void SetEnabledAdBox(bool b) {
         boxAdButtonCmp = BoxAdButton.GetComponent<Button>();
         boxAdButtonCmp.interactable = b;
@@ -88,4 +98,15 @@ public class UIController : SceneSingleton<UIController> {
         Debug.Log(">>>> Wait for it");
         Instantiate(waitForItPrefab, transform);
     }
+
+    public void ShowDayBoxButton() {
+        BoxDayButton.SetActive(true);
+        BoxDayWaitButton.SetActive(false);
+    }
+
+    public void ShowDayBoxWaitButton() {
+        BoxDayButton.SetActive(false);
+        BoxDayWaitButton.SetActive(true);
+    }
+
 }

@@ -1168,7 +1168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &284934484
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1183,9 +1183,9 @@ RectTransform:
   m_Father: {fileID: 883070246}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 395, y: -58.36683}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 150, y: 98.24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &284934485
@@ -4305,8 +4305,10 @@ MonoBehaviour:
   ShopPrefab: {fileID: 1094745606953602, guid: a8c37f914cf2dbd46aec93f3f8a89f7e, type: 2}
   BoxPopupPrefab: {fileID: 1393861602802556, guid: bfa265d38308df0419eb1e11e0ec040f,
     type: 2}
-  waitForItPrefab: {fileID: 1299789154594670, guid: e78a56ba5c5c2674ebe2eeee2cdc2e9a,
+  waitForItPrefab: {fileID: 1063380916139300, guid: e78a56ba5c5c2674ebe2eeee2cdc2e9a,
     type: 2}
+  BoxDayButton: {fileID: 284934483}
+  BoxDayWaitButton: {fileID: 1126157605}
   BoxAdButton: {fileID: 1785619427}
   lvlSlider: {fileID: 36674593}
 --- !u!114 &2066143727

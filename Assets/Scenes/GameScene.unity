@@ -4636,9 +4636,9 @@ MonoBehaviour:
     type: 2}
   triangleNEPrefab: {fileID: 114838009722516278, guid: 0d59061606300c7428abb9f7661092fa,
     type: 2}
-  triangleSEPrefab: {fileID: 114629025373439364, guid: 36544205242d5ad4cb8e18a71225193d,
+  triangleSEPrefab: {fileID: 114629025373439364, guid: e98f540acb10f0245be383266cdd596f,
     type: 2}
-  triangleSWPrefab: {fileID: 114131903841729098, guid: e98f540acb10f0245be383266cdd596f,
+  triangleSWPrefab: {fileID: 114131903841729098, guid: 36544205242d5ad4cb8e18a71225193d,
     type: 2}
   laserHorizontalPrefab: {fileID: 114838009722516278, guid: 32758e2d31077c04b944b4552758efa2,
     type: 2}

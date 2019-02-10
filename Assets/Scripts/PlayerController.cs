@@ -14,13 +14,29 @@ public class PlayerController : SceneSingleton<PlayerController> {
         if (player == null) {
             player = DataController.LoadPlayer() != null ? DataController.LoadPlayer() : new PlayerData();
             DateTime dt = DateTime.Now;
-            player.lastLogin = dt.ToString("yyyy-MM-dd");
+            player.lastLogin = dt.ToString("yyyy-MM-dd HH:mm");
+
+            SetupDailyBoxStuff();
 
             starsPerLvl = new Dictionary<int, int>();
             if (player.completedLvls != null && player.completedLvls.Count > 0) {
                 foreach (CompletedLevel lvl in player.completedLvls) {
                     starsPerLvl.Add(lvl.number, lvl.stars);
                 }
+            }
+        }
+    }
+
+    private static void SetupDailyBoxStuff() {
+        if (player.giveBoxAt != null && player.giveBoxAt != "") {
+            DateTime getBoxAt = DateTime.ParseExact(player.giveBoxAt, "yyyy-MM-dd HH:mm", null);
+            if (getBoxAt < DateTime.Now) {
+                UIController.Instance.ShowDayBoxButton();
+            }
+            else {
+                //set timer 
+                DayBoxTimer.Instance.SetCountDownTo(getBoxAt);
+                UIController.Instance.ShowDayBoxWaitButton();
             }
         }
     }
@@ -36,7 +52,6 @@ public class PlayerController : SceneSingleton<PlayerController> {
     }
 
     private void OnApplicationPause(bool pause) {
-        Debug.Log(">>> OnApplicationPause ? " + player.completedLvls);
         SavePlayer();
     }
 

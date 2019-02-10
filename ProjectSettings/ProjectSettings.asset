@@ -258,7 +258,7 @@ PlayerSettings:
   m_AndroidBanners:
   - width: 320
     height: 180
-    banner: {fileID: 2800000, guid: aeb86253da9d1af4bb80bcd43b97db24, type: 3}
+    banner: {fileID: 2800000, guid: 42692b52e76508f43ba0de0b423c19e8, type: 3}
   androidGamepadSupportLevel: 0
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:

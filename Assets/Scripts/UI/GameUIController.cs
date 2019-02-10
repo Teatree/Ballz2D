@@ -130,6 +130,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
 
     public void HandleWin() {
+        LevelController.SubmitStars();
         GameObject go = Instantiate(GameOverPrefab, transform);
         GameOver g = go.transform.GetComponent<GameOver>();
         g._type = GameOver.GameOverType.Win;

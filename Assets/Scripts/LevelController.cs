@@ -18,6 +18,8 @@ public class LevelController : SceneSingleton<LevelController> {
     public static bool isGameOver; 
     public static bool isGamePaused;
 
+    public static int oldStarsNumForGameOver = 0;
+
     void Awake() {
         currentLevel = AllLevelsData.GetCurrentLevel();
         isGameOver = false;
@@ -58,5 +60,18 @@ public class LevelController : SceneSingleton<LevelController> {
 
     public static bool IsGameStopped() {
         return isGameOver || isGamePaused;
+    }
+
+    public static void SubmitStars() {
+        if (PlayerController.starsPerLvl.ContainsKey(AllLevelsData.CurrentLevelIndex)) {
+            oldStarsNumForGameOver = PlayerController.starsPerLvl[AllLevelsData.CurrentLevelIndex];
+            if (PlayerController.starsPerLvl[AllLevelsData.CurrentLevelIndex] < LevelController.LevelStarsAmount) {
+                PlayerController.player.stars += LevelController.LevelStarsAmount - PlayerController.starsPerLvl[AllLevelsData.CurrentLevelIndex];
+            }
+        }
+        else {
+            oldStarsNumForGameOver = 0;
+            PlayerController.player.stars += LevelController.LevelStarsAmount;
+        }
     }
 }

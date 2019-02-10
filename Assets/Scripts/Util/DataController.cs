@@ -150,6 +150,7 @@ public class PlayerData {
     public int progressTowardsNextStarBox; // how many stars player already gathered for the current star box
     public int numStarBoxesOpened; // how many boxs were already opened
     public string lastLogin;
+    public string giveBoxAt;
     public bool noAds;
 
     public List<CompletedLevel> completedLvls = new List<CompletedLevel>();
