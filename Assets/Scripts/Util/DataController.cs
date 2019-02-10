@@ -147,6 +147,7 @@ public class DataController {
 public class PlayerData {
     public int gems;
     public int stars;
+    public int progressTowardsNextStarBox; // how many stars player already gathered for the current star box
     public int numStarBoxesOpened; // how many boxs were already opened
     public string lastLogin;
     public bool noAds;
