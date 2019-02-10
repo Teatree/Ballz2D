@@ -65,7 +65,7 @@ public class LevelUI : MonoBehaviour {
             Stars.SetActive(false);
         }
         else {
-            Debug.Log("level: " + LevelNumber + " starNum: " + starNum);
+            //Debug.Log("level: " + LevelNumber + " starNum: " + starNum);
             if (starNum == 0) {
                 img.sprite = Level_InComplete;
             }
