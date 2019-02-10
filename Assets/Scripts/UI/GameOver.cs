@@ -26,17 +26,18 @@ public class GameOver : IPopup<GameOver> {
 
         Debug.Log("GridController.oldStarsNumForGameOver = " + GridController.oldStarsNumForGameOver + " LevelController.LevelStarsAmount = " + LevelController.LevelStarsAmount);
 
-        if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
-            StarsSlider.value = PlayerController.player.stars - Mathf.Abs(GridController.oldStarsNumForGameOver - LevelController.LevelStarsAmount);
-            Debug.Log("PlayerController.player.stars - (GridController.oldStarsNumForGameOver - LevelController.LevelStarsAmount); " +
-                (PlayerController.player.stars - (GridController.oldStarsNumForGameOver - LevelController.LevelStarsAmount)));
-        }
-        else {
-            StarsSlider.value = PlayerController.player.stars;
-        }
+        //if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
+        //    StarsSlider.value = PlayerController.player.stars - Mathf.Abs(GridController.oldStarsNumForGameOver - LevelController.LevelStarsAmount);
+        //    Debug.Log("PlayerController.player.stars - (GridController.oldStarsNumForGameOver - LevelController.LevelStarsAmount); " +
+        //        (PlayerController.player.stars - (GridController.oldStarsNumForGameOver - LevelController.LevelStarsAmount)));
+        //}
+        //else {
+            StarsSlider.value = PlayerController.player.progressTowardsNextStarBox;
+        //}
 
         if (PlayerController.player.stars >= StarsSlider.maxValue) {
-            _type = GameOverType.WinBox;
+            //_type = GameOverType.WinBox;
+            _type = GameOverType.Win;
         }
 
         InitThings();
@@ -116,6 +117,7 @@ public class GameOver : IPopup<GameOver> {
                     Star1.transform.GetComponent<Animator>().SetTrigger("TurnIntoGold");
                     if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
                         StarsSlider.value += 1;
+                        PlayerController.player.progressTowardsNextStarBox += 1;
                     }
                     yield return new WaitForSeconds(0.3f);
                     Star2.transform.GetComponent<Image>().color = Color.grey;
@@ -126,11 +128,13 @@ public class GameOver : IPopup<GameOver> {
                     Star1.transform.GetComponent<Animator>().SetTrigger("TurnIntoGold");
                     if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
                         StarsSlider.value += 1;
+                        PlayerController.player.progressTowardsNextStarBox += 1;
                     }
                     yield return new WaitForSeconds(0.3f);
                     Star2.transform.GetComponent<Animator>().SetTrigger("TurnIntoGold");
                     if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
                         StarsSlider.value += 1;
+                        PlayerController.player.progressTowardsNextStarBox += 1;
                     }
                     Star3.transform.GetComponent<Image>().color = Color.grey;
                     break;
@@ -139,22 +143,26 @@ public class GameOver : IPopup<GameOver> {
                     Star1.transform.GetComponent<Animator>().SetTrigger("TurnIntoGold");
                     if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
                         StarsSlider.value += 1;
+                        PlayerController.player.progressTowardsNextStarBox += 1;
                     }
                     yield return new WaitForSeconds(0.3f);
                     Star2.transform.GetComponent<Animator>().SetTrigger("TurnIntoGold");
                     if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
                         StarsSlider.value += 1;
+                        PlayerController.player.progressTowardsNextStarBox += 1;
                     }
                     yield return new WaitForSeconds(0.3f);
                     Star3.transform.GetComponent<Animator>().SetTrigger("TurnIntoGold");
                     if (GridController.oldStarsNumForGameOver < LevelController.LevelStarsAmount) {
                         StarsSlider.value += 1;
+                        PlayerController.player.progressTowardsNextStarBox += 1;
                     }
                     break;
                 }
         }
         yield return null;
-        if (StarsSlider.value >= StarsSlider.maxValue) {
+        Debug.Log("reached this");
+        if (PlayerController.player.progressTowardsNextStarBox >= PlayerController.Instance.starBoxes[PlayerController.player.numStarBoxesOpened].starCost) {
             GameUIController.Instance.OpenBoxOpen();
         }
     }
