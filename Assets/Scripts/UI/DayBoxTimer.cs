@@ -32,14 +32,14 @@ public class DayBoxTimer : SceneSingleton<DayBoxTimer>{
         }
 
         timeLeftSec -= Time.deltaTime;
-        timeLeftMin = timeLeftSec / 60;
+        timeLeftMin = Mathf.Floor(timeLeftSec / 60);
 
         hours = Mathf.Floor(timeLeftMin / 60);
         minutes = timeLeftMin % 60;
         if (minutes > 59) minutes = 59;
-        if (minutes < 0) {
+        if (hours < 0) {
             stop = true;
-            minutes = 0;
+            hours = 0;
             minutes = 0;
         }
     }
@@ -56,7 +56,7 @@ public class DayBoxTimer : SceneSingleton<DayBoxTimer>{
     private IEnumerator Countdown() {
         while (!stop) {
             timerText.text = string.Format("{0:0}:{1:00}", hours, minutes);
-            yield return new WaitForSeconds(60f);
+            yield return new WaitForSeconds(1f);
         }
     }
 

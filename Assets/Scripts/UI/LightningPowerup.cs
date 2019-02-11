@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class LightningPowerup : SceneSingleton<LightningPowerup> {
 
-    public GameObject Lightning;
+    public Image Lightning;
     public GameObject Button;
     public Text AmountText;
     public GameObject playArea;
@@ -56,10 +57,10 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
     }
 
     private void PlayAni() {
-        GameObject inst = Instantiate(Lightning);
-        inst.transform.SetParent(transform.parent.transform.parent, false);
-        inst.SetActive(true);
-        Destroy(inst, 0.3f);
+        //inst.transform.SetParent(transform.parent.transform.parent, false);
+        Lightning.gameObject.SetActive(true);
+        Lightning.color = Color.yellow;
+        StartCoroutine(Fade(Lightning));
     }
 
     public void OnClick_Lightning() {
@@ -83,5 +84,10 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
             GameUIController.Instance.ShowShop();
         }
         EnableButton();
+    }
+
+    protected IEnumerator Fade(Image img) {
+        yield return new WaitForSeconds(0.1f);
+        img.gameObject.SetActive(false);
     }
 }
