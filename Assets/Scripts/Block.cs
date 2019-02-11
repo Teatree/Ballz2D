@@ -44,7 +44,13 @@ public class Block : MonoBehaviour {
             text.SetText(hitsRemaining.ToString());
 
             if (_type.Family.Equals("Block")) {
-                spriteRenderer.color = Color.Lerp(Color.white, Color.green, hitsRemaining / 10f);
+                Color highColor = new Color();
+                ColorUtility.TryParseHtmlString("#0F8000", out highColor);
+
+                Color lowColor = new Color();
+                ColorUtility.TryParseHtmlString("#DCE01D", out lowColor);
+
+                spriteRenderer.color = Color.Lerp(lowColor, highColor, hitsRemaining / 100f);
                 StartCoroutine(BlockBlink(spriteRenderer.color, 1));
             }
         }
