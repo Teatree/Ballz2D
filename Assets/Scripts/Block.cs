@@ -45,12 +45,12 @@ public class Block : MonoBehaviour {
 
             if (_type.Family.Equals("Block")) {
                 Color highColor = new Color();
-                ColorUtility.TryParseHtmlString("#0F8000", out highColor);
+                ColorUtility.TryParseHtmlString("#038C00", out highColor);
 
                 Color lowColor = new Color();
-                ColorUtility.TryParseHtmlString("#DCE01D", out lowColor);
+                ColorUtility.TryParseHtmlString("#4FFFAF", out lowColor);
 
-                spriteRenderer.color = Color.Lerp(lowColor, highColor, hitsRemaining / 100f);
+                spriteRenderer.color = Color.Lerp(lowColor, highColor, hitsRemaining / 10f);
                 StartCoroutine(BlockBlink(spriteRenderer.color, 1));
             }
         }

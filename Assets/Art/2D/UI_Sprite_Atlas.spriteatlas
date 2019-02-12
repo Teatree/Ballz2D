@@ -45,6 +45,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e2a2e93656370884396ef3838da33e40, type: 3}
   - {fileID: 21300000, guid: 049f84e66a6f11b4ba4e21c544e9a7ca, type: 3}
   - {fileID: 21300000, guid: bef485870e9afb6408e386da894594c8, type: 3}
+  - {fileID: 21300000, guid: efe6f6184003c02468c86ec104cfa430, type: 3}
   - {fileID: 21300000, guid: 5d16e39843f15a4438f5e4db39e718af, type: 3}
   - {fileID: 21300022, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
   - {fileID: 21300020, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
@@ -70,6 +71,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7b11d24e41809ee4791d7c778cc1c088, type: 3}
   - {fileID: 21300000, guid: 086b1ade9bd2a1649aa70378aa0d7f0f, type: 3}
   - {fileID: 21300000, guid: 295c7b5f2302d0e458d867ca41055044, type: 3}
+  - {fileID: 21300000, guid: 663c04df2b8edf74289121c074c6f9c7, type: 3}
   - {fileID: 21300000, guid: 22f95aff5af302e4fa9d676263c401e3, type: 3}
   m_PackedSpriteNamesToIndex:
   - HC_Gem_Icon
@@ -84,6 +86,7 @@ SpriteAtlas:
   - button_pink
   - Leaderboard_Icon
   - Level_Completed
+  - Balls_Booster
   - Achievements_Icon
   - Confetti_11
   - Confetti_10
@@ -109,6 +112,7 @@ SpriteAtlas:
   - Star_InComplete_Icon
   - Share_Icon
   - Ad_Balls_Icon
+  - Lightning_Booster
   - Ad_Camera_Icon
   m_Tag: UI_Sprite_Atlas
   m_IsVariant: 0
