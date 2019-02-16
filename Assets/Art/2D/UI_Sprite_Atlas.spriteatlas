@@ -40,6 +40,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: fd67f3b24e7af094ea55adb756880335, type: 3}
   - {fileID: 21300000, guid: f5e373532d14813488fb53a39c18ad48, type: 3}
   - {fileID: 21300000, guid: e4db8c44be412584f97934f962d071c6, type: 3}
+  - {fileID: 21300000, guid: 783a44c4e996f184d840ac33c61b29df, type: 3}
   - {fileID: 21300000, guid: c33c81d5a6c1a3b479410d7b62070315, type: 3}
   - {fileID: 21300000, guid: 485779f55278aa64ba5fed473158e8f0, type: 3}
   - {fileID: 21300000, guid: e2a2e93656370884396ef3838da33e40, type: 3}
@@ -81,6 +82,7 @@ SpriteAtlas:
   - button
   - button_shop
   - Reload_Icon
+  - arrow
   - Shop_Icon
   - Pause_Icon
   - button_pink

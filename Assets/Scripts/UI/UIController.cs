@@ -8,6 +8,7 @@ public class UIController : SceneSingleton<UIController> {
 
     [SerializeField]
     private LevelUI levelUiElementPrefab;
+    public GameObject arrowPrefab;
 
     public Text gems;
     public Text stars;
@@ -42,15 +43,42 @@ public class UIController : SceneSingleton<UIController> {
             // debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "\n path: " + DataController.levelfilePath + "\n jsonDataExtracted: " + DataController.AjsonData;
 
             //Create level buttons
+            
             if (PlayerController.player != null) {
+                int arrowIndex = 0;
+                int lvlIndex = 4;
                 for (int i = 0; i < AllLevelsData.allLevels.Count; i++) {
                     var lvl = Instantiate(levelUiElementPrefab, LevelListParent);
-                    lvl.LevelNumber = i;
+                    if (i % 8 == 4) {
+                        lvlIndex = 5;
+                    }
+                    if (i % 8 < 4) {
+                        lvl.LevelNumber = i;
+                        lvl.StarsNumber = (i < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i] : 0;
+                        lvl.buttonComponent.interactable = i <= PlayerController.starsPerLvl.Count ? true : false;
+                        lvl.UpdateButtonVisuals(lvl.StarsNumber);
+                    } else {
+                        lvlIndex-=2;
+                        Debug.Log(">>> i + lvlIndex > " + i +" > " + lvlIndex);
+                        lvl.LevelNumber = i + lvlIndex;
+                        lvl.StarsNumber = (i + lvlIndex < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i+ lvlIndex] : 0;
+                        lvl.buttonComponent.interactable = i + lvlIndex <= PlayerController.starsPerLvl.Count ? true : false;
+                        lvl.UpdateButtonVisuals(lvl.StarsNumber);         
+                    }
+                    var arrow = Instantiate(arrowPrefab, lvl.transform);
+                    arrow.transform.localScale = new Vector3(15, 15, 1);
 
-                    lvl.StarsNumber = (i < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i] : 0;
-                    lvl.buttonComponent.interactable = i <= PlayerController.starsPerLvl.Count ? true : false;
-                    lvl.UpdateButtonVisuals(lvl.StarsNumber);
-
+                    if (arrowIndex % 8 == 0 || arrowIndex % 8 == 1 || arrowIndex % 8 == 2) {
+                        arrow.transform.position = new Vector3(-45, lvl.transform.position.y);
+                        arrow.transform.localRotation = Quaternion.Euler(0, 0, 180);
+                    } else 
+                    if (arrowIndex % 8 == 3 || arrowIndex % 8 == 4) {
+                        arrow.transform.position = new Vector3(10, lvl.transform.position.y + 55);
+                        arrow.transform.localRotation = Quaternion.Euler(0, 0, 90);
+                    } else {
+                        arrow.transform.position = new Vector3(65, lvl.transform.position.y);
+                    }
+                    arrowIndex++;
                     lvlSlider.value = 0;
                 }
             }
