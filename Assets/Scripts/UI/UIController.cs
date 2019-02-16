@@ -25,41 +25,49 @@ public class UIController : SceneSingleton<UIController> {
     public GameObject BoxDayWaitButton;
 
     public GameObject BoxAdButton;
-    private Button boxAdButtonCmp; 
+    private Button boxAdButtonCmp;
     public Scrollbar lvlSlider;
 
     void Start() {
-        //Load data
-        AllLevelsData.allLevels = DataController.LoadLevels();
-
-        // debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "\n path: " + DataController.levelfilePath + "\n jsonDataExtracted: " + DataController.AjsonData;
-
-        //Create level buttons
-        if (PlayerController.player != null) {
-            for (int i = 0; i < AllLevelsData.allLevels.Count; i++) {
-                var lvl = Instantiate(levelUiElementPrefab, LevelListParent);
-                lvl.LevelNumber = i;
-       
-                lvl.StarsNumber = (i < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i] : 0;
-                lvl.buttonComponent.interactable = i <= PlayerController.starsPerLvl.Count ? true : false;
-                lvl.UpdateButtonVisuals(lvl.StarsNumber);
-
-                lvlSlider.value = 0;
-            }
+        Debug.Log(">>>> Menu.initScene > " + SceneController.initScene);
+        if (SceneController.initScene == "GameScene") {
+            SceneController.initScene = "";
+            SceneController.sceneController.UnloadMenu();
+            SceneController.sceneController.LoadGame();
         }
+        else {
+            //Load data
+            AllLevelsData.allLevels = DataController.LoadLevels();
 
-        stars.text = PlayerController.player != null ? PlayerController.player.GetStarsAmount().ToString() : "0";
+            // debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "\n path: " + DataController.levelfilePath + "\n jsonDataExtracted: " + DataController.AjsonData;
+
+            //Create level buttons
+            if (PlayerController.player != null) {
+                for (int i = 0; i < AllLevelsData.allLevels.Count; i++) {
+                    var lvl = Instantiate(levelUiElementPrefab, LevelListParent);
+                    lvl.LevelNumber = i;
+
+                    lvl.StarsNumber = (i < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i] : 0;
+                    lvl.buttonComponent.interactable = i <= PlayerController.starsPerLvl.Count ? true : false;
+                    lvl.UpdateButtonVisuals(lvl.StarsNumber);
+
+                    lvlSlider.value = 0;
+                }
+            }
+
+            stars.text = PlayerController.player != null ? PlayerController.player.GetStarsAmount().ToString() : "0";
+        }
     }
 
     void Update() {
-        gems.text = PlayerController.player != null ?  PlayerController.player.gems.ToString() : "0";
+        gems.text = PlayerController.player != null ? PlayerController.player.gems.ToString() : "0";
 
         // gems.text = "Gems >>> " +  PlayerController.player.gems;
         //debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "      path: " + DataController.levelfilePath;
     }
 
     public void getGems() {
-       // AdmobController.Instance.ShowGemsrewardVideo();
+        // AdmobController.Instance.ShowGemsrewardVideo();
     }
 
     public void Share() {
@@ -75,7 +83,7 @@ public class UIController : SceneSingleton<UIController> {
     }
 
     public void OpenBoxOpen() {
-      
+
         var Box = Instantiate(BoxPopupPrefab, transform);
         Box.GetComponent<BoxPopup>().itemToReceive = BoxOpener.Instance.GetBoxContents_BoxAd();
     }

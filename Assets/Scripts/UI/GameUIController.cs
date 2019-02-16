@@ -35,14 +35,23 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public static string currentLevelNumberLable;
 
     void Start() {
-        SceneController.sceneController.UnloadMenu();
-        HandlePreview();
-        Ad_Button.SetActive(true);
-        //LevelController.PauseGame();
-        currentLevelNumberLable =  "" + (1 + AllLevelsData.CurrentLevelIndex);
-        UpdateStars();
+        Debug.Log(">>>> Game.initScene > " + SceneController.initScene);
+        if (SceneController.initScene == "MenuScene") {
+            SceneController.initScene = "";
+            SceneController.sceneController.UnloadGame();
+            SceneController.sceneController.LoadMenu();
+        }
+        else {
 
-        Slider.maxValue = LevelController.ThirdStarScore;
+            SceneController.sceneController.UnloadMenu();
+            HandlePreview();
+            Ad_Button.SetActive(true);
+            //LevelController.PauseGame();
+            currentLevelNumberLable = "" + (1 + AllLevelsData.CurrentLevelIndex);
+            UpdateStars();
+
+            Slider.maxValue = LevelController.ThirdStarScore;
+        }
     }
 
     void Update() {

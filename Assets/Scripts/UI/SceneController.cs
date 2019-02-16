@@ -8,11 +8,12 @@ public class SceneController : MonoBehaviour {
     private static Dictionary<string, bool> sceneStateTracker;
     public static SceneController sceneController;
     bool gameStart;
-    public static string initScene = "MenuScene";
+    public static string initScene = "";
 
     public AdmobController admob;
 
     public void Awake() {
+
         Application.targetFrameRate = 60;
         Debug.Log(" >>>>> scene " + initScene);
         if (!gameStart) {
@@ -35,6 +36,8 @@ public class SceneController : MonoBehaviour {
             }
             gameStart = true;
         }
+
+        Debug.Log("I'm loadin services here !");
     }
 
     private void UnloadScene(string scene) {
@@ -88,11 +91,12 @@ public class SceneController : MonoBehaviour {
 
     public void RestartGame() {
         initScene = "GameScene";
-        SceneManager.LoadScene("Permanent", LoadSceneMode.Single);
+        LoadMenu();
     }
 
     public void ReloadMenu() {
         initScene = "MenuScene";
-        SceneManager.LoadScene("Permanent", LoadSceneMode.Single);
+        LoadGame();
+      //  SceneManager.LoadScene("Permanent", LoadSceneMode.Single);
     }
 }
