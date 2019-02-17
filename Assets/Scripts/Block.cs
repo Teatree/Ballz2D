@@ -150,10 +150,7 @@ public class Block : MonoBehaviour {
         UpdateVisualState();
     }
 
-    public Block() {
-
-    }
-
+    public Block() { }
 }
 
 public class BlockClone {

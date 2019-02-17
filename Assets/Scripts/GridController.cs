@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GridController : SceneSingleton<GridController> {
@@ -84,7 +85,11 @@ public class GridController : SceneSingleton<GridController> {
     public void SpawnRowOfBlocks(bool moveObstacles) {
         if (!doNotMoveRowDown) {
             RemoveOneTurnBlocks();
-            MoveOneRowDown(moveObstacles);
+            if (moveObstacles) {
+                MoveOneRowDown(moveObstacles);
+            } else {
+                animateOneRowDown();
+            }
             //add new line
             if (rowsSpawned < gc.currentLevel.rows.Count) {
                 List<CellData> cells = gc.currentLevel.rows[rowsSpawned].GetCells();
@@ -94,7 +99,6 @@ public class GridController : SceneSingleton<GridController> {
                         //block.gameObject.transform.localScale = new Vector3(block.gameObject.transform.localScale.x*blockScale, block.gameObject.transform.localScale.y*blockScale); // *NEW
                         block.Setup(cells[i].type, cells[i].life, rowsSpawned, i);
                         blocksSpawned.Add(block);
-                        
                     }
                 }
                 rowsSpawned++;
@@ -134,23 +138,66 @@ public class GridController : SceneSingleton<GridController> {
 
     private void MoveOneRowDown(bool moveObstacles) {
         //move blocks down one line
+        Dictionary<Block, float> newYforBlocks = new Dictionary<Block, float>();
         foreach (var block in blocksSpawned) {
             if (block != null && !block.destroyed && (block._type != BlockType.Obstacle || moveObstacles)) {
                 int newY = ++block.gridRow;
                 ConsiderObstacles(block, ref newY);
-
+                newYforBlocks.Add(block, newY);
                 if (!isSpecialCase(block, newY)) {
+
                     block.transform.position = GetPosition(newY, block.col);
                     RectTransform rt = block.GetComponent<RectTransform>();
                     rt.position = new Vector3(rt.position.x, rt.position.y, 0);
                 }
             }
         }
-
+       // moveTo(newYforBlocks);
         checkLastBlocksLine();
         blocksSpawnedSaved = new List<BlockClone>();
     }
 
+    public void  animateOneRowDown() {
+        Dictionary<Block, float> newYforBlocks = new Dictionary<Block, float>();
+        foreach (var block in blocksSpawned) {
+            if (block != null && !block.destroyed && (block._type != BlockType.Obstacle)) {
+                int newY = ++block.gridRow;
+                ConsiderObstacles(block, ref newY);
+                newYforBlocks.Add(block, GetPosition(newY, block.col).y); 
+            }
+        }
+         moveTo(newYforBlocks);
+        checkLastBlocksLine();
+        blocksSpawnedSaved = new List<BlockClone>();
+    }
+
+    public void moveTo(Dictionary<Block, float> d) {
+        StartCoroutine(moveDown(d));
+    }
+
+    private IEnumerator moveDown(Dictionary<Block, float> newYforBlocks) {
+        bool shouldStop = false;
+        while (!shouldStop) {
+            foreach (Block b in newYforBlocks.Keys) {
+                //:TODO 
+                //if (!isSpecialCase(b, (int)newPosY)) { 
+                float temp = Time.deltaTime * 0.7f;
+                // b.transform.position = Vector3.Lerp(b.transform.position, new Vector3(b.transform.position.x, newYforBlocks[b]), temp);
+                b.transform.position = new Vector3(b.transform.position.x, (b.transform.position.y - 0.05f));
+
+                RectTransform rt = b.GetComponent<RectTransform>();
+                    rt.position = new Vector3(rt.position.x, rt.position.y, 0);
+                // }
+                Debug.Log(">>>> " + b.transform.position.y + " >>>> " + newYforBlocks[b]);
+                if (b.transform.position.y <= newYforBlocks[b]) {
+                    shouldStop = true;
+                }
+            }
+          
+            yield return null;
+        }
+      
+    }
     private bool isSpecialCase(Block b, int newY) {
         if (newY == Constants.GameOver_y_grid_index) {
            if (!b._type.isCollidable ) {
