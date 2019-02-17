@@ -10,18 +10,21 @@ public class AdmobController : SceneSingleton<AdmobController> {
     string interstitialId = "ca-app-pub-4809397092315700/3492498628";
     string rewardVideoId = "ca-app-pub-4809397092315700/9646843432";
     string boxrewardVideoId = "ca-app-pub-4809397092315700/4309780879";
+    string ballsrewardVideoId = "ca-app-pub-4809397092315700~2101070495";
 #elif UNITY_IPHONE
      string appId = "ca-app-pub-4809397092315700~2101070495";
     string bannerId = "ca-app-pub-4809397092315700/7133905324";
     string interstitialId = "ca-app-pub-4809397092315700/3492498628";
     string rewardVideoId = "ca-app-pub-4809397092315700/9646843432";
      string boxrewardVideoId = "ca-app-pub-4809397092315700/9646843432";
+        string ballsrewardVideoId = "ca-app-pub-4809397092315700~2101070495";
 #else
     string appId = "ca-app-pub-4809397092315700~2101070495";
     string bannerId = "ca-app-pub-4809397092315700/7133905324";
     string interstitialId = "ca-app-pub-4809397092315700/3492498628";
     string rewardVideoId = "ca-app-pub-4809397092315700/9646843432";
      string boxrewardVideoId = "ca-app-pub-4809397092315700/9646843432";
+        string ballsrewardVideoId = "ca-app-pub-4809397092315700~2101070495";
 #endif
 
 
@@ -29,6 +32,7 @@ public class AdmobController : SceneSingleton<AdmobController> {
     private InterstitialAd interstitial;
     private RewardBasedVideoAd rewardGemsVideo;
     private RewardBasedVideoAd rewardBoxVideo;
+    private RewardBasedVideoAd rewardBallsVideo;
 
     public void Start() {
         MobileAds.Initialize(appId);
@@ -36,8 +40,10 @@ public class AdmobController : SceneSingleton<AdmobController> {
         this.RequestBanner();
         InitGemRewardVideo();
         InitBoxRewardVideo();
-        RequestInterstitial();
-        bannerView.Show();
+        if (!PlayerController.player.noAds) {
+            RequestInterstitial();
+            bannerView.Show();
+        }
     }
 
     private static AdRequest GetTestRequest() {
@@ -60,7 +66,7 @@ public class AdmobController : SceneSingleton<AdmobController> {
     }
 
     public void ShowIterstitial() {
-        if (this.interstitial.IsLoaded()) {
+        if (!PlayerController.player.noAds && this.interstitial.IsLoaded()) {
             this.interstitial.Show();
         }
     }
@@ -142,29 +148,40 @@ public class AdmobController : SceneSingleton<AdmobController> {
     }
 
     ////MoreBalls
-    //public void ShowBallsrewardVideo() {
-    //    if (rewardGemsVideo.IsLoaded()) {
-    //        rewardGemsVideo.Show();
-    //    }
-    //    else {
+    private void RequestBallsRewardVideo() {
+        this.rewardBallsVideo = RewardBasedVideoAd.Instance;
+        AdRequest request = GetTestRequest();
+        this.rewardBoxVideo.LoadAd(request, ballsrewardVideoId);
+        //if (UIController.Instance != null)
+        //    if (rewardBallsVideo.IsLoaded()) {
+        //        UIController.Instance.SetEnabledAdBox(true);
+        //    }
+        //    else {
+        //        UIController.Instance.SetEnabledAdBox(false);
+        //    }
+    }
 
-    //    }
-    //}
+    public void ShowBallsrewardVideo() {
+        if (rewardBallsVideo.IsLoaded()) {
+            rewardBallsVideo.Show();
+        }
+    }
 
-    //private void InitBallsRewardVideo() {
-    //    RequestRewardVideo();
-    //    // Get singleton reward based video ad reference
-    //    rewardGemsVideo.OnAdRewarded += HandleRewardBallsRewarded;
-    //    rewardGemsVideo.OnAdClosed += HandleRewardBallsClosed;
-    //}
+    private void InitBallsRewardVideo() {
+        RequestBallsRewardVideo();
+        // Get singleton reward based video ad reference
+        rewardBallsVideo.OnAdRewarded += HandleRewardBallsRewarded;
+        rewardBallsVideo.OnAdClosed += HandleRewardBallsClosed;
+    }
 
-    //public void HandleRewardBallsRewarded(object sender, Reward args) {
-    //    BallLauncher.ExtraBalls += UnityEngine.Random.Range(1, 6);
-    //}
+    public void HandleRewardBallsRewarded(object sender, Reward args) {
+        BallLauncher.ExtraBalls += 10;
+        MoreBallsPowerup.Instance.TextCanvasUpdate();
+    }
 
-    //public void HandleRewardBallsClosed(object sender, EventArgs args) {
-    //    this.RequestRewardVideo();
-    //}
+    public void HandleRewardBallsClosed(object sender, EventArgs args) {
+        this.RequestBallsRewardVideo();
+    }
 
     #endregion
 }

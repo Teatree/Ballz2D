@@ -8,7 +8,7 @@ public class Purchaser : MonoBehaviour, IStoreListener {
 
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
-    
+
     public static string noAds = "no_ads";
     public static string GEMS_100 = "100_gems";
     public static string NO_ADS = "no_ads";
@@ -134,14 +134,14 @@ public class Purchaser : MonoBehaviour, IStoreListener {
     }
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args) {
-        if (String.Equals(args.purchasedProduct.definition.id, GEMS_100, StringComparison.Ordinal)) {
-            Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
-            PlayerController.player.gems += 100;
+        String prodId = args.purchasedProduct.definition.id;
+        String[] prodVal = prodId.Split("_".ToCharArray());
+        if (prodVal.Length > 1 && prodVal[1].Equals("gems", StringComparison.CurrentCultureIgnoreCase)) {
+            PlayerController.player.gems += int.Parse(prodVal[0]);
         }
-
-        if (String.Equals(args.purchasedProduct.definition.id, NO_ADS, StringComparison.Ordinal)) {
+        else if (String.Equals(args.purchasedProduct.definition.id, NO_ADS, StringComparison.Ordinal)) {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
-            //TODO: NO ads
+            PlayerController.player.noAds = true;
         }
         // Return a flag indicating whether this product has completely been received, or if the application needs 
         // to be reminded of this purchase at next app launch. Use PurchaseProcessingResult.Pending when still 

@@ -27,10 +27,10 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
         GameObject textCanvas = BallLauncher.Instance.textCanvas;
         textCanvas.gameObject.transform.localPosition = new Vector3(0.27f, 0.17f);
         if (textCanvas.gameObject.transform.position.x > 2.55f) textCanvas.gameObject.transform.position = new Vector3(2.55f, textCanvas.gameObject.transform.position.y);
-        StartCoroutine(IncreaseScore(textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>(), BallLauncher.Instance.BallsReadyToShoot, BallLauncher.Instance.BallsReadyToShoot + ExtraBallsAmount));
+        StartCoroutine(IncreaseBalls(textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>(), BallLauncher.Instance.BallsReadyToShoot, BallLauncher.Instance.BallsReadyToShoot + ExtraBallsAmount));
     }
 
-    public IEnumerator IncreaseScore(Text textComponent, int wasBalls, int becomeBalls) {
+    public IEnumerator IncreaseBalls(Text textComponent, int wasBalls, int becomeBalls) {
         int i = (becomeBalls - wasBalls) / 2; //halfway
         int _initialFontSize = textComponent.fontSize;
         bool _changeSize = false;

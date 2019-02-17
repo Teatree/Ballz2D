@@ -4294,7 +4294,7 @@ MonoBehaviour:
   LevelListParent: {fileID: 511359688}
   levelUiElementPrefab: {fileID: 114320385160567790, guid: ff7ced476d2c21745aa046a965904fed,
     type: 2}
-  arrowPrefab: {fileID: 1839695158474700, guid: 96597ac8852934446baf005ef8971200,
+  arrowPrefab: {fileID: 1819503552045152, guid: 9d4273c0a67639345a3e399d67b46c0d,
     type: 2}
   gems: {fileID: 844553629}
   stars: {fileID: 1679044884}

@@ -213,7 +213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1512515699
 Transform:
   m_ObjectHideFlags: 0
@@ -267,7 +267,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoxAd: {fileID: 11400000, guid: 1db5fd2c72d745a48ac9c51e247dd501, type: 2}
   BoxDay: {fileID: 11400000, guid: 7ff4c41e1957b51409762e051c14330a, type: 2}
-  BoxStars1: {fileID: 11400000, guid: c44da912428f5874e9a9ffe7d7ddf394, type: 2}
   BoxShop1: {fileID: 11400000, guid: ee100ef067e08db4cbf74b7678e42919, type: 2}
   BoxShop2: {fileID: 11400000, guid: 0051e3fe6ccf7b54e8faba51799bf7d3, type: 2}
 --- !u!4 &1517596998

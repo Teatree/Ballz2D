@@ -59,14 +59,13 @@ public class UIController : SceneSingleton<UIController> {
                         lvl.UpdateButtonVisuals(lvl.StarsNumber);
                     } else {
                         lvlIndex-=2;
-                        Debug.Log(">>> i + lvlIndex > " + i +" > " + lvlIndex);
                         lvl.LevelNumber = i + lvlIndex;
                         lvl.StarsNumber = (i + lvlIndex < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i+ lvlIndex] : 0;
                         lvl.buttonComponent.interactable = i + lvlIndex <= PlayerController.starsPerLvl.Count ? true : false;
                         lvl.UpdateButtonVisuals(lvl.StarsNumber);         
                     }
                     var arrow = Instantiate(arrowPrefab, lvl.transform);
-                    arrow.transform.localScale = new Vector3(15, 15, 1);
+                   // arrow.transform.localScale = new Vector3(15, 15, 1);
 
                     if (arrowIndex % 8 == 0 || arrowIndex % 8 == 1 || arrowIndex % 8 == 2) {
                         arrow.transform.position = new Vector3(-45, lvl.transform.position.y);

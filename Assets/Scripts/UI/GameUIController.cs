@@ -20,12 +20,12 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject PausePrefab;
     public GameObject BoxPopupPrefab;
     public GameObject ShopPrefab;
- 
+
 
     [Header("SpeedUPIcon")]
     public GameObject SpeedUpIcon;
 
-    [Header ("Lasers")]
+    [Header("Lasers")]
     public GameObject laserLine1;
     public GameObject laserLine2;
     public GameObject laserLine3;
@@ -93,7 +93,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
             curScore += increment;
             Slider.value = curScore;
             ScoreText.text = curScore.ToString();
-            yield return null;     
+            yield return null;
         }
 
         curScore = endScore;
@@ -132,7 +132,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
     public void ShowGameOver() {
-       GameObject go =  Instantiate(GameOverPrefab, transform);
+        GameObject go = Instantiate(GameOverPrefab, transform);
         GameOver g = go.transform.GetComponent<GameOver>();
         g._type = GameOver.GameOverType.Fail;
     }
@@ -246,6 +246,10 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
     public void TurnSpeedUpIcon_OFF() {
         SpeedUpIcon.SetActive(false);
+    }
+
+    public void showMoreBallsAd() {
+        AdmobController.Instance.ShowBallsrewardVideo();
     }
 
 }
