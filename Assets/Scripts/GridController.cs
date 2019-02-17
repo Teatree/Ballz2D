@@ -69,8 +69,8 @@ public class GridController : SceneSingleton<GridController> {
             }
         }
 
-        Constants.GameOver_y_grid_index = grid.childCount-1;
-        Constants.Warning_y_grid_index = grid.childCount-2;
+        Constants.GameOver_y_grid_index = grid.childCount - 1;
+        Constants.Warning_y_grid_index = grid.childCount - 2;
 
         BlocksAmount = gc.currentLevel.GetBlocksAmount();
 
@@ -92,6 +92,7 @@ public class GridController : SceneSingleton<GridController> {
             }
             //add new line
             if (rowsSpawned < gc.currentLevel.rows.Count) {
+                List<Block> blocksToBlink = new List<Block>();
                 List<CellData> cells = gc.currentLevel.rows[rowsSpawned].GetCells();
                 for (int i = 0; i < playWidth; i++) {
                     if (cells[i] != null && cells[i].type != "") {
@@ -99,12 +100,29 @@ public class GridController : SceneSingleton<GridController> {
                         //block.gameObject.transform.localScale = new Vector3(block.gameObject.transform.localScale.x*blockScale, block.gameObject.transform.localScale.y*blockScale); // *NEW
                         block.Setup(cells[i].type, cells[i].life, rowsSpawned, i);
                         blocksSpawned.Add(block);
+                        blocksToBlink.Add(block);
                     }
                 }
+                //if(!moveObstacles) {
+                //    StartCoroutine(BlinkBlink(blocksToBlink));
+                //}
                 rowsSpawned++;
             }
         }
         BallLauncher.canShoot = true;
+    }
+
+    private IEnumerator BlinkBlink(List<Block> blocks) {
+        for (int i = 0; i < 4; i++) {
+            foreach (Block b in blocks) {
+                if (b.transform.gameObject.active) {
+                    b.transform.gameObject.SetActive(false);
+                } else {
+                    b.transform.gameObject.SetActive(true);
+                }
+            }
+            yield return new WaitForSeconds(0.02f);
+        }
     }
 
     private void checkLastBlocksLine() {
@@ -113,25 +131,25 @@ public class GridController : SceneSingleton<GridController> {
         int lastGridRow = 0;
 
         for (int i = 0; i < blocksSpawned.Count; i++) {
-            if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle 
-                                && blocksSpawned[i].gridRow > lastGridRow) { 
+            if (!blocksSpawned[i].destroyed && blocksSpawned[i]._type != BlockType.Obstacle
+                                && blocksSpawned[i].gridRow > lastGridRow) {
                 lastRowSpawnedPos = blocksSpawned[i].transform.position.y;
                 lastRowSpawnedIndex = blocksSpawned[i].row;
                 lastGridRow = blocksSpawned[i].gridRow;
-               // break;
+                // break;
             }
         }
 
         if (rowsSpawned > 0 && lastGridRow == Constants.Warning_y_grid_index) { //Show warnings ani
             BallLauncher.canShoot = true;
             Warning.Instance.ShowWarning();
-           // return;
+            // return;
         }
         if (rowsSpawned > 0 && lastGridRow == Constants.GameOver_y_grid_index) { // Show gameOver popup
             LevelController.isGameOver = true;
             Revive.RowToDestroyIndex = lastRowSpawnedIndex;
             Revive.RowToDestroyPosition = lastRowSpawnedPos;
-            GameUIController.Instance.HandleGameOver(); 
+            GameUIController.Instance.HandleGameOver();
             return;
         }
     }
@@ -152,21 +170,21 @@ public class GridController : SceneSingleton<GridController> {
                 }
             }
         }
-       // moveTo(newYforBlocks);
+        // moveTo(newYforBlocks);
         checkLastBlocksLine();
         blocksSpawnedSaved = new List<BlockClone>();
     }
 
-    public void  animateOneRowDown() {
+    public void animateOneRowDown() {
         Dictionary<Block, float> newYforBlocks = new Dictionary<Block, float>();
         foreach (var block in blocksSpawned) {
             if (block != null && !block.destroyed && (block._type != BlockType.Obstacle)) {
                 int newY = ++block.gridRow;
                 ConsiderObstacles(block, ref newY);
-                newYforBlocks.Add(block, GetPosition(newY, block.col).y); 
+                newYforBlocks.Add(block, GetPosition(newY, block.col).y);
             }
         }
-         moveTo(newYforBlocks);
+        moveTo(newYforBlocks);
         checkLastBlocksLine();
         blocksSpawnedSaved = new List<BlockClone>();
     }
@@ -186,27 +204,27 @@ public class GridController : SceneSingleton<GridController> {
                 b.transform.position = new Vector3(b.transform.position.x, (b.transform.position.y - 0.05f));
 
                 RectTransform rt = b.GetComponent<RectTransform>();
-                    rt.position = new Vector3(rt.position.x, rt.position.y, 0);
+                rt.position = new Vector3(rt.position.x, rt.position.y, 0);
                 // }
-                Debug.Log(">>>> " + b.transform.position.y + " >>>> " + newYforBlocks[b]);
                 if (b.transform.position.y <= newYforBlocks[b]) {
                     shouldStop = true;
+                    b.transform.position = new Vector3(b.transform.position.x, newYforBlocks[b]);
                 }
             }
-          
+
             yield return null;
         }
-      
+
     }
     private bool isSpecialCase(Block b, int newY) {
         if (newY == Constants.GameOver_y_grid_index) {
-           if (!b._type.isCollidable ) {
+            if (!b._type.isCollidable) {
                 if (b._type == BlockType.ExtraBall) {
                     ExtraBallBehaviour beh = b._behaviour as ExtraBallBehaviour;
                     beh.GetExtraBall();
                 }
                 b.DestroySelf();
-            } 
+            }
         }
         return false;
     }
@@ -223,7 +241,7 @@ public class GridController : SceneSingleton<GridController> {
 
     public void RemoveOneTurnBlocks() {
         foreach (Block b in blocksSpawned) {
-            if (b.wasHit ) {
+            if (b.wasHit) {
                 b.DestroySelf();
             }
         }
@@ -235,7 +253,7 @@ public class GridController : SceneSingleton<GridController> {
 
     public Block GetTheBlock(string type, int row, int col) {
         Block block;
-    
+
         switch (type) {
             case "FF": {
                     block = Instantiate(fountainPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);

@@ -65,17 +65,18 @@ public class UIController : SceneSingleton<UIController> {
                         lvl.UpdateButtonVisuals(lvl.StarsNumber);         
                     }
                     var arrow = Instantiate(arrowPrefab, lvl.transform);
+                    arrow.transform.SetParent(lvl.transform);
                    // arrow.transform.localScale = new Vector3(15, 15, 1);
 
                     if (arrowIndex % 8 == 0 || arrowIndex % 8 == 1 || arrowIndex % 8 == 2) {
-                        arrow.transform.position = new Vector3(-45, lvl.transform.position.y);
+                        arrow.transform.localPosition = new Vector3(-85, 0);
                         arrow.transform.localRotation = Quaternion.Euler(0, 0, 180);
                     } else 
                     if (arrowIndex % 8 == 3 || arrowIndex % 8 == 4) {
-                        arrow.transform.position = new Vector3(10, lvl.transform.position.y + 55);
+                        arrow.transform.localPosition = new Vector3(0, 85);
                         arrow.transform.localRotation = Quaternion.Euler(0, 0, 90);
                     } else {
-                        arrow.transform.position = new Vector3(65, lvl.transform.position.y);
+                        arrow.transform.localPosition = new Vector3(85, 0);
                     }
                     arrowIndex++;
                     lvlSlider.value = 0;
