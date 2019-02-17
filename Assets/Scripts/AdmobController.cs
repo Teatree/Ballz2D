@@ -162,9 +162,11 @@ public class AdmobController : SceneSingleton<AdmobController> {
     }
 
     public void ShowBallsrewardVideo() {
-        if (rewardBallsVideo.IsLoaded()) {
-            rewardBallsVideo.Show();
-        }
+        //if (rewardBallsVideo.IsLoaded()) {
+        //    rewardBallsVideo.Show();
+        //}
+        BallLauncher.ExtraBalls += 10;
+        MoreBallsPowerup.Instance.TextCanvasUpdate();
     }
 
     private void InitBallsRewardVideo() {

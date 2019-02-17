@@ -10,7 +10,14 @@ public class Purchaser : MonoBehaviour, IStoreListener {
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
 
     public static string noAds = "no_ads";
-    public static string GEMS_100 = "100_gems";
+    public static string GEMS_200 = "100_gems";
+    public static string GEMS_400 = "400_gems";
+    public static string GEMS_600 = "600_gems";
+    public static string GEMS_1100 = "1100_gems";
+    public static string GEMS_2300 = "2300_gems";
+    public static string GEMS_7200 = "7200_gems";
+    public static string GEMS_12500 = "12500_gems";
+    public static string GEMS_30000 = "30000_gems";
     public static string NO_ADS = "no_ads";
 
     public void Awake() {
@@ -34,7 +41,14 @@ public class Purchaser : MonoBehaviour, IStoreListener {
 
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
 
-        builder.AddProduct(GEMS_100, ProductType.Consumable);
+        builder.AddProduct(GEMS_200, ProductType.Consumable);
+        builder.AddProduct(GEMS_400, ProductType.Consumable);
+        builder.AddProduct(GEMS_600, ProductType.Consumable);
+        builder.AddProduct(GEMS_1100, ProductType.Consumable);
+        builder.AddProduct(GEMS_2300, ProductType.Consumable);
+        builder.AddProduct(GEMS_7200, ProductType.Consumable);
+        builder.AddProduct(GEMS_12500, ProductType.Consumable);
+        builder.AddProduct(GEMS_30000, ProductType.Consumable);
         builder.AddProduct(NO_ADS, ProductType.NonConsumable);
 
         UnityPurchasing.Initialize(this, builder);
@@ -45,8 +59,36 @@ public class Purchaser : MonoBehaviour, IStoreListener {
         return m_StoreController != null && m_StoreExtensionProvider != null;
     }
 
-    public void BuyGems100() {
-        BuyProductID(GEMS_100);
+    public void BuyGems200() {
+        BuyProductID(GEMS_200);
+    }
+
+    public void BuyGems400() {
+        BuyProductID(GEMS_400);
+    }
+
+    public void BuyGems600() {
+        BuyProductID(GEMS_600);
+    }
+
+    public void BuyGems1100() {
+        BuyProductID(GEMS_1100);
+    }
+
+    public void BuyGems2300() {
+        BuyProductID(GEMS_2300);
+    }
+
+    public void BuyGems7200() {
+        BuyProductID(GEMS_7200);
+    }
+
+    public void BuyGems12500() {
+        BuyProductID(GEMS_12500);
+    }
+
+    public void BuyGems30000() {
+        BuyProductID(GEMS_30000);
     }
 
     public void BuyNoAds() {

@@ -10,13 +10,16 @@ public class Tab : MonoBehaviour {
     public GameObject TabPanel;
     public bool initialB;
 
-    private Color color;
+    private Color activeCol;
+    private Color disableCol;
 
     private void Start() {
-        color = GetComponent<Image>().color;
+        ColorUtility.TryParseHtmlString("#4E1C3A", out activeCol);
+        ColorUtility.TryParseHtmlString("#180611", out disableCol);
+
         if (initialB) {
             TabContent.SetActive(initialB);
-            GetComponent<Image>().color = new Color(color.r, 255, color.b);
+            GetComponent<Image>().color = activeCol;
         }
     }
 
@@ -25,9 +28,9 @@ public class Tab : MonoBehaviour {
             content.gameObject.SetActive(false);
         }
         foreach (Transform tab in TabPanel.transform) {
-            tab.gameObject.GetComponent<Image>().color = color;
+            tab.gameObject.GetComponent<Image>().color = disableCol;
         }
         TabContent.SetActive(true);
-        GetComponent<Image>().color = new Color(color.r, 255, color.b);
+        GetComponent<Image>().color = activeCol;
     }
 }

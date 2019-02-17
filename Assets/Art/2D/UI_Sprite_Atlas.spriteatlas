@@ -45,6 +45,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 485779f55278aa64ba5fed473158e8f0, type: 3}
   - {fileID: 21300000, guid: e2a2e93656370884396ef3838da33e40, type: 3}
   - {fileID: 21300000, guid: 049f84e66a6f11b4ba4e21c544e9a7ca, type: 3}
+  - {fileID: 21300000, guid: 4fcd27573b6b1cd4589164a9e942e3e3, type: 3}
   - {fileID: 21300000, guid: bef485870e9afb6408e386da894594c8, type: 3}
   - {fileID: 21300000, guid: efe6f6184003c02468c86ec104cfa430, type: 3}
   - {fileID: 21300000, guid: 5d16e39843f15a4438f5e4db39e718af, type: 3}
@@ -87,6 +88,7 @@ SpriteAtlas:
   - Pause_Icon
   - button_pink
   - Leaderboard_Icon
+  - Dialog_BG_Shop
   - Level_Completed
   - Balls_Booster
   - Achievements_Icon
