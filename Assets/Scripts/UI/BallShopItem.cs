@@ -16,11 +16,11 @@ public class BallShopItem : MonoBehaviour {
     }
 
     public void OnClick_BuyBall() {
-        if (ItemsController.getItem(itemObject, false)) {
+       // if (ItemsController.getItem(itemObject, false)) {
             ItemsController.EquipSpecialBall(itemObject);
-        }
-        else {
-            ShopPopup.Instance.SwitchToShopHCTab();
-        }
+        //}
+        //else {
+        //    ShopPopup.Instance.SwitchToShopHCTab();
+        //}
     }
 }
