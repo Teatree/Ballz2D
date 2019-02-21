@@ -72,6 +72,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e77333bd9b4d22747b814ebf4421ef1f, type: 3}
   - {fileID: 21300000, guid: 7b11d24e41809ee4791d7c778cc1c088, type: 3}
   - {fileID: 21300000, guid: 086b1ade9bd2a1649aa70378aa0d7f0f, type: 3}
+  - {fileID: 21300000, guid: cac2f22fe0e71a142b5b093f25160c0d, type: 3}
   - {fileID: 21300000, guid: 295c7b5f2302d0e458d867ca41055044, type: 3}
   - {fileID: 21300000, guid: 663c04df2b8edf74289121c074c6f9c7, type: 3}
   - {fileID: 21300000, guid: 22f95aff5af302e4fa9d676263c401e3, type: 3}
@@ -115,6 +116,7 @@ SpriteAtlas:
   - Dialog_BG
   - Star_InComplete_Icon
   - Share_Icon
+  - Balls_Icon
   - Ad_Balls_Icon
   - Lightning_Booster
   - Ad_Camera_Icon
