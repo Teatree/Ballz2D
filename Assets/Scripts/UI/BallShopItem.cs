@@ -19,8 +19,7 @@ public class BallShopItem : MonoBehaviour {
         if (ItemsController.getItem(itemObject, false)) {
             ItemsController.EquipSpecialBall(itemObject);
 
-        }
-        else {
+        } else {
             ShopPopup.Instance.SwitchToShopHCTab();
         }
     }
