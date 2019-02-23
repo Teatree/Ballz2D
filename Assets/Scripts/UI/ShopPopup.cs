@@ -13,9 +13,10 @@ public class ShopPopup : IPopup<Pause> {
     public Text gemsCurrent;
 
     public Tab hcTab;
+    public static BallShopItem EquipedBall;
 
     public void Start() {
-        Debug.Log(">>>> " + Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200));
+        //Debug.Log(">>>> " + Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200));
         gems200.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200);
         gems400.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_400);
         gems600.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_600);

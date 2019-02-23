@@ -152,6 +152,8 @@ public class PlayerData {
     public string lastLogin;
     public string giveBoxAt;
     public bool noAds;
+    public string specialBallImageName;
+    public string specialBallName;
 
     public List<CompletedLevel> completedLvls = new List<CompletedLevel>();
     public List<ItemData> items = new List<ItemData>();

@@ -50,6 +50,7 @@ public class BoxPopup : IPopup<BoxPopup> {
     }
 
     public void OnClick_Equip() {
+        ItemsController.getItem(itemToReceive, true);
         ItemsController.EquipSpecialBall(itemToReceive);
     }
 

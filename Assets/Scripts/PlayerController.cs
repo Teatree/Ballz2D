@@ -24,6 +24,8 @@ public class PlayerController : SceneSingleton<PlayerController> {
                     starsPerLvl.Add(lvl.number, lvl.stars);
                 }
             }
+
+            LevelController.SpecialBall = player.specialBallImageName;
         }
     }
 
@@ -66,12 +68,6 @@ public class PlayerController : SceneSingleton<PlayerController> {
 
     void OnApplicationQuit() {
         SavePlayer();
-        //List<CompletedLevel> lvls = new List<CompletedLevel>();
-        //foreach (KeyValuePair<int, int> lvl in starsPerLvl) {
-        //    lvls.Add(new CompletedLevel(lvl.Key, lvl.Value));
-        //}
-        //player.completedLvls = lvls;
-        //DataController.SavePlayer(player);
     }
 
     private int getAmountOfItem(string iname) {

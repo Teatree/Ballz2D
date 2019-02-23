@@ -20,6 +20,8 @@ public class ItemsController : MonoBehaviour {
 
     public static void EquipSpecialBall(ItemObject iobj) {
         LevelController.SpecialBall = iobj.assetImage;
+        PlayerController.player.specialBallImageName = iobj.assetImage;
+        PlayerController.player.specialBallName = iobj.name;
         iobj.enabled = true;
         PlayerController.player.items.Find(x => x.name.Equals(iobj.name)).enabled = true;
     }
