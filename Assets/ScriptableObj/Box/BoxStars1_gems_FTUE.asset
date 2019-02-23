@@ -9,19 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db5349a0ddadbf344bbc53f0cdfe6cdd, type: 3}
-  m_Name: BoxStars1
+  m_Name: BoxStars1_gems_FTUE
   m_EditorClassIdentifier: 
-  objectName: BoxStars1
+  objectName: BoxStars1_gems_FTUE
   starCost: 5
   items:
   - {fileID: 11400000, guid: 73c974e5b16fb214fa75848012291f68, type: 2}
   - {fileID: 11400000, guid: e4d1732b90d39d14e8ce2fbe4c629540, type: 2}
   - {fileID: 11400000, guid: 9c48e6b0789bf6c43b2c15dc5008a179, type: 2}
   - {fileID: 11400000, guid: 62cc3b9b173acf54697ba16fb83ce056, type: 2}
-  - {fileID: 11400000, guid: 9afc81665ed05ec468acda53f3abe5ab, type: 2}
-  - {fileID: 11400000, guid: 26fbfda9eef7f3246957beee1c1ca708, type: 2}
-  - {fileID: 11400000, guid: 7c4f4f3563fcfb84d92c1a39caf57cf9, type: 2}
-  - {fileID: 11400000, guid: 62219fbf82f7e2747a2a1ed947952def, type: 2}
-  - {fileID: 11400000, guid: 50e75936c67c75242b425988dd871a40, type: 2}
-  - {fileID: 11400000, guid: d417285edcd98994ea3ccf6e399959fb, type: 2}
-  itemWights: 1400000064000000870000004b0000001e0000000d000000030000001e0000000d00000003000000
+  itemWights: 14000000af0000006400000032000000
