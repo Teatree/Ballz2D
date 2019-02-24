@@ -1,4 +1,5 @@
 ﻿
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,19 +14,13 @@ public class BallShopItem : MonoBehaviour {
 
     public GameObject confirmPopup;
     public ItemObject itemObject;
+    bool hasItem = false;
 
-    void Start () {
+    void Start() {
         ShopImage.sprite = itemObject.shopImage;
         ItemCost.text = itemObject.costGems.ToString();
 
-        bool hasItem = false;
-        foreach (ItemData i in PlayerController.player.items) {
-            if (i.name.Equals(itemObject.name)) {
-                uiEquip();
-                hasItem = true;
-                break;
-            }
-        }
+        checkHasItem();
 
         if (!hasItem) {
             uiBuy();
@@ -35,22 +30,63 @@ public class BallShopItem : MonoBehaviour {
         }
     }
 
-    public void OnClick_BuyBall() {
-        var confirm = Instantiate(confirmPopup, ShopPopup.Instance.gameObject.transform);
+    private void checkHasItem() {
+        foreach (ItemData i in PlayerController.player.items) {
+            if (i.name.Equals(itemObject.name)) {
+                uiEquip();
+                hasItem = true;
+                break;
+            }
+        }
     }
 
-    public void confirmedBuy() {
-        if (ItemsController.getItem(itemObject, false)) {
-            ItemsController.EquipSpecialBall(itemObject);
-            if (ShopPopup.EquipedBall != null) {
-                ShopPopup.EquipedBall.uiEquip();
-            }
-            uiEquiped();
+    public void OnClick_BuyBall() {
+        checkHasItem();
+        if (hasItem) {
+            equipAndUI();
+        } else if (PlayerController.player.gems >= itemObject.costGems) {
+            StartCoroutine(confirmedBuy());
         }
         else {
             ShopPopup.Instance.SwitchToShopHCTab();
         }
+
     }
+
+    public IEnumerator confirmedBuy() {
+        GameObject confirm = Instantiate(confirmPopup, ShopPopup.Instance.gameObject.transform);
+        while (confirm.GetComponent<ConfirmBallPopup>().result == "") {
+            yield return null;
+        }
+        if (confirm.GetComponent<ConfirmBallPopup>().result == "ok") {
+            if (ItemsController.getItem(itemObject, false)) {
+                equipAndUI();
+            }
+
+        }
+      
+    }
+
+    private void equipAndUI() {
+        ItemsController.EquipSpecialBall(itemObject);
+        if (ShopPopup.EquipedBall != null) {
+            ShopPopup.EquipedBall.uiEquip();
+        }
+        uiEquiped();
+    }
+
+    //public void confirmedBuy() {
+    //    if (ItemsController.getItem(itemObject, false)) {
+    //        ItemsController.EquipSpecialBall(itemObject);
+    //        if (ShopPopup.EquipedBall != null) {
+    //            ShopPopup.EquipedBall.uiEquip();
+    //        }
+    //        uiEquiped();
+    //    }
+    //    else {
+    //        ShopPopup.Instance.SwitchToShopHCTab();
+    //    }
+    //}
 
     public void uiEquiped() {
         button.interactable = false;
