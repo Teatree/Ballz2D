@@ -115,7 +115,7 @@ public class GridController : SceneSingleton<GridController> {
     private IEnumerator BlinkBlink(List<Block> blocks) {
         for (int i = 0; i < 4; i++) {
             foreach (Block b in blocks) {
-                if (b.transform.gameObject.active) {
+                if (b.transform.gameObject.activeSelf) {
                     b.transform.gameObject.SetActive(false);
                 } else {
                     b.transform.gameObject.SetActive(true);

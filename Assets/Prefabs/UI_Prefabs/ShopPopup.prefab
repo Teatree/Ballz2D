@@ -8024,6 +8024,8 @@ MonoBehaviour:
   EquippedTxt: {fileID: 114484138158482810}
   uglyGem: {fileID: 1397471398183244}
   button: {fileID: 114532406939039348}
+  confirmPopup: {fileID: 1658905206330056, guid: 0c4bbb47ed5177d48b8d64ce3742f57f,
+    type: 2}
   itemObject: {fileID: 11400000, guid: 52838865ad0aa2540b5640104fd413c5, type: 2}
 --- !u!114 &114084754616799508
 MonoBehaviour:
@@ -8379,6 +8381,8 @@ MonoBehaviour:
   EquippedTxt: {fileID: 114767374857652336}
   uglyGem: {fileID: 1499120366151496}
   button: {fileID: 114007608227111324}
+  confirmPopup: {fileID: 1658905206330056, guid: 0c4bbb47ed5177d48b8d64ce3742f57f,
+    type: 2}
   itemObject: {fileID: 11400000, guid: b467f71e4e8359e4396db74432ef46ea, type: 2}
 --- !u!114 &114115858444322596
 MonoBehaviour:
@@ -9038,6 +9042,7 @@ MonoBehaviour:
   EquippedTxt: {fileID: 0}
   uglyGem: {fileID: 0}
   button: {fileID: 0}
+  confirmPopup: {fileID: 0}
   itemObject: {fileID: 11400000, guid: 2fec7cef953308544beecbbbf185122b, type: 2}
 --- !u!114 &114148880666122686
 MonoBehaviour:
@@ -9056,6 +9061,7 @@ MonoBehaviour:
   EquippedTxt: {fileID: 0}
   uglyGem: {fileID: 0}
   button: {fileID: 0}
+  confirmPopup: {fileID: 0}
   itemObject: {fileID: 11400000, guid: b18a8c6e0aadc5b49a431f2d69739580, type: 2}
 --- !u!114 &114151002409589266
 MonoBehaviour:
@@ -9194,6 +9200,7 @@ MonoBehaviour:
   EquippedTxt: {fileID: 0}
   uglyGem: {fileID: 0}
   button: {fileID: 0}
+  confirmPopup: {fileID: 0}
   itemObject: {fileID: 11400000, guid: 150cc219c21aa3f4dbf6de457e23b10c, type: 2}
 --- !u!114 &114170221755859626
 MonoBehaviour:
@@ -9374,6 +9381,7 @@ MonoBehaviour:
   EquippedTxt: {fileID: 0}
   uglyGem: {fileID: 0}
   button: {fileID: 0}
+  confirmPopup: {fileID: 0}
   itemObject: {fileID: 11400000, guid: 0f34a4ff9c803014591e5e1d11139b27, type: 2}
 --- !u!114 &114187038400874684
 MonoBehaviour:
@@ -12389,6 +12397,7 @@ MonoBehaviour:
   EquippedTxt: {fileID: 0}
   uglyGem: {fileID: 0}
   button: {fileID: 0}
+  confirmPopup: {fileID: 0}
   itemObject: {fileID: 11400000, guid: a2b6720e5e8012340bbba371299e319f, type: 2}
 --- !u!114 &114365463511356168
 MonoBehaviour:
@@ -13502,6 +13511,7 @@ MonoBehaviour:
   EquippedTxt: {fileID: 0}
   uglyGem: {fileID: 0}
   button: {fileID: 0}
+  confirmPopup: {fileID: 0}
   itemObject: {fileID: 11400000, guid: ab9eb579e9daef74aa8a1c9fadf10c88, type: 2}
 --- !u!114 &114432148084679258
 MonoBehaviour:
@@ -15477,6 +15487,7 @@ MonoBehaviour:
   EquippedTxt: {fileID: 0}
   uglyGem: {fileID: 0}
   button: {fileID: 0}
+  confirmPopup: {fileID: 0}
   itemObject: {fileID: 11400000, guid: 52838865ad0aa2540b5640104fd413c5, type: 2}
 --- !u!114 &114564525605568276
 MonoBehaviour:
@@ -15907,6 +15918,7 @@ MonoBehaviour:
   EquippedTxt: {fileID: 0}
   uglyGem: {fileID: 0}
   button: {fileID: 0}
+  confirmPopup: {fileID: 0}
   itemObject: {fileID: 11400000, guid: c7ef00ec72c1ff646942702dbe7b4c55, type: 2}
 --- !u!114 &114602046634273050
 MonoBehaviour:
@@ -16006,6 +16018,7 @@ MonoBehaviour:
   EquippedTxt: {fileID: 0}
   uglyGem: {fileID: 0}
   button: {fileID: 0}
+  confirmPopup: {fileID: 0}
   itemObject: {fileID: 11400000, guid: 1b7ea4ddb90a83b48b800b91936b3174, type: 2}
 --- !u!114 &114610601897199048
 MonoBehaviour:
@@ -16119,6 +16132,7 @@ MonoBehaviour:
   EquippedTxt: {fileID: 0}
   uglyGem: {fileID: 0}
   button: {fileID: 0}
+  confirmPopup: {fileID: 0}
   itemObject: {fileID: 11400000, guid: 6692fecc34e8acc49b51295d1ba10976, type: 2}
 --- !u!114 &114612241627963874
 MonoBehaviour:
@@ -16486,6 +16500,7 @@ MonoBehaviour:
   EquippedTxt: {fileID: 0}
   uglyGem: {fileID: 0}
   button: {fileID: 0}
+  confirmPopup: {fileID: 0}
   itemObject: {fileID: 11400000, guid: ff5caf5e13ad8b34a854c64a70d77ecb, type: 2}
 --- !u!114 &114638518901616294
 MonoBehaviour:
@@ -18425,6 +18440,7 @@ MonoBehaviour:
   EquippedTxt: {fileID: 0}
   uglyGem: {fileID: 0}
   button: {fileID: 0}
+  confirmPopup: {fileID: 0}
   itemObject: {fileID: 11400000, guid: 779bcc37e4b97724f94eb4b7c3cfe170, type: 2}
 --- !u!114 &114758554613886720
 MonoBehaviour:

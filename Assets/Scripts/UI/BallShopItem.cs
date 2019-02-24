@@ -11,6 +11,7 @@ public class BallShopItem : MonoBehaviour {
     public GameObject uglyGem;
     public Button button;
 
+    public GameObject confirmPopup;
     public ItemObject itemObject;
 
     void Start () {
@@ -35,16 +36,20 @@ public class BallShopItem : MonoBehaviour {
     }
 
     public void OnClick_BuyBall() {
+        var confirm = Instantiate(confirmPopup, ShopPopup.Instance.gameObject.transform);
+    }
+
+    public void confirmedBuy() {
         if (ItemsController.getItem(itemObject, false)) {
             ItemsController.EquipSpecialBall(itemObject);
             if (ShopPopup.EquipedBall != null) {
                 ShopPopup.EquipedBall.uiEquip();
             }
             uiEquiped();
-        } else {
+        }
+        else {
             ShopPopup.Instance.SwitchToShopHCTab();
         }
-       
     }
 
     public void uiEquiped() {
