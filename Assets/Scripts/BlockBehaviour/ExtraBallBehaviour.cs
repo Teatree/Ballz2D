@@ -22,10 +22,12 @@ public class ExtraBallBehaviour : IBehaviour {
     public override void Update() {
 
         if (block.wasHit && moveSpeed > 0) {
-            if (block.transform.position.y >= 0.07) {
+            if (block.transform.position.y >= 0.48f) {
                 block.transform.position = new Vector2(block.transform.position.x, block.transform.position.y - moveSpeed * Time.deltaTime);
-            } else {
+            }
+            else {
                 GetExtraBall();
+                block.transform.position = new Vector3(block.transform.position.x, 0.48f);
                 block.StartCoroutine(DestroySelfLater());
             }
         }
