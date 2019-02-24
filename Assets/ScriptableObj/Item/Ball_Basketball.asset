@@ -13,7 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Basketball
   itemType: 0
-  costGems: 200
+  costGems: 2000
   amount: 0
   shopImage: {fileID: 21300000, guid: 7f477a97e06b2ae4bb8225434ae901c7, type: 3}
   assetImage: basketball
+  enabled: 0

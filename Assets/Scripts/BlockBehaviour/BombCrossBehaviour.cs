@@ -20,7 +20,6 @@ public class BombCrossBehaviour : IBehaviour {
                 }
             }
             GameUIController.Instance.UpdateScore(LevelController.levelScore);
-            UpdateBlocksInfo();
             block.destroyed = true;
         }
     }

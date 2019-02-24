@@ -12,14 +12,25 @@ public class SettingsPoup : IPopup<SettingsPoup> {
     }
 
     public void ResetProgress() {
-        PlayerController.player.gems = 0;
+        PlayerController.player.gems = 400;
         PlayerController.player.completedLvls = new List<CompletedLevel>();
         PlayerController.starsPerLvl = new Dictionary<int, int>();
         PlayerController.player.stars = 0;
+        PlayerController.player.specialBallImageName = "knob";
+        PlayerController.player.specialBallName = "Knob";
         PlayerController.player.items = new List<ItemData>();
+        ItemData i = new ItemData();
+        i.costGems = 10;
+        i.name = "Knob";
+        i.amount = 0;
+        i.enabled = true;
+        PlayerController.player.items.Add(i);
+        PlayerController.player.progressTowardsNextStarBox = 0;
+        PlayerController.player.numStarBoxesOpened = 0;
         AllLevelsData.CurrentLevelIndex = 0;
         LevelController.ResetScore();
         DataController.SavePlayer(PlayerController.player);
         SceneController.sceneController.ReloadMenu();
+
     }
 }

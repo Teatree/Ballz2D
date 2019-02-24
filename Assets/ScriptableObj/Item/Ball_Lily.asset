@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Lily
   itemType: 0
-  costGems: 200
+  costGems: 5000
   amount: 0
   shopImage: {fileID: 21300000, guid: 1a08b5a61f9c3f841902793ec70c5ea5, type: 3}
   assetImage: lily

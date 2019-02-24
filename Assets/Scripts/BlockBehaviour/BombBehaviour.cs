@@ -17,7 +17,6 @@
             }
         }
         this.block.destroyed = false;
-        UpdateBlocksInfo();
         block.DestroySelf();
     }
 

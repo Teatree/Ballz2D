@@ -10,9 +10,15 @@ public class BallShopItem : MonoBehaviour {
     public Text EquipTxt;
     public Text EquippedTxt;
     public GameObject uglyGem;
+    public Image priceHolder;
     public Button button;
-
     public GameObject confirmPopup;
+    public GameObject redirectPoorPopup;
+
+    public Sprite buttonYellow;
+    public Sprite buttonGreen;
+
+    [Header("BALL")]
     public ItemObject itemObject;
     bool hasItem = false;
 
@@ -44,11 +50,11 @@ public class BallShopItem : MonoBehaviour {
         checkHasItem();
         if (hasItem) {
             equipAndUI();
-        } else if (PlayerController.player.gems >= itemObject.costGems) {
+        } else if (PlayerController.player.gems >= itemObject.costGems && !hasItem) {
             StartCoroutine(confirmedBuy());
         }
         else {
-            ShopPopup.Instance.SwitchToShopHCTab();
+            StartCoroutine(redirectPoor());
         }
 
     }
@@ -65,6 +71,15 @@ public class BallShopItem : MonoBehaviour {
 
         }
       
+    }
+    public IEnumerator redirectPoor() {
+        GameObject redir = Instantiate(redirectPoorPopup, ShopPopup.Instance.gameObject.transform);
+        while (redir.GetComponent<ConfirmBallPopup>().result == "") {
+            yield return null;
+        }
+        if (redir.GetComponent<ConfirmBallPopup>().result == "ok") {
+            ShopPopup.Instance.SwitchToShopHCTab();
+        }
     }
 
     private void equipAndUI() {
@@ -94,6 +109,10 @@ public class BallShopItem : MonoBehaviour {
         EquippedTxt.gameObject.SetActive(true);
         EquipTxt.gameObject.SetActive(false);
         ItemCost.gameObject.SetActive(false);
+        priceHolder.sprite = buttonYellow;
+        Color newCol = new Color();
+        if (ColorUtility.TryParseHtmlString("#C8C8C8", out newCol))
+            priceHolder.color = newCol;
         ShopPopup.EquipedBall = this;
     }
 
@@ -102,6 +121,10 @@ public class BallShopItem : MonoBehaviour {
         uglyGem.SetActive(false);
         EquippedTxt.gameObject.SetActive(false);
         EquipTxt.gameObject.SetActive(true);
+        priceHolder.sprite = buttonYellow;
+        Color newCol = new Color();
+        if (ColorUtility.TryParseHtmlString("#FFFFFF", out newCol))
+            priceHolder.color = newCol;
         ItemCost.gameObject.SetActive(false);
     }
 
@@ -110,6 +133,10 @@ public class BallShopItem : MonoBehaviour {
         uglyGem.SetActive(true);
         EquippedTxt.gameObject.SetActive(false);
         EquipTxt.gameObject.SetActive(false);
+        priceHolder.sprite = buttonGreen;
+        Color newCol = new Color();
+        if (ColorUtility.TryParseHtmlString("#FFFFFF", out newCol))
+            priceHolder.color = newCol;
         ItemCost.gameObject.SetActive(true);
     }
 }

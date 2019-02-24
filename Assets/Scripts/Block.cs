@@ -82,7 +82,15 @@ public class Block : MonoBehaviour {
             if (_type.Equals(BlockType.Bomb)) CreateBombExplosion();
             destroyed = true;
             transform.position = faraway;
+            UpdateBlocksInfo();
             Destroy(gameObject, 0.0000001f);
+        }
+    }
+
+    protected void UpdateBlocksInfo() {
+        if (GridController.BlocksAmount > 0 && _type.isCollidable) {
+            GridController.BlocksAmount--;
+            GameUIController.Instance.UpdateBlocksAmount();
         }
     }
 

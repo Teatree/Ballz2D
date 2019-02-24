@@ -45,13 +45,6 @@ public abstract class IBehaviour {
         block.StopCoroutine(fadeRoutine);
     }
 
-    protected void UpdateBlocksInfo() {
-        if (GridController.BlocksAmount > 0 && block._type.isCollidable) {
-            GridController.BlocksAmount--;
-            GameUIController.Instance.UpdateBlocksAmount();
-        }
-    }
-
     public void UpdateSavedBlocks() {
         if (GridController.Instance.blocksSpawnedSaved != null && GridController.Instance.blocksSpawnedSaved.Count > 0) {
             foreach (BlockClone b in GridController.Instance.blocksSpawnedSaved) {

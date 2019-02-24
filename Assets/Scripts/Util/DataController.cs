@@ -181,6 +181,9 @@ public class ItemData {
         this.amount = io.amount;
         this.enabled = io.enabled;
     }
+    public ItemData() {
+
+    }
 }
 
 [System.Serializable]

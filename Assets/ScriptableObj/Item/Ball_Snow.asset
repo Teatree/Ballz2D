@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Snow
   itemType: 0
-  costGems: 200
+  costGems: 3000
   amount: 0
   shopImage: {fileID: 21300000, guid: efdf76b1677c82a4cabfe8f1371fe2e1, type: 3}
   assetImage: snow
