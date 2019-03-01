@@ -50,11 +50,13 @@ public class LevelController : SceneSingleton<LevelController> {
 
     public static void PauseGame() {
         isGamePaused = true;
+        Time.timeScale = 0;
         //Debug.Log("! Game is paused");
     }
 
     public static void ResumeGame() {
         isGamePaused = false;
+        Time.timeScale = 1;
         //Debug.Log("! Game is not paused");
     }
 
