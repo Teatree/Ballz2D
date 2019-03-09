@@ -111,16 +111,16 @@ public class UIController : SceneSingleton<UIController> {
     }
 
     public void OpenBoxOpen() {
-
         var Box = Instantiate(BoxPopupPrefab, transform);
         Box.GetComponent<BoxPopup>().itemToReceive = BoxOpener.Instance.GetBoxContents_BoxAd();
     }
 
-    public void GetDayBox() {
+    public void OpenDayBox() {
         DayBoxTimer.Instance.SetCountDownTo(DateTime.Now.AddHours(6));
         PlayerController.player.giveBoxAt = DateTime.Now.AddHours(6).ToString("yyyy-MM-dd HH:mm");
         OpenBoxOpen();
     }
+
     public void SetEnabledAdBox(bool b) {
         boxAdButtonCmp = BoxAdButton.GetComponent<Button>();
         boxAdButtonCmp.interactable = b;

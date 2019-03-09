@@ -8,7 +8,6 @@ public class DayBoxTimer : SceneSingleton<DayBoxTimer>{
     public Text timerText;
     public GameObject dayBoxWaitButtton;
 
-
     public float timeLeftMin = 0; //6h
     private float timeLeftSec = 0; //6h
     public static bool stop = true;
@@ -20,6 +19,9 @@ public class DayBoxTimer : SceneSingleton<DayBoxTimer>{
         if (timeLeftMin > 0) {
             startTimer(timeLeftMin);
             UIController.Instance.ShowDayBoxWaitButton();
+        }
+        else {
+            UIController.Instance.ShowDayBoxButton();
         }
     }
 
@@ -37,7 +39,7 @@ public class DayBoxTimer : SceneSingleton<DayBoxTimer>{
         hours = Mathf.Floor(timeLeftMin / 60);
         minutes = timeLeftMin % 60;
         if (minutes > 59) minutes = 59;
-        if (hours < 0) {
+        if (minutes < 0) {
             stop = true;
             hours = 0;
             minutes = 0;
