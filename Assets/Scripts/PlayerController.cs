@@ -7,16 +7,23 @@ public class PlayerController : SceneSingleton<PlayerController> {
     public static Dictionary<int, int> starsPerLvl;
     public static int progressTowardsStarBox;
 
+    // Daily Box Stuss
+    private static DateTime morning9 = DateTime.Now.Date.AddHours(9);
+    private static DateTime morning13 = DateTime.Now.Date.AddHours(13);
+    private static DateTime morning17 = DateTime.Now.Date.AddHours(17);
+    private static DateTime morning21 = DateTime.Now.Date.AddHours(21);
+    public static List<DateTime> times = new List<DateTime>();
+
     public List<BoxObject> starBoxes;
 
     private void Start() {
+        times.Add(morning9);
+        times.Add(morning13);
+        times.Add(morning17);
+        times.Add(morning21);
 
         if (player == null) {
             player = DataController.LoadPlayer() != null ? DataController.LoadPlayer() : new PlayerData();
-            DateTime dt = DateTime.Now;
-            player.lastLogin = dt.ToString("yyyy-MM-dd HH:mm");
-
-            SetupDailyBoxStuff();
 
             starsPerLvl = new Dictionary<int, int>();
             if (player.completedLvls != null && player.completedLvls.Count > 0) {
@@ -27,20 +34,7 @@ public class PlayerController : SceneSingleton<PlayerController> {
 
             LevelController.SpecialBall = player.specialBallImageName;
         }
-    }
 
-    private static void SetupDailyBoxStuff() {
-        if (player.giveBoxAt != null && player.giveBoxAt != "") {
-            DateTime getBoxAt = DateTime.ParseExact(player.giveBoxAt, "yyyy-MM-dd HH:mm", null);
-            if (getBoxAt < DateTime.Now) {
-                UIController.Instance.ShowDayBoxButton();
-            }
-            else {
-                //set timer 
-                DayBoxTimer.Instance.SetCountDownTo(getBoxAt);
-                UIController.Instance.ShowDayBoxWaitButton();
-            }
-        }
     }
 
     public void AddNewCompletedLevel(int lvlNum, int stars) {

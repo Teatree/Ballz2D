@@ -19,9 +19,9 @@ public class UIController : SceneSingleton<UIController> {
     public GameObject SettingsPrefab;
     public GameObject ShopPrefab;
     public GameObject BoxPopupPrefab;
+    public GameObject waitForItPrefab;
 
     //Daily boxes
-    public GameObject waitForItPrefab;
     public GameObject BoxDayButton;
     public GameObject BoxDayWaitButton;
 
@@ -30,6 +30,17 @@ public class UIController : SceneSingleton<UIController> {
     public Scrollbar lvlSlider;
 
     void Start() {
+        DateTime dt = DateTime.Parse(PlayerController.player.giveBoxAt);
+
+        if (dt < DateTime.Now) {
+            // if Player came logged in after box was supposed to be claiemd
+            ShowDayBoxButton();
+        }
+        else {
+            ShowDayBoxWaitButton();
+        }
+
+
         Debug.Log(">>>> Menu.initScene > " + SceneController.initScene);
         if (SceneController.initScene == "GameScene") {
             SceneController.initScene = "";
@@ -43,7 +54,7 @@ public class UIController : SceneSingleton<UIController> {
             // debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "\n path: " + DataController.levelfilePath + "\n jsonDataExtracted: " + DataController.AjsonData;
 
             //Create level buttons
-            
+
             if (PlayerController.player != null) {
                 int arrowIndex = 0;
                 int lvlIndex = 4;
@@ -58,20 +69,20 @@ public class UIController : SceneSingleton<UIController> {
                         lvl.buttonComponent.interactable = i <= PlayerController.starsPerLvl.Count ? true : false;
                         lvl.UpdateButtonVisuals(lvl.StarsNumber);
                     } else {
-                        lvlIndex-=2;
+                        lvlIndex -= 2;
                         lvl.LevelNumber = i + lvlIndex;
-                        lvl.StarsNumber = (i + lvlIndex < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i+ lvlIndex] : 0;
+                        lvl.StarsNumber = (i + lvlIndex < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i + lvlIndex] : 0;
                         lvl.buttonComponent.interactable = i + lvlIndex <= PlayerController.starsPerLvl.Count ? true : false;
-                        lvl.UpdateButtonVisuals(lvl.StarsNumber);         
+                        lvl.UpdateButtonVisuals(lvl.StarsNumber);
                     }
                     var arrow = Instantiate(arrowPrefab, lvl.transform);
                     arrow.transform.SetParent(lvl.transform);
-                   // arrow.transform.localScale = new Vector3(15, 15, 1);
+                    // arrow.transform.localScale = new Vector3(15, 15, 1);
 
                     if (arrowIndex % 8 == 0 || arrowIndex % 8 == 1 || arrowIndex % 8 == 2) {
                         arrow.transform.localPosition = new Vector3(-85, 0);
                         arrow.transform.localRotation = Quaternion.Euler(0, 0, 180);
-                    } else 
+                    } else
                     if (arrowIndex % 8 == 3 || arrowIndex % 8 == 4) {
                         arrow.transform.localPosition = new Vector3(0, 85);
                         arrow.transform.localRotation = Quaternion.Euler(0, 0, 90);
@@ -85,6 +96,10 @@ public class UIController : SceneSingleton<UIController> {
 
             stars.text = PlayerController.player != null ? PlayerController.player.GetStarsAmount().ToString() : "0";
         }
+
+        //if (DateTime.Parse(PlayerController.player.giveBoxAt) < // next time for box){
+
+        //    }
     }
 
     void Update() {
@@ -106,6 +121,10 @@ public class UIController : SceneSingleton<UIController> {
         Instantiate(SettingsPrefab, transform);
     }
 
+    public void OpenWaitPopup() {
+        Instantiate(waitForItPrefab, transform);
+    }
+
     public void OpenShop() {
         Instantiate(ShopPrefab, transform);
     }
@@ -116,9 +135,11 @@ public class UIController : SceneSingleton<UIController> {
     }
 
     public void OpenDayBox() {
-        DayBoxTimer.Instance.SetCountDownTo(DateTime.Now.AddHours(6));
-        PlayerController.player.giveBoxAt = DateTime.Now.AddHours(6).ToString("yyyy-MM-dd HH:mm");
+        //DayBoxTimer.Instance.SetCountDownTo(DateTime.Now.AddHours(6));
+        //PlayerController.player.giveBoxAt = DateTime.Now.AddHours(6).ToString("yyyy-MM-dd HH:mm");
         OpenBoxOpen();
+
+        ShowDayBoxWaitButton();
     }
 
     public void SetEnabledAdBox(bool b) {

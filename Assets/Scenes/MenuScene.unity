@@ -188,7 +188,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 774349404}
   m_HandleRect: {fileID: 774349403}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1981,7 +1981,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &511359689
@@ -3581,6 +3581,7 @@ GameObject:
   - component: {fileID: 1126157609}
   - component: {fileID: 1126157608}
   - component: {fileID: 1126157607}
+  - component: {fileID: 1126157611}
   m_Layer: 5
   m_Name: DayBoxWaitForIt
   m_TagString: Untagged
@@ -3661,8 +3662,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2066143728}
-        m_MethodName: showWaitForItPopup
+      - m_Target: {fileID: 2066143726}
+        m_MethodName: OpenWaitPopup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3708,6 +3709,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1126157605}
   m_CullTransparentMesh: 0
+--- !u!114 &1126157611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1126157605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f735aca3e0d27a64898edf795dad52af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: {fileID: 1111670198}
 --- !u!1 &1158488479
 GameObject:
   m_ObjectHideFlags: 0
@@ -4768,7 +4781,6 @@ GameObject:
   - component: {fileID: 2066143722}
   - component: {fileID: 2066143726}
   - component: {fileID: 2066143727}
-  - component: {fileID: 2066143728}
   m_Layer: 5
   m_Name: MainCanvas
   m_TagString: Untagged
@@ -4900,20 +4912,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3051e5ce3b7dfbf41ab1feccb84078b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2066143728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2066143721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 672cbc8fe642be946aab2d4f72fda467, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerText: {fileID: 1111670198}
-  dayBoxWaitButtton: {fileID: 1126157605}
-  timeLeftMin: 5
 --- !u!1 &2130635610
 GameObject:
   m_ObjectHideFlags: 0
