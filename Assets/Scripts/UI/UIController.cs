@@ -11,7 +11,7 @@ public class UIController : SceneSingleton<UIController> {
     public GameObject arrowPrefab;
 
     public Text gems;
-    public Text stars;
+    public Text starsText;
 
     public SpriteState sprState = new SpriteState();
 
@@ -28,6 +28,7 @@ public class UIController : SceneSingleton<UIController> {
     public GameObject BoxAdButton;
     private Button boxAdButtonCmp;
     public Scrollbar lvlSlider;
+
 
     void Start() {
         DateTime dt = DateTime.Parse(PlayerController.player.giveBoxAt);
@@ -94,7 +95,7 @@ public class UIController : SceneSingleton<UIController> {
                 }
             }
 
-            stars.text = PlayerController.player != null ? PlayerController.player.GetStarsAmount().ToString() : "0";
+            starsText.text = PlayerController.player != null ? PlayerController.player.GetStarsAmount().ToString() : "0";
         }
 
         //if (DateTime.Parse(PlayerController.player.giveBoxAt) < // next time for box){
