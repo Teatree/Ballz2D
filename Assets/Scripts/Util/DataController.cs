@@ -160,6 +160,7 @@ public class PlayerData {
     public bool noAds;
     public string specialBallImageName;
     public string specialBallName;
+    public bool boughtStarter;
 
     public List<CompletedLevel> completedLvls = new List<CompletedLevel>();
     public List<ItemData> items = new List<ItemData>();

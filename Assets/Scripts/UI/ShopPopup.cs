@@ -80,7 +80,7 @@ public class ShopPopup : IPopup<Pause> {
     public string getTheOfferType() {
         DateTime firstLogin = DateTime.Parse(PlayerController.player.firstLoginAt);
         var daysPlaying = DateTime.Now.Subtract(firstLogin).TotalDays;
-        if (daysPlaying < 7) {
+        if (daysPlaying < 3 && !PlayerController.player.boughtStarter || DateTime.Now.DayOfWeek == DayOfWeek.Tuesday) { // must see it if he logged in not on Tuesday
             return "STARTER";
         }
         if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday || DateTime.Now.DayOfWeek == DayOfWeek.Saturday) {
