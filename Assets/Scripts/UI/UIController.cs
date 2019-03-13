@@ -31,7 +31,7 @@ public class UIController : SceneSingleton<UIController> {
 
 
     void Start() {
-        DateTime dt = DateTime.Parse(PlayerController.player.giveBoxAt);
+        DateTime dt = PlayerController.player == null || PlayerController.player.giveBoxAt == null || PlayerController.player.giveBoxAt == "" ? DateTime.Now : DateTime.Parse(PlayerController.player.giveBoxAt);
 
         if (dt < DateTime.Now) {
             // if Player came logged in after box was supposed to be claiemd
@@ -42,7 +42,7 @@ public class UIController : SceneSingleton<UIController> {
         }
 
 
-        Debug.Log(">>>> Menu.initScene > " + SceneController.initScene);
+        // Debug.Log(">>>> Menu.initScene > " + SceneController.initScene);
         if (SceneController.initScene == "GameScene") {
             SceneController.initScene = "";
             SceneController.sceneController.UnloadMenu();
@@ -69,7 +69,8 @@ public class UIController : SceneSingleton<UIController> {
                         lvl.StarsNumber = (i < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i] : 0;
                         lvl.buttonComponent.interactable = i <= PlayerController.starsPerLvl.Count ? true : false;
                         lvl.UpdateButtonVisuals(lvl.StarsNumber);
-                    } else {
+                    }
+                    else {
                         lvlIndex -= 2;
                         lvl.LevelNumber = i + lvlIndex;
                         lvl.StarsNumber = (i + lvlIndex < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i + lvlIndex] : 0;
@@ -83,11 +84,13 @@ public class UIController : SceneSingleton<UIController> {
                     if (arrowIndex % 8 == 0 || arrowIndex % 8 == 1 || arrowIndex % 8 == 2) {
                         arrow.transform.localPosition = new Vector3(-85, 0);
                         arrow.transform.localRotation = Quaternion.Euler(0, 0, 180);
-                    } else
+                    }
+                    else
                     if (arrowIndex % 8 == 3 || arrowIndex % 8 == 4) {
                         arrow.transform.localPosition = new Vector3(0, 85);
                         arrow.transform.localRotation = Quaternion.Euler(0, 0, 90);
-                    } else {
+                    }
+                    else {
                         arrow.transform.localPosition = new Vector3(85, 0);
                     }
                     arrowIndex++;
@@ -95,12 +98,21 @@ public class UIController : SceneSingleton<UIController> {
                 }
             }
 
-            starsText.text = PlayerController.player != null ? PlayerController.player.GetStarsAmount().ToString() : "0";
+            SetStarsAmountText();
         }
 
         //if (DateTime.Parse(PlayerController.player.giveBoxAt) < // next time for box){
 
         //    }
+    }
+
+    private void SetStarsAmountText() {
+        int allStars = 0;
+        if (PlayerController.starsPerLvl != null)
+            foreach (int lvlInd in PlayerController.starsPerLvl.Keys) {
+                allStars += PlayerController.starsPerLvl[lvlInd];
+            }
+        starsText.text = PlayerController.player != null ? "" + allStars : "0";
     }
 
     void Update() {
@@ -123,7 +135,8 @@ public class UIController : SceneSingleton<UIController> {
     }
 
     public void OpenWaitPopup() {
-        Instantiate(waitForItPrefab, transform);
+        GameObject waitPopup = Instantiate(waitForItPrefab, transform);
+        BoxDayWaitButton.transform.GetComponent<DailyBoxTimer>().popupTimer = waitPopup.GetComponent<WaitForBoxPopup>().timerText;
     }
 
     public void OpenShop() {

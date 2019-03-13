@@ -1,15 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopPopup : IPopup<Pause> {
-    public Text gems200; 
-    public Text gems400; 
-    public Text gems600; 
-    public Text gems1100; 
-    public Text gems2300; 
-    public Text gems7200; 
-    public Text gems12500; 
-    public Text gems30000; 
+    public Text gems200;
+    public Text gems400;
+    public Text gems600;
+    public Text gems1100;
+    public Text gems2300;
+    public Text gems7200;
+    public Text gems12500;
+    public Text gems30000;
     public Text gemsCurrent;
 
     public Tab hcTab;
@@ -74,5 +75,17 @@ public class ShopPopup : IPopup<Pause> {
 
     public override void SwitchToShopHCTab() {
         hcTab.SetContentActive();
+    }
+
+    public string getTheOfferType() {
+        DateTime firstLogin = DateTime.Parse(PlayerController.player.firstLoginAt);
+        var daysPlaying = DateTime.Now.Subtract(firstLogin).TotalDays;
+        if (daysPlaying < 7) {
+            return "STARTER";
+        }
+        if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday || DateTime.Now.DayOfWeek == DayOfWeek.Saturday) {
+            return "WEEKEND";
+        }
+        return "STATIC";
     }
 }

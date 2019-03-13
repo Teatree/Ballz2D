@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
+using System;
 
 public class DataController {
     private static string levelsFileName = "levels.json";
@@ -37,7 +38,9 @@ public class DataController {
         if (!File.Exists(playerfilePath)) {
             TextAsset file = Resources.Load("playerInfo") as TextAsset;
             jsonData = file.ToString();
-
+            PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
+            pi.firstLoginAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            return pi;
             //StreamReader f = new StreamReader(playerfilePath);
             //jsonData = f.ReadToEnd();
             //f.Close();
@@ -49,11 +52,14 @@ public class DataController {
         }
         else {
             jsonData = File.ReadAllText(playerfilePath);
+            PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
             Debug.Log(">>>> jsonData > " + jsonData);
+            return pi;
+            
         }
-        PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
-        AjsonData = "<color=#a52a2aff> " + jsonData + "</color>";
-        return pi;
+       // PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
+     //   AjsonData = "<color=#a52a2aff> " + jsonData + "</color>";
+        
     }
 
     public static void SavePlayer(PlayerData pi) {
@@ -150,6 +156,7 @@ public class PlayerData {
     public int progressTowardsNextStarBox; // how many stars player already gathered for the current star box
     public int numStarBoxesOpened; // how many boxs were already opened
     public string giveBoxAt;
+    public string firstLoginAt;
     public bool noAds;
     public string specialBallImageName;
     public string specialBallName;

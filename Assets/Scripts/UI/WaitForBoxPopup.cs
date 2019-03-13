@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class WaitForBoxPopup : IPopup<Pause> {
+    public Text timerText;
 
-    // Use this for initialization
     void Start () {
         Debug.Log("WaitForBoxPopup");
 	}

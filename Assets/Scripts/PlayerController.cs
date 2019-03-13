@@ -48,16 +48,22 @@ public class PlayerController : SceneSingleton<PlayerController> {
     }
 
     private void OnApplicationPause(bool pause) {
+      
         SavePlayer();
     }
 
     private static void SavePlayer() {
-        List<CompletedLevel> lvls = new List<CompletedLevel>();
-            foreach (KeyValuePair<int, int> lvl in starsPerLvl) {
-                lvls.Add(new CompletedLevel(lvl.Key, lvl.Value));
+        if (PlayerController.player != null) {
+            List<CompletedLevel> lvls = new List<CompletedLevel>();
+
+            if (starsPerLvl != null) {
+                foreach (KeyValuePair<int, int> lvl in starsPerLvl) {
+                    lvls.Add(new CompletedLevel(lvl.Key, lvl.Value));
+                }
+                player.completedLvls = lvls;
             }
-        player.completedLvls = lvls;
-        DataController.SavePlayer(player);
+            DataController.SavePlayer(player);
+        }
     }
 
     void OnApplicationQuit() {

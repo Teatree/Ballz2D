@@ -3721,6 +3721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: {fileID: 1111670198}
+  popupTimer: {fileID: 0}
 --- !u!1 &1158488479
 GameObject:
   m_ObjectHideFlags: 0
