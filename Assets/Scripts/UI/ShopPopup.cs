@@ -16,6 +16,23 @@ public class ShopPopup : IPopup<Pause> {
     public Tab hcTab;
     public static BallShopItem EquipedBall;
 
+    [Header("Offers")]
+    public GameObject offerTab;
+    public GameObject weekendOffer;
+    public GameObject starterOffer;
+    public GameObject staticOffer;
+    public GameObject emptyOffer;
+    [Header("Offer timers")]
+    public GameObject timerGo;
+
+    private Text timer;
+
+    private int _countdownDay;
+    private int _countdownHour;
+    private int _countdownMinute;
+    private int _countdownSeconds;
+    private DateTime _countdown;
+
     public void Start() {
         //Debug.Log(">>>> " + Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200));
         gems200.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200);
@@ -26,6 +43,73 @@ public class ShopPopup : IPopup<Pause> {
         gems7200.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_7200);
         gems12500.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_12500);
         gems30000.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_30000);
+
+        SetUpOffers(getTheOfferType());
+    }
+
+    void Update() {
+        gemsCurrent.text = PlayerController.player != null ? PlayerController.player.gems.ToString() : "0";
+
+        if (offerTab.activeSelf == true) {
+            // ifs
+            _countdownDay = _countdown.Day - DateTime.Now.Day - 1;
+            _countdownHour = 24 - DateTime.Now.Hour;
+            _countdownMinute = 59 - DateTime.Now.Minute;
+            _countdownSeconds = 59 - DateTime.Now.Second;
+
+            if (_countdownDay < 1) {
+                timerGo.GetComponent<Text>().text = "Offer Ends in: " + string.Format("{0:00}h {1:00}m {2:00}s", _countdownHour, _countdownMinute, _countdownSeconds);
+            }
+            else {
+                timerGo.GetComponent<Text>().text = "Offer Ends in: " + string.Format("{0}d {1:00}h {2:00}m", _countdownDay, _countdownHour, _countdownMinute);
+            }
+            // calc
+        }
+    }
+
+    void SetUpOffers(string offerToShow) {
+        switch (offerToShow) {
+            case "WEEKEND": {
+                    Debug.Log("weekend");
+                    weekendOffer.SetActive(true);
+                    starterOffer.SetActive(false);
+                    staticOffer.SetActive(false);
+                    emptyOffer.SetActive(false);
+
+                    DateTime today = DateTime.Today;
+                    // The (... + 7) % 7 ensures we end up with a value in the range [0, 6]
+                    int daysUntilMonday = ((int)DayOfWeek.Monday - (int)today.DayOfWeek + 7) % 7;
+                    DateTime nextMonday = today.AddDays(daysUntilMonday);
+
+                    Debug.Log("next monday " + nextMonday);
+                    _countdown = nextMonday;
+                    break;
+                }
+            case "STARTER": {
+                    Debug.Log("starter");
+                    weekendOffer.SetActive(false);
+                    starterOffer.SetActive(true);
+                    staticOffer.SetActive(false);
+                    emptyOffer.SetActive(false);
+                    break;
+                }
+            case "STATIC": {
+                    Debug.Log("static");
+                    weekendOffer.SetActive(false);
+                    starterOffer.SetActive(false);
+                    staticOffer.SetActive(true);
+                    emptyOffer.SetActive(false);
+                    break;
+                }
+            default: {
+                    Debug.Log("n");
+                    weekendOffer.SetActive(false);
+                    starterOffer.SetActive(false);
+                    staticOffer.SetActive(false);
+                    emptyOffer.SetActive(true);
+                    break;
+                }
+        }
     }
 
     public void BuyGems200() {
@@ -60,10 +144,6 @@ public class ShopPopup : IPopup<Pause> {
         Purchaser.purchaser.BuyGems30000();
     }
 
-    void Update() {
-        gemsCurrent.text = PlayerController.player != null ? PlayerController.player.gems.ToString() : "0";
-    }
-
     public void BuyNoAds() {
         Purchaser.purchaser.BuyNoAds();
     }
@@ -86,6 +166,11 @@ public class ShopPopup : IPopup<Pause> {
         if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday || DateTime.Now.DayOfWeek == DayOfWeek.Saturday) {
             return "WEEKEND";
         }
-        return "STATIC";
+        if (DateTime.Now.DayOfWeek == DayOfWeek.Thursday || DateTime.Now.DayOfWeek == DayOfWeek.Friday) {
+            return "STATIC";
+        }
+        return "EMPTY";
     }
+
+    // Buying
 }

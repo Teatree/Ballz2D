@@ -9,7 +9,6 @@ public class DailyBoxTimer : MonoBehaviour {
 
     private int _countdownHour;
     private int _countdownMinute;
-    private DateTime _countdown;
 
     void Update () {
         foreach (DateTime d in PlayerController.times) {
