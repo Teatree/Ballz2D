@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class LightningPowerup : SceneSingleton<LightningPowerup> {
 
+    public Camera cam;
+
     public Image Lightning;
     public GameObject Button;
     public Text AmountText;
@@ -58,6 +60,9 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
 
     private void PlayAni() {
         //inst.transform.SetParent(transform.parent.transform.parent, false);
+
+        cam.GetComponent<Shaker>().TriggerShake();
+
         Lightning.gameObject.SetActive(true);
         Lightning.color = Color.yellow;
         StartCoroutine(Fade(Lightning));
