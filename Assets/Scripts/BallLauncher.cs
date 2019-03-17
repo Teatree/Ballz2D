@@ -184,7 +184,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     private IEnumerator LaunchBalls() {
         GameUIController.Instance.HideAdButtonFromTop();
-
+        _slider = false;
         if (BallsReadyToShoot == balls.Count) {
             GridController.doNotMoveRowDown = false;
 
@@ -258,6 +258,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     public void SummonAllBalls() {
+        if (launcherBallRoutine != null)
         StopCoroutine(launcherBallRoutine);
         foreach (Ball b in balls) {
             b.AddForceBall(ballVisual.transform.position - b.transform.position);
