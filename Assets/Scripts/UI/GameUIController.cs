@@ -20,6 +20,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject PausePrefab;
     public GameObject BoxPopupPrefab;
     public GameObject ShopPrefab;
+    public GameObject RedirectPrefab;
 
 
     [Header("SpeedUPIcon")]
@@ -252,4 +253,21 @@ public class GameUIController : SceneSingleton<GameUIController> {
         AdmobController.Instance.ShowBallsrewardVideo();
     }
 
+    public void ShowRedirectPoor() {
+        StartCoroutine(redirectPoor());
+        LevelController.PauseGame();
+    }
+
+    public IEnumerator redirectPoor() {
+        GameObject redir = Instantiate(RedirectPrefab, transform);
+        while (redir.GetComponent<ConfirmBallPopup>().result == "") {
+            yield return null;
+        }
+        if (redir.GetComponent<ConfirmBallPopup>().result == "ok") {
+            ShowShop();
+        }
+        if (redir.GetComponent<ConfirmBallPopup>().result == "no") {
+            LevelController.ResumeGame();
+        }
+    }
 }

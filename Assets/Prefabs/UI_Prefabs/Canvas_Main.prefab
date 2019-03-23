@@ -4449,7 +4449,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114265005302166974}
         m_MethodName: OnClick_CancelMove
         m_Mode: 1
         m_Arguments:
@@ -4738,6 +4738,8 @@ MonoBehaviour:
   BoxPopupPrefab: {fileID: 1393861602802556, guid: bfa265d38308df0419eb1e11e0ec040f,
     type: 2}
   ShopPrefab: {fileID: 1094745606953602, guid: a8c37f914cf2dbd46aec93f3f8a89f7e, type: 2}
+  RedirectPrefab: {fileID: 1812459812452356, guid: 228b91e0a5129bb4ebcd7248c048ecfc,
+    type: 2}
   SpeedUpIcon: {fileID: 1919324924277558}
   laserLine1: {fileID: 0}
   laserLine2: {fileID: 0}

@@ -56,7 +56,7 @@ public class CancelPowerup : SceneSingleton<CancelPowerup> {
             PlayerController.player.gems -= CostGems;
             CancelLastMove();
         } else {
-            GameUIController.Instance.ShowShop();
+            GameUIController.Instance.ShowRedirectPoor();
         }
     }
 }

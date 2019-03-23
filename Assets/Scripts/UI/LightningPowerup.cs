@@ -86,7 +86,7 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
             ShootLightning();
         }
         else {
-            GameUIController.Instance.ShowShop();
+            GameUIController.Instance.ShowRedirectPoor();
         }
         EnableButton();
     }
@@ -95,4 +95,6 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
         yield return new WaitForSeconds(0.1f);
         img.gameObject.SetActive(false);
     }
+
+    
 }

@@ -56,7 +56,6 @@ public class BallShopItem : MonoBehaviour {
         else {
             StartCoroutine(redirectPoor());
         }
-
     }
 
     public IEnumerator confirmedBuy() {
@@ -68,16 +67,17 @@ public class BallShopItem : MonoBehaviour {
             if (ItemsController.getItem(itemObject, false)) {
                 equipAndUI();
             }
-
         }
-      
     }
+
     public IEnumerator redirectPoor() {
         GameObject redir = Instantiate(redirectPoorPopup, ShopPopup.Instance.gameObject.transform);
         while (redir.GetComponent<ConfirmBallPopup>().result == "") {
             yield return null;
         }
         if (redir.GetComponent<ConfirmBallPopup>().result == "ok") {
+
+
             ShopPopup.Instance.SwitchToShopHCTab();
         }
     }

@@ -40,7 +40,7 @@ public class Revive : IPopup<Revive> {
             PlayerController.player.gems -= CostGems;
             available = false;
         } else {
-            GameUIController.Instance.ShowShop();
+            GameUIController.Instance.ShowRedirectPoor();
         }
     }
 

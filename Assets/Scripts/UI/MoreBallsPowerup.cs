@@ -87,7 +87,7 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
             GetMoreBalls();
         }
         else {
-            GameUIController.Instance.ShowShop();
+            GameUIController.Instance.ShowRedirectPoor();
         }
         EnableButton();
     }
