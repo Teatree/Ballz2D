@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
 public class Purchaser : MonoBehaviour, IStoreListener {
 
     public static Purchaser purchaser { get; set; }
+    public List<ShopOffer> offers;
 
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
 
-    public static string noAds = "no_ads";
     public static string GEMS_200 = "100_gems";
     public static string GEMS_400 = "400_gems";
     public static string GEMS_600 = "600_gems";
@@ -99,6 +100,10 @@ public class Purchaser : MonoBehaviour, IStoreListener {
         return m_StoreController.products.WithID(prodId).metadata.localizedPriceString;
     }
 
+    public void buyOffer(ShopOffer o) {
+        BuyProductID(o.id);
+    }
+
     private void BuyProductID(string productId) {
         if (IsInitialized()) {
             // ... look up the Product reference with the general product identifier and the Purchasing system's products collection.
@@ -185,6 +190,15 @@ public class Purchaser : MonoBehaviour, IStoreListener {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             PlayerController.player.noAds = true;
         }
+        else if (prodVal.Length > 1 && prodVal[1].Contains("pack")) {
+            foreach(ShopOffer s in offers) {
+                if(prodVal[1].Equals(s.id, StringComparison.CurrentCultureIgnoreCase)) {
+                    s.GivePlayerStuff();
+                    break;
+                }
+            }
+        }
+
         // Return a flag indicating whether this product has completely been received, or if the application needs 
         // to be reminded of this purchase at next app launch. Use PurchaseProcessingResult.Pending when still 
         // saving purchased products to the cloud, and when that save is delayed. 

@@ -7551,7 +7551,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114756428660203712}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114443219421272344}
+        m_MethodName: BuyShopOffer
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: e1fc11256a1279842b39a10fb5234105,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: ShopOffer, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114073450747503994
@@ -8069,7 +8081,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114302517526623244}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114443219421272344}
+        m_MethodName: BuyShopOffer
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 33739d103bc589146947dd0045a32176,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: ShopOffer, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114115274737993214
@@ -8789,7 +8813,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114702905411473984}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114443219421272344}
+        m_MethodName: BuyShopOffer
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 224a91f9fbfdda24d9db1333733b867b,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: ShopOffer, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114168174253796626
@@ -9356,7 +9392,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114294600042001368}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114443219421272344}
+        m_MethodName: BuyShopOffer
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: e2710af1be002ff4d9d33768efa80dfd,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: ShopOffer, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114203092835140534
@@ -13770,7 +13818,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114897462881684920}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114443219421272344}
+        m_MethodName: BuyShopOffer
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 74d9eff8505e510469e8535b72b0d917,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: ShopOffer, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114478030194643146
@@ -15468,7 +15528,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114581598473538388}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114443219421272344}
+        m_MethodName: BuyShopOffer
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 4ce45c985d203e74586e41015b38c35b,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: ShopOffer, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114585409140490192

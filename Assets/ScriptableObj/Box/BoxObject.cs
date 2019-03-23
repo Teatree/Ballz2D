@@ -10,4 +10,7 @@ public class BoxObject : ScriptableObject {
     public ItemObject[] items;
     public int[] itemWights;
     
+    public enum boxtype {
+        Box, Shop
+    }
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 657cbba2f7363d54ab829bd4c515bb15, type: 3}
+  m_Name: Pack_Special3
+  m_EditorClassIdentifier: 
+  name: Special Pack 3
+  id: pack_special_3
+  enabled: 1
+  items:
+  - {fileID: 11400000, guid: 59b980d8bec4ddd41800f2c3e5a15678, type: 2}
+  - {fileID: 11400000, guid: f8e8bb4811539ae4697acd4168fd65d2, type: 2}
+  - {fileID: 11400000, guid: d62d46b7319b8794e8fe949f4ec76455, type: 2}

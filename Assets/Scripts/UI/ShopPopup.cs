@@ -69,7 +69,7 @@ public class ShopPopup : IPopup<Pause> {
 
     void SetUpOffers(string offerToShow) {
         switch (offerToShow) {
-            case "WEEKEND": {
+            case "pack_weekend": {
                     Debug.Log("weekend");
                     weekendOffer.SetActive(true);
                     starterOffer.SetActive(false);
@@ -85,7 +85,7 @@ public class ShopPopup : IPopup<Pause> {
                     _countdown = nextMonday;
                     break;
                 }
-            case "STARTER": {
+            case "pack_starter": {
                     Debug.Log("starter");
                     weekendOffer.SetActive(false);
                     starterOffer.SetActive(true);
@@ -93,7 +93,7 @@ public class ShopPopup : IPopup<Pause> {
                     emptyOffer.SetActive(false);
                     break;
                 }
-            case "STATIC": {
+            case "pack_static": {
                     Debug.Log("static");
                     weekendOffer.SetActive(false);
                     starterOffer.SetActive(false);
@@ -157,17 +157,26 @@ public class ShopPopup : IPopup<Pause> {
         hcTab.SetContentActive();
     }
 
+    public void BuyShopOffer(ShopOffer sh) {
+        // buy by product id
+        Purchaser.purchaser.buyOffer(sh);
+
+        if(sh.id == "pack_starter") {
+            PlayerController.player.boughtStarter = true;
+        }
+    }
+
     public string getTheOfferType() {
         DateTime firstLogin = DateTime.Parse(PlayerController.player.firstLoginAt);
         var daysPlaying = DateTime.Now.Subtract(firstLogin).TotalDays;
         if (daysPlaying < 3 && !PlayerController.player.boughtStarter || DateTime.Now.DayOfWeek == DayOfWeek.Tuesday) { // must see it if he logged in not on Tuesday
-            return "STARTER";
+            return "pack_starter";
         }
         if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday || DateTime.Now.DayOfWeek == DayOfWeek.Saturday) {
-            return "WEEKEND";
+            return "pack_weekend";
         }
         if (DateTime.Now.DayOfWeek == DayOfWeek.Thursday || DateTime.Now.DayOfWeek == DayOfWeek.Friday) {
-            return "STATIC";
+            return "pack_static";
         }
         return "EMPTY";
     }

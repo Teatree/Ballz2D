@@ -13,6 +13,12 @@ public class ItemsController : MonoBehaviour {
                 int i = PlayerController.player.items.FindIndex(x => x.name.Equals(iobj.name));
                 PlayerController.player.items[i].amount += iobj.amount;
             }
+
+            if (iobj.itemType == ItemObject.ItemType.Currency) {
+                PlayerController.player.gems += iobj.amount;
+            }
+
+            Debug.Log("THere were some items claimed");
             return true;
         }
         return false;

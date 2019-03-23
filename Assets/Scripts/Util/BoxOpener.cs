@@ -39,9 +39,6 @@ public class BoxOpener : SceneSingleton<BoxOpener> {
         }
 
         var item = dic[dicKeys[dic.Count - 1]];
-        if (item.itemType.Equals(ItemObject.ItemType.Currency)) {
-            PlayerController.player.gems += item.amount;
-        }
 
         return item;
     }
@@ -70,9 +67,6 @@ public class BoxOpener : SceneSingleton<BoxOpener> {
         }
 
         var item = dic[dicKeys[dic.Count - 1]];
-        if (item.itemType.Equals(ItemObject.ItemType.Currency)) {
-            PlayerController.player.gems += item.amount;
-        }
 
         return item;
     }
