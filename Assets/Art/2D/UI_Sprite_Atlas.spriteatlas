@@ -38,6 +38,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a03907712fb73cf4c851c6dfe19d64ff, type: 3}
   - {fileID: 21300000, guid: 7ff5c0121d5cd2e42b8d82f938d10608, type: 3}
   - {fileID: 21300000, guid: fd67f3b24e7af094ea55adb756880335, type: 3}
+  - {fileID: 21300000, guid: 22f162533ab69b244ba1b28faa81459d, type: 3}
   - {fileID: 21300000, guid: f5e373532d14813488fb53a39c18ad48, type: 3}
   - {fileID: 21300000, guid: e4db8c44be412584f97934f962d071c6, type: 3}
   - {fileID: 21300000, guid: 783a44c4e996f184d840ac33c61b29df, type: 3}
@@ -46,6 +47,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e2a2e93656370884396ef3838da33e40, type: 3}
   - {fileID: 21300000, guid: 049f84e66a6f11b4ba4e21c544e9a7ca, type: 3}
   - {fileID: 21300000, guid: 4fcd27573b6b1cd4589164a9e942e3e3, type: 3}
+  - {fileID: 21300000, guid: fbaf04773f916264faf0bb5510b14569, type: 3}
   - {fileID: 21300000, guid: bef485870e9afb6408e386da894594c8, type: 3}
   - {fileID: 21300000, guid: efe6f6184003c02468c86ec104cfa430, type: 3}
   - {fileID: 21300000, guid: 5d16e39843f15a4438f5e4db39e718af, type: 3}
@@ -83,6 +85,7 @@ SpriteAtlas:
   - Cross_Icon
   - Lock_Icon
   - button
+  - Revive_Bomb
   - button_shop
   - Reload_Icon
   - arrow
@@ -91,6 +94,7 @@ SpriteAtlas:
   - button_pink
   - Leaderboard_Icon
   - Dialog_BG_Shop
+  - Ad_Camera_Icon_g
   - Level_Completed
   - Balls_Booster
   - Achievements_Icon
