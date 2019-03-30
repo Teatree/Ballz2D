@@ -16,18 +16,19 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
         UpdateVisual();
     }
 
-    public void GetMoreBalls() {
+    public void GetMoreBalls(int ExtraBallsAmount) {
         BallLauncher.ExtraBalls += ExtraBallsAmount;
-        TextCanvasUpdate();
-        UpdateVisual();
+        BallsAmountTextCanvasUpdate(BallLauncher.Instance.BallsReadyToShoot, ExtraBallsAmount);
+      
     }
 
-    public void TextCanvasUpdate() {
+    public void BallsAmountTextCanvasUpdate(int ballsAmount, int ExtraBallsAmount) {
         BallLauncher.Instance.CheckExtraBalls();
         GameObject textCanvas = BallLauncher.Instance.textCanvas;
         textCanvas.gameObject.transform.localPosition = new Vector3(0.27f, 0.17f);
         if (textCanvas.gameObject.transform.position.x > 2.55f) textCanvas.gameObject.transform.position = new Vector3(2.55f, textCanvas.gameObject.transform.position.y);
-        StartCoroutine(IncreaseBalls(textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>(), BallLauncher.Instance.BallsReadyToShoot, BallLauncher.Instance.BallsReadyToShoot + ExtraBallsAmount));
+        
+        StartCoroutine(IncreaseBalls(textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>(), ballsAmount, ballsAmount + ExtraBallsAmount));
     }
 
     public IEnumerator IncreaseBalls(Text textComponent, int wasBalls, int becomeBalls) {
@@ -73,7 +74,8 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
         int hasItem = hasExtraBallsItem();
 
         if (hasItem >= 0) {
-            GetMoreBalls();
+            GetMoreBalls(ExtraBallsAmount);
+            UpdateVisual();
             if (PlayerController.player.items[hasItem].amount > 1) {
                 PlayerController.player.items[hasItem].amount--;
             }
@@ -84,7 +86,7 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
         else
          if (PlayerController.player.gems >= CostGems) {
             PlayerController.player.gems -= CostGems;
-            GetMoreBalls();
+            GetMoreBalls(ExtraBallsAmount);
         }
         else {
             GameUIController.Instance.ShowRedirectPoor();

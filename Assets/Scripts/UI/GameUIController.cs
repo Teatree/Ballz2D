@@ -239,6 +239,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
             laserLine.material.color = c;
             yield return null;
         }
+        GridController.Instance.DidIwin();
         LevelController.isGameOver = false;
     }
 

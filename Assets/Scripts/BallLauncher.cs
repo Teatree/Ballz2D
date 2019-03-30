@@ -104,6 +104,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     public void CheckExtraBalls() {
         if (ExtraBalls > 0) {
             CreateBall(ExtraBalls);
+            
             ExtraBalls = 0;
         }
     }

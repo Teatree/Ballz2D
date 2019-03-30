@@ -46,7 +46,8 @@ public class Revive : IPopup<Revive> {
             DestroyBottomLines();
             PlayerController.player.gems -= CostGems;
             available = false;
-        } else {
+        }
+        else {
             GameUIController.Instance.ShowRedirectPoorRevive();
         }
     }
@@ -62,6 +63,8 @@ public class Revive : IPopup<Revive> {
         }
         GameUIController.Instance.UpdateScore(LevelController.levelScore);
         Warning.Instance.StopAndDestroyWarnings();
+
+
     }
 
     private void ShootLasers(LineRenderer laserLine, float y) {
@@ -83,7 +86,7 @@ public class Revive : IPopup<Revive> {
 
     public void OnClick_ShowGameOver() {
         Revive.available = false;
-        
+
         GameUIController.Instance.ShowGameOver();
     }
 }

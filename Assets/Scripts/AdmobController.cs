@@ -163,11 +163,14 @@ public class AdmobController : SceneSingleton<AdmobController> {
     }
 
     public void ShowBallsrewardVideo() {
-        //if (rewardBallsVideo.IsLoaded()) {
-        //    rewardBallsVideo.Show();
-        //}
-        BallLauncher.ExtraBalls += 10;
-        MoreBallsPowerup.Instance.TextCanvasUpdate();
+        if (Application.platform == RuntimePlatform.Android) {
+            if (rewardBallsVideo.IsLoaded()) {
+                rewardBallsVideo.Show();
+            }
+        }
+        else {
+            MoreBallsPowerup.Instance.GetMoreBalls(10);
+        }
     }
 
     private void InitBallsRewardVideo() {
@@ -178,8 +181,7 @@ public class AdmobController : SceneSingleton<AdmobController> {
     }
 
     public void HandleRewardBallsRewarded(object sender, Reward args) {
-        BallLauncher.ExtraBalls += 10;
-        MoreBallsPowerup.Instance.TextCanvasUpdate();
+        MoreBallsPowerup.Instance.GetMoreBalls(10);
     }
 
     public void HandleRewardBallsClosed(object sender, EventArgs args) {
