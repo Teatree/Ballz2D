@@ -259,6 +259,10 @@ public class GameUIController : SceneSingleton<GameUIController> {
         LevelController.PauseGame();
     }
 
+    public void ShowRedirectPoorRevive() {
+        StartCoroutine(redirectPoorRevive());
+    }
+
     public IEnumerator redirectPoor() {
         GameObject redir = Instantiate(RedirectPrefab, transform);
         while (redir.GetComponent<ConfirmBallPopup>().result == "") {
@@ -269,6 +273,19 @@ public class GameUIController : SceneSingleton<GameUIController> {
         }
         if (redir.GetComponent<ConfirmBallPopup>().result == "no") {
             LevelController.ResumeGame();
+        }
+    }
+
+    public IEnumerator redirectPoorRevive() {
+        GameObject redir = Instantiate(RedirectPrefab, transform);
+        while (redir.GetComponent<ConfirmBallPopup>().result == "") {
+            yield return null;
+        }
+        if (redir.GetComponent<ConfirmBallPopup>().result == "ok") {
+            ShowShop();
+        }
+        if (redir.GetComponent<ConfirmBallPopup>().result == "no") {
+            Debug.Log("no");
         }
     }
 }

@@ -1198,8 +1198,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OpenShop
+      - m_Target: {fileID: 114830867570453422}
+        m_MethodName: OnClick_ShowShop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1360,7 +1360,8 @@ MonoBehaviour:
   laserLine2: {fileID: 0}
   laserLine3: {fileID: 0}
   adsButton: {fileID: 1731237829256880}
-  CostGems: 0
+  HCAmount: {fileID: 114675808630616578}
+  CostGems: 400
 --- !u!114 &114834566031587274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1402,17 +1403,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114830867570453422}
         m_MethodName: GetRevive
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 114830867570453422}
-        m_MethodName: OnClick_Close
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

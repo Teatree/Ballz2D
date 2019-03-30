@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Revive : IPopup<Revive> {
 
@@ -6,6 +7,7 @@ public class Revive : IPopup<Revive> {
     public GameObject laserLine2;
     public GameObject laserLine3;
     public GameObject adsButton;
+    public Text HCAmount;
 
     public static int RowToDestroyIndex;
     public static float RowToDestroyPosition;
@@ -22,6 +24,7 @@ public class Revive : IPopup<Revive> {
     public void Start() {
         // if Ads
         adsButton.SetActive(false);
+        HCAmount.text = PlayerController.player != null ? PlayerController.player.gems.ToString() : "0";
 
         laserLine1 = GameUIController.Instance.laserLine1;
         laserLine2 = GameUIController.Instance.laserLine2;
@@ -39,11 +42,12 @@ public class Revive : IPopup<Revive> {
     public void GetRevive() {
         Debug.Log(LevelController.isGameOver);
         if (LevelController.isGameOver && PlayerController.player.gems >= CostGems) {
+            OnClick_Close();
             DestroyBottomLines();
             PlayerController.player.gems -= CostGems;
             available = false;
         } else {
-            GameUIController.Instance.ShowRedirectPoor();
+            GameUIController.Instance.ShowRedirectPoorRevive();
         }
     }
 
@@ -73,6 +77,9 @@ public class Revive : IPopup<Revive> {
         GameUIController.Instance.FadingLasers(laserLine);
     }
 
+    public void OnClick_ShowShop() {
+        GameUIController.Instance.ShowShop();
+    }
 
     public void OnClick_ShowGameOver() {
         Revive.available = false;
