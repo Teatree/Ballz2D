@@ -68,7 +68,6 @@ public class Warning : SceneSingleton<Warning> {
         DestroyWarnings();
     }
 
-
     private Vector3 GetWarningPosition(int i) {
         Vector3 position = transform.position;
         /// 2.731f is a shift to center the whole thing on the screen

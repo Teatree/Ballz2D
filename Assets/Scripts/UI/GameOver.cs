@@ -35,7 +35,7 @@ public class GameOver : IPopup<GameOver> {
             StarsSlider.value = PlayerController.player.progressTowardsNextStarBox;
         //}
 
-        if (PlayerController.player.stars >= StarsSlider.maxValue) {
+        if (_type != GameOverType.Fail && PlayerController.player.progressTowardsNextStarBox >= StarsSlider.maxValue) {
             //_type = GameOverType.WinBox;
             _type = GameOverType.Win;
         }
@@ -43,7 +43,7 @@ public class GameOver : IPopup<GameOver> {
         InitThings();
     }
 
-    private void InitThings() {
+    public void InitThings() {
         switch (_type) {
             case GameOverType.Fail: {
                     InitFail();

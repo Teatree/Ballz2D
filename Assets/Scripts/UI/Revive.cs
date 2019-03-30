@@ -5,6 +5,7 @@ public class Revive : IPopup<Revive> {
     public GameObject laserLine1;
     public GameObject laserLine2;
     public GameObject laserLine3;
+    public GameObject adsButton;
 
     public static int RowToDestroyIndex;
     public static float RowToDestroyPosition;
@@ -19,6 +20,8 @@ public class Revive : IPopup<Revive> {
     public static bool available = false;
 
     public void Start() {
+        // if Ads
+        adsButton.SetActive(false);
 
         laserLine1 = GameUIController.Instance.laserLine1;
         laserLine2 = GameUIController.Instance.laserLine2;
@@ -73,6 +76,7 @@ public class Revive : IPopup<Revive> {
 
     public void OnClick_ShowGameOver() {
         Revive.available = false;
-        GameUIController.Instance.HandleGameOver();
+        
+        GameUIController.Instance.ShowGameOver();
     }
 }

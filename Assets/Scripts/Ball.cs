@@ -53,9 +53,12 @@ public class Ball : MonoBehaviour {
         //transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z-100, transform.rotation.w);
         //rb.velocity = rb.velocity.normalized * moveSpeed;
 
-        //sorry
-        if (transform.position.y < 0.1) {
-            EnableCollision();
+        //sorry,no
+        if (transform.position.y < 0) {
+            if (this.active) {
+                EnableCollision();
+                BallLauncher.Instance.ReturnBall(this);
+            }
         }
     }
 

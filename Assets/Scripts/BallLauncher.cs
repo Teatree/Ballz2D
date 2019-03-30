@@ -261,8 +261,10 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         if (launcherBallRoutine != null)
         StopCoroutine(launcherBallRoutine);
         foreach (Ball b in balls) {
-            b.AddForceBall(ballVisual.transform.position - b.transform.position);
-            b.DisableCollision();
+            if (b.active) {
+                b.AddForceBall(ballVisual.transform.position - b.transform.position);
+                b.DisableCollision();
+            }
         }
         int ballsAlreadyThere = 0;
         foreach (Ball b in balls) {

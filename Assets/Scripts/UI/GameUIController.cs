@@ -121,7 +121,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
         if (Revive.available) {
             Instantiate(RevivePrefab, transform);
         } else {
-            Instantiate(GameOverPrefab, transform);
+            ShowGameOver();
         }
     }
 
@@ -136,6 +136,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
         GameObject go = Instantiate(GameOverPrefab, transform);
         GameOver g = go.transform.GetComponent<GameOver>();
         g._type = GameOver.GameOverType.Fail;
+        g.InitThings();
     }
 
 
