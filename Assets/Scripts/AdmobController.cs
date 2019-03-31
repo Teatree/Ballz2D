@@ -49,7 +49,7 @@ public class AdmobController : SceneSingleton<AdmobController> {
     private static AdRequest GetTestRequest() {
         //.AddTestDevice("F3BF2A3E2B31B3411BC09B6435FC8160")
         return new AdRequest.Builder()
-            .AddTestDevice("F3BF2A3E2B31B3411BC09B6435FC8160")
+          //  .AddTestDevice("F3BF2A3E2B31B3411BC09B6435FC8160")
             .Build();
     }
 

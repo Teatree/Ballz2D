@@ -36,6 +36,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 93f78420add918844895e3a69f5a9fd4, type: 3}
   - {fileID: 21300000, guid: db381d509864fc04e87535943e7a1486, type: 3}
   - {fileID: 21300000, guid: a03907712fb73cf4c851c6dfe19d64ff, type: 3}
+  - {fileID: 21300000, guid: 9d029aa1945dbeb4b8a2ef99d0c23427, type: 3}
   - {fileID: 21300000, guid: 7ff5c0121d5cd2e42b8d82f938d10608, type: 3}
   - {fileID: 21300000, guid: fd67f3b24e7af094ea55adb756880335, type: 3}
   - {fileID: 21300000, guid: 22f162533ab69b244ba1b28faa81459d, type: 3}
@@ -83,6 +84,7 @@ SpriteAtlas:
   - HC_Gem_Icon
   - Level_InComplete
   - Cross_Icon
+  - Redo_Icon
   - Lock_Icon
   - button
   - Revive_Bomb
