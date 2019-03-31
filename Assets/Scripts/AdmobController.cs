@@ -38,18 +38,18 @@ public class AdmobController : SceneSingleton<AdmobController> {
         MobileAds.Initialize(appId);
 
         this.RequestBanner();
-        //InitGemRewardVideo();
-        //InitBoxRewardVideo();
-        //if (!PlayerController.player.noAds) {
-        //    RequestInterstitial();
-        //    bannerView.Show();
-        //}
+        InitGemRewardVideo();
+        InitBoxRewardVideo();
+        if (!PlayerController.player.noAds) {
+            RequestInterstitial();
+            bannerView.Show();
+        }
     }
 
     private static AdRequest GetTestRequest() {
         //.AddTestDevice("F3BF2A3E2B31B3411BC09B6435FC8160")
         return new AdRequest.Builder()
-            .AddTestDevice("9457F77F86541E4EA84BF4A7CF6D83A6")
+            .AddTestDevice("F3BF2A3E2B31B3411BC09B6435FC8160")
             .Build();
     }
 
