@@ -10,21 +10,21 @@ public class AdmobController : SceneSingleton<AdmobController> {
     string interstitialId = "ca-app-pub-4809397092315700/3492498628";
     string rewardVideoId = "ca-app-pub-4809397092315700/9646843432";
     string boxrewardVideoId = "ca-app-pub-4809397092315700/4309780879";
-    string ballsrewardVideoId = "ca-app-pub-4809397092315700~2101070495";
+    string ballsrewardVideoId = "ca-app-pub-4809397092315700/7385839071";
 #elif UNITY_IPHONE
      string appId = "ca-app-pub-4809397092315700~2101070495";
     string bannerId = "ca-app-pub-4809397092315700/7133905324";
     string interstitialId = "ca-app-pub-4809397092315700/3492498628";
     string rewardVideoId = "ca-app-pub-4809397092315700/9646843432";
      string boxrewardVideoId = "ca-app-pub-4809397092315700/9646843432";
-        string ballsrewardVideoId = "ca-app-pub-4809397092315700~2101070495";
+        string ballsrewardVideoId = "ca-app-pub-4809397092315700/7385839071";
 #else
     string appId = "ca-app-pub-4809397092315700~2101070495";
     string bannerId = "ca-app-pub-4809397092315700/7133905324";
     string interstitialId = "ca-app-pub-4809397092315700/3492498628";
     string rewardVideoId = "ca-app-pub-4809397092315700/9646843432";
      string boxrewardVideoId = "ca-app-pub-4809397092315700/9646843432";
-        string ballsrewardVideoId = "ca-app-pub-4809397092315700~2101070495";
+        string ballsrewardVideoId = "ca-app-pub-4809397092315700/7385839071";
 #endif
 
 
@@ -38,12 +38,12 @@ public class AdmobController : SceneSingleton<AdmobController> {
         MobileAds.Initialize(appId);
 
         this.RequestBanner();
-        //InitGemRewardVideo();
-        //InitBoxRewardVideo();
-        //if (!PlayerController.player.noAds) {
-        //    RequestInterstitial();
-        //    bannerView.Show();
-        //}
+        InitGemRewardVideo();
+        InitBoxRewardVideo();
+        if (!PlayerController.player.noAds) {
+            RequestInterstitial();
+            bannerView.Show();
+        }
     }
 
     private static AdRequest GetTestRequest() {
@@ -53,16 +53,22 @@ public class AdmobController : SceneSingleton<AdmobController> {
             .Build();
     }
 
+    private static AdRequest GetRequest() {
+        //.AddTestDevice("F3BF2A3E2B31B3411BC09B6435FC8160")
+        return new AdRequest.Builder()
+            .Build();
+    }
+
     private void RequestBanner() {
         bannerView = new BannerView(bannerId, AdSize.Banner, AdPosition.Top);
-        AdRequest request = GetTestRequest();
+        AdRequest request = GetRequest();
         bannerView.LoadAd(request);
     }
 
     #region Interstitial
     private void RequestInterstitial() {
         this.interstitial = new InterstitialAd(interstitialId);
-        AdRequest request = GetTestRequest();
+        AdRequest request = GetRequest();
         this.interstitial.LoadAd(request);
     }
 
@@ -80,7 +86,7 @@ public class AdmobController : SceneSingleton<AdmobController> {
 
     private void RequestGemsRewardVideo() {
         this.rewardGemsVideo = RewardBasedVideoAd.Instance;
-        AdRequest request = GetTestRequest();
+        AdRequest request = GetRequest();
         this.rewardGemsVideo.LoadAd(request, rewardVideoId);
     }
 
@@ -112,7 +118,7 @@ public class AdmobController : SceneSingleton<AdmobController> {
     //Box 
     private void RequestBoxRewardVideo() {
         this.rewardBoxVideo = RewardBasedVideoAd.Instance;
-        AdRequest request = GetTestRequest();
+        AdRequest request = GetRequest();
         this.rewardBoxVideo.LoadAd(request, boxrewardVideoId);
         if (UIController.Instance != null)
             if (rewardBoxVideo.IsLoaded()) {
@@ -151,7 +157,7 @@ public class AdmobController : SceneSingleton<AdmobController> {
     ////MoreBalls
     private void RequestBallsRewardVideo() {
         this.rewardBallsVideo = RewardBasedVideoAd.Instance;
-        AdRequest request = GetTestRequest();
+        AdRequest request = GetRequest();
         this.rewardBoxVideo.LoadAd(request, ballsrewardVideoId);
         //if (UIController.Instance != null)
         //    if (rewardBallsVideo.IsLoaded()) {
