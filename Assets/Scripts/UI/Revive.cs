@@ -63,8 +63,6 @@ public class Revive : IPopup<Revive> {
         }
         GameUIController.Instance.UpdateScore(LevelController.levelScore);
         Warning.Instance.StopAndDestroyWarnings();
-
-
     }
 
     private void ShootLasers(LineRenderer laserLine, float y) {

@@ -123,6 +123,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
         } else {
             ShowGameOver();
         }
+        Warning.Instance.StopAndDestroyWarnings();
     }
 
 
