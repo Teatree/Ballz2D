@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cfe258167756a04995fe788e803c598, type: 3}
-  m_Name: Ball_Star
+  m_Name: Ball_Triangle
   m_EditorClassIdentifier: 
-  name: Star
+  name: Triangle
   itemType: 0
-  costGems: 2000
+  costGems: 1000
   amount: 0
-  shopImage: {fileID: 21300000, guid: dcf9eac0dc9ae184181e26ad95a83e33, type: 3}
-  assetImage: star
+  shopImage: {fileID: 21300000, guid: ee29f67d7a6500c46a888f35821ba685, type: 3}
+  assetImage: triangle
   enabled: 0

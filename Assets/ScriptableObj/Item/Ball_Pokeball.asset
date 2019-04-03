@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cfe258167756a04995fe788e803c598, type: 3}
-  m_Name: Ball_Puzzle
+  m_Name: Ball_Pokeball
   m_EditorClassIdentifier: 
-  name: Puzzle
+  name: Pokeball
   itemType: 0
-  costGems: 1000
+  costGems: 5000
   amount: 0
-  shopImage: {fileID: 21300000, guid: f717c232b84b0fe4399b5b69c3009157, type: 3}
-  assetImage: puzzle
+  shopImage: {fileID: 21300000, guid: 15b93aa015100ac48a96b8d24acc57ac, type: 3}
+  assetImage: pokeball
   enabled: 0
