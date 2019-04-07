@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Maple
   itemType: 0
-  costGems: 200
+  costGems: 2000
   amount: 0
-  shopImage: {fileID: 21300000, guid: e96c153cac8066b42b01b1ff264ac083, type: 3}
+  shopImage: {fileID: 21300000, guid: c4d014a6b33304c4e9d1ffc08b2de6dc, type: 3}
   assetImage: maple
   enabled: 0
