@@ -69,7 +69,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
     public void PauseGame() {
-        LevelController.PauseGame();
+        //LevelController.PauseGame();
         Instantiate(PausePrefab, transform);
     }
 
@@ -253,7 +253,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
     public void showMoreBallsAd() {
-        AdmobController.Instance.ShowBallsrewardVideo();
+      //  AdmobController.Instance.ShowBallsrewardVideo();
     }
 
     public void ShowRedirectPoor() {

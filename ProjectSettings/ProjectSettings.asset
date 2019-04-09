@@ -247,7 +247,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 2
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: D:/avatars_vrchat/turnbasedtut/Ballz2D/Ballz2D/ballsKey.keystore
+  AndroidKeystoreName: C:/Users/Garry/Desktop/GoHere/Ballz2D/ballsKey.keystore
   AndroidKeyaliasName: ballskey
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
@@ -842,13 +842,14 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Build: 0
     Collab: 0
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudProjectId: 852a915d-4670-43e8-8345-3efa68a8f01e
+  projectName: BirckTheBalls
+  organizationId: teatree
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

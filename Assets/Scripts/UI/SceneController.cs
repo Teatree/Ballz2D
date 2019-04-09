@@ -10,7 +10,7 @@ public class SceneController : MonoBehaviour {
     bool gameStart;
     public static string initScene = "";
 
-    public AdmobController admob;
+    //public AdmobController admob;
 
     public void Awake() {
 

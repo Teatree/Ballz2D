@@ -6,12 +6,13 @@ using System;
 public class ShareController : SceneSingleton<ShareController> {
 
     public string ScreenshotName = "screenshot.png";
-#if UNITY_ANDROID
     String gameUrl = "https://play.google.com/apps/testing/com.FearlessDoodlez.BirckTheBalls";
-#endif
-#if UNITY_IOS
-        String gameUrl = "https://play.google.com/apps/testing/com.FearlessDoodlez.BirckTheBalls";
-#endif
+//#if UNITY_ANDROID
+//     gameUrl = "https://play.google.com/apps/testing/com.FearlessDoodlez.BirckTheBalls";
+//#endif
+//#if UNITY_IOS
+//        gameUrl = "https://play.google.com/apps/testing/com.FearlessDoodlez.BirckTheBalls";
+//#endif
 
 
     public void ShareScreenshotWithText(string text) {

@@ -162,7 +162,7 @@ public class UIController : SceneSingleton<UIController> {
     }
 
     public void ShowAdBox() {
-        AdmobController.Instance.ShowBoxrewardVideo();
+       // AdmobController.Instance.ShowBoxrewardVideo();
     }
 
     public void showWaitForItPopup() {

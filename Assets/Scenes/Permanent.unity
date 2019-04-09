@@ -206,7 +206,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1512515699}
-  - component: {fileID: 1512515700}
   m_Layer: 0
   m_Name: Adz
   m_TagString: Untagged
@@ -227,17 +226,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1512515700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1512515698}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bceebcfaddd3164f91f6970a41080b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1517596996
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d455da3f1046efa47ba47da9d728dc87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  admob: {fileID: 1512515700}
 --- !u!4 &1784900067
 Transform:
   m_ObjectHideFlags: 0
