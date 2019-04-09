@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cfe258167756a04995fe788e803c598, type: 3}
-  m_Name: Ball_Clower
+  m_Name: Ball_Shell
   m_EditorClassIdentifier: 
-  name: Clower
+  name: Shell
   itemType: 0
-  costGems: 200
+  costGems: 5000
   amount: 0
-  shopImage: {fileID: 21300000, guid: 79ef85cc1a392ab47a6e9a445d9527c8, type: 3}
-  assetImage: clover
+  shopImage: {fileID: 21300000, guid: aaf3cb37b05a54445bc8889fb016cb5c, type: 3}
+  assetImage: shell
   enabled: 0

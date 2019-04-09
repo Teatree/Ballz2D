@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cfe258167756a04995fe788e803c598, type: 3}
-  m_Name: Ball_atom
+  m_Name: Ball_Sunflower
   m_EditorClassIdentifier: 
-  name: Atom
+  name: Sunflower
   itemType: 0
-  costGems: 2000
+  costGems: 3000
   amount: 0
-  shopImage: {fileID: 21300000, guid: a69333850eaae0041bc613a19be57a21, type: 3}
-  assetImage: atoms
+  shopImage: {fileID: 21300000, guid: 8eb40437efc27a648a79fa7c9fd74fe4, type: 3}
+  assetImage: sunflower
   enabled: 0
