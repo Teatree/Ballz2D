@@ -22,6 +22,9 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject ShopPrefab;
     public GameObject RedirectPrefab;
 
+    [Header("FTUE")]
+    public GameObject FTUEPrefab;
+    GameObject FTUE;
 
     [Header("SpeedUPIcon")]
     public GameObject SpeedUpIcon;
@@ -53,6 +56,12 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
             Slider.maxValue = LevelController.ThirdStarScore;
         }
+
+
+        if(PlayerController.player.completedLvls != null && PlayerController.player.completedLvls.Count == 0 && AllLevelsData.CurrentLevelIndex == 0) {
+            ShowFTUE();
+            HideAdButtonFromTop();
+        }
     }
 
     void Update() {
@@ -66,6 +75,16 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public void ShowShop() {
         LevelController.PauseGame();
         Instantiate(ShopPrefab, transform);
+    }
+
+    //FTUE Stuff
+    public void ShowFTUE() {
+        FTUE = Instantiate(FTUEPrefab, transform);
+        Debug.Log("---- Showing FTUE");
+    }
+
+    public void RemoveFTUE() {
+        Destroy(FTUE);
     }
 
     public void PauseGame() {
@@ -209,6 +228,10 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public void SetStartDrag() {
         BallLauncher.Instance.SetSlider(true);
         BallLauncher.Instance.SetStartDrag();
+
+        if (PlayerController.player.completedLvls != null && PlayerController.player.completedLvls.Count == 0 && AllLevelsData.CurrentLevelIndex == 0) {
+            GameUIController.Instance.RemoveFTUE();
+        }
     }
 
 
@@ -290,4 +313,6 @@ public class GameUIController : SceneSingleton<GameUIController> {
             Debug.Log("no");
         }
     }
+
+    
 }

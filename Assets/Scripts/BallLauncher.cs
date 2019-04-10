@@ -73,6 +73,11 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                     if (canShoot && !IsPointerOverUIObject()) {
                         //GameUIController.Instance.SetDebugText(" I AM NOT OVER ANY OBJECT OR NOTHING !");
                         if (Input.GetMouseButtonDown(0)) {
+
+                            if (PlayerController.player.completedLvls != null && PlayerController.player.completedLvls.Count == 0 && AllLevelsData.CurrentLevelIndex == 0) {
+                                GameUIController.Instance.RemoveFTUE();
+                            }
+
                             SetStartDrag();
                         }
                         else if (Input.GetMouseButton(0)) {

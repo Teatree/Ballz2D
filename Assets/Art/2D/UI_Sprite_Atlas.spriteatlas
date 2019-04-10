@@ -35,6 +35,7 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 93f78420add918844895e3a69f5a9fd4, type: 3}
   - {fileID: 21300000, guid: db381d509864fc04e87535943e7a1486, type: 3}
+  - {fileID: 21300000, guid: f0a5ef5175f9f9349874c6e9d1379ccc, type: 3}
   - {fileID: 21300000, guid: a03907712fb73cf4c851c6dfe19d64ff, type: 3}
   - {fileID: 21300000, guid: 9d029aa1945dbeb4b8a2ef99d0c23427, type: 3}
   - {fileID: 21300000, guid: 7ff5c0121d5cd2e42b8d82f938d10608, type: 3}
@@ -83,6 +84,7 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - HC_Gem_Icon
   - Level_InComplete
+  - fingerFTUE
   - Cross_Icon
   - Redo_Icon
   - Lock_Icon
