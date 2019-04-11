@@ -97,10 +97,15 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
             // Check whether balls were out for too long and speed up
             if (BallsReadyToShoot != balls.Count && outTime > outTimeLimit) {
                 //Debug.Log(">>> BallsReadyToShoot > " + BallsReadyToShoot);
-                SpeedUP();
+                SpeedUP(2);
+                outTime += Time.deltaTime * 10;
+                if (outTime > outTimeLimit * 2) {
+                    SpeedUP(5);
+                    Debug.Log(" --------- increaseing speed ");
+                }
             }
             else if (BallsReadyToShoot != balls.Count && outTime <= outTimeLimit && Time.deltaTime != 2f) {
-              //  Debug.Log("outTime = " + outTime);
+                //  Debug.Log("outTime = " + outTime);
                 outTime += Time.deltaTime * 10;
             }
         }
@@ -281,11 +286,11 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         BallsReadyToShoot = ballsAlreadyThere;
     }
 
-    public void SpeedUP() {
+    public void SpeedUP(float s) {
         if (Time.timeScale == 1f && !LevelController.isGamePaused && !BallLauncher.canShoot) {
           //  Debug.Log("Speeding Up!");
             GameUIController.Instance.TurnSpeedUpIcon_ON();
-            Time.timeScale = 2f;
+            Time.timeScale = s;
         }
     }
 
