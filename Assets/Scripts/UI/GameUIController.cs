@@ -22,6 +22,9 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject ShopPrefab;
     public GameObject RedirectPrefab;
 
+    [Header("Item Received Feedback")]
+    public GameObject ItemReceived;
+
     [Header("FTUE")]
     public GameObject FTUEPrefab;
     GameObject FTUE;
@@ -88,7 +91,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
     public void PauseGame() {
-        //LevelController.PauseGame();
+        LevelController.PauseGame();
         Instantiate(PausePrefab, transform);
     }
 
@@ -314,5 +317,8 @@ public class GameUIController : SceneSingleton<GameUIController> {
         }
     }
 
-    
+    public void ShowItemReceived() { // could add different items in future maybe?
+        Instantiate(ItemReceived, transform);
+    }
+
 }

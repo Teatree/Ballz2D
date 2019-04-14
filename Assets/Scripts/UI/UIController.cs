@@ -120,6 +120,13 @@ public class UIController : SceneSingleton<UIController> {
 
         // gems.text = "Gems >>> " +  PlayerController.player.gems;
         //debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "      path: " + DataController.levelfilePath;
+
+        if (PlayerController.player.adBoxOpenedCount < UnityAddsController.Instance.AdBoxOpenLimit) {
+            SetEnabledAdBox(true);
+        }
+        else {
+            SetEnabledAdBox(false);
+        }
     }
 
     public void getGems() {
@@ -162,7 +169,7 @@ public class UIController : SceneSingleton<UIController> {
     }
 
     public void ShowAdBox() {
-       // AdmobController.Instance.ShowBoxrewardVideo();
+        UnityAddsController.Instance.ShowBoxAd();
     }
 
     public void showWaitForItPopup() {
@@ -179,5 +186,4 @@ public class UIController : SceneSingleton<UIController> {
         BoxDayButton.SetActive(false);
         BoxDayWaitButton.SetActive(true);
     }
-
 }

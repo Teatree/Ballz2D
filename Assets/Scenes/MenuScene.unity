@@ -4034,6 +4034,8 @@ MonoBehaviour:
     type: 2}
   BoxDayButton: {fileID: 284934483}
   BoxDayWaitButton: {fileID: 1126157605}
+  ItemReceived: {fileID: 1129312519272930, guid: dc20e5c61ba190849a7fd7ad744f2329,
+    type: 2}
   BoxAdButton: {fileID: 1785619427}
   lvlSlider: {fileID: 36674593}
 --- !u!114 &2066143727

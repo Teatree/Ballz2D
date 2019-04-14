@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Revive : IPopup<Revive> {
@@ -12,19 +13,21 @@ public class Revive : IPopup<Revive> {
     public static int RowToDestroyIndex;
     public static float RowToDestroyPosition;
 
-
     private float line1Y;
     private float line2Y;
     private float line3Y;
 
     public int CostGems;
 
+    // Ads Stuff
+    public int MoreHCReviveOpenLimit = 3;
+
     public static bool available = false;
 
     public void Start() {
-        // if Ads
-        adsButton.SetActive(false);
-        HCAmount.text = PlayerController.player != null ? PlayerController.player.gems.ToString() : "0";
+        UpdateButtsButtonState();
+
+        //HCAmount.text = PlayerController.player != null ? PlayerController.player.gems.ToString() : "0";
 
         laserLine1 = GameUIController.Instance.laserLine1;
         laserLine2 = GameUIController.Instance.laserLine2;
@@ -39,6 +42,27 @@ public class Revive : IPopup<Revive> {
         laserLine3.transform.position = new Vector3(-3.15f, line3Y);
     }
 
+    public void Update() {
+        HCAmount.text = PlayerController.player != null ? PlayerController.player.gems.ToString() : "0";
+    }
+
+    public void UpdateButtsButtonState() {
+        DateTime dt = PlayerController.player == null || PlayerController.player.MoreHCReviveOpenedDate == null || PlayerController.player.MoreHCReviveOpenedDate == "" ? DateTime.Now : DateTime.Parse(PlayerController.player.MoreHCReviveOpenedDate);
+
+        if (DateTime.Now.Date == dt) {
+            if (PlayerController.player.MoreHCReviveCount < MoreHCReviveOpenLimit) {
+                adsButton.SetActive(true);
+            }
+            else {
+                adsButton.SetActive(false);
+            }
+        }
+        else {
+            PlayerController.player.MoreHCReviveOpenedDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+            adsButton.SetActive(true);
+        }
+    }
+
     public void GetRevive() {
         Debug.Log(LevelController.isGameOver);
         if (LevelController.isGameOver && PlayerController.player.gems >= CostGems) {
@@ -50,6 +74,10 @@ public class Revive : IPopup<Revive> {
         else {
             GameUIController.Instance.ShowRedirectPoorRevive();
         }
+    }
+
+    public void ShowThemAdsForHC() {
+        UnityAddsController.Instance.ShowMoreHCReviveAd();
     }
 
     public void DestroyBottomLines() {

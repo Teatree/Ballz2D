@@ -3250,6 +3250,8 @@ MonoBehaviour:
   ShopPrefab: {fileID: 1094745606953602, guid: a8c37f914cf2dbd46aec93f3f8a89f7e, type: 2}
   RedirectPrefab: {fileID: 1812459812452356, guid: 228b91e0a5129bb4ebcd7248c048ecfc,
     type: 2}
+  ItemReceived: {fileID: 1129312519272930, guid: dc20e5c61ba190849a7fd7ad744f2329,
+    type: 2}
   FTUEPrefab: {fileID: 1173401912381124, guid: 6439be44aaa73b446ac8f46ab3943333, type: 2}
   SpeedUpIcon: {fileID: 1919324924277558}
   laserLine1: {fileID: 0}

@@ -4896,11 +4896,21 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 223953077776160678, guid: c21fdeca8edd0db479c5466e36f51ee3,
+    - target: {fileID: 114905707069503284, guid: c21fdeca8edd0db479c5466e36f51ee3,
         type: 2}
-      propertyPath: m_Camera
+      propertyPath: cam
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 114905707069503284, guid: c21fdeca8edd0db479c5466e36f51ee3,
+        type: 2}
+      propertyPath: playArea
+      value: 
+      objectReference: {fileID: 883614033}
+    - target: {fileID: 114173288729083726, guid: c21fdeca8edd0db479c5466e36f51ee3,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1936070846}
     - target: {fileID: 114817632410744238, guid: c21fdeca8edd0db479c5466e36f51ee3,
         type: 2}
       propertyPath: laserLine1
@@ -4916,21 +4926,11 @@ Prefab:
       propertyPath: laserLine3
       value: 
       objectReference: {fileID: 1189035050}
-    - target: {fileID: 114173288729083726, guid: c21fdeca8edd0db479c5466e36f51ee3,
+    - target: {fileID: 223953077776160678, guid: c21fdeca8edd0db479c5466e36f51ee3,
         type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1936070846}
-    - target: {fileID: 114905707069503284, guid: c21fdeca8edd0db479c5466e36f51ee3,
-        type: 2}
-      propertyPath: cam
+      propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 114905707069503284, guid: c21fdeca8edd0db479c5466e36f51ee3,
-        type: 2}
-      propertyPath: playArea
-      value: 
-      objectReference: {fileID: 883614033}
     - target: {fileID: 114279820295870054, guid: c21fdeca8edd0db479c5466e36f51ee3,
         type: 2}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target

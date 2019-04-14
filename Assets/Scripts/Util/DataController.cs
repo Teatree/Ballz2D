@@ -161,6 +161,10 @@ public class PlayerData {
     public string specialBallImageName;
     public string specialBallName;
     public bool boughtStarter;
+    public int adBoxOpenedCount; 
+    public string adBoxOpenedDate;
+    public int MoreHCReviveCount;
+    public string MoreHCReviveOpenedDate;
 
     public List<CompletedLevel> completedLvls = new List<CompletedLevel>();
     public List<ItemData> items = new List<ItemData>();
