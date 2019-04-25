@@ -1,0 +1,44 @@
+{
+	"gems": 400,
+	"stars": 0,
+	"numStarBoxesOpened": 0,
+	"lastLogin": "2019-02-09",
+	"noAds": false,
+	"completedLvls": [],
+	"items": [{
+		"costGems": 400,
+		"name": "Booster Lightning",
+		"amount": 8,
+		"enabled": false
+	},
+	{
+		"costGems": 400,
+		"name": "Booster Balls",
+		"amount": 4,
+		"enabled": false
+	},
+	{
+		"costGems": 200,
+		"name": "90 Gems",
+		"amount": 720,
+		"enabled": false
+	},
+	{
+		"costGems": 200,
+		"name": "40 Gems",
+		"amount": 40,
+		"enabled": false
+	},
+	{
+		"costGems": 200,
+		"name": "60 Gems",
+		"amount": 540,
+		"enabled": false
+	},
+	{
+		"costGems": 200,
+		"name": "120 Gems",
+		"amount": 120,
+		"enabled": false
+	}]
+}
