@@ -596,7 +596,7 @@ MonoBehaviour:
   _type: 1
   StarsAmount: 0
   Btn_Group_Single: {fileID: 1664211212529686}
-  Btn_Group_Ads: {fileID: 0}
+  Btn_Group_Ads: {fileID: 1412719880089208}
   Btn_Group_Fail: {fileID: 1021389487296548}
   Star1: {fileID: 1842923632059342}
   Star2: {fileID: 1424522507849236}

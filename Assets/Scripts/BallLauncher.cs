@@ -51,7 +51,8 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     private void Update() {
         if (!LevelController.IsGameStopped()) {
-            
+            Debug.Log(" >>>>>> BallsReadyToShoot " + BallsReadyToShoot);
+            Debug.Log(" >>>>>> balls.Count " + balls.Count);
             if (BallsReadyToShoot == balls.Count && canShoot) { // don't let the player launch until all balls are back.
                 //GameUIController.Instance.SetDebugText("Balls Are back!");
                 LightningPowerup.Instance.EnableButton();
@@ -206,6 +207,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
             canShoot = false;
             Vector3 direction = endDragPosition - transform.position;
             direction.Normalize();
+            Debug.Log(" >>> Really? ");
             BallsReadyToShoot = 0;
             foreach (var ball in balls) {
                 ball.transform.position = transform.position;

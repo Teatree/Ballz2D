@@ -9,6 +9,8 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
     public GameObject HC_cost;
     public Text AmountText;
     public int CostGems;
+    public int minExtraBalls = 1;
+    public int maxExtraBalls = 10;
 
     public int ExtraBallsAmount;
 
@@ -20,6 +22,11 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
         BallLauncher.ExtraBalls += ExtraBallsAmount;
         BallsAmountTextCanvasUpdate(BallLauncher.Instance.BallsReadyToShoot, ExtraBallsAmount);
       
+    }
+
+    public int getRandomBallsAmount() {
+        int res = Random.Range(minExtraBalls, maxExtraBalls);
+        return res;
     }
 
     public void BallsAmountTextCanvasUpdate(int ballsAmount, int ExtraBallsAmount) {
@@ -72,7 +79,7 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
 
     public void OnClick_GetMoreBalls() {
         int hasItem = hasExtraBallsItem();
-
+        
         if (hasItem >= 0) {
             GetMoreBalls(ExtraBallsAmount);
             UpdateVisual();

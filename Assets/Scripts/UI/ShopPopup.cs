@@ -34,15 +34,15 @@ public class ShopPopup : IPopup<Pause> {
     private DateTime _countdown;
 
     public void Start() {
-        //Debug.Log(">>>> " + Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200));
-        //gems200.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200);
-        //gems400.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_400);
-        //gems600.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_600);
-        //gems1100.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_1100);
-        //gems2300.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_2300);
-        //gems7200.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_7200);
-        //gems12500.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_12500);
-        //gems30000.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_30000);
+        Debug.Log(">>>> " + Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200));
+        gems200.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200);
+        gems400.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_400);
+        gems600.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_600);
+        gems1100.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_1100);
+        gems2300.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_2300);
+        gems7200.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_7200);
+        gems12500.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_12500);
+        gems30000.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_30000);
 
         SetUpOffers(getTheOfferType());
     }

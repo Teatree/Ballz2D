@@ -7,9 +7,11 @@ using UnityEngine.Monetization;
 
 
 public class UnityAddsController : SceneSingleton<UnityAddsController> {
+    private const int extraGems = 40;
     private string gameId = "3108568";
     private string boxAd = "BoxRewarded";
     private string moreHCAd = "MoreHCRewarded";
+    private string moreBallsAd = "MoreBallsRewarded";
 
     public int AdBoxOpenLimit = 3;
 
@@ -79,8 +81,30 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
     void HandleMoreHCGiveNastya(ShowResult result) {
         if (result == ShowResult.Finished) {
             Debug.LogWarning(" REWARD!");
-            GameUIController.Instance.ShowItemReceived();
-            PlayerController.player.gems += 40;
+            GameUIController.Instance.ShowItemReceived(extraGems);
+            PlayerController.player.gems += extraGems;
+        }
+        else if (result == ShowResult.Skipped) {
+            Debug.LogWarning("The player skipped the video - DO NOT REWARD!");
+        }
+        else if (result == ShowResult.Failed) {
+            Debug.LogError("Video failed to show");
+        }
+    }
+
+    public void ShowMoreBallsReviveAd() {
+        ShowAdCallbacks options = new ShowAdCallbacks();
+        options.finishCallback = HandleMoreBalls;
+        ShowAdPlacementContent ad = Monetization.GetPlacementContent(moreBallsAd) as ShowAdPlacementContent;
+        ad.Show(options);
+    }
+
+    void HandleMoreBalls(ShowResult result) {
+        if (result == ShowResult.Finished) {
+            Debug.LogWarning(" REWARD!");
+            int ballsAmount = MoreBallsPowerup.Instance.getRandomBallsAmount();
+            GameUIController.Instance.ShowItemReceived(ballsAmount);
+            MoreBallsPowerup.Instance.GetMoreBalls(ballsAmount);
         }
         else if (result == ShowResult.Skipped) {
             Debug.LogWarning("The player skipped the video - DO NOT REWARD!");

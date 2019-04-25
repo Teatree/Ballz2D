@@ -41,9 +41,9 @@ public class SceneSingleton<T> : MonoBehaviour, IInitable where T : MonoBehaviou
     }
 
     protected virtual void OnDestroy() {
-        if (ReferenceEquals(_instance, this))
+      //  if (ReferenceEquals(_instance, this))
             _instance = null;
-        else
-            Debug.LogError(name + ": second instance exists!");
+        //else
+           // Debug.LogError(name + ": second instance exists!");
     }
 }

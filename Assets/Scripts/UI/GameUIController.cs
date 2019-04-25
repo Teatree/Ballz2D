@@ -279,7 +279,8 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
     public void showMoreBallsAd() {
-      //  AdmobController.Instance.ShowBallsrewardVideo();
+        BallLauncher.canShoot = false;
+        UnityAddsController.Instance.ShowMoreBallsReviveAd();
     }
 
     public void ShowRedirectPoor() {
@@ -317,8 +318,9 @@ public class GameUIController : SceneSingleton<GameUIController> {
         }
     }
 
-    public void ShowItemReceived() { // could add different items in future maybe?
-        Instantiate(ItemReceived, transform);
+    public void ShowItemReceived(int amount) { // could add different items in future maybe?
+       var itemFeedback =  Instantiate(ItemReceived, transform);
+        itemFeedback.transform.GetComponent<ItemReceivedFeedback>().setAmount(amount);
     }
 
 }
