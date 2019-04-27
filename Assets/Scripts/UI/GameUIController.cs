@@ -190,11 +190,6 @@ public class GameUIController : SceneSingleton<GameUIController> {
             // Warning.Instance.ShowWarning();
             // ShowGameOver();
 
-
-            Debug.Log(" > BallsReadyToShoot >  " + BallLauncher.Instance.BallsReadyToShoot);
-            Debug.Log(" > balls.Count  >  " + BallLauncher.Instance.balls.Count);
-            Debug.Log(" > canShoot > " + BallLauncher.canShoot);
-
         }
 
         //Android

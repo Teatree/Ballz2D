@@ -335,7 +335,7 @@ public class GridController : SceneSingleton<GridController> {
             }
             GameUIController.Instance.HandleWin();
 
-           PlayServicesController.Instance.PublishScoreToLeaderBoard(LevelController.levelScore);
+           //PlayServicesController.Instance.PublishScoreToLeaderBoard(LevelController.levelScore);
             return true;
         }
         else {

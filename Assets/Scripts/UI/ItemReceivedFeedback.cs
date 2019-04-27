@@ -35,8 +35,6 @@ public class ItemReceivedFeedback : MonoBehaviour {
         for (int i = 0; i < 10; i++) {
             BallLauncher.Instance.BallsReadyToShoot = BallLauncher.Instance.balls.Count;
             BallLauncher.canShoot = true;
-            Debug.Log(">>>>>  BallLauncher.Instance.BallsReadyToShoot " + BallLauncher.Instance.BallsReadyToShoot);
-            Debug.Log(">>>>>  BallLauncher.Instance.balls.Count " + BallLauncher.Instance.balls.Count);
 
             active = false;
             
