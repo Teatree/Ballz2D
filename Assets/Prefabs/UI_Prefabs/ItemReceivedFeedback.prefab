@@ -219,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: {fileID: 114583815923373064}
   icon: {fileID: 114460563027453114}
+  active: 0
 --- !u!114 &114393810621211982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -353,9 +354,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1129312519272930}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 114116303791750222}
+        m_MethodName: OnClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemReceivedFeedback : MonoBehaviour {
@@ -23,15 +24,24 @@ public class ItemReceivedFeedback : MonoBehaviour {
     private void OnEnable() {
         active = true;
     }
-    void OnDisable() {
+    public void OnClick() {
         if (active) {
             MoreBallsPowerup.Instance.UpdateVisual();
+            StartCoroutine(waitBeforeShoot());
+        }
+    }
+
+    protected IEnumerator waitBeforeShoot() {
+        for (int i = 0; i < 10; i++) {
             BallLauncher.Instance.BallsReadyToShoot = BallLauncher.Instance.balls.Count;
             BallLauncher.canShoot = true;
             Debug.Log(">>>>>  BallLauncher.Instance.BallsReadyToShoot " + BallLauncher.Instance.BallsReadyToShoot);
             Debug.Log(">>>>>  BallLauncher.Instance.balls.Count " + BallLauncher.Instance.balls.Count);
-     
+
             active = false;
+            
+            yield return null;
         }
+        transform.gameObject.SetActive(false);
     }
 }
