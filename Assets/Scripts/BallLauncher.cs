@@ -21,6 +21,10 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     private Vector3 endDragPosition;
     private LaunchPreview launchPreview;
+
+    public static int ExtraBalls = 0;
+    public static int ExtraAdBalls = 0;
+
     [HideInInspector]
     public List<Ball> balls = new List<Ball>();
     [HideInInspector]
@@ -34,7 +38,6 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     public Coroutine launcherBallRoutine;
 
-    public static int ExtraBalls = 0;
 
     private float outTime = 0;
     private float outTimeLimit = 40;
@@ -45,7 +48,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         base_y = transform.position.y;
         launchPreview = GetComponent<LaunchPreview>();
         CreateBall(InitBallAmount);
-        textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
+        SetBallsUIText();
         canShoot = true;
     }
 
@@ -115,8 +118,9 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     public void CheckExtraBalls() {
         if (ExtraBalls > 0) {
             CreateBall(ExtraBalls);
-            
+
             ExtraBalls = 0;
+            SetBallsUIText();
         }
     }
 
@@ -127,7 +131,9 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         }
 
         BallsReadyToShoot++;
-        textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
+
+        SetBallsUIText();
+
         if (BallsReadyToShoot == balls.Count) {
             GridController.Instance.SpawnRowOfBlocks(false);
             LevelController.ResetScoreCoefficient();
@@ -142,6 +148,20 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
         b.transform.position = new Vector2(-100, -100);
         b.moveSpeed = 0;
+    }
+
+    public void SetBallsUIText() {
+        if (ExtraAdBalls > 0 && BallsReadyToShoot >= balls.Count - ExtraAdBalls) {
+            if (BallsReadyToShoot < balls.Count) {
+                textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + (balls.Count - ExtraAdBalls) + "+"+(balls.Count - BallsReadyToShoot);
+            }
+            else {
+                textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + (BallsReadyToShoot - ExtraAdBalls) + "+" + ExtraAdBalls;
+            }
+        }
+        else {
+            textCanvas.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "x" + BallsReadyToShoot;
+        }
     }
 
     private void UpdateVisualsFirstBall(Ball b) {
@@ -195,7 +215,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     private IEnumerator LaunchBalls() {
-        GameUIController.Instance.HideAdButtonFromTop();
+        GameUIController.Instance.BlockAdButtonFromTop();
         _slider = false;
         if (BallsReadyToShoot == balls.Count) {
             GridController.doNotMoveRowDown = false;

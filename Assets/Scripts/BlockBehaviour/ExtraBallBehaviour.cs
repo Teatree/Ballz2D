@@ -43,6 +43,7 @@ public class ExtraBallBehaviour : IBehaviour {
 
     private IEnumerator DestroySelfLater() {
         yield return new WaitForSeconds(5f);
+        BallLauncher.Instance.SetBallsUIText();
         block.DestroySelf();
     }
 }

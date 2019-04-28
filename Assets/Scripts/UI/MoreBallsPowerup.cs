@@ -21,7 +21,6 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
     public void GetMoreBalls(int ExtraBallsAmount) {
         BallLauncher.ExtraBalls += ExtraBallsAmount;
         BallsAmountTextCanvasUpdate(BallLauncher.Instance.BallsReadyToShoot, ExtraBallsAmount);
-      
     }
 
     public int getRandomBallsAmount() {
@@ -58,6 +57,7 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
             yield return new WaitForSeconds(0.02f);
         }
         textComponent.fontSize = _initialFontSize;
+        BallLauncher.Instance.SetBallsUIText();
     }
 
     public void DisableButton() {

@@ -105,6 +105,8 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
             int ballsAmount = MoreBallsPowerup.Instance.getRandomBallsAmount();
             GameUIController.Instance.ShowItemReceived(ballsAmount);
             MoreBallsPowerup.Instance.GetMoreBalls(ballsAmount);
+            BallLauncher.ExtraAdBalls = ballsAmount;
+            BallLauncher.Instance.SetBallsUIText();
         }
         else if (result == ShowResult.Skipped) {
             Debug.LogWarning("The player skipped the video - DO NOT REWARD!");

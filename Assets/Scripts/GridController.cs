@@ -110,6 +110,7 @@ public class GridController : SceneSingleton<GridController> {
             }
         }
         BallLauncher.canShoot = true;
+        GameUIController.Instance.UnblockAdButtonFromTop();
     }
 
     private IEnumerator BlinkBlink(List<Block> blocks) {

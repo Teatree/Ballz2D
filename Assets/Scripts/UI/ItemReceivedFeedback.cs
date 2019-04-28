@@ -28,6 +28,9 @@ public class ItemReceivedFeedback : MonoBehaviour {
         if (active) {
             MoreBallsPowerup.Instance.UpdateVisual();
             StartCoroutine(waitBeforeShoot());
+
+            BallLauncher.ExtraAdBalls = int.Parse(amount.text);
+            BallLauncher.Instance.SetBallsUIText();
         }
     }
 

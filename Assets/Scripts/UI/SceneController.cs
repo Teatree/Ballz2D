@@ -61,6 +61,7 @@ public class SceneController : MonoBehaviour {
     }
 
     public void LoadGame() {
+        BallLauncher.ExtraAdBalls = 0;
         UnloadScene("MenuScene");
         LoadScene("GameScene");
     }

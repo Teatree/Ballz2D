@@ -37,7 +37,9 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public GameObject laserLine2;
     public GameObject laserLine3;
 
-    public GameObject Ad_Button;
+    [Header("Ad Button")]
+    public GameObject Ad_ButtonShade;
+    public GameObject Ad_Arrow;
 
     public static string currentLevelNumberLable;
 
@@ -52,7 +54,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
             SceneController.sceneController.UnloadMenu();
             HandlePreview();
-            Ad_Button.SetActive(true);
+            Ad_ButtonShade.SetActive(false);
             //LevelController.PauseGame();
             currentLevelNumberLable = "" + (1 + AllLevelsData.CurrentLevelIndex);
             UpdateStars();
@@ -60,10 +62,9 @@ public class GameUIController : SceneSingleton<GameUIController> {
             Slider.maxValue = LevelController.ThirdStarScore;
         }
 
-
         if(PlayerController.player.completedLvls != null && PlayerController.player.completedLvls.Count == 0 && AllLevelsData.CurrentLevelIndex == 0) {
             ShowFTUE();
-            HideAdButtonFromTop();
+            BlockAdButtonFromTop();
         }
     }
 
@@ -149,9 +150,17 @@ public class GameUIController : SceneSingleton<GameUIController> {
     }
 
 
-    public void HideAdButtonFromTop() {
-        if (Ad_Button.activeSelf) {
-            Ad_Button.SetActive(false);
+    public void BlockAdButtonFromTop() {
+        if (!Ad_ButtonShade.activeSelf) {
+            Ad_Arrow.SetActive(false);
+            Ad_ButtonShade.SetActive(true);
+            BallLauncher.Instance.SetBallsUIText();
+        }
+    }
+
+    public void UnblockAdButtonFromTop() {
+        if (BallLauncher.ExtraAdBalls <= 0) {
+            Ad_ButtonShade.SetActive(false);
         }
     }
 

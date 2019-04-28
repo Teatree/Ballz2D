@@ -3149,8 +3149,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 65.95, y: 36.42}
+  m_AnchoredPosition: {x: 31.73, y: 0}
+  m_SizeDelta: {x: 109.75, y: 36.42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &590760658
 MonoBehaviour:
@@ -3178,7 +3178,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 2
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -4896,21 +4896,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114905707069503284, guid: c21fdeca8edd0db479c5466e36f51ee3,
+    - target: {fileID: 223953077776160678, guid: c21fdeca8edd0db479c5466e36f51ee3,
         type: 2}
-      propertyPath: cam
+      propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 114905707069503284, guid: c21fdeca8edd0db479c5466e36f51ee3,
-        type: 2}
-      propertyPath: playArea
-      value: 
-      objectReference: {fileID: 883614033}
-    - target: {fileID: 114173288729083726, guid: c21fdeca8edd0db479c5466e36f51ee3,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1936070846}
     - target: {fileID: 114817632410744238, guid: c21fdeca8edd0db479c5466e36f51ee3,
         type: 2}
       propertyPath: laserLine1
@@ -4926,11 +4916,21 @@ Prefab:
       propertyPath: laserLine3
       value: 
       objectReference: {fileID: 1189035050}
-    - target: {fileID: 223953077776160678, guid: c21fdeca8edd0db479c5466e36f51ee3,
+    - target: {fileID: 114173288729083726, guid: c21fdeca8edd0db479c5466e36f51ee3,
         type: 2}
-      propertyPath: m_Camera
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1936070846}
+    - target: {fileID: 114905707069503284, guid: c21fdeca8edd0db479c5466e36f51ee3,
+        type: 2}
+      propertyPath: cam
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 114905707069503284, guid: c21fdeca8edd0db479c5466e36f51ee3,
+        type: 2}
+      propertyPath: playArea
+      value: 
+      objectReference: {fileID: 883614033}
     - target: {fileID: 114279820295870054, guid: c21fdeca8edd0db479c5466e36f51ee3,
         type: 2}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -5025,40 +5025,6 @@ Prefab:
         type: 2}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1050990264151382, guid: c21fdeca8edd0db479c5466e36f51ee3, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114980242622087116, guid: c21fdeca8edd0db479c5466e36f51ee3,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114980242622087116, guid: c21fdeca8edd0db479c5466e36f51ee3,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114980242622087116, guid: c21fdeca8edd0db479c5466e36f51ee3,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114965361399446892, guid: c21fdeca8edd0db479c5466e36f51ee3,
-        type: 2}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114965361399446892, guid: c21fdeca8edd0db479c5466e36f51ee3,
-        type: 2}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114965361399446892, guid: c21fdeca8edd0db479c5466e36f51ee3,
-        type: 2}
-      propertyPath: m_Color.b
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c21fdeca8edd0db479c5466e36f51ee3, type: 2}
