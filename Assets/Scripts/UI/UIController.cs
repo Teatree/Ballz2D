@@ -156,11 +156,13 @@ public class UIController : SceneSingleton<UIController> {
     }
 
     public void OpenDayBox() {
-        //DayBoxTimer.Instance.SetCountDownTo(DateTime.Now.AddHours(6));
-        //PlayerController.player.giveBoxAt = DateTime.Now.AddHours(6).ToString("yyyy-MM-dd HH:mm");
-        OpenBoxOpen();
 
+        OpenBoxOpen();
         ShowDayBoxWaitButton();
+
+        DateTime dt = PlayerController.player == null || PlayerController.player.giveBoxAt == null || PlayerController.player.giveBoxAt == "" ? DateTime.Now : DateTime.Parse(PlayerController.player.giveBoxAt);
+        NotificationController.Instance.ScheduleBoxNotification(dt);
+
     }
 
     public void SetEnabledAdBox(bool b) {
