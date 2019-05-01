@@ -17,7 +17,7 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
 
     void Start() {
         UIController.Instance.SetEnabledAdBox(false);
-        if (Monetization.isSupported && PlayerController.player.adBoxOpenedCount < AdBoxOpenLimit) {
+        if (Monetization.isSupported) {
             Monetization.Initialize(gameId, true);
         }
     }

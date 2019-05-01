@@ -47,10 +47,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c33c81d5a6c1a3b479410d7b62070315, type: 3}
   - {fileID: 21300000, guid: 485779f55278aa64ba5fed473158e8f0, type: 3}
   - {fileID: 21300000, guid: e2a2e93656370884396ef3838da33e40, type: 3}
+  - {fileID: 21300000, guid: e66fc4666566fa745bb63d76555fdf42, type: 3}
   - {fileID: 21300000, guid: 049f84e66a6f11b4ba4e21c544e9a7ca, type: 3}
   - {fileID: 21300000, guid: 4fcd27573b6b1cd4589164a9e942e3e3, type: 3}
   - {fileID: 21300000, guid: fbaf04773f916264faf0bb5510b14569, type: 3}
   - {fileID: 21300000, guid: bef485870e9afb6408e386da894594c8, type: 3}
+  - {fileID: 21300000, guid: 93ac1597cd602fd489a893227283f59e, type: 3}
   - {fileID: 21300000, guid: efe6f6184003c02468c86ec104cfa430, type: 3}
   - {fileID: 21300000, guid: 5d16e39843f15a4438f5e4db39e718af, type: 3}
   - {fileID: 21300022, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
@@ -72,9 +74,11 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e9a6ff2b4a4c7e244bbb436feb0c3217, type: 3}
   - {fileID: 21300000, guid: 669e955c7d1f04a4fac2f92e67010abb, type: 3}
   - {fileID: 21300000, guid: 5cd3709cbec4ec14c8217bc1dfea8cfa, type: 3}
+  - {fileID: 21300000, guid: d6b4abfc77ecf6449b8aefdacfa23cdf, type: 3}
   - {fileID: 21300000, guid: 2dd4a63d6b4b5494b9ea2c33ac6df7e7, type: 3}
   - {fileID: 21300000, guid: 17fa624d6718ad64f9efa22f69091bfc, type: 3}
   - {fileID: 21300000, guid: e77333bd9b4d22747b814ebf4421ef1f, type: 3}
+  - {fileID: 21300000, guid: 92aaf73ebdabf7a4994d623724bb6121, type: 3}
   - {fileID: 21300000, guid: 7b11d24e41809ee4791d7c778cc1c088, type: 3}
   - {fileID: 21300000, guid: 086b1ade9bd2a1649aa70378aa0d7f0f, type: 3}
   - {fileID: 21300000, guid: cac2f22fe0e71a142b5b093f25160c0d, type: 3}
@@ -96,10 +100,12 @@ SpriteAtlas:
   - Shop_Icon
   - Pause_Icon
   - button_pink
+  - Play_Icon
   - Leaderboard_Icon
   - Dialog_BG_Shop
   - Ad_Camera_Icon_g
   - Level_Completed
+  - Sound_Icon
   - Balls_Booster
   - Achievements_Icon
   - Confetti_11
@@ -121,9 +127,11 @@ SpriteAtlas:
   - Undo_Icon
   - Star_Icon
   - Gear_Icon
+  - Info_Icon
   - Box_Open_Icon
   - Box_Closed_Icon
   - Dialog_BG
+  - Home_Icon
   - Star_InComplete_Icon
   - Share_Icon
   - Balls_Icon

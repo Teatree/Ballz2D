@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: ShopIcons_Sprite_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 7b43bd211967b91429cf3f4daab6c12c, type: 3}
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 15b93aa015100ac48a96b8d24acc57ac, type: 3}
+  - {fileID: 21300000, guid: dcf9eac0dc9ae184181e26ad95a83e33, type: 3}
+  - {fileID: 21300000, guid: 597e71112ab8f974997663642d37cd95, type: 3}
+  - {fileID: 21300000, guid: 10048321ece668d4785e0e01a0236abe, type: 3}
+  - {fileID: 21300000, guid: 42692b52e76508f43ba0de0b423c19e8, type: 3}
+  - {fileID: 21300000, guid: 1da4b182132d02743a38f0db13d747b1, type: 3}
+  - {fileID: 21300000, guid: eb7e5bd26df6efb40892acf27c075289, type: 3}
+  - {fileID: 21300000, guid: aeb86253da9d1af4bb80bcd43b97db24, type: 3}
+  - {fileID: 21300000, guid: be2c58a4aba7bf94e8b6436a971d8d77, type: 3}
+  - {fileID: 21300000, guid: 8721b9f4d05798b4480695598f6c484d, type: 3}
+  - {fileID: 21300000, guid: 4eeedb55e5ec5a74bbd5cade022595a6, type: 3}
+  - {fileID: 21300000, guid: a69333850eaae0041bc613a19be57a21, type: 3}
+  - {fileID: 21300000, guid: 50e15bc5ba9d2ad449edb1a4c3110bf9, type: 3}
+  - {fileID: 21300000, guid: 6bd7e146dbf345843b9b462af9b3bb36, type: 3}
+  - {fileID: 21300000, guid: c4d014a6b33304c4e9d1ffc08b2de6dc, type: 3}
+  - {fileID: 21300000, guid: 1a3f45f6cc3abe548a189fdf0b4c1bc7, type: 3}
+  - {fileID: 21300000, guid: 927edd172e8dc3840b2b2b3ace2c823c, type: 3}
+  - {fileID: 21300000, guid: 8eb40437efc27a648a79fa7c9fd74fe4, type: 3}
+  - {fileID: 21300000, guid: aaf3cb37b05a54445bc8889fb016cb5c, type: 3}
+  - {fileID: 21300000, guid: 7f477a97e06b2ae4bb8225434ae901c7, type: 3}
+  - {fileID: 21300000, guid: 95ceda983c4da9243806ac07ae17409d, type: 3}
+  - {fileID: 21300000, guid: d7c7c2d97936054488b0c6374ddead89, type: 3}
+  - {fileID: 21300000, guid: 31a4fbca7c1013a4cb87951e6146acf8, type: 3}
+  - {fileID: 21300000, guid: 2d5e467b25cf99c40b10a834c475f265, type: 3}
+  - {fileID: 21300000, guid: 7e6965bb897bcb64a961f4ad16b93d92, type: 3}
+  - {fileID: 21300000, guid: 5570142cb8ff27745a8346ee3edb8c34, type: 3}
+  - {fileID: 21300000, guid: a65530cc30cd5ca48bd03c33e0af2568, type: 3}
+  - {fileID: 21300000, guid: ee29f67d7a6500c46a888f35821ba685, type: 3}
+  - {fileID: 21300000, guid: cb3ad0ed846403347813d6bbb01e8919, type: 3}
+  - {fileID: 21300000, guid: 9fbc702ef1022464b953e61dce7ff81a, type: 3}
+  - {fileID: 21300000, guid: 06799d2e230027048a7156282f7925ed, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - pokeball_shop
+  - star_shop
+  - skull_shop
+  - snow_shop
+  - heart_shop
+  - avocado_shop
+  - shuriken_shop
+  - egg_shop
+  - hash_shop
+  - stawberry_shop
+  - orange_shop
+  - atom_shop
+  - spiderman_shop
+  - tennisball_shop
+  - maple_shop
+  - diamond_shop
+  - ghost_shop
+  - sunflower_shop
+  - shell_shop
+  - basketball_shop
+  - cookie_shop
+  - stormtrooper_shop
+  - sakura_shop
+  - joker_shop
+  - shield_shop
+  - finn_shop
+  - peppermint_shop
+  - triangle_shop
+  - cupcake_shop
+  - hellocat_shop
+  - clover_shop
+  m_Tag: ShopIcons_Sprite_Atlas
+  m_IsVariant: 0

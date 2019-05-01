@@ -16,8 +16,10 @@ public class SettingsPoup : IPopup<SettingsPoup> {
         PlayerController.player.completedLvls = new List<CompletedLevel>();
         PlayerController.starsPerLvl = new Dictionary<int, int>();
         PlayerController.player.stars = 0;
+
         PlayerController.player.specialBallImageName = "knob";
         PlayerController.player.specialBallName = "Knob";
+        LevelController.SpecialBall = "knob";
         PlayerController.player.items = new List<ItemData>();
         ItemData i = new ItemData();
         i.costGems = 10;
@@ -25,6 +27,7 @@ public class SettingsPoup : IPopup<SettingsPoup> {
         i.amount = 0;
         i.enabled = true;
         PlayerController.player.items.Add(i);
+
         PlayerController.player.progressTowardsNextStarBox = 0;
         PlayerController.player.numStarBoxesOpened = 0;
         AllLevelsData.CurrentLevelIndex = 0;
