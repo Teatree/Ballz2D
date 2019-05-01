@@ -22,6 +22,7 @@ public class GameOver : IPopup<GameOver> {
     public GameObject levelText;
 
     public void Start() {
+        Debug.Log("38 children " + PlayerController.player.numStarBoxesOpened);
         StarsSlider.maxValue = PlayerController.Instance.starBoxes[PlayerController.player.numStarBoxesOpened].starCost;
 
         Debug.Log("GridController.oldStarsNumForGameOver = " + LevelController.oldStarsNumForGameOver + " LevelController.LevelStarsAmount = " + LevelController.LevelStarsAmount);
@@ -161,7 +162,7 @@ public class GameOver : IPopup<GameOver> {
                 }
         }
         yield return null;
-        Debug.Log("reached this");
+        Debug.Log("reached this " + PlayerController.player.numStarBoxesOpened);
         if (PlayerController.player.progressTowardsNextStarBox >= PlayerController.Instance.starBoxes[PlayerController.player.numStarBoxesOpened].starCost) {
             GameUIController.Instance.OpenBoxOpen();
         }

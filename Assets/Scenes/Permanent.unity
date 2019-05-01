@@ -196,6 +196,8 @@ MonoBehaviour:
   starBoxes:
   - {fileID: 11400000, guid: c44da912428f5874e9a9ffe7d7ddf394, type: 2}
   - {fileID: 11400000, guid: f674ae4629546604f98ce3ff0bb2e268, type: 2}
+  - {fileID: 11400000, guid: 71bef18d8d060dd42b5a831abed2a4f9, type: 2}
+  - {fileID: 11400000, guid: 71f134337430e064c95866e46dfc51d5, type: 2}
   - {fileID: 11400000, guid: c30d92d2de53c164cb997166f2062b9f, type: 2}
   - {fileID: 11400000, guid: e78163f711a856a409e18afc2cc5bb47, type: 2}
 --- !u!1 &1512515698
