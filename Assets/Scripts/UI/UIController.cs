@@ -41,7 +41,6 @@ public class UIController : SceneSingleton<UIController> {
             ShowDayBoxWaitButton();
         }
 
-
         // Debug.Log(">>>> Menu.initScene > " + SceneController.initScene);
         if (SceneController.initScene == "GameScene") {
             SceneController.initScene = "";
@@ -49,7 +48,7 @@ public class UIController : SceneSingleton<UIController> {
             SceneController.sceneController.LoadGame();
         }
         else {
-            //Load data
+            // Load data
             AllLevelsData.allLevels = DataController.LoadLevels();
 
             // debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "\n path: " + DataController.levelfilePath + "\n jsonDataExtracted: " + DataController.AjsonData;
