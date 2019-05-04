@@ -10,6 +10,10 @@ public class SceneController : MonoBehaviour {
     bool gameStart;
     public static string initScene = "";
 
+    private static bool shouldShowRestartIntersticial;
+    public static int shouldShowLevelIntersticial = 2; // counter of how many times player should load level before he is shown an ad
+    public static int shouldShowLevelIntersticialcounter;
+
     //public AdmobController admob;
 
     public void Awake() {
@@ -92,7 +96,17 @@ public class SceneController : MonoBehaviour {
 
     public void RestartGame() {
         initScene = "GameScene";
-        LoadMenu();
+
+        if (PlayerController.player.stars > 7 && PlayerController.player.noAds == false) {
+            if (shouldShowRestartIntersticial) {
+                UnityAddsController.Instance.ShowEnterActionPhaseAfterRestartAd();
+                shouldShowRestartIntersticial = false;
+            }
+            else {
+                shouldShowRestartIntersticial = true;
+                LoadMenu();
+            }
+        }
     }
 
     public void ReloadMenu() {

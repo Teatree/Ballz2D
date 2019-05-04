@@ -81,7 +81,17 @@ public class LevelUI : MonoBehaviour {
     public void StartGameAtLevel() {
         AllLevelsData.CurrentLevelIndex = LevelNumber;
         LevelController.ResetScore();
-       // AdmobController.Instance.ShowIterstitial();
-        SceneController.sceneController.LoadGame();
+        // AdmobController.Instance.ShowIterstitial();
+
+        if (PlayerController.player.stars > 7 && PlayerController.player.noAds == false) {
+            if (SceneController.shouldShowLevelIntersticialcounter >= SceneController.shouldShowLevelIntersticial) {
+                UnityAddsController.Instance.ShowEnterActionPhaseFromMainMenuAd();
+                SceneController.shouldShowLevelIntersticialcounter = 0;
+            }
+            else {
+                SceneController.shouldShowLevelIntersticialcounter++;
+                SceneController.sceneController.LoadGame();
+            }
+        }
     }
 }

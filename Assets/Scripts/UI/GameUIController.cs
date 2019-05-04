@@ -241,7 +241,6 @@ public class GameUIController : SceneSingleton<GameUIController> {
         }
     }
 
-
     public void SetSlider(bool r) {
         BallLauncher.Instance.SetSlider(r);
         // Debug.Log("slider = " + _slider);

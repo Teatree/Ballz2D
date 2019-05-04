@@ -50,6 +50,9 @@ public class PlayerController : SceneSingleton<PlayerController> {
     private void OnApplicationPause(bool pause) {
       
         SavePlayer();
+
+        if(pause)
+            NotificationController.Instance.ScheduleComeback(DateTime.Now.AddHours(6));
     }
 
     private static void SavePlayer() {
@@ -68,6 +71,8 @@ public class PlayerController : SceneSingleton<PlayerController> {
 
     void OnApplicationQuit() {
         SavePlayer();
+
+        //NotificationController.Instance.ScheduleBoxComeback(DateTime.Now.AddSeconds(30)/*DateTime.Now.AddHours(8)*/);
     }
 
     private int getAmountOfItem(string iname) {

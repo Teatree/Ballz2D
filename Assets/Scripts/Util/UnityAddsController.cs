@@ -13,6 +13,10 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
     private string moreHCAd = "MoreHCRewarded";
     private string moreBallsAd = "MoreBallsRewarded";
 
+    //intersticials
+    private string enterActionPhaseAfterRestartAd = "EnterActionPhaseAfterRestart";
+    private string enterActionPhaseFromMainMenuAd = "EnterActionPhaseFromMainMenu";
+
     public int AdBoxOpenLimit = 3;
 
     void Start() {
@@ -113,6 +117,46 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
         }
         else if (result == ShowResult.Failed) {
             Debug.LogError("Video failed to show");
+        }
+    }
+
+    public void ShowEnterActionPhaseAfterRestartAd() {
+        ShowAdCallbacks options = new ShowAdCallbacks();
+        options.finishCallback = HandleLoadMenu;
+        
+        ShowAdPlacementContent ad = Monetization.GetPlacementContent(enterActionPhaseAfterRestartAd) as ShowAdPlacementContent;
+        ad.Show(options);
+    }
+
+    public void ShowEnterActionPhaseFromMainMenuAd() {
+        ShowAdCallbacks options = new ShowAdCallbacks();
+        options.finishCallback = HandleLoadGame;
+
+        ShowAdPlacementContent ad = Monetization.GetPlacementContent(enterActionPhaseFromMainMenuAd) as ShowAdPlacementContent;
+        ad.Show(options);
+    }
+
+    void HandleLoadMenu (ShowResult result) {
+        if (result == ShowResult.Finished) {
+            SceneController.sceneController.LoadMenu();
+        }
+        else if (result == ShowResult.Skipped) {
+            SceneController.sceneController.LoadMenu();
+        }
+        else if (result == ShowResult.Failed) {
+            SceneController.sceneController.LoadMenu();
+        }
+    }
+
+    void HandleLoadGame(ShowResult result) {
+        if (result == ShowResult.Finished) {
+            SceneController.sceneController.LoadGame();
+        }
+        else if (result == ShowResult.Skipped) {
+            SceneController.sceneController.LoadGame();
+        }
+        else if (result == ShowResult.Failed) {
+            SceneController.sceneController.LoadGame();
         }
     }
 }

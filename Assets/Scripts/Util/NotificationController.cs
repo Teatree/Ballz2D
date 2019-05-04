@@ -4,11 +4,14 @@ using Assets.SimpleAndroidNotifications;
 
 public class NotificationController : SceneSingleton<NotificationController> {
 
+    private static bool notificationSet;
+
 	void Start () {
+        //ScheduleSimple();
     }
 
     public void ScheduleSimple() {
-        NotificationManager.Send(TimeSpan.FromSeconds(5), "Simple notification", "Customize icon and color", new Color(1, 0.3f, 0.15f));
+        NotificationManager.Send(TimeSpan.FromSeconds(5), "Simple notification", "Come back please, omg come back", new Color(1, 0.3f, 0.15f));
     }
 
     public void ScheduleNormal() {
@@ -32,6 +35,28 @@ public class NotificationController : SceneSingleton<NotificationController> {
         };
 
         NotificationManager.SendCustom(notificationParams);
+    }
+
+    public void ScheduleComeback(DateTime notifyAt) {
+        if (!notificationSet) {
+            TimeSpan waitTime = notifyAt - DateTime.Now;
+            var notificationParams = new NotificationParams {
+                Id = UnityEngine.Random.Range(0, int.MaxValue),
+                Delay = TimeSpan.FromSeconds(waitTime.Seconds),
+                Title = "We miss you",
+                Message = "Pease come back",
+                Ticker = "Ticker",
+                Sound = true,
+                Vibrate = true,
+                Light = true,
+                SmallIcon = NotificationIcon.Heart,
+                SmallIconColor = new Color(0.7f, 0.5f, 0),
+                LargeIcon = "app_icon"
+            };
+
+            NotificationManager.SendCustom(notificationParams);
+            notificationSet = true;
+        }
     }
 
     public void ScheduleCustom() {
