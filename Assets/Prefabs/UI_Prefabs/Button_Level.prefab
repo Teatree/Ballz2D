@@ -233,7 +233,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelNumber: 0
-  IsCompleted: 0
   StarsNumber: 0
   c: {fileID: 0}
   buttonComponent: {fileID: 114992693812369830}
@@ -248,6 +247,7 @@ MonoBehaviour:
   Star_InComplete: {fileID: 21300000, guid: 7b11d24e41809ee4791d7c778cc1c088, type: 3}
   Level_Complete: {fileID: 21300000, guid: bef485870e9afb6408e386da894594c8, type: 3}
   Level_InComplete: {fileID: 21300000, guid: db381d509864fc04e87535943e7a1486, type: 3}
+  Level_Current: {fileID: 21300000, guid: 7a5dc53d91fcc2e42acc3d5d5aa3cf2e, type: 3}
 --- !u!114 &114372445744776592
 MonoBehaviour:
   m_ObjectHideFlags: 1

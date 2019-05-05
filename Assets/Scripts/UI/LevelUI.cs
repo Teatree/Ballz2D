@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class LevelUI : MonoBehaviour {
 
     public int LevelNumber;
-    public bool IsCompleted;
     public int StarsNumber;
 
     public Camera c;
@@ -25,6 +24,7 @@ public class LevelUI : MonoBehaviour {
     public Sprite Star_InComplete;
     public Sprite Level_Complete;
     public Sprite Level_InComplete;
+    public Sprite Level_Current;
 
     private void Start() {
         SceneController.sceneController.UnloadGame();
@@ -67,7 +67,7 @@ public class LevelUI : MonoBehaviour {
         else {
             //Debug.Log("level: " + LevelNumber + " starNum: " + starNum);
             if (starNum == 0) {
-                img.sprite = Level_InComplete;
+                img.sprite = Level_Current;
             }
             else {
                 img.sprite = Level_Complete;
@@ -92,6 +92,9 @@ public class LevelUI : MonoBehaviour {
                 SceneController.shouldShowLevelIntersticialcounter++;
                 SceneController.sceneController.LoadGame();
             }
+        }
+        if (PlayerController.player.stars <= 7) {
+            SceneController.sceneController.LoadGame();
         }
     }
 }

@@ -20,10 +20,11 @@ public class DataController {
 #elif UNITY_ANDROID
     public static string levelfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", levelsFileName);
     public static string itemsfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", itemsFileName);
+    public static string itemsfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", itemsFileName);
     public static string playerfilePath = Path.Combine ( Application.persistentDataPath,  playerFileName);
 
 #elif UNITY_IOS
-    private static string levelfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", levelsFileName);
+    private static string levelfilePath = Path.Combine (Application.f50persistentDataPath  + "/Raw", levelsFileName);
     private static string itemsfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", itemsFileName);
     private static string playerfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", playerFileName);
  

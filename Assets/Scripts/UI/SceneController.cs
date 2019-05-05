@@ -107,6 +107,9 @@ public class SceneController : MonoBehaviour {
                 LoadMenu();
             }
         }
+        if (PlayerController.player.stars <= 7) {
+            LoadMenu();
+        }
     }
 
     public void ReloadMenu() {

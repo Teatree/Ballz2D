@@ -70,11 +70,13 @@ SpriteAtlas:
   - {fileID: 21300016, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
   - {fileID: 21300018, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
   - {fileID: 21300000, guid: 8b4ff06a15af68a46b0925033dbe1a04, type: 3}
+  - {fileID: 21300000, guid: 70aeee6a22dd25c4683a135835ac1c16, type: 3}
   - {fileID: 21300000, guid: 0c29ac0bcd551554f9e4231a988842d8, type: 3}
   - {fileID: 21300000, guid: e9a6ff2b4a4c7e244bbb436feb0c3217, type: 3}
   - {fileID: 21300000, guid: 669e955c7d1f04a4fac2f92e67010abb, type: 3}
   - {fileID: 21300000, guid: 5cd3709cbec4ec14c8217bc1dfea8cfa, type: 3}
   - {fileID: 21300000, guid: d6b4abfc77ecf6449b8aefdacfa23cdf, type: 3}
+  - {fileID: 21300000, guid: 7a5dc53d91fcc2e42acc3d5d5aa3cf2e, type: 3}
   - {fileID: 21300000, guid: 2dd4a63d6b4b5494b9ea2c33ac6df7e7, type: 3}
   - {fileID: 21300000, guid: 17fa624d6718ad64f9efa22f69091bfc, type: 3}
   - {fileID: 21300000, guid: e77333bd9b4d22747b814ebf4421ef1f, type: 3}
@@ -123,11 +125,13 @@ SpriteAtlas:
   - Confetti_8
   - Confetti_9
   - button_blank
+  - Plus_Icon
   - bunny
   - Undo_Icon
   - Star_Icon
   - Gear_Icon
   - Info_Icon
+  - Level_Current
   - Box_Open_Icon
   - Box_Closed_Icon
   - Dialog_BG

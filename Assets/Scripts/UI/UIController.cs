@@ -26,6 +26,8 @@ public class UIController : SceneSingleton<UIController> {
     public GameObject BoxDayWaitButton;
 
     public GameObject BoxAdButton;
+    public GameObject BoxAdArrow;
+
     private Button boxAdButtonCmp;
     public Scrollbar lvlSlider;
 
@@ -100,6 +102,11 @@ public class UIController : SceneSingleton<UIController> {
             SetStarsAmountText();
         }
 
+        if (PlayerController.player.adBoxOpenedCount < UnityAddsController.Instance.AdBoxOpenLimit) {
+            BoxAdArrow.SetActive(true);
+            BoxAdArrow.GetComponent<Animation>().Play();
+        }
+
         //if (DateTime.Parse(PlayerController.player.giveBoxAt) < // next time for box){
 
         //    }
@@ -167,6 +174,9 @@ public class UIController : SceneSingleton<UIController> {
     public void SetEnabledAdBox(bool b) {
         boxAdButtonCmp = BoxAdButton.GetComponent<Button>();
         boxAdButtonCmp.interactable = b;
+        if (b == false) {
+            BoxAdArrow.SetActive(b);
+        }
     }
 
     public void ShowAdBox() {
