@@ -197,4 +197,8 @@ public class UIController : SceneSingleton<UIController> {
         BoxDayButton.SetActive(false);
         BoxDayWaitButton.SetActive(true);
     }
+
+    public void FacebookShare() {
+        //FacebookController.Instance.FacebookShare();
+    }
 }

@@ -82,6 +82,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e77333bd9b4d22747b814ebf4421ef1f, type: 3}
   - {fileID: 21300000, guid: 92aaf73ebdabf7a4994d623724bb6121, type: 3}
   - {fileID: 21300000, guid: 7b11d24e41809ee4791d7c778cc1c088, type: 3}
+  - {fileID: 21300000, guid: b0f50c9e63e2f2c41ad5c63a158db240, type: 3}
   - {fileID: 21300000, guid: 086b1ade9bd2a1649aa70378aa0d7f0f, type: 3}
   - {fileID: 21300000, guid: cac2f22fe0e71a142b5b093f25160c0d, type: 3}
   - {fileID: 21300000, guid: 295c7b5f2302d0e458d867ca41055044, type: 3}
@@ -137,6 +138,7 @@ SpriteAtlas:
   - Dialog_BG
   - Home_Icon
   - Star_InComplete_Icon
+  - button_fb
   - Share_Icon
   - Balls_Icon
   - Ad_Balls_Icon
