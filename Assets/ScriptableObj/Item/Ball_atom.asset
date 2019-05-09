@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Atom
   itemType: 0
-  costGems: 2000
+  costGems: 3000
   amount: 0
   shopImage: {fileID: 21300000, guid: a69333850eaae0041bc613a19be57a21, type: 3}
   assetImage: atoms

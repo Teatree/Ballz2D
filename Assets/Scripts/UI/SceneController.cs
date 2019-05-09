@@ -18,6 +18,8 @@ public class SceneController : MonoBehaviour {
 
     public void Awake() {
 
+        PlayerController.PlayerDataLoad();
+
         Application.targetFrameRate = 60;
         Debug.Log(" >>>>> scene " + initScene);
         if (!gameStart) {
@@ -36,7 +38,12 @@ public class SceneController : MonoBehaviour {
                 sceneStateTracker["MenuScene"] = false;
                 LoadMenu();
             } else {
-                LoadMenu();
+                if (PlayerController.player.completedLvls != null && PlayerController.player.completedLvls.Count == 0 && AllLevelsData.CurrentLevelIndex == 0) {
+                    LoadGame();
+                }
+                else {
+                    LoadMenu();
+                }
             }
             gameStart = true;
         }

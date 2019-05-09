@@ -22,6 +22,11 @@ public class PlayerController : SceneSingleton<PlayerController> {
         times.Add(morning17);
         times.Add(morning21);
 
+        PlayerDataLoad();
+
+    }
+
+    public static void PlayerDataLoad() {
         if (player == null) {
             player = DataController.LoadPlayer() != null ? DataController.LoadPlayer() : new PlayerData();
 
@@ -34,7 +39,6 @@ public class PlayerController : SceneSingleton<PlayerController> {
 
             LevelController.SpecialBall = player.specialBallImageName;
         }
-
     }
 
     public void AddNewCompletedLevel(int lvlNum, int stars) {

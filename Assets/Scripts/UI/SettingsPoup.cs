@@ -11,6 +11,10 @@ public class SettingsPoup : IPopup<SettingsPoup> {
         #endif
     }
 
+    public void PrivacyPolicy() {
+        Application.OpenURL("https://docs.google.com/document/d/1nq-UQ8j5vF09rLokYYZFsxljIyPJczRbdyQgEo43SBQ/edit?usp=sharing");
+    }
+
     public void ResetProgress() {
         PlayerController.player.gems = 400;
         PlayerController.player.completedLvls = new List<CompletedLevel>();
