@@ -83,6 +83,10 @@ public class LaunchPreview : MonoBehaviour {
         Vector3 newPoint = mousePoint - _lineRenderer.transform.position;
         mousePoint.z = 0;
 
+        BallLauncher.aimCanceled = newPoint.y < 0; // I'm so coder
+        if(BallLauncher.aimCanceled)
+            BallLauncher.Instance.HideGhosts();
+
         Vector3 endPoint = newPoint.normalized * 2;
         endPoint.z = 0;
 

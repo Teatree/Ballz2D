@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Facebook.Unity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,16 @@ public class SceneController : MonoBehaviour {
     //public AdmobController admob;
 
     public void Awake() {
+
+        if (FB.IsInitialized) {
+            FB.ActivateApp();
+        }
+        else {
+            //Handle FB.Init
+            FB.Init(() => {
+                FB.ActivateApp();
+            });
+        }
 
         PlayerController.PlayerDataLoad();
 

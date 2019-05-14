@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class BallLauncher : SceneSingleton<BallLauncher> {
     private static float base_y;
@@ -38,9 +38,10 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     public Coroutine launcherBallRoutine;
 
-
     private float outTime = 0;
     private float outTimeLimit = 40;
+
+    public static bool aimCanceled = false;
 
     private void Awake() {
         SpeedUP_remove();
@@ -125,7 +126,6 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     public void ReturnBall(Ball b) {
-        Debug.Log("Return balls");
         if (BallsReadyToShoot == 0 || (b.ignoreCollision && newPos.y == 0)) {
             UpdateVisualsFirstBall(b);
         }
@@ -203,11 +203,13 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     public void EndDrag() {
-        //GameUIController.Instance.SetDebugText("Shooting! ");
-        Slider.gameObject.transform.parent.gameObject.SetActive(false);
-        textCanvas.SetActive(false);
-        launcherBallRoutine = StartCoroutine(LaunchBalls());
-        HideGhosts();
+        if (!aimCanceled) {
+            //GameUIController.Instance.SetDebugText("Shooting! ");
+            Slider.gameObject.transform.parent.gameObject.SetActive(false);
+            textCanvas.SetActive(false);
+            launcherBallRoutine = StartCoroutine(LaunchBalls());
+            HideGhosts();
+        }
     }
 
     public void shootBallPart() {
@@ -332,7 +334,6 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
     }
-
 
     private static void UPdateBallSprite(Ball ball) {
         if (LevelController.SpecialBall != null) {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Facebook.Unity;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,7 +53,20 @@ public class PlayerController : SceneSingleton<PlayerController> {
     }
 
     private void OnApplicationPause(bool pause) {
-      
+
+        if (!pause) {
+            //app resume
+            if (FB.IsInitialized) {
+                FB.ActivateApp();
+            }
+            else {
+                //Handle FB.Init
+                FB.Init(() => {
+                    FB.ActivateApp();
+                });
+            }
+        }
+
         SavePlayer();
 
         if(pause)

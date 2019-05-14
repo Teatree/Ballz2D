@@ -6,5 +6,6 @@ public class MouseCanceller : MonoBehaviour {
         //If your mouse hovers over the GameObject with the script attached, output this message
         Input.ResetInputAxes();
         BallLauncher.Instance.HideGhosts();
+        BallLauncher.aimCanceled = true;
     }
 }

@@ -199,6 +199,6 @@ public class UIController : SceneSingleton<UIController> {
     }
 
     public void FacebookShare() {
-        //FacebookController.Instance.FacebookShare();
+        FacebookController.Instance.FacebookShare();
     }
 }

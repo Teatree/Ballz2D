@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 public class GameUIController : SceneSingleton<GameUIController> {
 
     [Header("Score")]
@@ -79,6 +81,10 @@ public class GameUIController : SceneSingleton<GameUIController> {
     public void ShowShop() {
         LevelController.PauseGame();
         Instantiate(ShopPrefab, transform);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) {
+        Debug.Log("Entered UI!");
     }
 
     //FTUE Stuff

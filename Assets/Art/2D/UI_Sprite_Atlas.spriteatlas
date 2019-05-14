@@ -38,6 +38,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f0a5ef5175f9f9349874c6e9d1379ccc, type: 3}
   - {fileID: 21300000, guid: a03907712fb73cf4c851c6dfe19d64ff, type: 3}
   - {fileID: 21300000, guid: 9d029aa1945dbeb4b8a2ef99d0c23427, type: 3}
+  - {fileID: 21300000, guid: cc2324021230982448f7e8c01d2f5b5c, type: 3}
   - {fileID: 21300000, guid: 7ff5c0121d5cd2e42b8d82f938d10608, type: 3}
   - {fileID: 21300000, guid: fd67f3b24e7af094ea55adb756880335, type: 3}
   - {fileID: 21300000, guid: 22f162533ab69b244ba1b28faa81459d, type: 3}
@@ -69,6 +70,7 @@ SpriteAtlas:
   - {fileID: 21300002, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
   - {fileID: 21300016, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
   - {fileID: 21300018, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
+  - {fileID: 21300000, guid: 1134bec96aa48184194a0c8fc739e2c3, type: 3}
   - {fileID: 21300000, guid: 8b4ff06a15af68a46b0925033dbe1a04, type: 3}
   - {fileID: 21300000, guid: 70aeee6a22dd25c4683a135835ac1c16, type: 3}
   - {fileID: 21300000, guid: 0c29ac0bcd551554f9e4231a988842d8, type: 3}
@@ -94,6 +96,7 @@ SpriteAtlas:
   - fingerFTUE
   - Cross_Icon
   - Redo_Icon
+  - No_Ads_Icon
   - Lock_Icon
   - button
   - Revive_Bomb
@@ -125,6 +128,7 @@ SpriteAtlas:
   - Confetti_1
   - Confetti_8
   - Confetti_9
+  - logo
   - button_blank
   - Plus_Icon
   - bunny
