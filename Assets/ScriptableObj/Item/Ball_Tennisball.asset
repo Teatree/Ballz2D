@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Tennisball
   itemType: 0
-  costGems: 1000
+  costGems: 2000
   amount: 0
   shopImage: {fileID: 21300000, guid: 6bd7e146dbf345843b9b462af9b3bb36, type: 3}
-  assetImage: triangle
+  assetImage: tennisball
   enabled: 0

@@ -11,6 +11,7 @@ public class DataController {
     public static string AjsonData;
     private const string CASHE_FOLDER = "LocalStorage";
 
+
 #if UNITY_EDITOR
     public static string levelfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", levelsFileName);
     public static string itemsfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", itemsFileName);

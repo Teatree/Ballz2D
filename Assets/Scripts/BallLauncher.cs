@@ -30,6 +30,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     [HideInInspector]
     public int BallsReadyToShoot;
     public static bool canShoot;
+    public int shotCount;
     private Vector3 newPos;
     public bool _slider;
 
@@ -40,6 +41,8 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
 
     private float outTime = 0;
     private float outTimeLimit = 40;
+
+    public GameObject upperDownWindGO;
 
     public static bool aimCanceled = false;
 
@@ -77,17 +80,24 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 if (!_slider) {
                     if (canShoot && !IsPointerOverUIObject()) {
                         //GameUIController.Instance.SetDebugText(" I AM NOT OVER ANY OBJECT OR NOTHING !");
+
                         if (Input.GetMouseButtonDown(0)) {
 
                             if (PlayerController.player.completedLvls != null && PlayerController.player.completedLvls.Count == 0 && AllLevelsData.CurrentLevelIndex == 0) {
                                 GameUIController.Instance.RemoveFTUE();
                             }
 
-                            SetStartDrag();
+                            SetStartDrag(worldPosition);
                         }
                         else if (Input.GetMouseButton(0)) {
 
-                            ContinueDrag(worldPosition);
+                            if (worldPosition.y > 0.65) {
+                                ContinueDrag(worldPosition);
+                            }
+                            else {
+                                ContinueDrag(new Vector3(worldPosition.x, 0.65f, worldPosition.z));
+                            }
+                            Debug.Log("y - " + worldPosition.y);
                         }
                         else if (Input.GetMouseButtonUp(0)) {
                             EndDrag();
@@ -106,7 +116,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                 outTime += Time.deltaTime * 10;
                 if (outTime > outTimeLimit * 2) {
                     SpeedUP(5);
-                    Debug.Log(" --------- increaseing speed ");
+                  //  Debug.Log(" --------- increaseing speed ");
                 }
             }
             else if (BallsReadyToShoot != balls.Count && outTime <= outTimeLimit && Time.deltaTime != 2f) {
@@ -144,6 +154,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
             // resetting the speedup
             SpeedUP_remove();
             outTime = 0;
+            upperDownWindGO.active = false;
         }
 
         b.transform.position = new Vector2(-100, -100);
@@ -203,12 +214,14 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
     }
 
     public void EndDrag() {
-        if (!aimCanceled) {
+        if (!aimCanceled && launchPreview.active) {
             //GameUIController.Instance.SetDebugText("Shooting! ");
             Slider.gameObject.transform.parent.gameObject.SetActive(false);
             textCanvas.SetActive(false);
             launcherBallRoutine = StartCoroutine(LaunchBalls());
             HideGhosts();
+            upperDownWindGO.active = true;
+            shotCount++;
         }
     }
 
@@ -281,9 +294,15 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
         launchPreview.SetEndPoint(endDragPosition);
     }
 
-    public void SetStartDrag() {
+    public void SetStartDrag(Vector3 worldPosition) {
         //Debug.Log("starting drag");
         launchPreview.SetStartPoint(transform.position);
+
+        endDragPosition = worldPosition;
+
+        // Debug.Log(" endDragPosition: " + endDragPosition);
+        launchPreview.SetEndPoint(endDragPosition);
+
         launchPreview.active = true;
         ShowGhosts();
     }

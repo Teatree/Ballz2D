@@ -80,9 +80,13 @@ public class LightningPowerup : SceneSingleton<LightningPowerup> {
             else {
                 PlayerController.player.items.RemoveAt(hasItem);
             }
+            AnalyticsController.Instance.LogLevelBoostsUsedEvent("Level " + AllLevelsData.CurrentLevelIndex, "Lightning");
         }
         else if (PlayerController.player.gems >= CostGems) {
             PlayerController.player.gems -= CostGems;
+
+            AnalyticsController.Instance.LogSpendCreditsEvent("Lightning", "Power Up", CostGems);
+
             ShootLightning();
         }
         else {

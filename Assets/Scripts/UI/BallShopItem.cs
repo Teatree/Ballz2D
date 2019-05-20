@@ -66,6 +66,8 @@ public class BallShopItem : MonoBehaviour {
         if (confirm.GetComponent<ConfirmBallPopup>().result == "ok") {
             if (ItemsController.getItem(itemObject, false)) {
                 equipAndUI();
+
+                AnalyticsController.Instance.LogSpendCreditsEvent(itemObject.name, "ball",itemObject.costGems);
             }
         }
     }

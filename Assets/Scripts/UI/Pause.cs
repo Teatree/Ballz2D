@@ -16,5 +16,7 @@ public class Pause : IPopup<Pause> {
         LevelController.ResetScore();
         SceneController.sceneController.UnloadGame();
         SceneController.sceneController.RestartGame();
+
+        AnalyticsController.Instance.LogLevelRestartedEvent("Level " + AllLevelsData.CurrentLevelIndex);
     }
 }

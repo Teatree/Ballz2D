@@ -18,17 +18,6 @@ public class SceneController : MonoBehaviour {
     //public AdmobController admob;
 
     public void Awake() {
-
-        if (FB.IsInitialized) {
-            FB.ActivateApp();
-        }
-        else {
-            //Handle FB.Init
-            FB.Init(() => {
-                FB.ActivateApp();
-            });
-        }
-
         PlayerController.PlayerDataLoad();
 
         Application.targetFrameRate = 60;
@@ -128,6 +117,8 @@ public class SceneController : MonoBehaviour {
         if (PlayerController.player.stars <= 7) {
             LoadMenu();
         }
+
+        
     }
 
     public void ReloadMenu() {

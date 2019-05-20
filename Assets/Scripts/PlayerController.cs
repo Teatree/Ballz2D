@@ -1,9 +1,11 @@
-﻿using Facebook.Unity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : SceneSingleton<PlayerController> {
+    //TODO remove someday 
+    public static int hardcodedLevlsCompleted = 0;
+
     public static PlayerData player;
     public static Dictionary<int, int> starsPerLvl;
     public static int progressTowardsStarBox;
@@ -32,6 +34,11 @@ public class PlayerController : SceneSingleton<PlayerController> {
             player = DataController.LoadPlayer() != null ? DataController.LoadPlayer() : new PlayerData();
 
             starsPerLvl = new Dictionary<int, int>();
+            if (hardcodedLevlsCompleted > 0 ) {
+                for (int i = 0; i < hardcodedLevlsCompleted; i++) {
+                    starsPerLvl.Add(i, 3);
+                }
+            } else 
             if (player.completedLvls != null && player.completedLvls.Count > 0) {
                 foreach (CompletedLevel lvl in player.completedLvls) {
                     starsPerLvl.Add(lvl.number, lvl.stars);
@@ -53,19 +60,6 @@ public class PlayerController : SceneSingleton<PlayerController> {
     }
 
     private void OnApplicationPause(bool pause) {
-
-        if (!pause) {
-            //app resume
-            if (FB.IsInitialized) {
-                FB.ActivateApp();
-            }
-            else {
-                //Handle FB.Init
-                FB.Init(() => {
-                    FB.ActivateApp();
-                });
-            }
-        }
 
         SavePlayer();
 

@@ -13,6 +13,8 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
     private string moreHCAd = "MoreHCRewarded";
     private string moreBallsAd = "MoreBallsRewarded";
 
+    public Sprite iconSprte;
+
     //intersticials
     private string enterActionPhaseAfterRestartAd = "EnterActionPhaseAfterRestart";
     private string enterActionPhaseFromMainMenuAd = "EnterActionPhaseFromMainMenu";
@@ -20,7 +22,7 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
     public int AdBoxOpenLimit = 3;
 
     void Start() {
-        UIController.Instance.SetEnabledAdBox(false);
+       // UIController.Instance.SetEnabledAdBox(false);
         if (Monetization.isSupported) {
             Monetization.Initialize(gameId, true);
         }
@@ -34,12 +36,14 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
 
         PlayerController.player.MoreHCReviveCount++;
         ((Revive)Revive.Instance).UpdateButtsButtonState();
+
+        AnalyticsController.Instance.LogIncentivizedAdWatchedEvent("More HC AD");
     }
 
     public void ShowBoxAd() {
         DateTime dt = PlayerController.player == null || PlayerController.player.adBoxOpenedDate == null || PlayerController.player.adBoxOpenedDate == "" ? DateTime.Now : DateTime.Parse(PlayerController.player.adBoxOpenedDate);
 
-        if (DateTime.Now.Date == dt) {
+        if (DateTime.Now.Date == dt.Date) {
             // if Player came logged in after box was supposed to be claiemd
 
             // Not exceding limit
@@ -50,6 +54,8 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
                 ad.Show(options);
 
                 PlayerController.player.adBoxOpenedCount++;
+
+                AnalyticsController.Instance.LogIncentivizedAdWatchedEvent("Box AD");
             }
             else {
                 UIController.Instance.SetEnabledAdBox(false);
@@ -64,6 +70,8 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
             ad.Show(options);
 
             PlayerController.player.adBoxOpenedCount = 1;
+
+            AnalyticsController.Instance.LogIncentivizedAdWatchedEvent("Box AD");
         }
         // set the dat of ad shown
         // Add counter to ad shown
@@ -101,13 +109,15 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
         options.finishCallback = HandleMoreBalls;
         ShowAdPlacementContent ad = Monetization.GetPlacementContent(moreBallsAd) as ShowAdPlacementContent;
         ad.Show(options);
+
+        AnalyticsController.Instance.LogIncentivizedAdWatchedEvent("More Balls AD");
     }
 
     void HandleMoreBalls(ShowResult result) {
         if (result == ShowResult.Finished) {
             Debug.LogWarning(" REWARD!");
             int ballsAmount = MoreBallsPowerup.Instance.getRandomBallsAmount();
-            GameUIController.Instance.ShowItemReceived(ballsAmount);
+            GameUIController.Instance.ShowItemReceived(ballsAmount, iconSprte);
             MoreBallsPowerup.Instance.GetMoreBalls(ballsAmount);
             BallLauncher.ExtraAdBalls = ballsAmount;
             BallLauncher.Instance.SetBallsUIText();

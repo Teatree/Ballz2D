@@ -240,7 +240,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
 
     public void SetStartDrag() {
         BallLauncher.Instance.SetSlider(true);
-        BallLauncher.Instance.SetStartDrag();
+        BallLauncher.Instance.SetStartDrag(new Vector3(-0.78f, 2.21f));
 
         if (PlayerController.player.completedLvls != null && PlayerController.player.completedLvls.Count == 0 && AllLevelsData.CurrentLevelIndex == 0) {
             GameUIController.Instance.RemoveFTUE();
@@ -258,10 +258,12 @@ public class GameUIController : SceneSingleton<GameUIController> {
         var Box = Instantiate(BoxPopupPrefab, transform);
         Box.GetComponent<BoxPopup>().itemToReceive = BoxOpener.Instance.GetBoxContents_BoxStars(PlayerController.player.numStarBoxesOpened);
 
-        if (PlayerController.player.numStarBoxesOpened < PlayerController.Instance.starBoxes.Count-1) {
+        //if (PlayerController.player.numStarBoxesOpened < PlayerController.Instance.starBoxes.Count-1) {
             PlayerController.player.numStarBoxesOpened += 1;
             PlayerController.player.progressTowardsNextStarBox = 0;
-        }
+        //}
+
+        AnalyticsController.Instance.LogBoxesOpenedEvent("Star Box " + PlayerController.player.numStarBoxesOpened, Box.GetComponent<BoxPopup>().itemToReceive.name, Box.GetComponent<BoxPopup>().itemToReceive.amount);
     }
 
     public void FadingLasers(LineRenderer laserLine) {
@@ -327,8 +329,14 @@ public class GameUIController : SceneSingleton<GameUIController> {
         }
     }
 
-    public void ShowItemReceived(int amount) { // could add different items in future maybe?
+    public void ShowItemReceived(int amount, Sprite iconSprite) { // could add different items in future maybe?
        var itemFeedback =  Instantiate(ItemReceived, transform);
+       itemFeedback.transform.GetComponent<ItemReceivedFeedback>().setAmount(amount);
+       itemFeedback.transform.GetComponent<ItemReceivedFeedback>().setIcon(iconSprite);
+    }
+
+    public void ShowItemReceived(int amount) { 
+        var itemFeedback = Instantiate(ItemReceived, transform);
         itemFeedback.transform.GetComponent<ItemReceivedFeedback>().setAmount(amount);
     }
 

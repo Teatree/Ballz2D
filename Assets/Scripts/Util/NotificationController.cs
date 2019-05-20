@@ -7,7 +7,8 @@ public class NotificationController : SceneSingleton<NotificationController> {
     private static bool notificationSet;
 
 	void Start () {
-        //ScheduleSimple();
+        //Cancel  previous notifications
+        cancelComeBackNotification();
     }
 
     public void ScheduleSimple() {
@@ -39,9 +40,11 @@ public class NotificationController : SceneSingleton<NotificationController> {
 
     public void ScheduleComeback(DateTime notifyAt) {
         if (!notificationSet) {
+            cancelComeBackNotification();
             TimeSpan waitTime = notifyAt - DateTime.Now;
             var notificationParams = new NotificationParams {
-                Id = UnityEngine.Random.Range(0, int.MaxValue),
+                Id = 42,
+                //Id = UnityEngine.Random.Range(0, int.MaxValue),
                 Delay = TimeSpan.FromHours(waitTime.Hours),
                 Title = "We miss you",
                 Message = "Pease come back",
@@ -75,6 +78,10 @@ public class NotificationController : SceneSingleton<NotificationController> {
         };
 
         NotificationManager.SendCustom(notificationParams);
+    }
+
+    public void cancelComeBackNotification () {
+        NotificationManager.Cancel(42);
     }
 
     public void CancelAll() {

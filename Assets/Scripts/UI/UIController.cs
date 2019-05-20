@@ -102,10 +102,12 @@ public class UIController : SceneSingleton<UIController> {
             SetStarsAmountText();
         }
 
-        if (PlayerController.player.adBoxOpenedCount < UnityAddsController.Instance.AdBoxOpenLimit) {
-            BoxAdArrow.SetActive(true);
-            BoxAdArrow.GetComponent<Animation>().Play();
-        }
+        InitAdbox();
+
+        //if (PlayerController.player.adBoxOpenedCount < UnityAddsController.Instance.AdBoxOpenLimit) {
+        //    BoxAdArrow.SetActive(true);
+        //    BoxAdArrow.GetComponent<Animation>().Play();
+        //}
 
         //if (DateTime.Parse(PlayerController.player.giveBoxAt) < // next time for box){
 
@@ -159,6 +161,8 @@ public class UIController : SceneSingleton<UIController> {
     public void OpenBoxOpen() {
         var Box = Instantiate(BoxPopupPrefab, transform);
         Box.GetComponent<BoxPopup>().itemToReceive = BoxOpener.Instance.GetBoxContents_BoxAd();
+
+        AnalyticsController.Instance.LogBoxesOpenedEvent("Day / Ad Box", Box.GetComponent<BoxPopup>().itemToReceive.name, Box.GetComponent<BoxPopup>().itemToReceive.amount);
     }
 
     public void OpenDayBox() {
@@ -176,6 +180,23 @@ public class UIController : SceneSingleton<UIController> {
         boxAdButtonCmp.interactable = b;
         if (b == false) {
             BoxAdArrow.SetActive(b);
+        }
+    }
+
+    public void InitAdbox() {
+        DateTime dt = PlayerController.player == null || PlayerController.player.adBoxOpenedDate == null || PlayerController.player.adBoxOpenedDate == "" ? DateTime.Now : DateTime.Parse(PlayerController.player.adBoxOpenedDate);
+
+        if (DateTime.Now.Date == dt.Date) {
+            if (PlayerController.player.adBoxOpenedCount < UnityAddsController.Instance.AdBoxOpenLimit) {
+                BoxAdArrow.SetActive(true);
+                BoxAdArrow.GetComponent<Animation>().Play();
+                SetEnabledAdBox(true);
+            } else {
+                SetEnabledAdBox(false);
+            }
+        } else {
+            SetEnabledAdBox(true);
+            PlayerController.player.adBoxOpenedCount = 0;
         }
     }
 

@@ -54,6 +54,9 @@ public class CancelPowerup : SceneSingleton<CancelPowerup> {
     public void OnClick_CancelMove() {
         if (PlayerController.player.gems >= CostGems) {
             PlayerController.player.gems -= CostGems;
+
+            AnalyticsController.Instance.LogSpendCreditsEvent("Undo", "Undo", CostGems);
+
             CancelLastMove();
         } else {
             GameUIController.Instance.ShowRedirectPoor();

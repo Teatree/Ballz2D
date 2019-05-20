@@ -113,6 +113,46 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &614604901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 614604903}
+  - component: {fileID: 614604902}
+  m_Layer: 0
+  m_Name: AnalyticsController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &614604902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 614604901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae75ecda997a0974a92d9e0f26e2bee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &614604903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 614604901}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.09816762, y: 0.5208035, z: -1.8373379}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &910660168
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,6 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da02a448fbf3bae4999775133d38cf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconSprte: {fileID: 21300000, guid: e57be9760f7f7074a8bd6fbac3e7faec, type: 3}
   AdBoxOpenLimit: 3
 --- !u!114 &1512515701
 MonoBehaviour:
@@ -381,6 +422,10 @@ MonoBehaviour:
   offers:
   - {fileID: 11400000, guid: 4ce45c985d203e74586e41015b38c35b, type: 2}
   - {fileID: 11400000, guid: 224a91f9fbfdda24d9db1333733b867b, type: 2}
+  - {fileID: 11400000, guid: e2710af1be002ff4d9d33768efa80dfd, type: 2}
+  - {fileID: 11400000, guid: e1fc11256a1279842b39a10fb5234105, type: 2}
+  - {fileID: 11400000, guid: 33739d103bc589146947dd0045a32176, type: 2}
+  - {fileID: 11400000, guid: 74d9eff8505e510469e8535b72b0d917, type: 2}
 --- !u!4 &1957123853
 Transform:
   m_ObjectHideFlags: 0
@@ -404,7 +449,7 @@ GameObject:
   - component: {fileID: 2095601271}
   - component: {fileID: 2095601270}
   m_Layer: 0
-  m_Name: FacebookContoller
+  m_Name: FacebookCuntoller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

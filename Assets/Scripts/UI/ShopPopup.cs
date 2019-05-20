@@ -14,6 +14,14 @@ public class ShopPopup : IPopup<Pause> {
     public Text gemsCurrent;
     public Text noAds;
 
+    public Text starterPack;
+    public Text featuredPack;
+    public Text weekendPack;
+    public Text specialOffer1;
+    public Text specialOffer2;
+    public Text specialOffer3;
+
+
     public Tab hcTab;
     public static BallShopItem EquipedBall;
 
@@ -46,6 +54,13 @@ public class ShopPopup : IPopup<Pause> {
         gems30000.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_30000);
         noAds.text = Purchaser.purchaser.GetLocalPrice(Purchaser.NO_ADS);
 
+        starterPack.text = Purchaser.purchaser.GetLocalPrice(Purchaser.STARTER_PACK);
+        weekendPack.text = Purchaser.purchaser.GetLocalPrice(Purchaser.WEEKEND_PACK);
+        featuredPack.text = Purchaser.purchaser.GetLocalPrice(Purchaser.STATIC_PACK);
+        specialOffer1.text = Purchaser.purchaser.GetLocalPrice(Purchaser.SPECIAL_PACK_1);
+        specialOffer2.text = Purchaser.purchaser.GetLocalPrice(Purchaser.SPECIAL_PACK_2);
+        specialOffer3.text = Purchaser.purchaser.GetLocalPrice(Purchaser.SPECIAL_PACK_3);
+    
         SetUpOffers(getTheOfferType());
     }
 
@@ -161,10 +176,38 @@ public class ShopPopup : IPopup<Pause> {
 
     public void BuyShopOffer(ShopOffer sh) {
         // buy by product id
-    //    Purchaser.purchaser.buyOffer(sh);
-
-        if(sh.id == "pack_starter") {
+        //    Purchaser.purchaser.buyOffer(sh);
+        Debug.Log(">>>> buy btn > " + sh.id);
+        if (sh.id == Purchaser.STARTER_PACK) {
+            Purchaser.purchaser.BuyStarterPack();
             PlayerController.player.boughtStarter = true;
+
+            AnalyticsController.Instance.LogIAPEvent(Purchaser.STARTER_PACK);
+        }
+        if (sh.id == Purchaser.WEEKEND_PACK) {
+            Purchaser.purchaser.BuyWeekendPack();
+
+            AnalyticsController.Instance.LogIAPEvent(Purchaser.WEEKEND_PACK);
+        }
+        if (sh.id == Purchaser.STATIC_PACK) {
+            Purchaser.purchaser.BuyStaticPack();
+
+            AnalyticsController.Instance.LogIAPEvent(Purchaser.STARTER_PACK);
+        }
+        if (sh.id == Purchaser.SPECIAL_PACK_1) {
+            Purchaser.purchaser.BuySpecialPack_1();
+
+            AnalyticsController.Instance.LogIAPEvent(Purchaser.SPECIAL_PACK_1);
+        }
+        if (sh.id == Purchaser.SPECIAL_PACK_2) {
+            Purchaser.purchaser.BuySpecialPack_2();
+
+            AnalyticsController.Instance.LogIAPEvent(Purchaser.SPECIAL_PACK_2);
+        }
+        if (sh.id == Purchaser.SPECIAL_PACK_3) {
+            Purchaser.purchaser.BuySpecialPack_3();
+
+            AnalyticsController.Instance.LogIAPEvent(Purchaser.SPECIAL_PACK_3);
         }
     }
 

@@ -21,6 +21,14 @@ public class Purchaser : MonoBehaviour, IStoreListener {
     public static string GEMS_30000 = "30000_gems";
     public static string NO_ADS = "no_ads";
 
+    public static string STARTER_PACK = "pack_starter";
+    public static string WEEKEND_PACK = "pack_weekend";
+    public static string STATIC_PACK = "pack_static";
+
+    public static string SPECIAL_PACK_1 = "pack_special_1";
+    public static string SPECIAL_PACK_2 = "pack_special_2";
+    public static string SPECIAL_PACK_3 = "pack_special_3";
+
     public void Awake() {
         purchaser = this;
     }
@@ -51,6 +59,13 @@ public class Purchaser : MonoBehaviour, IStoreListener {
         builder.AddProduct(GEMS_12500, ProductType.Consumable);
         builder.AddProduct(GEMS_30000, ProductType.Consumable);
         builder.AddProduct(NO_ADS, ProductType.NonConsumable);
+
+        builder.AddProduct(STARTER_PACK, ProductType.Consumable);
+        builder.AddProduct(WEEKEND_PACK, ProductType.Consumable);
+        builder.AddProduct(STATIC_PACK, ProductType.Consumable);
+        builder.AddProduct(SPECIAL_PACK_1, ProductType.Consumable);
+        builder.AddProduct(SPECIAL_PACK_2, ProductType.Consumable);
+        builder.AddProduct(SPECIAL_PACK_3, ProductType.Consumable);
 
         UnityPurchasing.Initialize(this, builder);
     }
@@ -96,6 +111,27 @@ public class Purchaser : MonoBehaviour, IStoreListener {
         BuyProductID(NO_ADS);
     }
 
+    public void BuySpecialPack_1() {
+        BuyProductID(SPECIAL_PACK_1);
+    }
+
+    public void BuySpecialPack_2() {
+        BuyProductID(SPECIAL_PACK_2);
+    }
+    public void BuySpecialPack_3() {
+        BuyProductID(SPECIAL_PACK_3);
+    }
+
+    public void BuyStarterPack() {
+        BuyProductID(STARTER_PACK);
+    }
+
+    public void BuyWeekendPack() {
+        BuyProductID(WEEKEND_PACK);
+    }
+    public void BuyStaticPack() {
+        BuyProductID(STATIC_PACK);
+    }
     public string GetLocalPrice(string prodId) {
         return m_StoreController.products.WithID(prodId).metadata.localizedPriceString;
     }
@@ -181,6 +217,7 @@ public class Purchaser : MonoBehaviour, IStoreListener {
     }
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args) {
+
         String prodId = args.purchasedProduct.definition.id;
         String[] prodVal = prodId.Split("_".ToCharArray());
         if (prodVal.Length > 1 && prodVal[1].Equals("gems", StringComparison.CurrentCultureIgnoreCase)) {
@@ -190,9 +227,10 @@ public class Purchaser : MonoBehaviour, IStoreListener {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             PlayerController.player.noAds = true;
         }
-        else if (prodVal.Length > 1 && prodVal[1].Contains("pack")) {
-            foreach(ShopOffer s in offers) {
-                if(prodVal[1].Equals(s.id, StringComparison.CurrentCultureIgnoreCase)) {
+        else if (prodVal.Length > 1 && prodVal[0].Contains("pack")) {
+            foreach (ShopOffer s in offers) {
+                Debug.Log(">>>> check > " + s.id + " >? " + prodId);
+                if(prodId.Equals(s.id, StringComparison.CurrentCultureIgnoreCase)) {
                     s.GivePlayerStuff();
                     break;
                 }

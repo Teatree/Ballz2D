@@ -11,8 +11,14 @@ public class ItemReceivedFeedback : MonoBehaviour {
     public void setAmount(int amount) {
         this.amount.text = "x " + amount;
     }
-	// Use this for initialization
-	void Start () {
+
+    public void setIcon(Sprite iconSprite) {
+        this.icon.sprite = iconSprite;
+        this.icon.SetNativeSize();
+    }
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	

@@ -89,10 +89,13 @@ public class MoreBallsPowerup : SceneSingleton<MoreBallsPowerup> {
             else {
                 PlayerController.player.items.RemoveAt(hasItem);
             }
+            AnalyticsController.Instance.LogLevelBoostsUsedEvent("Level " + AllLevelsData.CurrentLevelIndex, "MoreBalls");
         }
         else
          if (PlayerController.player.gems >= CostGems) {
             PlayerController.player.gems -= CostGems;
+
+            AnalyticsController.Instance.LogSpendCreditsEvent("MoreBalls", "Power Up", CostGems);
             GetMoreBalls(ExtraBallsAmount);
         }
         else {
