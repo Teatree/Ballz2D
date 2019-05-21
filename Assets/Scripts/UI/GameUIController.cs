@@ -68,6 +68,11 @@ public class GameUIController : SceneSingleton<GameUIController> {
             ShowFTUE();
             BlockAdButtonFromTop();
         }
+
+        if (UnityAddsController.AdsLoaded == false) {
+            Ad_ButtonShade.SetActive(true);
+            Ad_Arrow.SetActive(false);
+        }
     }
 
     void Update() {

@@ -14,7 +14,8 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
     private string moreBallsAd = "MoreBallsRewarded";
 
     public Sprite iconSprte;
-
+    public static bool AdsLoaded;
+    
     //intersticials
     private string enterActionPhaseAfterRestartAd = "EnterActionPhaseAfterRestart";
     private string enterActionPhaseFromMainMenuAd = "EnterActionPhaseFromMainMenu";
@@ -22,11 +23,24 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
     public int AdBoxOpenLimit = 3;
 
     void Start() {
-       // UIController.Instance.SetEnabledAdBox(false);
         if (Monetization.isSupported) {
             Monetization.Initialize(gameId, true);
         }
+
+        AdsLoaded = Application.internetReachability != NetworkReachability.NotReachable;
+        //AdsLoaded = false;
+        if (!AdsLoaded) {
+            UIController.Instance.SetEnabledAdBox(false);
+        }
     }
+
+    //private void Update() {
+    //    if (Application.internetReachability == NetworkReachability.NotReachable) {
+    //        hasInternetAccess = false;
+    //    } else {
+    //        hasInternetAccess = true;
+    //    }
+    //}
 
     public void ShowMoreHCReviveAd() {
         ShowAdCallbacks options = new ShowAdCallbacks();
@@ -47,7 +61,7 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
             // if Player came logged in after box was supposed to be claiemd
 
             // Not exceding limit
-            if(PlayerController.player.adBoxOpenedCount < AdBoxOpenLimit) {
+            if(PlayerController.player.adBoxOpenedCount < AdBoxOpenLimit && AdsLoaded) {
                 ShowAdCallbacks options = new ShowAdCallbacks();
                 options.finishCallback = HandleOpenAdBoxNastya;
                 ShowAdPlacementContent ad = Monetization.GetPlacementContent(boxAd) as ShowAdPlacementContent;

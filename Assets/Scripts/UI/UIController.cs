@@ -198,6 +198,10 @@ public class UIController : SceneSingleton<UIController> {
             SetEnabledAdBox(true);
             PlayerController.player.adBoxOpenedCount = 0;
         }
+
+        if (UnityAddsController.AdsLoaded == false) {
+            SetEnabledAdBox(false);
+        }
     }
 
     public void ShowAdBox() {

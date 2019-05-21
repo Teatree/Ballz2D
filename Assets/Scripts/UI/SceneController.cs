@@ -104,7 +104,8 @@ public class SceneController : MonoBehaviour {
     public void RestartGame() {
         initScene = "GameScene";
 
-        if (PlayerController.player.stars > 7 && PlayerController.player.noAds == false) {
+        Debug.Log(">>>>  UnityAddsController.AdsLoaded > " + UnityAddsController.AdsLoaded);
+        if (PlayerController.player.stars > 7 && !PlayerController.player.noAds && UnityAddsController.AdsLoaded) {
             if (shouldShowRestartIntersticial) {
                 UnityAddsController.Instance.ShowEnterActionPhaseAfterRestartAd();
                 shouldShowRestartIntersticial = false;
@@ -113,8 +114,7 @@ public class SceneController : MonoBehaviour {
                 shouldShowRestartIntersticial = true;
                 LoadMenu();
             }
-        }
-        if (PlayerController.player.stars <= 7) {
+        } else {
             LoadMenu();
         }
 

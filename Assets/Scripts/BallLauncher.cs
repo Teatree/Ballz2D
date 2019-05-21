@@ -97,7 +97,7 @@ public class BallLauncher : SceneSingleton<BallLauncher> {
                             else {
                                 ContinueDrag(new Vector3(worldPosition.x, 0.65f, worldPosition.z));
                             }
-                            Debug.Log("y - " + worldPosition.y);
+                            //Debug.Log("y - " + worldPosition.y);
                         }
                         else if (Input.GetMouseButtonUp(0)) {
                             EndDrag();

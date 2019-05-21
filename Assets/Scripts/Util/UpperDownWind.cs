@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UpperDownWind : MonoBehaviour {
 
-    int counter;
+    int counter = -800;
 
     public void BlowWind(Rigidbody2D rb) {
         StartCoroutine(Woooof(rb));
@@ -16,7 +16,7 @@ public class UpperDownWind : MonoBehaviour {
 
             counter++;
             if (counter > 200) {
-                rb.AddForce(new Vector2(rb.velocity.x+0.1f, (rb.velocity.y+0.01f) * 100));
+                rb.AddForce(new Vector2(rb.velocity.x+0.05f, (rb.velocity.y+0.01f) * 100));
                 Debug.Log("Woooof vel: " + rb.velocity);
                 counter = 0;
             }

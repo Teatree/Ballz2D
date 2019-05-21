@@ -21,7 +21,6 @@ public class ShopPopup : IPopup<Pause> {
     public Text specialOffer2;
     public Text specialOffer3;
 
-
     public Tab hcTab;
     public static BallShopItem EquipedBall;
 
@@ -33,6 +32,8 @@ public class ShopPopup : IPopup<Pause> {
     public GameObject emptyOffer;
     [Header("Offer timers")]
     public GameObject timerGo;
+    [Header("No Ads IAP")]
+    public GameObject noAdsIAPGo;
 
     private Text timer;
 
@@ -82,6 +83,8 @@ public class ShopPopup : IPopup<Pause> {
             }
             // calc
         }
+
+        noAdsIAPGo.SetActive(!PlayerController.player.noAds);
     }
 
     void SetUpOffers(string offerToShow) {

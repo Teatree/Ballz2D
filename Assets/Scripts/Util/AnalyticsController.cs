@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Facebook.Unity;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class AnalyticsController : SceneSingleton<AnalyticsController> {
 
@@ -45,6 +46,13 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
             (float)totalValue,
             parameters
         );
+
+        Analytics.CustomEvent("HC_Spent", new Dictionary<string, object>
+        {
+            { "contentId", contentId},
+            { "contentType", contentType},
+            { "totalValue", totalValue}
+        });
     }
 
     public void LogIAPEvent(string IAP_ID) {
@@ -55,6 +63,11 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
             0,
             parameters
         );
+
+        Analytics.CustomEvent("IAPClicked", new Dictionary<string, object>
+        {
+            { "IAP_ID", IAP_ID}
+        });
     }
 
     public void LogIncentivizedAdWatchedEvent(string ad_ID) {
@@ -65,6 +78,11 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
             0,
             parameters
         );
+
+        Analytics.CustomEvent("IncentiziedVideoWatched", new Dictionary<string, object>
+        {
+            { "ad_ID", ad_ID}
+        });
     }
 
     public void LogBoxesOpenedEvent(string box_id, string item, int amount) {
@@ -77,6 +95,13 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
             0,
             parameters
         );
+
+        Analytics.CustomEvent("BoxesOpened", new Dictionary<string, object>
+        {
+            { "box_ID", box_id},
+            { "item", item },
+            { "amount", amount}
+        });
     }
 
     #region Levels
@@ -89,6 +114,12 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
             0,
             parameters
         );
+
+        Analytics.CustomEvent("LevelShotsRequired", new Dictionary<string, object>
+        {
+            { "levelNum", lvlNum },
+            { "shotCount", shotsCount }
+        });
     }
 
     public void LogLevelBoostsUsedEvent(string lvlNum, string boostType) {
@@ -100,6 +131,12 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
             0,
             parameters
         );
+
+        Analytics.CustomEvent("LevelBoostUsedEvent", new Dictionary<string, object>
+        {
+            { "levelNum", lvlNum },
+            { "boostType", boostType }
+        });
     }
 
     public void LogLevelCompletedEvent(string levelNum) {
@@ -111,26 +148,41 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
             0,
             parameters
         );
+
+        Analytics.CustomEvent("LevelCompleted", new Dictionary<string, object>
+        {
+            { "levelNum", levelNum }
+        });
     }
 
     public void LogLevelFailedEvent(string levelNum) {
         var parameters = new Dictionary<string, object>();
         parameters["levelNum"] = levelNum;
         FB.LogAppEvent(
-            "LevelCompleted",
+            "LevelFailed",
             0,
             parameters
         );
+
+        Analytics.CustomEvent("LevelFailed", new Dictionary<string, object>
+        {
+            { "levelNum", levelNum }
+        });
     }
 
     public void LogLevelRestartedEvent(string levelNum) {
         var parameters = new Dictionary<string, object>();
         parameters["levelNum"] = levelNum;
         FB.LogAppEvent(
-            "LevelCompleted",
+            "LevelRestarted",
             0,
             parameters
         );
+
+        Analytics.CustomEvent("LevelRestarted", new Dictionary<string, object>
+        {
+            { "levelNum", levelNum }
+        });
     }
     #endregion
 }

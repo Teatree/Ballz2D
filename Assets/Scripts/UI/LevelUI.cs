@@ -83,7 +83,7 @@ public class LevelUI : MonoBehaviour {
         LevelController.ResetScore();
         // AdmobController.Instance.ShowIterstitial();
 
-        if (PlayerController.player.stars > 7 && PlayerController.player.noAds == false) {
+        if (PlayerController.player.stars > 7 && PlayerController.player.noAds == false && UnityAddsController.AdsLoaded) {
             if (SceneController.shouldShowLevelIntersticialcounter >= SceneController.shouldShowLevelIntersticial) {
                 UnityAddsController.Instance.ShowEnterActionPhaseFromMainMenuAd();
                 SceneController.shouldShowLevelIntersticialcounter = 0;
@@ -93,7 +93,7 @@ public class LevelUI : MonoBehaviour {
                 SceneController.sceneController.LoadGame();
             }
         }
-        if (PlayerController.player.stars <= 7) {
+        else {
             SceneController.sceneController.LoadGame();
         }
     }
