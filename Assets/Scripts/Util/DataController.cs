@@ -13,7 +13,8 @@ public class DataController {
 
 
 #if UNITY_EDITOR
-    public static string levelfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", levelsFileName);
+    //public static string levelfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", levelsFileName);
+    public static string levelfilePath = "https://file.io/xntBH1";
     public static string itemsfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", itemsFileName);
     //public static string playerfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", playerFileName);
     public static string playerfilePath = Path.Combine(Application.persistentDataPath, playerFileName);
