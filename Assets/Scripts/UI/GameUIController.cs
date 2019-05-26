@@ -107,8 +107,11 @@ public class GameUIController : SceneSingleton<GameUIController> {
         Instantiate(PausePrefab, transform);
     }
 
-    #region stars
-    public void UpdateScore(int newScore) {
+    private void OnApplicationPause(bool pause) {
+        if (pause && !LevelController.isGamePaused) PauseGame();
+    }
+        #region stars
+        public void UpdateScore(int newScore) {
         StopCoroutine("IncreaseScore");
 
         //Debug.Log("Increase The Score!");

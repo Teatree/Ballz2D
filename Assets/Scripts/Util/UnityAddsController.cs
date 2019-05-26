@@ -24,7 +24,7 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
 
     void Start() {
         if (Monetization.isSupported) {
-            Monetization.Initialize(gameId, true);
+            Monetization.Initialize(gameId, false);
         }
 
         AdsLoaded = Application.internetReachability != NetworkReachability.NotReachable;

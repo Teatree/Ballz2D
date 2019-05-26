@@ -5,7 +5,7 @@ public class SettingsPoup : IPopup<SettingsPoup> {
 
     public void RateTheGame() {
         #if UNITY_ANDROID
-                Application.OpenURL("market://details?id=com.fd.etf.android");
+                Application.OpenURL("market://details?id=com.FearlessDoodlez.BirckTheBalls");
         #elif UNITY_IPHONE
                         Application.OpenURL("itms-apps://itunes.apple.com/app/idYOUR_APP_ID");
         #endif
