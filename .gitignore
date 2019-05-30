@@ -8,8 +8,6 @@
 /[Ll]ibrary/
 sysinfo.txt
 *.stackdump
-/Assets/AssetStoreTools*
-/Assets/StreamingAssets*
 *.apk
 *.unitypackage
  
