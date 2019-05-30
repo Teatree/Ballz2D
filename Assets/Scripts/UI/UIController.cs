@@ -115,6 +115,19 @@ public class UIController : SceneSingleton<UIController> {
         //if (DateTime.Parse(PlayerController.player.giveBoxAt) < // next time for box){
 
         //    }
+
+        StartCoroutine(LoadOnlineImage());
+    }
+
+    IEnumerator LoadOnlineImage() {
+        yield return 0;
+        WWW imgLink = new WWW(url);
+        yield return imgLink;
+        img = imgLink.texture;
+    }
+
+    private void OnGUI() {
+        GUILayout.Label(img);
     }
 
     private void SetStarsAmountText() {

@@ -13,21 +13,19 @@ public class DataController {
 
 
 #if UNITY_EDITOR
-    public static string levelfilePathLocal = Path.Combine(Application.dataPath + "/StreamingAssets", levelsFileName);
-    public static string levelfilePath = "https://github.com/Teatree/Ballz2D/raw/master/level_online.json";
+    //public static string levelfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", levelsFileName);
+    public static string levelfilePath = "https://file.io/xntBH1";
     public static string itemsfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", itemsFileName);
     //public static string playerfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", playerFileName);
     public static string playerfilePath = Path.Combine(Application.persistentDataPath, playerFileName);
 
 #elif UNITY_ANDROID
-    public static string levelfilePathLocal = Path.Combine ( Application.persistentDataPath, levelsFileName);
-    public static string levelfilePath = "https://github.com/Teatree/Ballz2D/raw/master/level_online.json";
+    public static string levelfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", levelsFileName);
     public static string itemsfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", itemsFileName);
     public static string playerfilePath = Path.Combine ( Application.persistentDataPath,  playerFileName);
 
 #elif UNITY_IOS
-    //private static string levelfilePath = Path.Combine (Application.f50persistentDataPath  + "/Raw", levelsFileName);
-    private static string levelfilePath = "https://github.com/Teatree/Ballz2D/raw/master/level_online.json";
+    private static string levelfilePath = Path.Combine (Application.f50persistentDataPath  + "/Raw", levelsFileName);
     private static string itemsfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", itemsFileName);
     private static string playerfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", playerFileName);
  
@@ -97,49 +95,14 @@ public class DataController {
     public static List<LevelData> LoadLevels() {
         List<LevelData> lvlsData = new List<LevelData>();
         string jsonData = "";
-        bool isNetwork = Application.internetReachability != NetworkReachability.NotReachable;
-        Debug.Log(" >>>> is NEtwork " + isNetwork );
         if (Application.platform == RuntimePlatform.Android) {
-            if (isNetwork) {
-                WWW reader = new WWW(levelfilePath);
-                while (!reader.isDone) { }
+            WWW reader = new WWW(levelfilePath);
+            while (!reader.isDone) { }
 
-                jsonData = reader.text;
-
-                //Save the file
-                StreamWriter writer = new StreamWriter(levelfilePathLocal, false);
-                writer.WriteLine(jsonData);
-                writer.Close();
-            } else {
-                if (!File.Exists(levelfilePathLocal)){
-                    TextAsset file = Resources.Load("levels") as TextAsset;
-                    jsonData = file.ToString();
-                } else {
-                    jsonData = File.ReadAllText(levelfilePathLocal);
-                }
-                //TextAsset file = Resources.Load("levels.json") as TextAsset;
-                //jsonData = file.ToString();
-                //WWW reader = new WWW(levelfilePathLocal);
-                //while (!reader.isDone) { }
-                //jsonData = reader.text;
-            }
+            jsonData = reader.text;
         }
         else {
-            if (isNetwork) {
-
-                WWW reader = new WWW(levelfilePath);
-                while (!reader.isDone) { }
-                jsonData = reader.text;
-
-                Debug.Log(" >>>> levels jsonData " + jsonData);
-                //Save the file
-                StreamWriter writer = new StreamWriter(levelfilePathLocal, false);
-                writer.WriteLine(jsonData);
-                writer.Close();
-            } else {
-                jsonData =
-               File.ReadAllText(levelfilePathLocal);
-            }
+            jsonData = File.ReadAllText(levelfilePath);
         }
 
 
