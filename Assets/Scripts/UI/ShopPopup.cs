@@ -61,7 +61,7 @@ public class ShopPopup : IPopup<Pause> {
         specialOffer1.text = Purchaser.purchaser.GetLocalPrice(Purchaser.SPECIAL_PACK_1);
         specialOffer2.text = Purchaser.purchaser.GetLocalPrice(Purchaser.SPECIAL_PACK_2);
         specialOffer3.text = Purchaser.purchaser.GetLocalPrice(Purchaser.SPECIAL_PACK_3);
-    
+
         SetUpOffers(getTheOfferType());
     }
 
@@ -165,7 +165,7 @@ public class ShopPopup : IPopup<Pause> {
     }
 
     public void BuyNoAds() {
-       Purchaser.purchaser.BuyNoAds();
+        Purchaser.purchaser.BuyNoAds();
     }
 
     public override void OnClick_Close() {
