@@ -32,9 +32,6 @@ public class UIController : SceneSingleton<UIController> {
     private Button boxAdButtonCmp;
     public Scrollbar lvlSlider;
 
-    string url = "https://cdn.shrm.org/image/upload/c_crop,h_365,w_851,x_0,y_0/w_auto:100:2100,q_auto,f_auto/v1/Compensation/pay-hands_qd26uc";
-    Texture2D img;
-
     void Start() {
         DateTime dt = PlayerController.player == null || PlayerController.player.giveBoxAt == null || PlayerController.player.giveBoxAt == "" ? DateTime.Now : DateTime.Parse(PlayerController.player.giveBoxAt);
 
@@ -115,19 +112,6 @@ public class UIController : SceneSingleton<UIController> {
         //if (DateTime.Parse(PlayerController.player.giveBoxAt) < // next time for box){
 
         //    }
-
-        StartCoroutine(LoadOnlineImage());
-    }
-
-    IEnumerator LoadOnlineImage() {
-        yield return 0;
-        WWW imgLink = new WWW(url);
-        yield return imgLink;
-        img = imgLink.texture;
-    }
-
-    private void OnGUI() {
-        GUILayout.Label(img);
     }
 
     private void SetStarsAmountText() {
