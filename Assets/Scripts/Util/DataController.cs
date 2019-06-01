@@ -14,20 +14,20 @@ public class DataController {
 
 #if UNITY_EDITOR
     public static string levelfilePathLocal = Path.Combine(Application.dataPath + "/StreamingAssets", levelsFileName);
-    public static string levelfilePath = "https://github.com/Teatree/Ballz2D/raw/master/level_online.json";
+    public static string levelfilePath = "https://raw.githubusercontent.com/fearlessdoodlez/balls/master/level_online.json";
     public static string itemsfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", itemsFileName);
     //public static string playerfilePath = Path.Combine(Application.dataPath + "/StreamingAssets", playerFileName);
     public static string playerfilePath = Path.Combine(Application.persistentDataPath, playerFileName);
 
 #elif UNITY_ANDROID
     public static string levelfilePathLocal = Path.Combine ( Application.persistentDataPath, levelsFileName);
-    public static string levelfilePath = "https://github.com/Teatree/Ballz2D/raw/master/level_online.json";
+    public static string levelfilePath = "https://raw.githubusercontent.com/fearlessdoodlez/balls/master/level_online.json";
     public static string itemsfilePath = Path.Combine ("jar:file://" + Application.dataPath + "!/assets/", itemsFileName);
     public static string playerfilePath = Path.Combine ( Application.persistentDataPath,  playerFileName);
 
 #elif UNITY_IOS
     //private static string levelfilePath = Path.Combine (Application.f50persistentDataPath  + "/Raw", levelsFileName);
-    private static string levelfilePath = "https://github.com/Teatree/Ballz2D/raw/master/level_online.json";
+    private static string levelfilePath = "https://raw.githubusercontent.com/fearlessdoodlez/balls/master/level_online.json";
     private static string itemsfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", itemsFileName);
     private static string playerfilePath = Path.Combine (Application.persistentDataPath  + "/Raw", playerFileName);
  

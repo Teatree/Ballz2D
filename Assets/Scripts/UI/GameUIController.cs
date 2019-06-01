@@ -267,7 +267,7 @@ public class GameUIController : SceneSingleton<GameUIController> {
         Box.GetComponent<BoxPopup>().itemToReceive = BoxOpener.Instance.GetBoxContents_BoxStars(PlayerController.player.numStarBoxesOpened);
 
         //if (PlayerController.player.numStarBoxesOpened < PlayerController.Instance.starBoxes.Count-1) {
-            PlayerController.player.numStarBoxesOpened += 1;
+            PlayerController.player.numStarBoxesOpened += PlayerController.player.numStarBoxesOpened < (PlayerController.Instance.starBoxes.Count-1) ? 1 : 0;
             PlayerController.player.progressTowardsNextStarBox = 0;
         //}
 

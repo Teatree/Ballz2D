@@ -184,6 +184,10 @@ public class GameOver : IPopup<GameOver> {
         ReloadGameScene();
     }
 
+    public void Share() {
+        ShareController.Instance.ShareScreenshotWithText("Look at this game! ");
+    }
+
     private static void ReloadGameScene() {
         LevelController.ResetScore();
         SceneController.sceneController.UnloadGame();
