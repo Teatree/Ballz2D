@@ -107,11 +107,9 @@ public class DataController
         List<LevelData> lvlsData = new List<LevelData>();
         string jsonData = "";
         bool isNetwork = Application.internetReachability != NetworkReachability.NotReachable;
-        Debug.Log(" >>>> is NEtwork " + isNetwork);
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            if (isNetwork)
-            {
+        Debug.Log(" >>>> is NEtwork " + isNetwork );
+        if (Application.platform == RuntimePlatform.Android) {
+            if (isNetwork) {
                 WWW reader = new WWW(levelfilePath);
                 while (!reader.isDone) { }
 
@@ -121,16 +119,11 @@ public class DataController
                 StreamWriter writer = new StreamWriter(levelfilePathLocal, false);
                 writer.WriteLine(jsonData);
                 writer.Close();
-            }
-            else
-            {
-                if (!File.Exists(levelfilePathLocal))
-                {
+            } else {
+                if (!File.Exists(levelfilePathLocal)){
                     TextAsset file = Resources.Load("levels") as TextAsset;
                     jsonData = file.ToString();
-                }
-                else
-                {
+                } else {
                     jsonData = File.ReadAllText(levelfilePathLocal);
                 }
                 //TextAsset file = Resources.Load("levels.json") as TextAsset;
@@ -140,10 +133,8 @@ public class DataController
                 //jsonData = reader.text;
             }
         }
-        else
-        {
-            if (isNetwork)
-            {
+        else {
+            if (isNetwork) {
 
                 WWW reader = new WWW(levelfilePath);
                 while (!reader.isDone) { }
@@ -154,9 +145,7 @@ public class DataController
                 StreamWriter writer = new StreamWriter(levelfilePathLocal, false);
                 writer.WriteLine(jsonData);
                 writer.Close();
-            }
-            else
-            {
+            } else {
                 jsonData =
                File.ReadAllText(levelfilePathLocal);
             }
