@@ -44,23 +44,23 @@ public class ShopPopup : IPopup<Pause> {
     private DateTime _countdown;
 
     public void Start() {
-        Debug.Log(">>>> " + Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200));
-        gems200.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200);
-        gems400.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_400);
-        gems600.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_600);
-        gems1100.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_1100);
-        gems2300.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_2300);
-        gems7200.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_7200);
-        gems12500.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_12500);
-        gems30000.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_30000);
-        noAds.text = Purchaser.purchaser.GetLocalPrice(Purchaser.NO_ADS);
+        //Debug.Log(">>>> " + Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200));
+        //gems200.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_200);
+        //gems400.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_400);
+        //gems600.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_600);
+        //gems1100.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_1100);
+        //gems2300.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_2300);
+        //gems7200.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_7200);
+        //gems12500.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_12500);
+        //gems30000.text = Purchaser.purchaser.GetLocalPrice(Purchaser.GEMS_30000);
+        //noAds.text = Purchaser.purchaser.GetLocalPrice(Purchaser.NO_ADS);
 
-        starterPack.text = Purchaser.purchaser.GetLocalPrice(Purchaser.STARTER_PACK);
-        weekendPack.text = Purchaser.purchaser.GetLocalPrice(Purchaser.WEEKEND_PACK);
-        featuredPack.text = Purchaser.purchaser.GetLocalPrice(Purchaser.STATIC_PACK);
-        specialOffer1.text = Purchaser.purchaser.GetLocalPrice(Purchaser.SPECIAL_PACK_1);
-        specialOffer2.text = Purchaser.purchaser.GetLocalPrice(Purchaser.SPECIAL_PACK_2);
-        specialOffer3.text = Purchaser.purchaser.GetLocalPrice(Purchaser.SPECIAL_PACK_3);
+        //starterPack.text = Purchaser.purchaser.GetLocalPrice(Purchaser.STARTER_PACK);
+        //weekendPack.text = Purchaser.purchaser.GetLocalPrice(Purchaser.WEEKEND_PACK);
+        //featuredPack.text = Purchaser.purchaser.GetLocalPrice(Purchaser.STATIC_PACK);
+        //specialOffer1.text = Purchaser.purchaser.GetLocalPrice(Purchaser.SPECIAL_PACK_1);
+        //specialOffer2.text = Purchaser.purchaser.GetLocalPrice(Purchaser.SPECIAL_PACK_2);
+        //specialOffer3.text = Purchaser.purchaser.GetLocalPrice(Purchaser.SPECIAL_PACK_3);
 
         SetUpOffers(getTheOfferType());
     }
@@ -132,41 +132,41 @@ public class ShopPopup : IPopup<Pause> {
         }
     }
 
-    public void BuyGems200() {
-        Purchaser.purchaser.BuyGems200();
-    }
+    //public void BuyGems200() {
+    //    Purchaser.purchaser.BuyGems200();
+    //}
 
-    public void BuyGems400() {
-        Purchaser.purchaser.BuyGems400();
-    }
+    //public void BuyGems400() {
+    //    Purchaser.purchaser.BuyGems400();
+    //}
 
-    public void BuyGems600() {
-        Purchaser.purchaser.BuyGems600();
-    }
+    //public void BuyGems600() {
+    //    Purchaser.purchaser.BuyGems600();
+    //}
 
-    public void BuyGems1100() {
-        Purchaser.purchaser.BuyGems1100();
-    }
+    //public void BuyGems1100() {
+    //    Purchaser.purchaser.BuyGems1100();
+    //}
 
-    public void BuyGems2300() {
-        Purchaser.purchaser.BuyGems2300();
-    }
+    //public void BuyGems2300() {
+    //    Purchaser.purchaser.BuyGems2300();
+    //}
 
-    public void BuyGems7200() {
-        Purchaser.purchaser.BuyGems7200();
-    }
+    //public void BuyGems7200() {
+    //    Purchaser.purchaser.BuyGems7200();
+    //}
 
-    public void BuyGems12500() {
-        Purchaser.purchaser.BuyGems12500();
-    }
+    //public void BuyGems12500() {
+    //    Purchaser.purchaser.BuyGems12500();
+    //}
 
-    public void BuyGems30000() {
-        Purchaser.purchaser.BuyGems30000();
-    }
+    //public void BuyGems30000() {
+    //    Purchaser.purchaser.BuyGems30000();
+    //}
 
-    public void BuyNoAds() {
-        Purchaser.purchaser.BuyNoAds();
-    }
+    //public void BuyNoAds() {
+    //    Purchaser.purchaser.BuyNoAds();
+    //}
 
     public override void OnClick_Close() {
         LevelController.ResumeGame();
@@ -177,42 +177,42 @@ public class ShopPopup : IPopup<Pause> {
         hcTab.SetContentActive();
     }
 
-    public void BuyShopOffer(ShopOffer sh) {
-        // buy by product id
-        //    Purchaser.purchaser.buyOffer(sh);
-        Debug.Log(">>>> buy btn > " + sh.id);
-        if (sh.id == Purchaser.STARTER_PACK) {
-            Purchaser.purchaser.BuyStarterPack();
-            PlayerController.player.boughtStarter = true;
+    //public void BuyShopOffer(ShopOffer sh) {
+    //    // buy by product id
+    //    //    Purchaser.purchaser.buyOffer(sh);
+    //    Debug.Log(">>>> buy btn > " + sh.id);
+    //    if (sh.id == Purchaser.STARTER_PACK) {
+    //        Purchaser.purchaser.BuyStarterPack();
+    //        PlayerController.player.boughtStarter = true;
 
-            AnalyticsController.Instance.LogIAPEvent(Purchaser.STARTER_PACK);
-        }
-        if (sh.id == Purchaser.WEEKEND_PACK) {
-            Purchaser.purchaser.BuyWeekendPack();
+    //        AnalyticsController.Instance.LogIAPEvent(Purchaser.STARTER_PACK);
+    //    }
+    //    if (sh.id == Purchaser.WEEKEND_PACK) {
+    //        Purchaser.purchaser.BuyWeekendPack();
 
-            AnalyticsController.Instance.LogIAPEvent(Purchaser.WEEKEND_PACK);
-        }
-        if (sh.id == Purchaser.STATIC_PACK) {
-            Purchaser.purchaser.BuyStaticPack();
+    //        AnalyticsController.Instance.LogIAPEvent(Purchaser.WEEKEND_PACK);
+    //    }
+    //    if (sh.id == Purchaser.STATIC_PACK) {
+    //        Purchaser.purchaser.BuyStaticPack();
 
-            AnalyticsController.Instance.LogIAPEvent(Purchaser.STARTER_PACK);
-        }
-        if (sh.id == Purchaser.SPECIAL_PACK_1) {
-            Purchaser.purchaser.BuySpecialPack_1();
+    //        AnalyticsController.Instance.LogIAPEvent(Purchaser.STARTER_PACK);
+    //    }
+    //    if (sh.id == Purchaser.SPECIAL_PACK_1) {
+    //        Purchaser.purchaser.BuySpecialPack_1();
 
-            AnalyticsController.Instance.LogIAPEvent(Purchaser.SPECIAL_PACK_1);
-        }
-        if (sh.id == Purchaser.SPECIAL_PACK_2) {
-            Purchaser.purchaser.BuySpecialPack_2();
+    //        AnalyticsController.Instance.LogIAPEvent(Purchaser.SPECIAL_PACK_1);
+    //    }
+    //    if (sh.id == Purchaser.SPECIAL_PACK_2) {
+    //        Purchaser.purchaser.BuySpecialPack_2();
 
-            AnalyticsController.Instance.LogIAPEvent(Purchaser.SPECIAL_PACK_2);
-        }
-        if (sh.id == Purchaser.SPECIAL_PACK_3) {
-            Purchaser.purchaser.BuySpecialPack_3();
+    //        AnalyticsController.Instance.LogIAPEvent(Purchaser.SPECIAL_PACK_2);
+    //    }
+    //    if (sh.id == Purchaser.SPECIAL_PACK_3) {
+    //        Purchaser.purchaser.BuySpecialPack_3();
 
-            AnalyticsController.Instance.LogIAPEvent(Purchaser.SPECIAL_PACK_3);
-        }
-    }
+    //        AnalyticsController.Instance.LogIAPEvent(Purchaser.SPECIAL_PACK_3);
+    //    }
+    //}
 
     public string getTheOfferType() {
         DateTime firstLogin = DateTime.Parse(PlayerController.player.firstLoginAt);
