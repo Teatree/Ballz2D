@@ -10,6 +10,7 @@ sysinfo.txt
 *.stackdump
 /Assets/AssetStoreTools*
 /Assets/StreamingAssets*
+/Assets/FacebookSDK*
 *.apk
 *.unitypackage
  
