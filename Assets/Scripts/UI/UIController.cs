@@ -129,7 +129,7 @@ public class UIController : SceneSingleton<UIController> {
         // gems.text = "Gems >>> " +  PlayerController.player.gems;
         //debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "      path: " + DataController.levelfilePath;
 
-        if (PlayerController.player.adBoxOpenedCount < UnityAddsController.Instance.AdBoxOpenLimit) {
+        if (PlayerController.player != null && PlayerController.player.adBoxOpenedCount < UnityAddsController.Instance.AdBoxOpenLimit) {
             SetEnabledAdBox(true);
         }
         else {
