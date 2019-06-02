@@ -26,7 +26,6 @@ public class PlayerController : SceneSingleton<PlayerController> {
         times.Add(morning21);
 
         PlayerDataLoad();
-
     }
 
     public static void PlayerDataLoad() {
