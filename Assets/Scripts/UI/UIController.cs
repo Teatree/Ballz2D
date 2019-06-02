@@ -169,10 +169,13 @@ public class UIController : SceneSingleton<UIController> {
 
         OpenBoxOpen();
         ShowDayBoxWaitButton();
-
-        DateTime dt = PlayerController.player == null || PlayerController.player.giveBoxAt == null || PlayerController.player.giveBoxAt == "" ? DateTime.Now : DateTime.Parse(PlayerController.player.giveBoxAt);
-        NotificationController.Instance.ScheduleBoxNotification(dt);
-
+        
+        if (PlayerController.player != null && PlayerController.player.giveBoxAt != null && PlayerController.player.giveBoxAt != "")
+        {
+            DateTime dt = DateTime.Parse(PlayerController.player.giveBoxAt);
+            NotificationController.Instance.ScheduleBoxNotification(dt);
+            Debug.Log(">>>> Notify givebox at ? " + dt);
+        }
     }
 
     public void SetEnabledAdBox(bool b) {

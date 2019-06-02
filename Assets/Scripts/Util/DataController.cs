@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 
-public class DataController {
+public class DataController
+{
     private static string levelsFileName = "levels.json";
     private static string itemsFileName = "items.json";
     private static string playerFileName = "playerInfo.json";
@@ -35,11 +36,13 @@ public class DataController {
 #endif
 
     //--------- Player Info ----------
-    public static PlayerData LoadPlayer() {
+    public static PlayerData LoadPlayer()
+    {
         string jsonData = "";
         //if (Application.platform == RuntimePlatform.Android) {
 
-        if (!File.Exists(playerfilePath)) {
+        if (!File.Exists(playerfilePath))
+        {
             TextAsset file = Resources.Load("playerInfo") as TextAsset;
             jsonData = file.ToString();
             PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
@@ -54,19 +57,21 @@ public class DataController {
             //while (!reader.isDone) { }
             //jsonData = reader.text;
         }
-        else {
+        else
+        {
             jsonData = File.ReadAllText(playerfilePath);
             PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
             Debug.Log(">>>> jsonData > " + jsonData);
             return pi;
-            
+
         }
-       // PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
-     //   AjsonData = "<color=#a52a2aff> " + jsonData + "</color>";
-        
+        // PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
+        //   AjsonData = "<color=#a52a2aff> " + jsonData + "</color>";
+
     }
 
-    public static void SavePlayer(PlayerData pi) {
+    public static void SavePlayer(PlayerData pi)
+    {
         string jsonData = JsonUtility.ToJson(pi);
         // Debug.Log(">>> player info > " + jsonData);
         // if (Application.platform == RuntimePlatform.Android) {
@@ -79,14 +84,17 @@ public class DataController {
     }
 
     //------------Items ---------------------------
-    public static List<ItemData> LoadItems() {
+    public static List<ItemData> LoadItems()
+    {
         string jsonData = "";
-        if (Application.platform == RuntimePlatform.Android) {
+        if (Application.platform == RuntimePlatform.Android)
+        {
             WWW reader = new WWW(itemsfilePath);
             while (!reader.isDone) { }
             jsonData = reader.text;
         }
-        else {
+        else
+        {
             jsonData = File.ReadAllText(itemsfilePath);
         }
         ItemData[] id = JsonHelper.FromJson<ItemData>(jsonData);
@@ -94,7 +102,8 @@ public class DataController {
     }
 
     //------------Load Levels --------------------
-    public static List<LevelData> LoadLevels() {
+    public static List<LevelData> LoadLevels()
+    {
         List<LevelData> lvlsData = new List<LevelData>();
         string jsonData = "";
         bool isNetwork = Application.internetReachability != NetworkReachability.NotReachable;
@@ -143,34 +152,43 @@ public class DataController {
         }
 
 
-        if (jsonData != null) {
+        if (jsonData != null)
+        {
             string separ = "Level_[0-9][0-9][0-9]";
             string[] lvls = System.Text.RegularExpressions.Regex.Split(jsonData, separ);
 
-            for (int i = 1; i < lvls.Length; i++) {
+            for (int i = 1; i < lvls.Length; i++)
+            {
 
                 string editedLvl = "{ \"Rows" + lvls[i].Substring(1, lvls[i].Length - 7);
-                if (editedLvl.LastIndexOf("]") == editedLvl.Length - 1) {
+                if (editedLvl.LastIndexOf("]") == editedLvl.Length - 1)
+                {
                     editedLvl += "}";
                 }
-                else {
+                else
+                {
                     editedLvl += "]}";
                 }
                 RowData[] rows = JsonHelper.FromJson<RowData>(editedLvl);
                 LevelData lvlData = new LevelData();
                 System.Array.Reverse(rows);
 
-                foreach (RowData row in rows) {
-                    if (!row.IsEmpty()) {
+                foreach (RowData row in rows)
+                {
+                    if (!row.IsEmpty())
+                    {
                         lvlData.rows.Add(row);
                     }
                 }
 
-                foreach (RowData row in rows) {
-                    if (row.IsEmpty()) {
+                foreach (RowData row in rows)
+                {
+                    if (row.IsEmpty())
+                    {
                         lvlData.emptyRowsCount++;
                     }
-                    else {
+                    else
+                    {
                         break;
                     }
                 }
@@ -179,7 +197,8 @@ public class DataController {
             }
             return lvlsData;
         }
-        else {
+        else
+        {
             //Debug.LogError("Cannot find the file " + levelfilePath);
             //AjsonData = "<color=#a52a2aff>JSON IS NULL</color>";
             return lvlsData;
@@ -189,7 +208,8 @@ public class DataController {
 }
 
 [System.Serializable]
-public class PlayerData {
+public class PlayerData
+{
     public int gems;
     public int stars;
     public int progressTowardsNextStarBox; // how many stars player already gathered for the current star box
@@ -200,7 +220,7 @@ public class PlayerData {
     public string specialBallImageName;
     public string specialBallName;
     public bool boughtStarter;
-    public int adBoxOpenedCount; 
+    public int adBoxOpenedCount;
     public string adBoxOpenedDate;
     public int MoreHCReviveCount;
     public string MoreHCReviveOpenedDate;
@@ -208,9 +228,11 @@ public class PlayerData {
     public List<CompletedLevel> completedLvls = new List<CompletedLevel>();
     public List<ItemData> items = new List<ItemData>();
 
-    public int GetStarsAmount() {
+    public int GetStarsAmount()
+    {
         int sum = 0;
-        foreach (CompletedLevel lvl in completedLvls) {
+        foreach (CompletedLevel lvl in completedLvls)
+        {
             sum += lvl.stars;
         }
         stars = sum;
@@ -219,44 +241,54 @@ public class PlayerData {
 }
 
 [System.Serializable]
-public class ItemData {
+public class ItemData
+{
     public int costGems;
     public string name;
     public int amount;
     public bool enabled;
 
-    public ItemData(ItemObject io) {
+    public ItemData(ItemObject io)
+    {
         this.costGems = io.costGems;
         this.name = io.name;
         this.amount = io.amount;
         this.enabled = io.enabled;
     }
-    public ItemData() {
+    public ItemData()
+    {
 
     }
 }
 
 [System.Serializable]
-public class CompletedLevel {
+public class CompletedLevel
+{
     public int number;
     public int stars;
 
-    public CompletedLevel(int i, int j) {
+    public CompletedLevel(int i, int j)
+    {
         this.number = i;
         this.stars = j;
     }
 }
 [System.Serializable]
-public class LevelData {
+public class LevelData
+{
     public int emptyRowsCount;
     public List<RowData> rows = new List<RowData>();
 
-    public int GetBlocksAmount() {
+    public int GetBlocksAmount()
+    {
         int amount = 0;
-        for (int i = 0; i < rows.Count; i++) {
+        for (int i = 0; i < rows.Count; i++)
+        {
             List<CellData> cells = rows[i].GetCells();
-            for (int j = 0; j < cells.Count; j++) {
-                if (cells[j] != null && cells[j].isCollidableBlock()) {
+            for (int j = 0; j < cells.Count; j++)
+            {
+                if (cells[j] != null && cells[j].isCollidableBlock())
+                {
                     amount++;
                 }
             }
@@ -266,7 +298,8 @@ public class LevelData {
 }
 
 [System.Serializable]
-public class RowData {
+public class RowData
+{
     public string o;
     public string col1;
     public string col2;
@@ -284,7 +317,8 @@ public class RowData {
     public string col14;
     public string col15;
 
-    public List<CellData> GetCells() {
+    public List<CellData> GetCells()
+    {
         List<CellData> cells = new List<CellData>();
         cells.Add(new CellData(col2));
         cells.Add(new CellData(col3));
@@ -303,7 +337,8 @@ public class RowData {
         return cells;
     }
 
-    public bool IsEmpty() {
+    public bool IsEmpty()
+    {
         return col2 != null && (col2 == "" || col2 == "x") &&
                 col3 != null && (col3 == "" || col3 == "x") &&
                 col4 != null && (col4 == "" || col4 == "x") &&
@@ -320,46 +355,56 @@ public class RowData {
     }
 }
 
-public class CellData {
+public class CellData
+{
     public string type;
     public int life;
 
-    public CellData(string stringVal) {
-        if (stringVal.Length > 2) {
+    public CellData(string stringVal)
+    {
+        if (stringVal.Length > 2)
+        {
             type = stringVal.Substring(0, 2);
             life = int.Parse(stringVal.Substring(2, stringVal.Length - 2));
         }
-        else {
+        else
+        {
             type = stringVal;
         }
     }
 
-    public bool isCollidableBlock() {
+    public bool isCollidableBlock()
+    {
         return type != null && type != "" && type != "LV" && type != "LH" && type != "LC" && type != "FF" && type != "★★" && type != "os";
     }
 }
 
 
-public static class JsonHelper {
-    public static T[] FromJson<T>(string json) {
+public static class JsonHelper
+{
+    public static T[] FromJson<T>(string json)
+    {
         Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
         return wrapper.Rows;
     }
 
-    public static string ToJson<T>(T[] array) {
+    public static string ToJson<T>(T[] array)
+    {
         Wrapper<T> wrapper = new Wrapper<T>();
         wrapper.Rows = array;
         return JsonUtility.ToJson(wrapper);
     }
 
-    public static string ToJson<T>(T[] array, bool prettyPrint) {
+    public static string ToJson<T>(T[] array, bool prettyPrint)
+    {
         Wrapper<T> wrapper = new Wrapper<T>();
         wrapper.Rows = array;
         return JsonUtility.ToJson(wrapper, prettyPrint);
     }
 
     [System.Serializable]
-    private class Wrapper<T> {
+    private class Wrapper<T>
+    {
         public T[] Rows;
     }
 }

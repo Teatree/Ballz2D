@@ -11,6 +11,8 @@ sysinfo.txt
 /Assets/AssetStoreTools*
 /Assets/StreamingAssets*
 /Assets/FacebookSDK*
+/Assets/Plugins*
+/Assets/PlayServicesResolver*
 *.apk
 *.unitypackage
  
