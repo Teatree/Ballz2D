@@ -80,3 +80,4 @@ Corridor/Library/metadata/
 /Assets/Plugins/iOS/UnityAds.framework/Headers/UnityAnalytics.h
 /Assets/Plugins/iOS/UnityAds.framework/Headers/UnityServices.h
 /Assets/Plugins/UDP/Android/udpsandbox.aar
+/Assets/Plugins/UDP/Editor/*.meta
