@@ -45,7 +45,7 @@ public class Block : MonoBehaviour {
 
             if (_type.Family.Equals("Block")) {
                 Color highColor = new Color();
-                ColorUtility.TryParseHtmlString("#038C00", out highColor);
+                ColorUtility.TryParseHtmlString("#248C00", out highColor);
 
                 Color lowColor = new Color();
                 ColorUtility.TryParseHtmlString("#4FFFAF", out lowColor);

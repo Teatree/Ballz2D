@@ -49,6 +49,7 @@ public class SceneController : MonoBehaviour {
         }
 
         Debug.Log("I'm loadin services here !");
+
     }
 
     private void UnloadScene(string scene) {
@@ -73,14 +74,15 @@ public class SceneController : MonoBehaviour {
 
     public void LoadGame() {
         BallLauncher.ExtraAdBalls = 0;
+      
         UnloadScene("MenuScene");
         LoadScene("GameScene");
     }
 
     public void LoadMenu() {
+        
         UnloadScene("GameScene");
         LoadScene("MenuScene");
-
     }
 
     public void UnloadGame() {
