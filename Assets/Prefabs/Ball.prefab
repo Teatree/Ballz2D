@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 114868672981750182}
   - component: {fileID: 58975375745680046}
   - component: {fileID: 50122553291929004}
+  - component: {fileID: 247770003998830436}
   m_Layer: 8
   m_Name: Ball
   m_TagString: Untagged
@@ -87,7 +88,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0.004
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f1cbeb186b759f646ad962ab2292501d, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -163,7 +164,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8fe55a714fa42b74bb67b60d899a1f99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31a8c62e071b7da4ba6bbd1e08ee79a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -174,3 +175,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!247 &247770003998830436
+ConstantForce2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1353940230588586}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0}
+  m_RelativeForce: {x: -0.1, y: -0.01}
+  m_Torque: 0

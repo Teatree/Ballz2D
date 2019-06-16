@@ -28,7 +28,7 @@ public class DebugCameraMove : MonoBehaviour {
             Vector3 direction = touchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Camera.main.transform.position += direction;
         }
-        zoom(Input.GetAxis("Mouse ScrollWheel"));
+        zoom(Input.GetAxis("Mouse ScrollWheel")); 
     }
 
     void zoom(float increment) {

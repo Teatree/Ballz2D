@@ -3,11 +3,30 @@ using System.Collections.Generic;
 using Facebook.Unity;
 using UnityEngine;
 using UnityEngine.Analytics;
+using UnityEngine.Networking;
 
 public class AnalyticsController : SceneSingleton<AnalyticsController> {
 
     // Use this for initialization
-    void Awake () {
+    void Awake() {
+
+        //   StartCoroutine(Upload());
+        SomeData someData = new SomeData();
+        someData.o = "wut?";
+
+        string json = JsonUtility.ToJson(someData);
+
+        WWW www;
+        Hashtable postHeader = new Hashtable();
+        postHeader.Add("Content-Type", "application/json");
+
+        // convert json string to byte
+        var formData = System.Text.Encoding.UTF8.GetBytes(json);
+
+        www = new WWW("http://5.45.69.185:5000/analytics", formData, postHeader);
+        StartCoroutine(WaitForRequest(www));
+
+        Debug.Log("json: " + json);
 
         if (FB.IsInitialized) {
             FB.ActivateApp();
@@ -19,6 +38,43 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
             });
         }
 
+    }
+
+    public class SomeData {
+        public string o = "HELLO FROM UNITY";
+    }
+
+    //IEnumerator Upload() {
+    //    SomeData someData = new SomeData();
+    //    someData.o = "wut?";
+
+    //    string json = JsonUtility.ToJson(someData);
+
+        //List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
+        //formData.Add(new MultipartFormDataSection("field1=foo&field2=bar"));
+        //formData.Add(new MultipartFormFileSection("my file data", "myfile.txt"));
+
+   
+
+        //UnityWebRequest www = UnityWebRequest.Post("http://5.45.69.185:5000/analytics", json);
+        //yield return www.SendWebRequest();
+
+        //if (www.isNetworkError || www.isHttpError) {
+        //    Debug.Log(www.error);
+        //}
+        //else {
+        //    Debug.Log("Form upload complete!");
+        //}
+    //}
+
+    IEnumerator WaitForRequest(WWW data) {
+        yield return data; // Wait until the download is done
+        if (data.error != null) {
+            Debug.Log("There was an error sending request: " + data.error);
+        }
+        else {
+            Debug.Log("WWW Request: " + data.text);
+        }
     }
 
     private void OnApplicationPause(bool pause) {

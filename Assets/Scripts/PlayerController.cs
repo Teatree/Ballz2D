@@ -7,7 +7,7 @@ public class PlayerController : SceneSingleton<PlayerController> {
     public static int hardcodedLevlsCompleted = 0;
 
     public static PlayerData player;
-    public static Dictionary<int, int> starsPerLvl;
+    public static Dictionary<int, int> starsPerLvl; 
     public static int progressTowardsStarBox;
 
     // Daily Box Stuss
