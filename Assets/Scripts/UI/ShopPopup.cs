@@ -133,38 +133,56 @@ public class ShopPopup : IPopup<Pause> {
     }
 
     public void BuyGems200() {
+        AnalyticsController.Instance.LogIAPEvent("200 GEMS");
+
         Purchaser.purchaser.BuyGems200();
     }
 
     public void BuyGems400() {
+        AnalyticsController.Instance.LogIAPEvent("400 GEMS");
+
         Purchaser.purchaser.BuyGems400();
     }
 
     public void BuyGems600() {
+        AnalyticsController.Instance.LogIAPEvent("600 GEMS");
+
         Purchaser.purchaser.BuyGems600();
     }
 
     public void BuyGems1100() {
+        AnalyticsController.Instance.LogIAPEvent("1100 GEMS");
+
         Purchaser.purchaser.BuyGems1100();
     }
 
     public void BuyGems2300() {
+        AnalyticsController.Instance.LogIAPEvent("2300 GEMS");
+
         Purchaser.purchaser.BuyGems2300();
     }
 
     public void BuyGems7200() {
+        AnalyticsController.Instance.LogIAPEvent("7200 GEMS");
+
         Purchaser.purchaser.BuyGems7200();
     }
 
     public void BuyGems12500() {
+        AnalyticsController.Instance.LogIAPEvent("12500 GEMS");
+
         Purchaser.purchaser.BuyGems12500();
     }
 
     public void BuyGems30000() {
+        AnalyticsController.Instance.LogIAPEvent("30000 GEMS");
+
         Purchaser.purchaser.BuyGems30000();
     }
 
     public void BuyNoAds() {
+        AnalyticsController.Instance.LogIAPEvent("No Ads");
+
         Purchaser.purchaser.BuyNoAds();
     }
 

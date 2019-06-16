@@ -63,7 +63,6 @@ public class GameOver : IPopup<GameOver> {
                     throw new System.ArgumentException("Init for Popup " + _type + "is not defined ");
                 }
         }
-        AnalyticsController.Instance.LogLevelShotsEvent("Level " + AllLevelsData.CurrentLevelIndex, BallLauncher.Instance.shotCount);
         BallLauncher.Instance.shotCount = 0;
     }
 
@@ -76,7 +75,7 @@ public class GameOver : IPopup<GameOver> {
         Btn_Group_Ads.SetActive(false);
         Btn_Group_Fail.SetActive(true);
 
-        AnalyticsController.Instance.LogLevelFailedEvent("Level " + AllLevelsData.CurrentLevelIndex);
+        AnalyticsController.Instance.LogLevelFailedEvent("Level " + AllLevelsData.CurrentLevelIndex, BallLauncher.Instance.shotCount);
 
         Star1.transform.GetComponent<Image>().color = Color.grey;
         Star2.transform.GetComponent<Image>().color = Color.grey;
@@ -93,7 +92,7 @@ public class GameOver : IPopup<GameOver> {
 
         Window_Confetti.Instance.ReleaseConfetti();
 
-        AnalyticsController.Instance.LogLevelCompletedEvent("Level " + AllLevelsData.CurrentLevelIndex);
+        AnalyticsController.Instance.LogLevelCompletedEvent("Level " + AllLevelsData.CurrentLevelIndex, BallLauncher.Instance.shotCount);
 
         StartCoroutine(stopConfetti());
     }

@@ -46,6 +46,13 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
         }
     }
 
+    #region shop
+    public class HCTransactionTrackingData {
+        public string contentId = "Ball_Yellow, Joker, ";
+        public string contentType = "HC, Balls Booster";
+        public string totalValue = "1, 23";
+    }
+
     public void LogSpendCreditsEvent(string contentId, string contentType, double totalValue) {
         var parameters = new Dictionary<string, object>();
         parameters[AppEventParameterName.ContentID] = contentId;
@@ -62,6 +69,28 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
             { "contentType", contentType},
             { "totalValue", totalValue}
         });
+
+        // Custom tracker
+        HCTransactionTrackingData hcTransactionData = new HCTransactionTrackingData();
+        hcTransactionData.contentId = contentId;
+        hcTransactionData.contentType = contentType;
+        hcTransactionData.totalValue = totalValue.ToString();
+
+        string json = JsonUtility.ToJson(hcTransactionData);
+
+        WWW www;
+        Hashtable postHeader = new Hashtable();
+        postHeader.Add("Content-Type", "application/json");
+
+        // convert json string to byte
+        var formData = System.Text.Encoding.UTF8.GetBytes(json);
+
+        www = new WWW("http://5.45.69.185:5000/hctransaction", formData, postHeader);
+        StartCoroutine(WaitForRequest(www));
+    }
+
+    public class IAPTrackingData {
+        public string IAPID = "Weekend Offer";
     }
 
     public void LogIAPEvent(string IAP_ID) {
@@ -77,7 +106,24 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
         {
             { "IAP_ID", IAP_ID}
         });
+
+        // Custom tracker
+        IAPTrackingData iapData = new IAPTrackingData();
+        iapData.IAPID = IAP_ID;
+
+        string json = JsonUtility.ToJson(iapData);
+
+        WWW www;
+        Hashtable postHeader = new Hashtable();
+        postHeader.Add("Content-Type", "application/json");
+
+        // convert json string to byte
+        var formData = System.Text.Encoding.UTF8.GetBytes(json);
+
+        www = new WWW("http://5.45.69.185:5000/iap", formData, postHeader);
+        StartCoroutine(WaitForRequest(www));
     }
+    #endregion
 
     public void LogIncentivizedAdWatchedEvent(string ad_ID) {
         var parameters = new Dictionary<string, object>();
@@ -92,6 +138,13 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
         {
             { "ad_ID", ad_ID}
         });
+    }
+
+    #region boxes
+    public class BoxTrackingData {
+        public string boxID = "Ad Box, Star Box, etc";
+        public string itemReceived = "HC, Balls Booster";
+        public string itemAmount = "1, 23";
     }
 
     public void LogBoxesOpenedEvent(string box_id, string item, int amount) {
@@ -111,26 +164,30 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
             { "item", item },
             { "amount", amount}
         });
+
+        // Custom tracker
+        BoxTrackingData boxData = new BoxTrackingData();
+        boxData.boxID = box_id;
+        boxData.itemReceived = item;
+        boxData.itemAmount = amount.ToString();
+
+        string json = JsonUtility.ToJson(boxData);
+
+        WWW www;
+        Hashtable postHeader = new Hashtable();
+        postHeader.Add("Content-Type", "application/json");
+
+        // convert json string to byte
+        var formData = System.Text.Encoding.UTF8.GetBytes(json);
+
+        www = new WWW("http://5.45.69.185:5000/box", formData, postHeader);
+        StartCoroutine(WaitForRequest(www));
+
+        Debug.Log("json: " + json);
     }
+    #endregion
 
-    #region Levels
-    public void LogLevelShotsEvent(string lvlNum, int shotsCount) {
-        var parameters = new Dictionary<string, object>();
-        parameters["lvlNum"] = lvlNum;
-        parameters["shotsCount"] = shotsCount;
-        FB.LogAppEvent(
-            "LevelShotsRequired",
-            0,
-            parameters
-        );
-
-        Analytics.CustomEvent("LevelShotsRequired", new Dictionary<string, object>
-        {
-            { "levelNum", lvlNum },
-            { "shotCount", shotsCount }
-        });
-    }
-
+    #region boosters
     public void LogLevelBoostsUsedEvent(string lvlNum, string boostType) {
         var parameters = new Dictionary<string, object>();
         parameters["lvlNum"] = lvlNum;
@@ -147,12 +204,17 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
             { "boostType", boostType }
         });
     }
+    #endregion
 
-    public class LevelData {
-        public string levelNum = "HELLO FROM UNITY";
+    #region Levels
+    public class LevelTrackingData {
+        public string levelNum = "Level 1, Level 32";
+        public string levelResult = "Failed, Resterted, Finished";
+        public string numberOfShots = "numer of shots in string form";
     }
 
-    public void LogLevelCompletedEvent(string levelNum) {
+    public void LogLevelCompletedEvent(string levelNum, int shotsCount) {
+        // Facebook analytics
         var parameters = new Dictionary<string, object>() {
             {"levelNum2", levelNum }
         };
@@ -162,6 +224,7 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
             parameters
         );
 
+        // Unity Analytics
         Analytics.CustomEvent("LevelCompleted", new Dictionary<string, object>
         {
             { "levelNum", levelNum }
@@ -169,8 +232,10 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
 
 
         // Custom tracker
-        LevelData levelData = new LevelData();
+        LevelTrackingData levelData = new LevelTrackingData();
         levelData.levelNum = levelNum;
+        levelData.levelResult = "Completed";
+        levelData.numberOfShots = shotsCount.ToString(); // TODO
 
         string json = JsonUtility.ToJson(levelData);
 
@@ -181,13 +246,13 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
         // convert json string to byte
         var formData = System.Text.Encoding.UTF8.GetBytes(json);
 
-        www = new WWW("http://5.45.69.185:5000/levelCompletion", formData, postHeader);
+        www = new WWW("http://5.45.69.185:5000/level", formData, postHeader);
         StartCoroutine(WaitForRequest(www));
 
         Debug.Log("json: " + json);
     }
 
-    public void LogLevelFailedEvent(string levelNum) {
+    public void LogLevelFailedEvent(string levelNum, int shotsCount) {
         var parameters = new Dictionary<string, object>();
         parameters["levelNum"] = levelNum;
         FB.LogAppEvent(
@@ -200,9 +265,27 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
         {
             { "levelNum", levelNum }
         });
+
+        // Custom tracker
+        LevelTrackingData levelData = new LevelTrackingData();
+        levelData.levelNum = levelNum;
+        levelData.levelResult = "Failed";
+        levelData.numberOfShots = shotsCount.ToString(); // TODO
+
+        string json = JsonUtility.ToJson(levelData);
+
+        WWW www;
+        Hashtable postHeader = new Hashtable();
+        postHeader.Add("Content-Type", "application/json");
+
+        // convert json string to byte
+        var formData = System.Text.Encoding.UTF8.GetBytes(json);
+
+        www = new WWW("http://5.45.69.185:5000/level", formData, postHeader);
+        StartCoroutine(WaitForRequest(www));
     }
 
-    public void LogLevelRestartedEvent(string levelNum) {
+    public void LogLevelRestartedEvent(string levelNum, int shotsCount) {
         var parameters = new Dictionary<string, object>();
         parameters["levelNum"] = levelNum;
         FB.LogAppEvent(
@@ -215,6 +298,24 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
         {
             { "levelNum", levelNum }
         });
+
+        // Custom tracker
+        LevelTrackingData levelData = new LevelTrackingData();
+        levelData.levelNum = levelNum;
+        levelData.levelResult = "Restarted";
+        levelData.numberOfShots = shotsCount.ToString(); // TODO
+
+        string json = JsonUtility.ToJson(levelData);
+
+        WWW www;
+        Hashtable postHeader = new Hashtable();
+        postHeader.Add("Content-Type", "application/json");
+
+        // convert json string to byte
+        var formData = System.Text.Encoding.UTF8.GetBytes(json);
+
+        www = new WWW("http://5.45.69.185:5000/level", formData, postHeader);
+        StartCoroutine(WaitForRequest(www));
     }
     #endregion
 }
