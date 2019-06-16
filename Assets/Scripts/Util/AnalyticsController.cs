@@ -9,25 +9,6 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
 
     // Use this for initialization
     void Awake() {
-
-        //   StartCoroutine(Upload());
-        SomeData someData = new SomeData();
-        someData.o = "wut?";
-
-        string json = JsonUtility.ToJson(someData);
-
-        WWW www;
-        Hashtable postHeader = new Hashtable();
-        postHeader.Add("Content-Type", "application/json");
-
-        // convert json string to byte
-        var formData = System.Text.Encoding.UTF8.GetBytes(json);
-
-        www = new WWW("http://5.45.69.185:5000/analytics", formData, postHeader);
-        StartCoroutine(WaitForRequest(www));
-
-        Debug.Log("json: " + json);
-
         if (FB.IsInitialized) {
             FB.ActivateApp();
         }
@@ -37,35 +18,7 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
                 FB.ActivateApp();
             });
         }
-
     }
-
-    public class SomeData {
-        public string o = "HELLO FROM UNITY";
-    }
-
-    //IEnumerator Upload() {
-    //    SomeData someData = new SomeData();
-    //    someData.o = "wut?";
-
-    //    string json = JsonUtility.ToJson(someData);
-
-        //List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-        //formData.Add(new MultipartFormDataSection("field1=foo&field2=bar"));
-        //formData.Add(new MultipartFormFileSection("my file data", "myfile.txt"));
-
-   
-
-        //UnityWebRequest www = UnityWebRequest.Post("http://5.45.69.185:5000/analytics", json);
-        //yield return www.SendWebRequest();
-
-        //if (www.isNetworkError || www.isHttpError) {
-        //    Debug.Log(www.error);
-        //}
-        //else {
-        //    Debug.Log("Form upload complete!");
-        //}
-    //}
 
     IEnumerator WaitForRequest(WWW data) {
         yield return data; // Wait until the download is done
@@ -195,6 +148,10 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
         });
     }
 
+    public class LevelData {
+        public string levelNum = "HELLO FROM UNITY";
+    }
+
     public void LogLevelCompletedEvent(string levelNum) {
         var parameters = new Dictionary<string, object>() {
             {"levelNum2", levelNum }
@@ -209,6 +166,25 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
         {
             { "levelNum", levelNum }
         });
+
+
+        // Custom tracker
+        LevelData levelData = new LevelData();
+        levelData.levelNum = levelNum;
+
+        string json = JsonUtility.ToJson(levelData);
+
+        WWW www;
+        Hashtable postHeader = new Hashtable();
+        postHeader.Add("Content-Type", "application/json");
+
+        // convert json string to byte
+        var formData = System.Text.Encoding.UTF8.GetBytes(json);
+
+        www = new WWW("http://5.45.69.185:5000/levelCompletion", formData, postHeader);
+        StartCoroutine(WaitForRequest(www));
+
+        Debug.Log("json: " + json);
     }
 
     public void LogLevelFailedEvent(string levelNum) {
