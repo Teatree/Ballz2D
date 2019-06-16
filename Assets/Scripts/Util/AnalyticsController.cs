@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Facebook.Unity;
 using UnityEngine;
 using UnityEngine.Analytics;
+using UnityEngine.Networking;
 
 public class AnalyticsController : SceneSingleton<AnalyticsController> {
 
     // Use this for initialization
-    void Awake () {
-
+    void Awake() {
         if (FB.IsInitialized) {
             FB.ActivateApp();
         }
@@ -18,7 +18,16 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
                 FB.ActivateApp();
             });
         }
+    }
 
+    IEnumerator WaitForRequest(WWW data) {
+        yield return data; // Wait until the download is done
+        if (data.error != null) {
+            Debug.Log("There was an error sending request: " + data.error);
+        }
+        else {
+            Debug.Log("WWW Request: " + data.text);
+        }
     }
 
     private void OnApplicationPause(bool pause) {
@@ -139,6 +148,10 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
         });
     }
 
+    public class LevelData {
+        public string levelNum = "HELLO FROM UNITY";
+    }
+
     public void LogLevelCompletedEvent(string levelNum) {
         var parameters = new Dictionary<string, object>() {
             {"levelNum2", levelNum }
@@ -153,6 +166,25 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
         {
             { "levelNum", levelNum }
         });
+
+
+        // Custom tracker
+        LevelData levelData = new LevelData();
+        levelData.levelNum = levelNum;
+
+        string json = JsonUtility.ToJson(levelData);
+
+        WWW www;
+        Hashtable postHeader = new Hashtable();
+        postHeader.Add("Content-Type", "application/json");
+
+        // convert json string to byte
+        var formData = System.Text.Encoding.UTF8.GetBytes(json);
+
+        www = new WWW("http://5.45.69.185:5000/levelCompletion", formData, postHeader);
+        StartCoroutine(WaitForRequest(www));
+
+        Debug.Log("json: " + json);
     }
 
     public void LogLevelFailedEvent(string levelNum) {
