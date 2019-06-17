@@ -34,20 +34,21 @@ public class DataController
  
  
 #endif
-
+    
     //--------- Player Info ----------
     public static PlayerData LoadPlayer()
     {
         string jsonData = "";
         //if (Application.platform == RuntimePlatform.Android) {
+        PlayerData pi;
 
-        if (!File.Exists(playerfilePath))
-        {
+        if (!File.Exists(playerfilePath)) {
             TextAsset file = Resources.Load("playerInfo") as TextAsset;
             jsonData = file.ToString();
-            PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
+            pi = JsonUtility.FromJson<PlayerData>(jsonData);
+            pi.PlayerID = PlayerController.GenerateID();
             pi.firstLoginAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            return pi;
+
             //StreamReader f = new StreamReader(playerfilePath);
             //jsonData = f.ReadToEnd();
             //f.Close();
@@ -57,17 +58,15 @@ public class DataController
             //while (!reader.isDone) { }
             //jsonData = reader.text;
         }
-        else
-        {
+        else {
             jsonData = File.ReadAllText(playerfilePath);
-            PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
+            pi = JsonUtility.FromJson<PlayerData>(jsonData);
             Debug.Log(">>>> jsonData > " + jsonData);
-            return pi;
 
         }
+        return pi;
         // PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
         //   AjsonData = "<color=#a52a2aff> " + jsonData + "</color>";
-
     }
 
     public static void SavePlayer(PlayerData pi)
@@ -210,6 +209,7 @@ public class DataController
 [System.Serializable]
 public class PlayerData
 {
+    public string PlayerID;
     public int gems;
     public int stars;
     public int progressTowardsNextStarBox; // how many stars player already gathered for the current star box

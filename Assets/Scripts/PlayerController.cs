@@ -46,6 +46,11 @@ public class PlayerController : SceneSingleton<PlayerController> {
 
             LevelController.SpecialBall = player.specialBallImageName;
         }
+        AnalyticsController.Instance.LogPlayersOnline("online");
+    }
+
+    public static string GenerateID() {
+        return System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("Player" + UnityEngine.Random.Range(0, 100000000) + DateTime.Now));
     }
 
     public void AddNewCompletedLevel(int lvlNum, int stars) {
@@ -59,11 +64,16 @@ public class PlayerController : SceneSingleton<PlayerController> {
     }
 
     private void OnApplicationPause(bool pause) {
-
+        
         SavePlayer();
 
-        if(pause)
+        if (pause) {
+            AnalyticsController.Instance.LogPlayersOnline("offline");
             NotificationController.Instance.ScheduleComeback(DateTime.Now.AddHours(6));
+        }
+        else {
+            AnalyticsController.Instance.LogPlayersOnline("online");
+        }
     }
 
     private static void SavePlayer() {
@@ -81,6 +91,7 @@ public class PlayerController : SceneSingleton<PlayerController> {
     }
 
     void OnApplicationQuit() {
+        AnalyticsController.Instance.LogPlayersOnline("offline");
         SavePlayer();
 
         //NotificationController.Instance.ScheduleBoxComeback(DateTime.Now.AddSeconds(30)/*DateTime.Now.AddHours(8)*/);
