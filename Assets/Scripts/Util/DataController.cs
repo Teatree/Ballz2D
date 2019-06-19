@@ -53,7 +53,7 @@ public class DataController
             //jsonData = f.ReadToEnd();
             //f.Close();
 
-
+            
             //WWW reader = new WWW(playerfilePath);
             //while (!reader.isDone) { }
             //jsonData = reader.text;
@@ -61,6 +61,9 @@ public class DataController
         else {
             jsonData = File.ReadAllText(playerfilePath);
             pi = JsonUtility.FromJson<PlayerData>(jsonData);
+            if(pi.PlayerID == null || pi.PlayerID == "") {
+                pi.PlayerID = PlayerController.GenerateID();
+            }
             Debug.Log(">>>> jsonData > " + jsonData);
 
         }

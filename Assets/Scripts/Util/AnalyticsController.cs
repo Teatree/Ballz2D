@@ -238,10 +238,11 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
     public class LevelTrackingData : JsonData {
         public string levelNum = "Level 1, Level 32";
         public string levelResult = "Failed, Resterted, Finished";
+        public string starsAmount = "1,2,3 stars at the end";
         public string numberOfShots = "numer of shots in string form";
     }
 
-    public void LogLevelCompletedEvent(string levelNum, int shotsCount) {
+    public void LogLevelStatusEvent(string levelNum, int shotsCount, int starsCount, string levelResult) {
         // Facebook analytics
         var parameters = new Dictionary<string, object>() {
             {"levelNum2", levelNum }
@@ -263,76 +264,11 @@ public class AnalyticsController : SceneSingleton<AnalyticsController> {
         LevelTrackingData levelData = new LevelTrackingData();
         levelData.playerID = PlayerController.player.PlayerID;
         levelData.levelNum = levelNum;
-        levelData.levelResult = "Completed";
-        levelData.numberOfShots = shotsCount.ToString(); // TODO
+        levelData.starsAmount = starsCount.ToString();
+        levelData.levelResult = levelResult;
+        levelData.numberOfShots = shotsCount.ToString();
 
         PostRequest(levelData, "http://5.45.69.185:80/level");
-    }
-
-    public void LogLevelFailedEvent(string levelNum, int shotsCount) {
-        var parameters = new Dictionary<string, object>();
-        parameters["levelNum"] = levelNum;
-        FB.LogAppEvent(
-            "LevelFailed",
-            0,
-            parameters
-        );
-
-        Analytics.CustomEvent("LevelFailed", new Dictionary<string, object>
-        {
-            { "levelNum", levelNum }
-        });
-
-        // Custom tracker
-        LevelTrackingData levelData = new LevelTrackingData();
-        levelData.levelNum = levelNum;
-        levelData.levelResult = "Failed";
-        levelData.numberOfShots = shotsCount.ToString(); // TODO
-
-        string json = JsonUtility.ToJson(levelData);
-
-        WWW www;
-        Hashtable postHeader = new Hashtable();
-        postHeader.Add("Content-Type", "application/json");
-
-        // convert json string to byte
-        var formData = System.Text.Encoding.UTF8.GetBytes(json);
-
-        www = new WWW("http://5.45.69.185:80/level", formData, postHeader);
-        StartCoroutine(WaitForRequest(www));
-    }
-
-    public void LogLevelRestartedEvent(string levelNum, int shotsCount) {
-        var parameters = new Dictionary<string, object>();
-        parameters["levelNum"] = levelNum;
-        FB.LogAppEvent(
-            "LevelRestarted",
-            0,
-            parameters
-        );
-
-        Analytics.CustomEvent("LevelRestarted", new Dictionary<string, object>
-        {
-            { "levelNum", levelNum }
-        });
-
-        // Custom tracker
-        LevelTrackingData levelData = new LevelTrackingData();
-        levelData.levelNum = levelNum;
-        levelData.levelResult = "Restarted";
-        levelData.numberOfShots = shotsCount.ToString(); // TODO
-
-        string json = JsonUtility.ToJson(levelData);
-
-        WWW www;
-        Hashtable postHeader = new Hashtable();
-        postHeader.Add("Content-Type", "application/json");
-
-        // convert json string to byte
-        var formData = System.Text.Encoding.UTF8.GetBytes(json);
-
-        www = new WWW("http://5.45.69.185:80/level", formData, postHeader);
-        StartCoroutine(WaitForRequest(www));
     }
     #endregion
 

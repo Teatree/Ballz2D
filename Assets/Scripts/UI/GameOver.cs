@@ -75,7 +75,7 @@ public class GameOver : IPopup<GameOver> {
         Btn_Group_Ads.SetActive(false);
         Btn_Group_Fail.SetActive(true);
 
-        AnalyticsController.Instance.LogLevelFailedEvent("Level " + AllLevelsData.CurrentLevelIndex, BallLauncher.Instance.shotCount);
+        AnalyticsController.Instance.LogLevelStatusEvent("Level " + AllLevelsData.CurrentLevelIndex, BallLauncher.Instance.shotCount, 0, "Failed");
 
         Star1.transform.GetComponent<Image>().color = Color.grey;
         Star2.transform.GetComponent<Image>().color = Color.grey;
@@ -92,7 +92,7 @@ public class GameOver : IPopup<GameOver> {
 
         Window_Confetti.Instance.ReleaseConfetti();
 
-        AnalyticsController.Instance.LogLevelCompletedEvent("Level " + AllLevelsData.CurrentLevelIndex, BallLauncher.Instance.shotCount);
+        AnalyticsController.Instance.LogLevelStatusEvent("Level " + AllLevelsData.CurrentLevelIndex, BallLauncher.Instance.shotCount, StarsAmount, "Completed");
 
         StartCoroutine(stopConfetti());
     }
