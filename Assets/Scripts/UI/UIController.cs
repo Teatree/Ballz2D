@@ -19,6 +19,7 @@ public class UIController : SceneSingleton<UIController> {
     [Header("Popups")]
     public GameObject SettingsPrefab;
     public GameObject ShopPrefab;
+    public GameObject SubscriptionsPrefub;
     public GameObject BoxPopupPrefab;
     public GameObject waitForItPrefab;
 
@@ -156,6 +157,11 @@ public class UIController : SceneSingleton<UIController> {
 
     public void OpenShop() {
         Instantiate(ShopPrefab, transform);
+    }
+
+    public void OpenSubscriptions()
+    {
+        Instantiate(SubscriptionsPrefub, transform);
     }
 
     public void OpenBoxOpen() {
