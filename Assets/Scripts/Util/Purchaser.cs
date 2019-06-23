@@ -37,6 +37,9 @@ public class Purchaser : MonoBehaviour, IStoreListener
     public static string MONTH_SUB = "month_sub";
     public static string YEAR_SUB = "year_sub";
 
+    private IGooglePlayStoreExtensions m_GooglePlayStoreExtensions;
+    public static string debugbs = "0";
+
     public void Awake()
     {
         purchaser = this;
@@ -92,6 +95,8 @@ public class Purchaser : MonoBehaviour, IStoreListener
         // Only say we are initialized if both the Purchasing references are set.
         return m_StoreController != null && m_StoreExtensionProvider != null;
     }
+
+    #region initializeBuy
 
     public void BuyGems200()
     {
@@ -179,6 +184,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
         BuyProductID(YEAR_SUB);
     }
 
+    #endregion
 
     public string GetLocalPrice(string prodId)
     {
@@ -270,6 +276,9 @@ public class Purchaser : MonoBehaviour, IStoreListener
         m_StoreController = controller;
         // Store specific subsystem, for accessing device-specific store features.
         m_StoreExtensionProvider = extensions;
+        m_GooglePlayStoreExtensions = extensions.GetExtension<IGooglePlayStoreExtensions>();
+
+        getSubData();
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)
@@ -333,47 +342,53 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
     public void getSubData()
     {
+        //Dictionary<string, string> Dict = m_GooglePlayStoreExtensions.GetProductJSONDictionary();
+
         foreach (var item in m_StoreController.products.all)
         {
             if (item.availableToPurchase)
             {
-                if (item.receipt != null)
-                {
+                if (item.receipt != null) 
+                    {
                     if (item.definition.type == ProductType.Subscription)
                     {
-                        if (checkIfProductIsAvailableForSubscriptionManager(item.receipt))
-                        {
-                            //string intro_json = (introductory_info_dict == null || !introductory_info_dict.ContainsKey(item.definition.storeSpecificId)) ? null : introductory_info_dict[item.definition.storeSpecificId];
-                       
-                            SubscriptionManager p = new SubscriptionManager(item, null);
-                            SubscriptionInfo info = p.getSubscriptionInfo();
-                            Debug.Log("product id is: " + info.getProductId());
-                            Debug.Log("purchase date is: " + info.getPurchaseDate());
-                            Debug.Log("subscription next billing date is: " + info.getExpireDate());
-                            Debug.Log("is subscribed? " + info.isSubscribed().ToString());
-                            Debug.Log("is expired? " + info.isExpired().ToString());
-                            Debug.Log("is cancelled? " + info.isCancelled());
-                            Debug.Log("product is in free trial peroid? " + info.isFreeTrial());
-                            Debug.Log("product is auto renewing? " + info.isAutoRenewing());
-                            Debug.Log("subscription remaining valid time until next billing date is: " + info.getRemainingTime());
-                            Debug.Log("is this product in introductory price period? " + info.isIntroductoryPricePeriod());
-                            Debug.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
-                            Debug.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
-                            Debug.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
-                        }
-                        else
-                        {
-                            Debug.Log("This product is not available for SubscriptionManager class, only products that are purchase by 1.19+ SDK can use this class.");
-                        }
+                        //if (checkIfProductIsAvailableForSubscriptionManager(item.receipt)) {
+                        //string intro_json = (Dict == null || !Dict.ContainsKey(item.definition.storeSpecificId)) ? null : Dict[item.definition.storeSpecificId];
+                        //string intro_json = (introductory_info_dict == null || !introductory_info_dict.ContainsKey(item.definition.storeSpecificId)) ? null : introductory_info_dict[item.definition.storeSpecificId];
+
+                        //Debug.Log("intro_json: " + intro_json);
+
+                        //SubscriptionManager p = new SubscriptionManager(item, intro_json);
+
+                        //SubscriptionInfo info = p.getSubscriptionInfo();
+                        //Debug.Log("product id is: " + info.getProductId());
+                        //Debug.Log("purchase date is: " + info.getPurchaseDate());
+                        //Debug.Log("subscription next billing date is: " + info.getExpireDate());
+                        //Debug.Log("is subscribed? " + info.isSubscribed().ToString());
+                        //Debug.Log("is expired? " + info.isExpired().ToString());
+                        //Debug.Log("is cancelled? " + info.isCancelled());
+                        //Debug.Log("product is in free trial peroid? " + info.isFreeTrial());
+                        //Debug.Log("product is auto renewing? " + info.isAutoRenewing());
+                        //Debug.Log("subscription remaining valid time until next billing date is: " + info.getRemainingTime());
+                        //Debug.Log("is this product in introductory price period? " + info.isIntroductoryPricePeriod());
+                        //Debug.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
+                        //Debug.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
+                        //Debug.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
+                        debugbs += "1 " + item.receipt + "\n";
+                        //}
+                        //else {
+                        //    Debug.Log("This product is not available for SubscriptionManager class, only products that are purchase by 1.19+ SDK can use this class.");
+                        //}
                     }
                     else
                     {
                         Debug.Log("the product is not a subscription product");
+                        debugbs += "2" + "\n";
                     }
                 }
-                else
-                {
+                else {
                     Debug.Log("the product should have a valid receipt");
+                    debugbs += "3" + "\n";
                 }
             }
         }

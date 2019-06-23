@@ -9,9 +9,13 @@ public class SubscriptionPopup : IPopup<SubscriptionPopup> {
 
     public void Start()
     {
-        freeCost.text = Purchaser.purchaser.GetLocalPrice(Purchaser.WEEK_SUB);
+       // freeCost.text = Purchaser.purchaser.GetLocalPrice(Purchaser.WEEK_SUB);
         monthlySubCost.text = Purchaser.purchaser.GetLocalPrice(Purchaser.MONTH_SUB);
         yearlySubCost.text = Purchaser.purchaser.GetLocalPrice(Purchaser.YEAR_SUB);
+    }
+
+    public void Update() {
+        freeCost.text = Purchaser.debugbs;
     }
 
     public void buyTryWeekSub()
