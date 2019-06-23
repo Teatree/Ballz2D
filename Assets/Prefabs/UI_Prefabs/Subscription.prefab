@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224314609674775708}
   - component: {fileID: 222462520394229918}
+  - component: {fileID: 114108184003540054}
   m_Layer: 5
   m_Name: Subscription
   m_TagString: Untagged
@@ -180,7 +181,7 @@ GameObject:
   - component: {fileID: 222004476460616920}
   - component: {fileID: 114025175020290108}
   m_Layer: 5
-  m_Name: ShopPopupPanel
+  m_Name: SubPopupPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -422,6 +423,20 @@ MonoBehaviour:
   m_Text: 'Memebrship
 
 '
+--- !u!114 &114108184003540054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1052768013514236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 951f901eb4cd34c49b8a5f1cd9a3b2ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freeCost: {fileID: 114132900779072100}
+  monthlySubCost: {fileID: 114538799462746416}
+  yearlySubCost: {fileID: 114589495472518080}
 --- !u!114 &114132900779072100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -514,7 +529,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1Month
+  m_Text: 1 Month
 --- !u!114 &114189481337939958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -567,7 +582,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114477066604455408}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114108184003540054}
+        m_MethodName: buyMonthSub
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114209904765518768
@@ -704,7 +730,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 114108184003540054}
         m_MethodName: OnClick_Close
         m_Mode: 1
         m_Arguments:
@@ -860,7 +886,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114144048023700394}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114108184003540054}
+        m_MethodName: buyTryWeekSub
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114538799462746416
@@ -1112,7 +1149,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114209904765518768}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114108184003540054}
+        m_MethodName: buyYearSub
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114839028909908188

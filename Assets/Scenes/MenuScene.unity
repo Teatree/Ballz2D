@@ -3688,7 +3688,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2066143726}
-        m_MethodName: OpenShop
+        m_MethodName: OpenSubscriptions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4665,6 +4665,8 @@ MonoBehaviour:
   SettingsPrefab: {fileID: 1305703286730776, guid: 9d25620c88531a846a0342469935e834,
     type: 2}
   ShopPrefab: {fileID: 1094745606953602, guid: a8c37f914cf2dbd46aec93f3f8a89f7e, type: 2}
+  SubscriptionsPrefub: {fileID: 1052768013514236, guid: 813da7fc792e3bb46b45d11a9abcc402,
+    type: 2}
   BoxPopupPrefab: {fileID: 1393861602802556, guid: bfa265d38308df0419eb1e11e0ec040f,
     type: 2}
   waitForItPrefab: {fileID: 1063380916139300, guid: e78a56ba5c5c2674ebe2eeee2cdc2e9a,
