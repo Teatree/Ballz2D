@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SubscriptionPopup : IPopup<SubscriptionPopup> {
@@ -7,15 +6,31 @@ public class SubscriptionPopup : IPopup<SubscriptionPopup> {
     public Text monthlySubCost;
     public Text yearlySubCost;
 
+    public GameObject freeBtn;
+    public GameObject monthlySubBtn;
+    public GameObject yearlySubBtn;
+
+    public bool isOnStart;
+
     public void Start()
     {
-       // freeCost.text = Purchaser.purchaser.GetLocalPrice(Purchaser.WEEK_SUB);
-        monthlySubCost.text = Purchaser.purchaser.GetLocalPrice(Purchaser.MONTH_SUB);
-        yearlySubCost.text = Purchaser.purchaser.GetLocalPrice(Purchaser.YEAR_SUB);
+        InitPopup();
+    }
+
+
+    public void InitPopup() {
+        if (isOnStart) {
+            monthlySubBtn.SetActive(false);
+            yearlySubBtn.SetActive(false);
+        }
+        else {
+            monthlySubCost.text = Purchaser.purchaser.GetLocalPrice(Purchaser.MONTH_SUB);
+            yearlySubCost.text = Purchaser.purchaser.GetLocalPrice(Purchaser.YEAR_SUB);
+        }
     }
 
     public void Update() {
-        freeCost.text = Purchaser.debugbs;
+        freeCost.text = Purchaser.advertiseSubs + " / " + Purchaser.debugbs;
     }
 
     public void buyTryWeekSub()

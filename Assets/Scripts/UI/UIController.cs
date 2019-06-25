@@ -19,9 +19,11 @@ public class UIController : SceneSingleton<UIController> {
     [Header("Popups")]
     public GameObject SettingsPrefab;
     public GameObject ShopPrefab;
-    public GameObject SubscriptionsPrefub;
     public GameObject BoxPopupPrefab;
     public GameObject waitForItPrefab;
+
+    public GameObject SubscriptionsPrefub;
+    public GameObject subReceivedPopupPrefab;
 
     //Daily boxes
     public GameObject BoxDayButton;
@@ -104,7 +106,13 @@ public class UIController : SceneSingleton<UIController> {
         }
 
         InitAdbox();
-
+        //if (Purchaser.advertiseSubs) {
+        //    OpenSubscriptionsOnStart();
+        //}
+        
+        //if (Purchaser.giveSubsStuff) {
+        //    OpenSubscriptions();
+        //}
         //if (PlayerController.player.adBoxOpenedCount < UnityAddsController.Instance.AdBoxOpenLimit) {
         //    BoxAdArrow.SetActive(true);
         //    BoxAdArrow.GetComponent<Animation>().Play();
@@ -162,6 +170,18 @@ public class UIController : SceneSingleton<UIController> {
     public void OpenSubscriptions()
     {
         Instantiate(SubscriptionsPrefub, transform);
+    }
+
+    public void OpenSubsBonus() {
+        Instantiate(subReceivedPopupPrefab, transform);
+    }
+
+
+    public void OpenSubscriptionsOnStart() {
+        GameObject s = Instantiate(SubscriptionsPrefub, transform);
+        SubscriptionPopup sp = s.transform.GetComponent<SubscriptionPopup>();
+        sp.isOnStart = true;
+        sp.InitPopup();
     }
 
     public void OpenBoxOpen() {

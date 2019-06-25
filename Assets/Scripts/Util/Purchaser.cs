@@ -37,8 +37,11 @@ public class Purchaser : MonoBehaviour, IStoreListener
     public static string MONTH_SUB = "month_sub";
     public static string YEAR_SUB = "year_sub";
 
-    private IGooglePlayStoreExtensions m_GooglePlayStoreExtensions;
-    public static string debugbs = "0";
+  //  private IGooglePlayStoreExtensions m_GooglePlayStoreExtensions;
+    public static bool advertiseSubs = true;
+    public static bool giveSubsStuff = false;
+
+      public static string debugbs ="";
 
     public void Awake()
     {
@@ -276,7 +279,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
         m_StoreController = controller;
         // Store specific subsystem, for accessing device-specific store features.
         m_StoreExtensionProvider = extensions;
-        m_GooglePlayStoreExtensions = extensions.GetExtension<IGooglePlayStoreExtensions>();
+      //  m_GooglePlayStoreExtensions = extensions.GetExtension<IGooglePlayStoreExtensions>();
 
         getSubData();
     }
@@ -344,14 +347,11 @@ public class Purchaser : MonoBehaviour, IStoreListener
     {
         //Dictionary<string, string> Dict = m_GooglePlayStoreExtensions.GetProductJSONDictionary();
 
-        foreach (var item in m_StoreController.products.all)
-        {
-            if (item.availableToPurchase)
-            {
-                if (item.receipt != null) 
-                    {
-                    if (item.definition.type == ProductType.Subscription)
-                    {
+        foreach (var item in m_StoreController.products.all){
+            if (item.availableToPurchase){
+              
+                if (item.receipt != null) {
+                    if (item.definition.type == ProductType.Subscription) {
                         //if (checkIfProductIsAvailableForSubscriptionManager(item.receipt)) {
                         //string intro_json = (Dict == null || !Dict.ContainsKey(item.definition.storeSpecificId)) ? null : Dict[item.definition.storeSpecificId];
                         //string intro_json = (introductory_info_dict == null || !introductory_info_dict.ContainsKey(item.definition.storeSpecificId)) ? null : introductory_info_dict[item.definition.storeSpecificId];
@@ -374,7 +374,21 @@ public class Purchaser : MonoBehaviour, IStoreListener
                         //Debug.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
                         //Debug.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
                         //Debug.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
-                        debugbs += "1 " + item.receipt + "\n";
+                       
+                        GooglePurchaseData d = new GooglePurchaseData(item.receipt);
+                        if (item.hasReceipt) {
+                            advertiseSubs = false;
+                            DateTime dt = DateTime.MinValue;
+                            dt.AddMilliseconds(Convert.ToInt64(d.data.purchaseTime));
+                            //debugbs += d.data.productId + "  "  + "  " + dt + "\n";
+                            SubscriptionManager p = new SubscriptionManager(item, item.receipt);
+                            SubscriptionInfo info = p.getSubscriptionInfo();
+                            debugbs += info.getProductId() + "  " + info.isExpired() + "  " + info.getPurchaseDate() + "\n";
+                            if (info.isExpired() == Result.False && info.isCancelled() != Result.True) {
+                                Debug.Log(">>>> Give stuff! > ");
+                                UIController.Instance.OpenSubsBonus();
+                            }
+                        }
                         //}
                         //else {
                         //    Debug.Log("This product is not available for SubscriptionManager class, only products that are purchase by 1.19+ SDK can use this class.");
@@ -383,66 +397,69 @@ public class Purchaser : MonoBehaviour, IStoreListener
                     else
                     {
                         Debug.Log("the product is not a subscription product");
-                        debugbs += "2" + "\n";
+                     
                     }
                 }
                 else {
                     Debug.Log("the product should have a valid receipt");
-                    debugbs += "3" + "\n";
+                   
                 }
             }
         }
-    }
-    private bool checkIfProductIsAvailableForSubscriptionManager(string receipt)
-    {
-        var receipt_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(receipt);
-        if (!receipt_wrapper.ContainsKey("Store") || !receipt_wrapper.ContainsKey("Payload"))
-        {
-            Debug.Log("The product receipt does not contain enough information");
-            return false;
+        if (Purchaser.advertiseSubs) {
+            UIController.Instance.OpenSubscriptionsOnStart();
         }
-        var store = (string)receipt_wrapper["Store"];
-        var payload = (string)receipt_wrapper["Payload"];
+    }
+    //private bool checkIfProductIsAvailableForSubscriptionManager(string receipt)
+    //{
+    //    var receipt_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(receipt);
+    //    if (!receipt_wrapper.ContainsKey("Store") || !receipt_wrapper.ContainsKey("Payload"))
+    //    {
+    //        Debug.Log("The product receipt does not contain enough information");
+    //        return false;
+    //    }
+    //    var store = (string)receipt_wrapper["Store"];
+    //    var payload = (string)receipt_wrapper["Payload"];
 
-        if (payload != null)
-        {
-            switch (store)
-            {
-                case GooglePlay.Name:
-                    {
-                        var payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(payload);
-                        if (!payload_wrapper.ContainsKey("json"))
-                        {
-                            Debug.Log("The product receipt does not contain enough information, the 'json' field is missing");
-                            return false;
-                        }
-                        var original_json_payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode((string)payload_wrapper["json"]);
-                        if (original_json_payload_wrapper == null || !original_json_payload_wrapper.ContainsKey("developerPayload"))
-                        {
-                            Debug.Log("The product receipt does not contain enough information, the 'developerPayload' field is missing");
-                            return false;
-                        }
-                        var developerPayloadJSON = (string)original_json_payload_wrapper["developerPayload"];
-                        var developerPayload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(developerPayloadJSON);
-                        if (developerPayload_wrapper == null || !developerPayload_wrapper.ContainsKey("is_free_trial") || !developerPayload_wrapper.ContainsKey("has_introductory_price_trial"))
-                        {
-                            Debug.Log("The product receipt does not contain enough information, the product is not purchased using 1.19 or later");
-                            return false;
-                        }
-                        return true;
-                    }
-                case AppleAppStore.Name:
-                case AmazonApps.Name:
-                case MacAppStore.Name:
-                    {
-                        return true;
-                    }
-                default:
-                    {
-                        return false;
-                    }
-            }
-        }
-        return false;
-    }
+    //    if (payload != null)
+    //    {
+    //        switch (store)
+    //        {
+    //            case GooglePlay.Name:
+    //                {
+    //                    var payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(payload);
+    //                    if (!payload_wrapper.ContainsKey("json"))
+    //                    {
+    //                        Debug.Log("The product receipt does not contain enough information, the 'json' field is missing");
+    //                        return false;
+    //                    }
+    //                    var original_json_payload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode((string)payload_wrapper["json"]);
+    //                    if (original_json_payload_wrapper == null || !original_json_payload_wrapper.ContainsKey("developerPayload"))
+    //                    {
+    //                        Debug.Log("The product receipt does not contain enough information, the 'developerPayload' field is missing");
+    //                        return false;
+    //                    }
+    //                    var developerPayloadJSON = (string)original_json_payload_wrapper["developerPayload"];
+    //                    var developerPayload_wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(developerPayloadJSON);
+    //                    if (developerPayload_wrapper == null || !developerPayload_wrapper.ContainsKey("is_free_trial") || !developerPayload_wrapper.ContainsKey("has_introductory_price_trial"))
+    //                    {
+    //                        Debug.Log("The product receipt does not contain enough information, the product is not purchased using 1.19 or later");
+    //                        return false;
+    //                    }
+    //                    return true;
+    //                }
+    //            case AppleAppStore.Name:
+    //            case AmazonApps.Name:
+    //            case MacAppStore.Name:
+    //                {
+    //                    return true;
+    //                }
+    //            default:
+    //                {
+    //                    return false;
+    //                }
+    //        }
+    //    }
+    //    return false;
+    //}
 }
