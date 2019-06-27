@@ -32,6 +32,9 @@ public class UIController : SceneSingleton<UIController> {
     public GameObject BoxAdButton;
     public GameObject BoxAdArrow;
 
+    [Header("Item Received Feedback")]
+    public GameObject ItemReceived;
+
     private Button boxAdButtonCmp;
     public Scrollbar lvlSlider;
 
@@ -106,13 +109,14 @@ public class UIController : SceneSingleton<UIController> {
         }
 
         InitAdbox();
-        //if (Purchaser.advertiseSubs) {
-        //    OpenSubscriptionsOnStart();
-        //}
+
+        if (Purchaser.giveSubsStuff) {
+            OpenSubsBonus();
+        }
+        else if (Purchaser.advertiseSubs) {
+            OpenSubscriptionsOnStart();
+        }
         
-        //if (Purchaser.giveSubsStuff) {
-        //    OpenSubscriptions();
-        //}
         //if (PlayerController.player.adBoxOpenedCount < UnityAddsController.Instance.AdBoxOpenLimit) {
         //    BoxAdArrow.SetActive(true);
         //    BoxAdArrow.GetComponent<Animation>().Play();
@@ -176,7 +180,6 @@ public class UIController : SceneSingleton<UIController> {
         Instantiate(subReceivedPopupPrefab, transform);
     }
 
-
     public void OpenSubscriptionsOnStart() {
         GameObject s = Instantiate(SubscriptionsPrefub, transform);
         SubscriptionPopup sp = s.transform.GetComponent<SubscriptionPopup>();
@@ -210,6 +213,13 @@ public class UIController : SceneSingleton<UIController> {
         if (b == false) {
             BoxAdArrow.SetActive(b);
         }
+    }
+
+    public void Show2ItemReceived(int amount1, int amount2, Sprite iconSprite1, Sprite iconSprite2) { // could add different items in future maybe?
+        var itemFeedback = Instantiate(ItemReceived, transform);
+        itemFeedback.transform.GetComponent<ItemReceivedFeedback>().setAmount2(amount1, amount2);
+        itemFeedback.transform.GetComponent<ItemReceivedFeedback>().setIcon2(iconSprite1, iconSprite2);
+        itemFeedback.transform.GetComponent<ItemReceivedFeedback>().SetTwo(true);
     }
 
     public void InitAdbox() {

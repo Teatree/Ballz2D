@@ -227,7 +227,7 @@ public class PlayerData
     public string adBoxOpenedDate;
     public int MoreHCReviveCount;
     public string MoreHCReviveOpenedDate;
-    public string lastSubDate;
+    public string SubBonusReceivedDate;
 
     public List<CompletedLevel> completedLvls = new List<CompletedLevel>();
     public List<ItemData> items = new List<ItemData>();
