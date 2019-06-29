@@ -22,8 +22,8 @@ public class UIController : SceneSingleton<UIController> {
     public GameObject BoxPopupPrefab;
     public GameObject waitForItPrefab;
 
-    public GameObject SubscriptionsPrefub;
-    public GameObject subReceivedPopupPrefab;
+    public GameObject SubscriptionsPrefab;
+    public GameObject SubReceivedPopupPrefab;
 
     //Daily boxes
     public GameObject BoxDayButton;
@@ -173,15 +173,20 @@ public class UIController : SceneSingleton<UIController> {
 
     public void OpenSubscriptions()
     {
-        Instantiate(SubscriptionsPrefub, transform);
+        if (Purchaser.giveSubsStuff == false) {
+            Instantiate(SubscriptionsPrefab, transform);
+        }
+        else {
+            Instantiate(SubReceivedPopupPrefab, transform);
+        }
     }
 
     public void OpenSubsBonus() {
-        Instantiate(subReceivedPopupPrefab, transform);
+        Instantiate(SubReceivedPopupPrefab, transform);
     }
 
     public void OpenSubscriptionsOnStart() {
-        GameObject s = Instantiate(SubscriptionsPrefub, transform);
+        GameObject s = Instantiate(SubscriptionsPrefab, transform);
         SubscriptionPopup sp = s.transform.GetComponent<SubscriptionPopup>();
         sp.isOnStart = true;
         sp.InitPopup();

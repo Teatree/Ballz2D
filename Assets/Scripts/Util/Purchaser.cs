@@ -319,15 +319,18 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
         else if (String.Equals(args.purchasedProduct.definition.id, WEEK_SUB, StringComparison.Ordinal))
         {
-
+            giveSubsStuff = true;
+            UIController.Instance.OpenSubsBonus();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, MONTH_SUB, StringComparison.Ordinal))
         {
-
+            giveSubsStuff = true;
+            UIController.Instance.OpenSubsBonus();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, YEAR_SUB, StringComparison.Ordinal))
         {
-
+            giveSubsStuff = true;
+            UIController.Instance.OpenSubsBonus();
         }
 
         // Return a flag indicating whether this product has completely been received, or if the application needs 
@@ -350,7 +353,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
         foreach (var item in m_StoreController.products.all){      
             if (item.availableToPurchase){
 
-                giveSubsStuff = true;
+                //giveSubsStuff = true;
                 if (item.receipt != null) {
                     advertiseSubs = false;
                     
@@ -394,7 +397,6 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
                             if (info.isExpired() == Result.False && info.isCancelled() == Result.False && dt.Day < DateTime.Now.Day) {
                                 giveSubsStuff = true;
-                                PlayerController.player.SubBonusReceivedDate = DateTime.Now.Date.ToString("yyyy-MM-dd"); 
                             }
                         //}
                     }
