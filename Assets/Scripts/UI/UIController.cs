@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -111,9 +110,11 @@ public class UIController : SceneSingleton<UIController> {
         InitAdbox();
 
         if (Purchaser.giveSubsStuff) {
+            Purchaser.giveSubsStuff = false;
             OpenSubsBonus();
         }
         else if (Purchaser.advertiseSubs) {
+            Purchaser.advertiseSubs = false;
             OpenSubscriptionsOnStart();
         }
         

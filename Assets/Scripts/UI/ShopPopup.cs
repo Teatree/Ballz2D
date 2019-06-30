@@ -202,12 +202,12 @@ public class ShopPopup : IPopup<Pause> {
         if (sh.id == Purchaser.STARTER_PACK) {
             Purchaser.purchaser.BuyStarterPack();
             PlayerController.player.boughtStarter = true;
-
+            SetUpOffers("pack_static");
             AnalyticsController.Instance.LogIAPEvent(Purchaser.STARTER_PACK);
         }
         if (sh.id == Purchaser.WEEKEND_PACK) {
             Purchaser.purchaser.BuyWeekendPack();
-
+            SetUpOffers("pack_static");
             AnalyticsController.Instance.LogIAPEvent(Purchaser.WEEKEND_PACK);
         }
         if (sh.id == Purchaser.STATIC_PACK) {
