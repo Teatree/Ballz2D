@@ -12,7 +12,10 @@ public class SubscriptionPopup : IPopup<SubscriptionPopup> {
     public GameObject yearlySubBtn;
 
     [Header("Claiming")]
-    public Text receivedItemsDescText;
+    public GameObject tick1;
+    public GameObject minus1;
+    public GameObject tick2;
+    public GameObject minus2;
     public Sprite hcIcon;
     public Sprite boosterLightningIcon;
     public Sprite boosterMoreBallsIcon;
@@ -74,7 +77,10 @@ public class SubscriptionPopup : IPopup<SubscriptionPopup> {
     }
 
     public void SetItemsClaimed() {
-        receivedItemsDescText.text = "✔ 1  random booster \n" + "✔ 400 Gems \n" + "✔ No ADS ";
+        tick1.SetActive(true);
+        minus1.SetActive(false);
+        tick2.SetActive(true);
+        minus2.SetActive(false);
         PlayerController.player.SubBonusReceivedDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
         if(claimButton != null) claimButton.GetComponent<Button>().interactable = false;
     }
