@@ -104,6 +104,7 @@ public class SubscriptionPopup : IPopup<SubscriptionPopup> {
         
         if (dt.Day >= DateTime.Now.Day) {
             if (claimButton != null) claimButton.GetComponent<Button>().interactable = false;
+            SetItemsClaimed();
         }
         else {
             if (claimButton != null) claimButton.GetComponent<Button>().interactable = true;

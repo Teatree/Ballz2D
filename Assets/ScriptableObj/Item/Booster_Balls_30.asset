@@ -15,6 +15,6 @@ MonoBehaviour:
   itemType: 1
   costGems: 12000
   amount: 30
-  shopImage: {fileID: 21300000, guid: efe6f6184003c02468c86ec104cfa430, type: 3}
+  shopImage: {fileID: 21300000, guid: 1bb945a2f7bc9404b9606c0564db3ca2, type: 3}
   assetImage: heart
   enabled: 0

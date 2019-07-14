@@ -24,7 +24,12 @@ public class BoxPopup : IPopup<BoxPopup> {
         StartCoroutine(FadeIn());
 
         itemImage.sprite = itemToReceive.shopImage;
-        itemImage.SetNativeSize();
+        if (itemToReceive.name.Contains("Booster")) {
+            itemImage.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2 (90,90);
+        }
+        else {
+            itemImage.SetNativeSize();
+        }
         itemName.text = itemToReceive.name;
 
         if (itemToReceive.amount <= 0) {
@@ -35,7 +40,7 @@ public class BoxPopup : IPopup<BoxPopup> {
         }
         else {
             itemText.SetActive(true);
-            itemText.GetComponent<Text>().text = itemToReceive.amount.ToString();
+            itemText.GetComponent<Text>().text = "x" + itemToReceive.amount.ToString();
             panelBalls.SetActive(false);
             panelDefault.SetActive(true);
         }

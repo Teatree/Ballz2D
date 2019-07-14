@@ -35,11 +35,15 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 93f78420add918844895e3a69f5a9fd4, type: 3}
   - {fileID: 21300000, guid: db381d509864fc04e87535943e7a1486, type: 3}
+  - {fileID: 21300000, guid: 9fe8222147b765c4e8a390d12ec4296f, type: 3}
+  - {fileID: 21300000, guid: 49aed321673919c428a71ebf66b95efe, type: 3}
   - {fileID: 21300000, guid: f0a5ef5175f9f9349874c6e9d1379ccc, type: 3}
   - {fileID: 21300000, guid: a03907712fb73cf4c851c6dfe19d64ff, type: 3}
   - {fileID: 21300000, guid: 9d029aa1945dbeb4b8a2ef99d0c23427, type: 3}
+  - {fileID: 21300000, guid: b2ec0302fef27c645a68ab49f611e128, type: 3}
   - {fileID: 21300000, guid: cc2324021230982448f7e8c01d2f5b5c, type: 3}
   - {fileID: 21300000, guid: 7ff5c0121d5cd2e42b8d82f938d10608, type: 3}
+  - {fileID: 21300000, guid: 1bb945a2f7bc9404b9606c0564db3ca2, type: 3}
   - {fileID: 21300000, guid: fd67f3b24e7af094ea55adb756880335, type: 3}
   - {fileID: 21300000, guid: 22f162533ab69b244ba1b28faa81459d, type: 3}
   - {fileID: 21300000, guid: f5e373532d14813488fb53a39c18ad48, type: 3}
@@ -72,6 +76,7 @@ SpriteAtlas:
   - {fileID: 21300016, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
   - {fileID: 21300018, guid: 719d01c966dc9ac4daa80b15ae621a9b, type: 3}
   - {fileID: 21300000, guid: 1134bec96aa48184194a0c8fc739e2c3, type: 3}
+  - {fileID: 21300000, guid: f6d0ed5ace5092942a0083fbf2a0ce41, type: 3}
   - {fileID: 21300000, guid: 8b4ff06a15af68a46b0925033dbe1a04, type: 3}
   - {fileID: 21300000, guid: 70aeee6a22dd25c4683a135835ac1c16, type: 3}
   - {fileID: 21300000, guid: 0c29ac0bcd551554f9e4231a988842d8, type: 3}
@@ -85,6 +90,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 2dd4a63d6b4b5494b9ea2c33ac6df7e7, type: 3}
   - {fileID: 21300000, guid: 17fa624d6718ad64f9efa22f69091bfc, type: 3}
   - {fileID: 21300000, guid: e77333bd9b4d22747b814ebf4421ef1f, type: 3}
+  - {fileID: 21300000, guid: 271269fd7d6f1e54aa2e32bb1cda9702, type: 3}
   - {fileID: 21300000, guid: 92aaf73ebdabf7a4994d623724bb6121, type: 3}
   - {fileID: 21300000, guid: 7b11d24e41809ee4791d7c778cc1c088, type: 3}
   - {fileID: 21300000, guid: b0f50c9e63e2f2c41ad5c63a158db240, type: 3}
@@ -97,11 +103,15 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - HC_Gem_Icon
   - Level_InComplete
+  - button_yellow
+  - Lightning_Booster_Icon
   - fingerFTUE
   - Cross_Icon
   - Redo_Icon
+  - button_cyan
   - No_Ads_Icon
   - Lock_Icon
+  - MoreBalls_Booster_Icon
   - button
   - Revive_Bomb
   - button_shop
@@ -134,6 +144,7 @@ SpriteAtlas:
   - Confetti_8
   - Confetti_9
   - logo
+  - slider_bg
   - button_blank
   - Plus_Icon
   - bunny
@@ -147,6 +158,7 @@ SpriteAtlas:
   - Box_Open_Icon
   - Box_Closed_Icon
   - Dialog_BG
+  - Diamond_membership
   - Home_Icon
   - Star_InComplete_Icon
   - button_fb

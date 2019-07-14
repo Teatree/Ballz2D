@@ -121,7 +121,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.0.20
+  bundleVersion: 1.0.21
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -158,7 +158,7 @@ PlayerSettings:
     Android: com.FearlessDoodlez.BirckTheBalls
     Standalone: com.Company.ProductName
   buildNumber: {}
-  AndroidBundleVersionCode: 30
+  AndroidBundleVersionCode: 31
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -244,7 +244,7 @@ PlayerSettings:
   clonedFromGUID: fe97a795c6621624a9fc94fd2443b1a8
   templatePackageId: com.unity.template.2d@1.0.0
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  AndroidTargetArchitectures: 5
+  AndroidTargetArchitectures: 7
   AndroidSplashScreenScale: 2
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: C:/Users/Garry/Desktop/GoHere/Ballz2D/ballsKey.keystore
@@ -767,7 +767,8 @@ PlayerSettings:
   webGLLinkerTarget: 0
   scriptingDefineSymbols: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Android: 1
   il2cppCompilerConfiguration: {}
   incrementalIl2cppBuild: {}
   allowUnsafeCode: 0
