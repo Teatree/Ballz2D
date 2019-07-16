@@ -75,7 +75,7 @@ public class Ball : MonoBehaviour {
 
     private void ProcessBlockCOllision(Collider2D collider) {
         if (collider.gameObject.GetComponent<UpperDownWind>() != null) {
-            collider.gameObject.GetComponent<UpperDownWind>().BlowWind(this.GetComponent<Rigidbody2D>());
+            //collider.gameObject.GetComponent<UpperDownWind>().BlowWind(this.GetComponent<Rigidbody2D>());
 
             //rb.velocity = new Vector2();
         }
