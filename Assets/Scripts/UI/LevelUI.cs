@@ -61,7 +61,7 @@ public class LevelUI : MonoBehaviour {
         if (buttonComponent.interactable == false) {
             img.sprite = Level_InComplete;
             LockImage.SetActive(true);
-            Text.SetActive(false);
+            //Text.SetActive(false);
             Stars.SetActive(false);
         }
         else {
@@ -96,5 +96,15 @@ public class LevelUI : MonoBehaviour {
         else {
             SceneController.sceneController.LoadGame();
         }
+    }
+
+    void OnBecameInvisible() {
+        gameObject.SetActive(false);
+        Debug.Log(Text.GetComponent<Text>().text + " invisible");
+    }
+
+    void OnBecameVisible() {
+        gameObject.SetActive(true);
+        Debug.Log(Text.GetComponent<Text>().text + " visible");
     }
 }

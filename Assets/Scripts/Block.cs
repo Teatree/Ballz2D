@@ -36,7 +36,7 @@ public class Block : MonoBehaviour {
         text = GetComponentInChildren<TextMeshPro>();
         boxCollider = GetComponent<BoxCollider2D>();
 
-        UpdateVisualState();
+        //UpdateVisualState(100);
     }
 
     public void UpdateVisualState() {
@@ -45,12 +45,21 @@ public class Block : MonoBehaviour {
 
             if (_type.Family.Equals("Block")) {
                 Color highColor = new Color();
-                ColorUtility.TryParseHtmlString("#248C00", out highColor);
+                ColorUtility.TryParseHtmlString("#165500", out highColor);
+
+                Color midColor = new Color();
+                ColorUtility.TryParseHtmlString("#248C00", out midColor);
 
                 Color lowColor = new Color();
                 ColorUtility.TryParseHtmlString("#4FFFAF", out lowColor);
 
-                spriteRenderer.color = Color.Lerp(lowColor, highColor, hitsRemaining / 10f);
+                float hits = hitsRemaining;
+                if(hits > GridController.midBlockHp) {
+                    spriteRenderer.color = Color.Lerp(midColor, highColor, hits / GridController.maxBlockHp);
+                }
+                else {
+                    spriteRenderer.color = Color.Lerp(lowColor, midColor, hits / GridController.midBlockHp);
+                }
                 StartCoroutine(BlockBlink(spriteRenderer.color, 1));
             }
         }

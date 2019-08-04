@@ -36,7 +36,6 @@ public class Warning : SceneSingleton<Warning> {
 
             }
 
-
             for (float t = 0.01f; t < fadeOutTime; t += Time.deltaTime) {
                 //for (int i = warnings.Count - 1; i >= 0; i--) {
                 for (int i = 0; i < warnings.Count; i++) {

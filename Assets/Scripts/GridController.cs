@@ -53,6 +53,8 @@ public class GridController : SceneSingleton<GridController> {
 
     private List<Block> obstaclesCoordinates = new List<Block>();
     public static bool doNotMoveRowDown;
+    public static int maxBlockHp = 100;
+    public static int midBlockHp = 50;
 
     private void Start() { //OnLevelWasLoaded
 
@@ -95,7 +97,7 @@ public class GridController : SceneSingleton<GridController> {
                 List<Block> blocksToBlink = new List<Block>();
                 List<CellData> cells = gc.currentLevel.rows[rowsSpawned].GetCells();
                 for (int i = 0; i < playWidth; i++) {
-                    if (cells[i] != null && cells[i].type != "") {
+                    if (cells[i] != null && cells[i].type != "" && cells[i].type != null) {
                         Block block = GetTheBlock(cells[i].type, rowsSpawned, i);
                         //block.gameObject.transform.localScale = new Vector3(block.gameObject.transform.localScale.x*blockScale, block.gameObject.transform.localScale.y*blockScale); // *NEW
                         block.Setup(cells[i].type, cells[i].life, rowsSpawned, i);
@@ -103,6 +105,24 @@ public class GridController : SceneSingleton<GridController> {
                         blocksToBlink.Add(block);
                     }
                 }
+
+                maxBlockHp = 0;
+                int _totalHp = 0;
+
+                for (int y= 0; y < blocksSpawned.Count; y++) {
+                    if(maxBlockHp < blocksSpawned[y].hitsRemaining) {
+                        maxBlockHp = blocksSpawned[y].hitsRemaining;
+                    }
+                    _totalHp += blocksSpawned[y].hitsRemaining;
+                }
+
+                midBlockHp = _totalHp / blocksSpawned.Count;
+
+                for (int z = 0; z < blocksSpawned.Count; z++) {
+                    blocksSpawned[z].UpdateVisualState();
+                    Debug.Log("current highest block HP: " + maxBlockHp);
+                }
+
                 //if(!moveObstacles) {
                 //    StartCoroutine(BlinkBlink(blocksToBlink));
                 //}
@@ -316,6 +336,7 @@ public class GridController : SceneSingleton<GridController> {
                     block = Instantiate(triangleNEPrefab, GetPosition(0, col), Quaternion.identity, scalingParent);
                     break;
                 }
+       
             default: {
                     throw new System.ArgumentException("Block type  " + type + " is not defined ");
                 }
