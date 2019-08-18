@@ -348,7 +348,8 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
     public void getSubData()
     {
-        //Dictionary<string, string> Dict = m_GooglePlayStoreExtensions.GetProductJSONDictionary();
+        advertiseSubs = PlayerController.player.SubBonusReceivedDate == null || PlayerController.player.SubBonusReceivedDate != "";
+                                     
 
         foreach (var item in m_StoreController.products.all){      
             if (item.availableToPurchase){

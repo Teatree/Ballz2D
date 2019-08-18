@@ -985,6 +985,9 @@ MonoBehaviour:
   freeCost: {fileID: 0}
   monthlySubCost: {fileID: 0}
   yearlySubCost: {fileID: 0}
+  bg_try: {fileID: 0}
+  bg_3: {fileID: 0}
+  popupPanel: {fileID: 0}
   freeBtn: {fileID: 0}
   monthlySubBtn: {fileID: 0}
   yearlySubBtn: {fileID: 0}
@@ -993,9 +996,9 @@ MonoBehaviour:
   tick2: {fileID: 1722957094968006}
   minus2: {fileID: 1860519730885902}
   hcIcon: {fileID: 21300000, guid: 93f78420add918844895e3a69f5a9fd4, type: 3}
-  boosterLightningIcon: {fileID: 21300000, guid: 663c04df2b8edf74289121c074c6f9c7,
+  boosterLightningIcon: {fileID: 21300000, guid: 49aed321673919c428a71ebf66b95efe,
     type: 3}
-  boosterMoreBallsIcon: {fileID: 21300000, guid: efe6f6184003c02468c86ec104cfa430,
+  boosterMoreBallsIcon: {fileID: 21300000, guid: 1bb945a2f7bc9404b9606c0564db3ca2,
     type: 3}
   claimButton: {fileID: 1307521653067506}
   timer: {fileID: 114682180772416826}

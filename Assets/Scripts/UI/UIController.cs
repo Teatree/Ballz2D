@@ -113,7 +113,7 @@ public class UIController : SceneSingleton<UIController> {
             Purchaser.giveSubsStuff = false;
             OpenSubsBonus();
         }
-        else if (Purchaser.advertiseSubs) {
+        if (Purchaser.advertiseSubs) {
             Purchaser.advertiseSubs = false;
             OpenSubscriptionsOnStart();
         }

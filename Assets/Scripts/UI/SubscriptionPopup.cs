@@ -7,6 +7,10 @@ public class SubscriptionPopup : IPopup<SubscriptionPopup> {
     public Text monthlySubCost;
     public Text yearlySubCost;
 
+    public Sprite bg_try;
+    public Sprite bg_3;
+    public GameObject popupPanel;
+
     public GameObject freeBtn;
     public GameObject monthlySubBtn;
     public GameObject yearlySubBtn;
@@ -90,12 +94,14 @@ public class SubscriptionPopup : IPopup<SubscriptionPopup> {
             if (isOnStart) {
                 monthlySubBtn.SetActive(false);
                 yearlySubBtn.SetActive(false);
+                popupPanel.GetComponent<Image>().sprite = bg_try;
             }
             else {
                 monthlySubBtn.SetActive(true);
                 yearlySubBtn.SetActive(true);
                 monthlySubCost.text = Purchaser.purchaser.GetLocalPrice(Purchaser.MONTH_SUB);
                 yearlySubCost.text = Purchaser.purchaser.GetLocalPrice(Purchaser.YEAR_SUB);
+                popupPanel.GetComponent<Image>().sprite = bg_3;
             }
         }
 
