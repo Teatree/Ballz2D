@@ -107,8 +107,9 @@ public class SubscriptionPopup : IPopup<SubscriptionPopup> {
 
         DateTime dt = PlayerController.player.SubBonusReceivedDate != null && PlayerController.player.SubBonusReceivedDate != ""
                                         ? DateTime.Parse(PlayerController.player.SubBonusReceivedDate) : DateTime.MinValue;
-        
+        Debug.Log(">>>> items climed! > " + dt.Day);
         if (dt.Day >= DateTime.Now.Day) {
+            
             if (claimButton != null) claimButton.GetComponent<Button>().interactable = false;
             SetItemsClaimed();
         }

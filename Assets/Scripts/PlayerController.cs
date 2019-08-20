@@ -45,6 +45,7 @@ public class PlayerController : SceneSingleton<PlayerController> {
             }
 
             LevelController.SpecialBall = player.specialBallImageName;
+            UIController.advertiseSubs = PlayerController.player.advertiseSubs;
         }
         AnalyticsController.Instance.LogPlayersOnline("online");
     }

@@ -65,8 +65,9 @@ public class DataController
                 pi.PlayerID = PlayerController.GenerateID();
             }
             Debug.Log(">>>> jsonData > " + jsonData);
-
         }
+
+        pi.advertiseSubs = pi.SubBonusReceivedDate == null || pi.SubBonusReceivedDate == "";
         return pi;
         // PlayerData pi = JsonUtility.FromJson<PlayerData>(jsonData);
         //   AjsonData = "<color=#a52a2aff> " + jsonData + "</color>";
@@ -228,10 +229,11 @@ public class PlayerData
     public int MoreHCReviveCount;
     public string MoreHCReviveOpenedDate;
     public string SubBonusReceivedDate;
+    public bool isSubscribed;
+    public bool advertiseSubs;
 
     public List<CompletedLevel> completedLvls = new List<CompletedLevel>();
     public List<ItemData> items = new List<ItemData>();
-
     public int GetStarsAmount()
     {
         int sum = 0;

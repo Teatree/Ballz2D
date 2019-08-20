@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
-public class Purchaser : MonoBehaviour, IStoreListener
-{
+public class Purchaser : MonoBehaviour, IStoreListener {
 
     public static Purchaser purchaser { get; set; }
     public List<ShopOffer> offers;
@@ -13,7 +12,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
     private static IStoreController m_StoreController;          // The Unity Purchasing system.
     private static IExtensionProvider m_StoreExtensionProvider; // The store-specific Purchasing subsystems.
- 
+
 
     public static string GEMS_200 = "100_gems";
     public static string GEMS_400 = "400_gems";
@@ -37,32 +36,27 @@ public class Purchaser : MonoBehaviour, IStoreListener
     public static string MONTH_SUB = "month_sub";
     public static string YEAR_SUB = "year_sub";
 
-  //  private IGooglePlayStoreExtensions m_GooglePlayStoreExtensions;
+    //  private IGooglePlayStoreExtensions m_GooglePlayStoreExtensions;
     public static bool advertiseSubs = true;
     public static bool giveSubsStuff = false;
 
-      public static string debugbs ="";
+    public static string debugbs = "";
 
-    public void Awake()
-    {
+    public void Awake() {
         purchaser = this;
     }
 
-    void Start()
-    {
+    void Start() {
         // If we haven't set up the Unity Purchasing reference
-        if (m_StoreController == null)
-        {
+        if (m_StoreController == null) {
             // Begin to configure our connection to Purchasing
             InitializePurchasing();
         }
     }
 
-    public void InitializePurchasing()
-    {
+    public void InitializePurchasing() {
         // If we have already connected to Purchasing ...
-        if (IsInitialized())
-        {
+        if (IsInitialized()) {
             // ... we are done here.
             return;
         }
@@ -93,134 +87,108 @@ public class Purchaser : MonoBehaviour, IStoreListener
         UnityPurchasing.Initialize(this, builder);
     }
 
-    private bool IsInitialized()
-    {
+    private bool IsInitialized() {
         // Only say we are initialized if both the Purchasing references are set.
         return m_StoreController != null && m_StoreExtensionProvider != null;
     }
 
     #region initializeBuy
 
-    public void BuyGems200()
-    {
+    public void BuyGems200() {
         BuyProductID(GEMS_200);
     }
 
-    public void BuyGems400()
-    {
+    public void BuyGems400() {
         BuyProductID(GEMS_400);
     }
 
-    public void BuyGems600()
-    {
+    public void BuyGems600() {
         BuyProductID(GEMS_600);
     }
 
-    public void BuyGems1100()
-    {
+    public void BuyGems1100() {
         BuyProductID(GEMS_1100);
     }
 
-    public void BuyGems2300()
-    {
+    public void BuyGems2300() {
         BuyProductID(GEMS_2300);
     }
 
-    public void BuyGems7200()
-    {
+    public void BuyGems7200() {
         BuyProductID(GEMS_7200);
     }
 
-    public void BuyGems12500()
-    {
+    public void BuyGems12500() {
         BuyProductID(GEMS_12500);
     }
 
-    public void BuyGems30000()
-    {
+    public void BuyGems30000() {
         BuyProductID(GEMS_30000);
     }
 
-    public void BuyNoAds()
-    {
+    public void BuyNoAds() {
         BuyProductID(NO_ADS);
     }
 
-    public void BuySpecialPack_1()
-    {
+    public void BuySpecialPack_1() {
         BuyProductID(SPECIAL_PACK_1);
     }
 
-    public void BuySpecialPack_2()
-    {
+    public void BuySpecialPack_2() {
         BuyProductID(SPECIAL_PACK_2);
     }
-    public void BuySpecialPack_3()
-    {
+    public void BuySpecialPack_3() {
         BuyProductID(SPECIAL_PACK_3);
     }
 
-    public void BuyStarterPack()
-    {
+    public void BuyStarterPack() {
         BuyProductID(STARTER_PACK);
     }
 
-    public void BuyWeekendPack()
-    {
+    public void BuyWeekendPack() {
         BuyProductID(WEEKEND_PACK);
     }
-    public void BuyStaticPack()
-    {
+    public void BuyStaticPack() {
         BuyProductID(STATIC_PACK);
     }
 
-    public void BuyWeekSub()
-    {
+    public void BuyWeekSub() {
         BuyProductID(WEEK_SUB);
     }
-    public void BuyMonthSub()
-    {
+    public void BuyMonthSub() {
         BuyProductID(MONTH_SUB);
     }
-    public void BuyYearSub()
-    {
+    public void BuyYearSub() {
         BuyProductID(YEAR_SUB);
     }
 
     #endregion
 
-    public string GetLocalPrice(string prodId)
-    {
+    public string GetLocalPrice(string prodId) {
         return m_StoreController.products.WithID(prodId).metadata.localizedPriceString;
     }
 
-    public void buyOffer(ShopOffer o)
-    {
+    public void buyOffer(ShopOffer o) {
         BuyProductID(o.id);
     }
 
-    private void BuyProductID(string productId)
-    {
-        if (IsInitialized())
-        {
+    private void BuyProductID(string productId) {
+        if (IsInitialized()) {
             // ... look up the Product reference with the general product identifier and the Purchasing system's products collection.
             Product product = m_StoreController.products.WithID(productId);
 
             // If the look up found a product for this device's store and that product is ready to be sold ... 
-            if (product != null && product.availableToPurchase)
-            {
+            if (product != null && product.availableToPurchase) {
                 Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
                 // ... buy the product. Expect a response either through ProcessPurchase or OnPurchaseFailed asynchronously.
                 m_StoreController.InitiatePurchase(product);
             }
-            else
-            {
+            else {
                 // ... report the product look-up failure situation  
                 Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
             }
         }
-        else
-        {
+        else {
             // ... report the fact Purchasing has not succeeded initializing yet. Consider waiting longer or retrying initiailization.
             Debug.Log("BuyProductID FAIL. Not initialized.");
         }
@@ -229,11 +197,9 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
     // Restore purchases previously made by this customer. Some platforms automatically restore purchases, like Google. 
     // Apple currently requires explicit purchase restoration for IAP, conditionally displaying a password prompt.
-    public void RestorePurchases()
-    {
+    public void RestorePurchases() {
         // If Purchasing has not yet been set up ...
-        if (!IsInitialized())
-        {
+        if (!IsInitialized()) {
             // ... report the situation and stop restoring. Consider either waiting longer, or retrying initialization.
             Debug.Log("RestorePurchases FAIL. Not initialized.");
             return;
@@ -241,8 +207,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
 
         // If we are running on an Apple device ... 
         if (Application.platform == RuntimePlatform.IPhonePlayer ||
-            Application.platform == RuntimePlatform.OSXPlayer)
-        {
+            Application.platform == RuntimePlatform.OSXPlayer) {
             // ... begin restoring purchases
             Debug.Log("RestorePurchases started ...");
 
@@ -250,16 +215,14 @@ public class Purchaser : MonoBehaviour, IStoreListener
             var apple = m_StoreExtensionProvider.GetExtension<IAppleExtensions>();
             // Begin the asynchronous process of restoring purchases. Expect a confirmation response in 
             // the Action<bool> below, and ProcessPurchase if there are previously purchased products to restore.
-            apple.RestoreTransactions((result) =>
-            {
+            apple.RestoreTransactions((result) => {
                 // The first phase of restoration. If no more responses are received on ProcessPurchase then 
                 // no purchases are available to be restored.
                 Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
             });
         }
         // Otherwise ...
-        else
-        {
+        else {
             // We are not running on an Apple device. No work is necessary to restore purchases.
             Debug.Log("RestorePurchases FAIL. Not supported on this platform. Current = " + Application.platform);
         }
@@ -270,8 +233,7 @@ public class Purchaser : MonoBehaviour, IStoreListener
     // --- IStoreListener
     //
 
-    public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
-    {
+    public void OnInitialized(IStoreController controller, IExtensionProvider extensions) {
         // Purchasing has succeeded initializing. Collect our Purchasing references.
         Debug.Log("OnInitialized: PASS");
 
@@ -279,57 +241,53 @@ public class Purchaser : MonoBehaviour, IStoreListener
         m_StoreController = controller;
         // Store specific subsystem, for accessing device-specific store features.
         m_StoreExtensionProvider = extensions;
-      //  m_GooglePlayStoreExtensions = extensions.GetExtension<IGooglePlayStoreExtensions>();
+        //  m_GooglePlayStoreExtensions = extensions.GetExtension<IGooglePlayStoreExtensions>();
 
         getSubData();
     }
 
-    public void OnInitializeFailed(InitializationFailureReason error)
-    {
+    public void OnInitializeFailed(InitializationFailureReason error) {
         // Purchasing set-up has not succeeded. Check error for reason. Consider sharing this reason with the user.
         Debug.Log("OnInitializeFailed InitializationFailureReason:" + error);
     }
 
-    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
-    {
+    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args) {
 
         String prodId = args.purchasedProduct.definition.id;
         String[] prodVal = prodId.Split("_".ToCharArray());
-        if (prodVal.Length > 1 && prodVal[1].Equals("gems", StringComparison.CurrentCultureIgnoreCase))
-        {
+        if (prodVal.Length > 1 && prodVal[1].Equals("gems", StringComparison.CurrentCultureIgnoreCase)) {
             PlayerController.player.gems += int.Parse(prodVal[0]);
         }
-        else if (String.Equals(args.purchasedProduct.definition.id, NO_ADS, StringComparison.Ordinal))
-        {
+        else if (String.Equals(args.purchasedProduct.definition.id, NO_ADS, StringComparison.Ordinal)) {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
             PlayerController.player.noAds = true;
         }
-        else if (prodVal.Length > 1 && prodVal[0].Contains("pack"))
-        {
-            foreach (ShopOffer s in offers)
-            {
+        else if (prodVal.Length > 1 && prodVal[0].Contains("pack")) {
+            foreach (ShopOffer s in offers) {
                 Debug.Log(">>>> check > " + s.id + " >? " + prodId);
-                if (prodId.Equals(s.id, StringComparison.CurrentCultureIgnoreCase))
-                {
+                if (prodId.Equals(s.id, StringComparison.CurrentCultureIgnoreCase)) {
                     s.GivePlayerStuff();
                     break;
                 }
             }
         }
 
-        else if (String.Equals(args.purchasedProduct.definition.id, WEEK_SUB, StringComparison.Ordinal))
-        {
+        else if (String.Equals(args.purchasedProduct.definition.id, WEEK_SUB, StringComparison.Ordinal)) {
             giveSubsStuff = true;
+            PlayerController.player.isSubscribed = true;
+            PlayerController.player.advertiseSubs = false;
             UIController.Instance.OpenSubsBonus();
         }
-        else if (String.Equals(args.purchasedProduct.definition.id, MONTH_SUB, StringComparison.Ordinal))
-        {
+        else if (String.Equals(args.purchasedProduct.definition.id, MONTH_SUB, StringComparison.Ordinal)) {
             giveSubsStuff = true;
+            PlayerController.player.advertiseSubs = false;
+            PlayerController.player.isSubscribed = true;
             UIController.Instance.OpenSubsBonus();
         }
-        else if (String.Equals(args.purchasedProduct.definition.id, YEAR_SUB, StringComparison.Ordinal))
-        {
+        else if (String.Equals(args.purchasedProduct.definition.id, YEAR_SUB, StringComparison.Ordinal)) {
             giveSubsStuff = true;
+            PlayerController.player.advertiseSubs = false;
+            PlayerController.player.isSubscribed = true;
             UIController.Instance.OpenSubsBonus();
         }
 
@@ -339,83 +297,51 @@ public class Purchaser : MonoBehaviour, IStoreListener
         return PurchaseProcessingResult.Complete;
     }
 
-    public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
-    {
+    public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason) {
         // A product purchase attempt did not succeed. Check failureReason for more detail. Consider sharing 
         // this reason with the user to guide their troubleshooting actions.
         Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
     }
 
-    public void getSubData()
-    {
-        advertiseSubs = PlayerController.player.SubBonusReceivedDate == null || PlayerController.player.SubBonusReceivedDate != "";
-                                     
+    public void getSubData() {
+        advertiseSubs = PlayerController.player.SubBonusReceivedDate == null || PlayerController.player.SubBonusReceivedDate == "";
 
-        foreach (var item in m_StoreController.products.all){      
-            if (item.availableToPurchase){
+        foreach (var item in m_StoreController.products.all) {
+            if (item.availableToPurchase) {
 
                 //giveSubsStuff = true;
                 if (item.receipt != null) {
                     advertiseSubs = false;
-                    
+                    PlayerController.player.advertiseSubs = false;
                     if (item.definition.type == ProductType.Subscription) {
+                        advertiseSubs = false;
                         
-                        //string intro_json = (Dict == null || !Dict.ContainsKey(item.definition.storeSpecificId)) ? null : Dict[item.definition.storeSpecificId];
-                        //string intro_json = (introductory_info_dict == null || !introductory_info_dict.ContainsKey(item.definition.storeSpecificId)) ? null : introductory_info_dict[item.definition.storeSpecificId];
+                        PlayerController.player.advertiseSubs = false;
 
-                        //Debug.Log("intro_json: " + intro_json);
+                        SubscriptionManager p = new SubscriptionManager(item, item.receipt);
+                        SubscriptionInfo info = p.getSubscriptionInfo();
 
-                        //SubscriptionManager p = new SubscriptionManager(item, intro_json);
+                        DateTime dt = PlayerController.player.SubBonusReceivedDate != null && PlayerController.player.SubBonusReceivedDate != ""
+                                    ? DateTime.Parse(PlayerController.player.SubBonusReceivedDate) : DateTime.MinValue;
 
-                        //SubscriptionInfo info = p.getSubscriptionInfo();
-                        //Debug.Log("product id is: " + info.getProductId());
-                        //Debug.Log("purchase date is: " + info.getPurchaseDate());
-                        //Debug.Log("subscription next billing date is: " + info.getExpireDate());
-                        //Debug.Log("is subscribed? " + info.isSubscribed().ToString());
-                        //Debug.Log("is expired? " + info.isExpired().ToString());
-                        //Debug.Log("is cancelled? " + info.isCancelled());
-                        //Debug.Log("product is in free trial peroid? " + info.isFreeTrial());
-                        //Debug.Log("product is auto renewing? " + info.isAutoRenewing());
-                        //Debug.Log("subscription remaining valid time until next billing date is: " + info.getRemainingTime());
-                        //Debug.Log("is this product in introductory price period? " + info.isIntroductoryPricePeriod());
-                        //Debug.Log("the product introductory localized price is: " + info.getIntroductoryPrice());
-                        //Debug.Log("the product introductory price period is: " + info.getIntroductoryPricePeriod());
-                        //Debug.Log("the number of product introductory price period cycles is: " + info.getIntroductoryPricePeriodCycles());
-
-                        //GooglePurchaseData d = new GooglePurchaseData(item.receipt);
-                        //if (item.hasReceipt) {
-                            advertiseSubs = false;
-                            //DateTime dt = DateTime.MinValue;
-                            //dt.AddMilliseconds(Convert.ToInt64(d.data.purchaseTime));
-                            //debugbs += d.data.productId + "  "  + "  " + dt + "\n";
-
-                            SubscriptionManager p = new SubscriptionManager(item, item.receipt);
-                            SubscriptionInfo info = p.getSubscriptionInfo();
-                            //debugbs += info.getProductId() + "  " + info.isExpired() + "  " + info.getPurchaseDate() + "\n";
-                    
-                            DateTime dt = PlayerController.player.SubBonusReceivedDate != null && PlayerController.player.SubBonusReceivedDate != ""
-                                        ? DateTime.Parse(PlayerController.player.SubBonusReceivedDate) : DateTime.MinValue;
-
-                            if (info.isExpired() == Result.False && info.isCancelled() == Result.False && dt.Day < DateTime.Now.Day) {
-                                giveSubsStuff = true;
-                            }
-                        //}
+                        if (info.isExpired() == Result.False && info.isCancelled() == Result.False && dt.Day < DateTime.Now.Day) {
+                            giveSubsStuff = true;
+                            PlayerController.player.isSubscribed = true;
+                        } else {
+                            PlayerController.player.isSubscribed = false;
+                        }
                     }
-                    else
-                    {
+                    else {
                         Debug.Log("the product is not a subscription product");
-                     
+
                     }
                 }
                 else {
                     Debug.Log("the product should have a valid receipt");
-                   
+
                 }
             }
         }
-        //if (Purchaser.advertiseSubs && UIController.Instance != null) {
-        //    UIController.Instance.OpenSubscriptionsOnStart();
-        //}
     }
-  
+
 }

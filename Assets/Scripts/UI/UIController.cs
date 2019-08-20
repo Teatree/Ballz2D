@@ -37,6 +37,8 @@ public class UIController : SceneSingleton<UIController> {
     private Button boxAdButtonCmp;
     public Scrollbar lvlSlider;
 
+    public static bool advertiseSubs;
+
     void Start() {
         DateTime dt = PlayerController.player == null || PlayerController.player.giveBoxAt == null || PlayerController.player.giveBoxAt == "" ? DateTime.Now : DateTime.Parse(PlayerController.player.giveBoxAt);
 
@@ -48,94 +50,18 @@ public class UIController : SceneSingleton<UIController> {
             ShowDayBoxWaitButton();
         }
 
-        // Debug.Log(">>>> Menu.initScene > " + SceneController.initScene);
-        //if (SceneController.initScene == "GameScene") {
-        //    SceneController.initScene = "";
-        //    SceneController.sceneController.UnloadMenu();
-        //    SceneController.sceneController.LoadGame();
-        //}
-        //else {
-        //    // Load data
-        //    AllLevelsData.allLevels = DataController.LoadLevels();
-
-        //    // debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "\n path: " + DataController.levelfilePath + "\n jsonDataExtracted: " + DataController.AjsonData;
-
-        //    //Create level buttons
-
-        //    if (PlayerController.player != null) {
-        //        int arrowIndex = 0;
-        //        int lvlIndex = 4;
-        //        for (int i = 0; i < AllLevelsData.allLevels.Count; i++) {
-        //            var lvl = Instantiate(levelUiElementPrefab, LevelListParent);
-        //            if (i % 8 == 4) {
-        //                lvlIndex = 5;
-        //            }
-        //            if (i % 8 < 4) {
-        //                lvl.LevelNumber = i;
-        //                lvl.StarsNumber = (i < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i] : 0;
-        //                lvl.buttonComponent.interactable = i <= PlayerController.starsPerLvl.Count ? true : false;
-        //                lvl.UpdateButtonVisuals(lvl.StarsNumber);
-        //            }
-        //            else {
-        //                lvlIndex -= 2;
-        //                lvl.LevelNumber = i + lvlIndex;
-        //                lvl.StarsNumber = (i + lvlIndex < PlayerController.starsPerLvl.Count) ? PlayerController.starsPerLvl[i + lvlIndex] : 0;
-        //                lvl.buttonComponent.interactable = i + lvlIndex <= PlayerController.starsPerLvl.Count ? true : false;
-        //                lvl.UpdateButtonVisuals(lvl.StarsNumber);
-        //            }
-        //            var arrow = Instantiate(arrowPrefab, lvl.transform);
-        //            arrow.transform.SetParent(lvl.transform);
-        //            // arrow.transform.localScale = new Vector3(15, 15, 1);
-
-        //            if (arrowIndex % 8 == 0 || arrowIndex % 8 == 1 || arrowIndex % 8 == 2) {
-        //                arrow.transform.localPosition = new Vector3(-85, 0);
-        //                arrow.transform.localRotation = Quaternion.Euler(0, 0, 180);
-        //            }
-        //            else
-        //            if (arrowIndex % 8 == 3 || arrowIndex % 8 == 4) {
-        //                arrow.transform.localPosition = new Vector3(0, 85);
-        //                arrow.transform.localRotation = Quaternion.Euler(0, 0, 90);
-        //            }
-        //            else {
-        //                arrow.transform.localPosition = new Vector3(85, 0);
-        //            }
-        //            arrowIndex++;
-        //            lvlSlider.value = 0;
-        //        }
-        //    }
-
-        //    SetStarsAmountText();
-        //}
-
+      
         InitAdbox();
-
+      
         if (Purchaser.giveSubsStuff) {
             Purchaser.giveSubsStuff = false;
             OpenSubsBonus();
         }
-        if (Purchaser.advertiseSubs) {
-            Purchaser.advertiseSubs = false;
+        if (advertiseSubs) {
+            advertiseSubs = false;
             OpenSubscriptionsOnStart();
         }
-        
-        //if (PlayerController.player.adBoxOpenedCount < UnityAddsController.Instance.AdBoxOpenLimit) {
-        //    BoxAdArrow.SetActive(true);
-        //    BoxAdArrow.GetComponent<Animation>().Play();
-        //}
-
-        //if (DateTime.Parse(PlayerController.player.giveBoxAt) < // next time for box){
-
-        //    }
     }
-
-    //private void SetStarsAmountText() {
-    //    int allStars = 0;
-    //    if (PlayerController.starsPerLvl != null)
-    //        foreach (int lvlInd in PlayerController.starsPerLvl.Keys) {
-    //            allStars += PlayerController.starsPerLvl[lvlInd];
-    //        }
-    //    starsText.text = PlayerController.player != null ? "" + allStars : "0";
-    //}
 
     void Update() {
         gems.text = PlayerController.player != null ? PlayerController.player.gems.ToString() : "0";
@@ -149,10 +75,6 @@ public class UIController : SceneSingleton<UIController> {
         else {
             SetEnabledAdBox(false);
         }
-    }
-
-    public void getGems() {
-        // AdmobController.Instance.ShowGemsrewardVideo();
     }
 
     public void Share() {
@@ -174,7 +96,7 @@ public class UIController : SceneSingleton<UIController> {
 
     public void OpenSubscriptions()
     {
-        if (Purchaser.giveSubsStuff == false) {
+        if (PlayerController.player.isSubscribed == false) {
             Instantiate(SubscriptionsPrefab, transform);
         }
         else {
