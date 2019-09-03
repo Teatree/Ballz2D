@@ -11,6 +11,7 @@ public class UIController : SceneSingleton<UIController> {
     //public GameObject arrowPrefab;
 
     public Text gems;
+    public Text tempPlyIDTest;
     //public Text starsText;
 
     public SpriteState sprState = new SpriteState();
@@ -57,23 +58,33 @@ public class UIController : SceneSingleton<UIController> {
             Purchaser.giveSubsStuff = false;
             OpenSubsBonus();
         }
-        if (advertiseSubs) {
+        if (advertiseSubs && !PlayerController.player.isSubscribed) {
             advertiseSubs = false;
             OpenSubscriptionsOnStart();
         }
     }
 
     void Update() {
+        tempPlyIDTest.text = PlayerController.player.PlayerID;
+
         gems.text = PlayerController.player != null ? PlayerController.player.gems.ToString() : "0";
 
         // gems.text = "Gems >>> " +  PlayerController.player.gems;
         //debugText.text = "allLevels: " + AllLevelsData.allLevels.Count + "      path: " + DataController.levelfilePath;
 
+       // Debug.Log(">>> PlayerController.player.adBoxOpenedCount > " + PlayerController.player.adBoxOpenedCount);
+       // Debug.Log(">>> UnityAddsController.Instance.AdBoxOpenLimit > " + UnityAddsController.Instance.AdBoxOpenLimit);
         if (PlayerController.player != null && PlayerController.player.adBoxOpenedCount < UnityAddsController.Instance.AdBoxOpenLimit) {
             SetEnabledAdBox(true);
-        }
-        else {
+        } else {
             SetEnabledAdBox(false);
+        }
+
+        if (Application.platform == RuntimePlatform.Android) {
+            if (Input.GetKey(KeyCode.Escape)) {
+                Application.Quit();
+                return;
+            }
         }
     }
 
@@ -151,8 +162,9 @@ public class UIController : SceneSingleton<UIController> {
     }
 
     public void InitAdbox() {
-        DateTime dt = PlayerController.player == null || PlayerController.player.adBoxOpenedDate == null || PlayerController.player.adBoxOpenedDate == "" ? DateTime.Now : DateTime.Parse(PlayerController.player.adBoxOpenedDate);
+        DateTime dt = PlayerController.player == null || PlayerController.player.adBoxOpenedDate == null || PlayerController.player.adBoxOpenedDate == "" ? DateTime.MinValue : DateTime.Parse(PlayerController.player.adBoxOpenedDate);
 
+        Debug.Log(">>>> dt.Date > " + dt.Date);
         if (DateTime.Now.Date == dt.Date) {
             if (PlayerController.player.adBoxOpenedCount < UnityAddsController.Instance.AdBoxOpenLimit) {
                 BoxAdArrow.SetActive(true);
@@ -166,7 +178,7 @@ public class UIController : SceneSingleton<UIController> {
             PlayerController.player.adBoxOpenedCount = 0;
         }
 
-        if (UnityAddsController.AdsLoaded == false) {
+        if (!UnityAddsController.AdsLoaded) {
             SetEnabledAdBox(false);
         }
     }

@@ -38,14 +38,15 @@ public class FacebookController : SceneSingleton<FacebookController> {
     #endregion
 
     public void FacebookShare() {
-        FB.ShareLink(new System.Uri("https://i.kym-cdn.com/entries/icons/facebook/000/021/033/Screenshot_236.jpg"), "Check it out!",
-            "It's a doggo!",
-            new System.Uri("https://resocoder.com/wp-content/uploads/2017/01/logoRound512.png"));
+        FB.ShareLink(new System.Uri("https://play.google.com/store/apps/details?id=com.FearlessDoodlez.BirckTheBalls"), "Check it out!",
+            "This game has balls!",
+//            new System.Uri("https://raw.githubusercontent.com/fearlessdoodlez/balls/master/bunny.png")
+            null);
     }
 
     #region Inviting
     public void FacebookGameRequest() {
-        FB.AppRequest("Hey! Come and play this awesome game!", title: "Reso Coder Tutorial");
+        FB.AppRequest("Hey! Come and play this awesome game!", title: "Ball vs Bricks");
     }
 
     public void FacebookInvite() {

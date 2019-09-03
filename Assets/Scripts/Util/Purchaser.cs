@@ -321,10 +321,10 @@ public class Purchaser : MonoBehaviour, IStoreListener {
                         SubscriptionManager p = new SubscriptionManager(item, item.receipt);
                         SubscriptionInfo info = p.getSubscriptionInfo();
 
-                        DateTime dt = PlayerController.player.SubBonusReceivedDate != null && PlayerController.player.SubBonusReceivedDate != ""
-                                    ? DateTime.Parse(PlayerController.player.SubBonusReceivedDate) : DateTime.MinValue;
+                        //DateTime dt = PlayerController.player.SubBonusReceivedDate != null && PlayerController.player.SubBonusReceivedDate != ""
+                        //            ? DateTime.Parse(PlayerController.player.SubBonusReceivedDate) : DateTime.MinValue;
 
-                        if (info.isExpired() == Result.False && info.isCancelled() == Result.False && dt.Day < DateTime.Now.Day) {
+                        if (info.isExpired() == Result.False && info.isCancelled() == Result.False) {
                             giveSubsStuff = true;
                             PlayerController.player.isSubscribed = true;
                         } else {

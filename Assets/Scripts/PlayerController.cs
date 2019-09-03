@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : SceneSingleton<PlayerController> {
     //TODO remove someday 
-    public static int hardcodedLevlsCompleted = 140;
+    public static int hardcodedLevlsCompleted = 0;
 
     public static PlayerData player;
     public static Dictionary<int, int> starsPerLvl; 

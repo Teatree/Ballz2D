@@ -37,9 +37,17 @@ public class ItemReceivedFeedback : MonoBehaviour {
 
     public void setIcon2(Sprite iconSprite, Sprite iconSprite2) {
         this.icon2_1.sprite = iconSprite;
-        this.icon2_1.SetNativeSize();
         this.icon2_2.sprite = iconSprite2;
-        this.icon2_2.SetNativeSize();
+
+        if (!iconSprite2.name.Contains("Booster")) {
+            this.icon2_1.SetNativeSize();
+            this.icon2_2.SetNativeSize();
+        }
+        else {
+            this.icon2_1.SetNativeSize();
+            this.icon2_2.rectTransform.localScale.Set(1.2f, 0.56f, 0.56f);
+        }
+
     }
 
     // Use this for initialization

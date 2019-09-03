@@ -14,7 +14,7 @@ public class UnityBanner : MonoBehaviour {
 #endif
 
     // Use this for initialization
-    void Start() {
+    void Awake() {
         Advertisement.Initialize(gameId, testMode);
         Advertisement.Banner.SetPosition(BannerPosition.TOP_CENTER);
        

@@ -55,7 +55,7 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
     }
 
     public void ShowBoxAd() {
-        DateTime dt = PlayerController.player == null || PlayerController.player.adBoxOpenedDate == null || PlayerController.player.adBoxOpenedDate == "" ? DateTime.Now : DateTime.Parse(PlayerController.player.adBoxOpenedDate);
+        DateTime dt = PlayerController.player == null || PlayerController.player.adBoxOpenedDate == null || PlayerController.player.adBoxOpenedDate == "" ? DateTime.MinValue : DateTime.Parse(PlayerController.player.adBoxOpenedDate);
 
         if (DateTime.Now.Date == dt.Date) {
             // if Player came logged in after box was supposed to be claiemd
@@ -68,7 +68,7 @@ public class UnityAddsController : SceneSingleton<UnityAddsController> {
                 ad.Show(options);
 
                 PlayerController.player.adBoxOpenedCount++;
-
+                PlayerController.player.adBoxOpenedDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
                 AnalyticsController.Instance.LogIncentivizedAdWatchedEvent("Box AD");
             }
             else {

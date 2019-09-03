@@ -15,8 +15,6 @@ public class SceneController : MonoBehaviour {
     public static int shouldShowLevelIntersticial = 2; // counter of how many times player should load level before he is shown an ad
     public static int shouldShowLevelIntersticialcounter;
 
-    //public AdmobController admob;
-
     public void Awake() {
         PlayerController.PlayerDataLoad();
 

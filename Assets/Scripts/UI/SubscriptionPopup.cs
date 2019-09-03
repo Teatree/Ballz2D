@@ -35,7 +35,7 @@ public class SubscriptionPopup : IPopup<SubscriptionPopup> {
     public ItemObject boosterMoreBallsItem;
 
     void Update() {
-
+        freeCost.text = PlayerController.player.SubBonusReceivedDate + PlayerController.player.isSubscribed;
         // timer
         if (claimButton != null && claimButton.GetComponent<Button>().interactable == false) {
             _countdownHour = 23 - DateTime.Now.Hour;
@@ -107,7 +107,7 @@ public class SubscriptionPopup : IPopup<SubscriptionPopup> {
 
         DateTime dt = PlayerController.player.SubBonusReceivedDate != null && PlayerController.player.SubBonusReceivedDate != ""
                                         ? DateTime.Parse(PlayerController.player.SubBonusReceivedDate) : DateTime.MinValue;
-        Debug.Log(">>>> items climed! > " + dt.Day);
+        //Debug.Log(">>>> items climed! > " + dt.Day);
         if (dt.Day >= DateTime.Now.Day) {
             
             if (claimButton != null) claimButton.GetComponent<Button>().interactable = false;
